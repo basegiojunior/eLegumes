@@ -30,7 +30,7 @@ const InputMask: React.RefForwardingComponent<InputRef, InputProps> = (
 ) => {
   const [focused, setFocused] = useState(false);
 
-  const inputRefElement = useRef<any>(null);
+  const inputRefElement = useRef(null);
 
   useImperativeHandle(ref, () => ({
     focus() {
