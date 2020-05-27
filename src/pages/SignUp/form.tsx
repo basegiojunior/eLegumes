@@ -13,7 +13,7 @@ import {
   FONT_SIZE_PRIMARY_DP,
 } from "../../styles/sizes";
 
-import Input from "../../Components/Input";
+import Input, { InputMask } from "../../Components/Input";
 import Button from "../../Components/Button";
 
 type FormProps = {
@@ -87,7 +87,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
         ref={emailInputRef}
       />
 
-      <Input
+      <InputMask
         icon="cellphone-android"
         type="cel-phone"
         options={{
@@ -98,7 +98,6 @@ const Form: React.FC<FormProps> = (propsForm) => {
         autoCorrect={false}
         title="Celular"
         placeholder="(99) 99999-9999"
-        mask
         keyboardType="numeric"
         value={propsForm.values.phone}
         error={propsForm.errors.phone}

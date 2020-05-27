@@ -61,6 +61,7 @@ const SignIn: React.FC<SignProps> = ({ navigation }) => {
                 style={{ marginBottom: 25 }}
                 autoCapitalize="none"
                 autoCorrect={false}
+                title="Email"
                 placeholder="Email"
                 autoCompleteType="email"
                 keyboardType="email-address"
