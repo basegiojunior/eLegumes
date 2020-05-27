@@ -17,15 +17,3 @@ const Button: React.FC<ButtonProps> = ({ style, text, onPress, ...rest }) => {
 };
 
 export default Button;
-
-// Button.propTypes = {
-//   text: PropTypes.string,
-//   onPress: PropTypes.func,
-//   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-// };
-
-// Button.defaultProps = {
-//   text: "",
-//   onPress: null,
-//   style: {},
-// };

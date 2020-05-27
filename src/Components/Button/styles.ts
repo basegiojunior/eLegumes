@@ -39,7 +39,7 @@ export const ButtonText = styled.Text<ButtonTextProps>`
   font-family: ${FONT_BOLD};
 `;
 
-export const ContainerSecondary = styled.TouchableOpacity`
+export const ContainerSecondary = styled.TouchableWithoutFeedback`
   margin-bottom: ${SPACE_SECONDARY};
   background: transparent;
 

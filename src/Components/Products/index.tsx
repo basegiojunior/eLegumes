@@ -12,7 +12,6 @@ import {
   PromotionPrice,
   Div2,
   Add,
-  AddText,
   NameProduct,
   ImageProduct,
 } from "./styles";

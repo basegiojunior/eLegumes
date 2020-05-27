@@ -35,14 +35,11 @@ const SignIn: React.FC<SignProps> = ({ navigation }) => {
   const loading = useSelector((state: any) => state.auth.loading);
   const [visibleForgotPass, setVisibleForgotPass] = useState(false);
   const [emailForgot, setEmailForgot] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit: Function = async (email: string, password: string) => {
     store.dispatch(signInRequest(email, password));
   };
-
-  // useEffect(() => {
-  // 	store.dispatch(clean());
-  // }, []);
 
   const forgotPasswordReturn: Function = () => (
     <>
@@ -68,6 +65,7 @@ const SignIn: React.FC<SignProps> = ({ navigation }) => {
                 autoCompleteType="email"
                 keyboardType="email-address"
                 value={emailForgot}
+                submitted={isSubmitted}
                 onChangeText={(text: string) => {
                   setEmailForgot(text);
                 }}
@@ -75,7 +73,7 @@ const SignIn: React.FC<SignProps> = ({ navigation }) => {
               <Button
                 text="Recuperar Senha"
                 onPress={() => {
-                  // store.dispatch(forgotPassword(emailForgot));
+                  setIsSubmitted(true);
                   if (emailForgot !== "") {
                     setVisibleForgotPass(false);
                   }

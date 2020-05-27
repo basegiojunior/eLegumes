@@ -24,15 +24,3 @@ const ButtonText: React.FC<ButtonProps> = ({
 };
 
 export default ButtonText;
-
-// ButtonText.propTypes = {
-//   italic: PropTypes.bool,
-//   text: PropTypes.string,
-//   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-// };
-
-// ButtonText.defaultProps = {
-//   italic: false,
-//   text: "",
-//   style: {},
-// };

@@ -13,7 +13,7 @@ import {
 import produto from "../../assets/product.jpg";
 
 interface ProductsArray {
-  listElements: Array<object>;
+  listElements: { title: string; price: string }[];
   title: string;
 }
 

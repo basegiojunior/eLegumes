@@ -5,7 +5,6 @@ import { TextInput } from "react-native";
 // import CampInformation from "../../Components/CampInformation";
 
 import Input from "../../Components/Input";
-import InputPassword from "../../Components/Input/password";
 import Button from "../../Components/Button";
 import ButtonText from "../../Components/Button/buttonText";
 
@@ -17,6 +16,7 @@ type FormProps = {
     email: string;
   };
   setFieldValue: Function;
+  submitCount: number;
   handleSubmit: Function;
   forgotPassword: Function;
 };
@@ -30,10 +30,12 @@ const Form: React.FC<FormProps> = (propsForm) => {
         icon="email"
         autoCapitalize="none"
         autoCorrect={false}
+        title="Email"
         placeholder="Email"
         autoCompleteType="email"
         keyboardType="email-address"
         value={propsForm.values.email}
+        submitted={propsForm.submitCount > 0}
         onChangeText={(text) => {
           propsForm.setFieldValue("email", text);
         }}
@@ -45,10 +47,11 @@ const Form: React.FC<FormProps> = (propsForm) => {
         icon="lock"
         autoCapitalize="none"
         autoCorrect={false}
+        title="Senha"
         placeholder="Senha"
-        autoCompleteType="password"
         secureTextEntry
         value={propsForm.values.password}
+        submitted={propsForm.submitCount > 0}
         onChangeText={(text) => propsForm.setFieldValue("password", text)}
         returnKeyType="send"
         onSubmitEditing={() => {

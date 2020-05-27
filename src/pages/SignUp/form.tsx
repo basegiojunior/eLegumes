@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { withFormik } from "formik";
 import { Alert, TextInput } from "react-native";
 import * as Yup from "yup";
@@ -7,7 +7,6 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { CheckContainer, ButtonCheck } from "./styles";
 
 import { PRIMARY_COLOR } from "../../styles/colors";
-import { FONT_BOLD } from "../../styles/fonts";
 import {
   ICON_CHECKBOX_SIZE,
   SPACE_PRIMARY_DP,
@@ -15,7 +14,6 @@ import {
 } from "../../styles/sizes";
 
 import Input from "../../Components/Input";
-import InputMask from "../../Components/Input/inputMask";
 import Button from "../../Components/Button";
 
 type FormProps = {
@@ -55,6 +53,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
       <Input
         icon="account"
         autoCorrect={false}
+        title="Nome"
         placeholder="Nome Completo"
         autoCompleteType="name"
         autoCapitalize="words"
@@ -72,6 +71,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
       <Input
         icon="email"
         autoCorrect={false}
+        title="Email"
         placeholder="Email"
         autoCompleteType="email"
         autoCapitalize="none"
@@ -79,7 +79,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
         value={propsForm.values.email}
         error={propsForm.errors.email}
         submitted={propsForm.submitCount > 0}
-        onChangeText={(text) => {
+        onChangeText={(text: string) => {
           propsForm.setFieldValue("email", text);
         }}
         returnKeyType="next"
@@ -87,7 +87,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
         ref={emailInputRef}
       />
 
-      {/* <InputMask
+      <Input
         icon="cellphone-android"
         type="cel-phone"
         options={{
@@ -96,34 +96,35 @@ const Form: React.FC<FormProps> = (propsForm) => {
           dddMask: "(99) ",
         }}
         autoCorrect={false}
-        placeholder="Celular"
-        mask="(99) 99999-9999"
+        title="Celular"
+        placeholder="(99) 99999-9999"
+        mask
         keyboardType="numeric"
         value={propsForm.values.phone}
         error={propsForm.errors.phone}
-        onChangeText={(text) => {
+        submitted={propsForm.submitCount > 0}
+        onChangeText={(text: string) => {
           propsForm.setFieldValue("phone", text);
         }}
         returnKeyType="next"
         onSubmitEditing={() => passwordInputRef.current?.focus()}
         ref={phoneInputRef}
       />
-      <CampInformation
-        error={propsForm.errors.phone}
-        touched={propsForm.touched.phone}
-      /> */}
 
       <Input
         icon="lock"
         autoCapitalize="none"
         autoCorrect={false}
+        title="Senha"
         placeholder="Senha"
         autoCompleteType="password"
         secureTextEntry
         value={propsForm.values.password}
         error={propsForm.errors.password}
         submitted={propsForm.submitCount > 0}
-        onChangeText={(text) => propsForm.setFieldValue("password", text)}
+        onChangeText={(text: string) => {
+          propsForm.setFieldValue("password", text);
+        }}
         returnKeyType="next"
         onSubmitEditing={() => passwordConfirmInputRef.current?.focus()}
         ref={passwordInputRef}
@@ -133,13 +134,14 @@ const Form: React.FC<FormProps> = (propsForm) => {
         icon="lock"
         autoCapitalize="none"
         autoCorrect={false}
+        title="Confirmar Senha"
         placeholder="Confirmar Senha"
         autoCompleteType="password"
         secureTextEntry
         value={propsForm.values.passwordConfirmation}
         error={propsForm.errors.passwordConfirmation}
         submitted={propsForm.submitCount > 0}
-        onChangeText={(text) => {
+        onChangeText={(text: string) => {
           propsForm.setFieldValue("passwordConfirmation", text);
         }}
         returnKeyType="send"
@@ -221,7 +223,9 @@ export default withFormik({
     email: Yup.string()
       .email("Você precisa digitar um E-MAIL válido.")
       .required("Você precisa preencher seu E-MAIL."),
-    phone: Yup.string().required("Você precisa preencher seu CELULAR"),
+    phone: Yup.string()
+      .min(15, "Você precisa preencher seu CELULAR")
+      .required("Você precisa preencher seu CELULAR"),
     password: Yup.string()
       .min(8, "A senha deve ter no mínimo 8 caracteres")
       .required("Você precisa preencher a SENHA"),

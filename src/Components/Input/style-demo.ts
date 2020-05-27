@@ -1,15 +1,12 @@
 import styled from "styled-components/native";
 import { TextInputMask, TextInputMaskProps } from "react-native-masked-text";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
 import {
   FONT_SIZE_PRIMARY,
-  FONT_SIZE_SECONDARY,
   SPACE_SECONDARY,
   BORDER_ROUND,
   HEIGHT_PRIMARY,
 } from "../../styles/sizes";
-
 import {
   PRIMARY_COLOR,
   TEXT_PRIMARY,
@@ -58,7 +55,7 @@ export const TInput = styled.TextInput`
   color: ${TEXT_PRIMARY};
 `;
 
-export const TInputMask = styled(TextInputMask)<TextInputMaskProps>`
+export const TInputMask = styled(TextInputMask)`
   flex: 1;
   font-size: ${FONT_SIZE_PRIMARY};
   font-family: ${FONT_REGULAR};
@@ -72,28 +69,4 @@ export const CampName = styled.Text<ContainerProps>`
   /* font-weight: bold; */
   color: ${(props) => (props.focused ? SECONDARY_COLOR : "rgba(0,0,0,.75)")};
   font-family: ${FONT_BOLD};
-`;
-
-// CAMPO DE ALERTA
-
-export const CampInformationView = styled.Text`
-  z-index: 0;
-  font-size: ${FONT_SIZE_SECONDARY};
-  color: ${TEXT_PRIMARY};
-  margin-right: ${SPACE_SECONDARY};
-  padding: 0;
-  justify-content: flex-end;
-  font-family: ${FONT_REGULAR};
-`;
-
-export const ContainerCamp = styled.View`
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-top: 2px;
-  padding-left: 1px;
-  align-items: center;
-`;
-
-export const AlertIcon = styled(Icon)`
-  margin: 0 ${SPACE_SECONDARY};
 `;

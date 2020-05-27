@@ -13,11 +13,11 @@ import {
 
 import produto from "../../assets/product.jpg";
 
-interface ProductsArray {
-  listElements: Array<object>;
+type ProductsArray = {
+  listElements: { title: string; price: string }[];
   nItemsInScreen?: number;
   title?: string;
-}
+};
 
 const SlideProducts: React.FC<ProductsArray> = ({
   listElements,
@@ -28,18 +28,20 @@ const SlideProducts: React.FC<ProductsArray> = ({
     <Content>
       {title && <Title>{title}</Title>}
       <LateralSlide>
-        {listElements.map((item) => (
-          <LinkContainer>
-            <ViewLink>
-              <ImageProduct
-                nItemsInScreen={nItemsInScreen || 2}
-                source={produto}
-              />
-              <TitleProduct>{item.title}</TitleProduct>
-              {item.price && <PriceProduct>R$ {item.price}</PriceProduct>}
-            </ViewLink>
-          </LinkContainer>
-        ))}
+        {listElements.map(
+          (item): JSX.Element => (
+            <LinkContainer>
+              <ViewLink>
+                <ImageProduct
+                  nItemsInScreen={nItemsInScreen || 2}
+                  source={produto}
+                />
+                <TitleProduct>{item.title}</TitleProduct>
+                {item.price && <PriceProduct>R$ {item.price}</PriceProduct>}
+              </ViewLink>
+            </LinkContainer>
+          )
+        )}
       </LateralSlide>
     </Content>
   );

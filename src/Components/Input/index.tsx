@@ -5,29 +5,39 @@ import React, {
   useImperativeHandle,
   useEffect,
 } from "react";
-// import PropTypes from "prop-types";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
-import { TextInputProps, TouchableWithoutFeedback, View } from "react-native";
 
-import CampInformation from "../CampInformation";
+import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import { TouchableWithoutFeedback, View } from "react-native";
+import { TextInputMaskProps } from "react-native-masked-text";
 
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../styles/colors";
 import { ICON_SIZE } from "../../styles/sizes";
 
-import { Container, ContainerAll, TInput, CampName } from "./styles";
+import {
+  Container,
+  ContainerAll,
+  TInput,
+  CampName,
+  ContainerCamp,
+  AlertIcon,
+  CampInformationView,
+  TInputMask,
+} from "./styles";
 
-interface InputProps extends TextInputProps {
+interface InputMaskProps extends TextInputMaskProps {
   icon: string;
   value: string;
   error?: string;
   submitted: boolean;
+  title: string;
+  mask?: boolean;
 }
 
 interface InputRef {
   focus(): void;
 }
 
-const Input: React.RefForwardingComponent<InputRef, InputProps> = (
+const Input: React.ForwardRefRenderFunction<InputRef, InputMaskProps> = (
   {
     style,
     icon,
@@ -36,7 +46,8 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
     value,
     error,
     submitted,
-    placeholder,
+    title,
+    mask,
     ...rest
   },
   ref
@@ -69,7 +80,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
 
   return (
     <ContainerAll>
-      <CampName focused={focused}>{placeholder}</CampName>
+      <CampName focused={focused}>{title}</CampName>
       <Container style={style} focused={focused} error={showError}>
         {icon && (
           <Icon
@@ -80,21 +91,35 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
           />
         )}
 
-        <TInput
-          {...rest}
-          // placeholder={placeholder}
-          ref={inputRefElement}
-          value={value}
-          multiline={multiline}
-          onFocus={() => {
-            setFocused(true);
-            setTouched(true);
-          }}
-          onBlur={() => {
-            setFocused(false);
-          }}
-          secureTextEntry={secureTextEntry && securePass}
-        />
+        {mask ? (
+          <TInputMask
+            {...rest}
+            value={value}
+            ref={inputRefElement}
+            onFocus={() => {
+              setFocused(true);
+              setTouched(true);
+            }}
+            onBlur={() => {
+              setFocused(false);
+            }}
+          />
+        ) : (
+          <TInput
+            {...rest}
+            value={value}
+            ref={inputRefElement}
+            multiline={multiline}
+            onFocus={() => {
+              setFocused(true);
+              setTouched(true);
+            }}
+            onBlur={() => {
+              setFocused(false);
+            }}
+            secureTextEntry={secureTextEntry && securePass}
+          />
+        )}
 
         {secureTextEntry && (
           <TouchableWithoutFeedback onPress={() => setSecurePass(!securePass)}>
@@ -117,23 +142,15 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
           </View>
         )}
       </Container>
-      <CampInformation error={error} show={showError} />
+
+      {showError && !!error && (
+        <ContainerCamp>
+          <AlertIcon name="alert-circle" size={ICON_SIZE} color="red" />
+          <CampInformationView>{error}</CampInformationView>
+        </ContainerCamp>
+      )}
     </ContainerAll>
   );
 };
 
 export default forwardRef(Input);
-
-// Input.propTypes = {
-//   icon: PropTypes.string,
-//   placeholder2: PropTypes.string,
-//   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-// };
-
-// Input.defaultProps = {
-//   icon: null,
-//   placeholder2: "",
-//   style: {},
-// };
-
-// export default forwardRef(Input);
