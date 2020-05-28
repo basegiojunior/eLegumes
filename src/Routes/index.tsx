@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import React from "react";
-// import { View } from "react-native";
 
 import { widthPercentageToDP } from "../Components/PercentageConverter";
 import { FONT_REGULAR } from "../styles/fonts";
@@ -23,11 +22,6 @@ const styleBarTop: Record<string, string | Record<string, string>> = {
   headerTitleAlign: "center",
   headerTintColor: "#fff",
 };
-
-// const screenOptions: Record<string, boolean | Record<string, string>> = {
-//   headerShown: false,
-//   cardStyle: { backgroundColor: "#f0f0f0" },
-// };
 
 const DashboardStack = createStackNavigator();
 

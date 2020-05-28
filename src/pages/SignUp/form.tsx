@@ -207,6 +207,12 @@ const Form: React.FC<FormProps> = (propsForm) => {
   );
 };
 
+type HandleProps = {
+  props: {
+    handleSubmitSignUp: Function;
+  };
+};
+
 export default withFormik({
   mapPropsToValues: () => ({
     email: "",
@@ -214,7 +220,6 @@ export default withFormik({
     passwordConfirmation: "",
     phone: "",
     name: "",
-    show: false,
   }),
 
   validationSchema: Yup.object().shape({

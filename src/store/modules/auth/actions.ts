@@ -6,15 +6,15 @@ export const signInRequest: Function = (email: string, password: string) => {
 };
 
 export const signInSuccess: Function = (
-  token: string,
-  name: string,
-  email: string,
-  phone: string,
-  id: string
+  token: string
+  // name: string,
+  // email: string,
+  // phone: string,
+  // id: string
 ) => {
   return {
     type: "@auth/SIGN_IN_SUCCESS",
-    payload: { token, name, email, phone, id },
+    payload: { token },
   };
 };
 

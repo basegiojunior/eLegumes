@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://www.kdmeulotacao.com.br/api",
+  baseURL: "https://api-elegumes.herokuapp.com/",
   // baseURL: 'https://api-kd-meu-locatao.herokuapp.com',
   headers: {
     "Access-Control-Allow-Origin": "*",

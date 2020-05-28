@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesome as Icon } from "@expo/vector-icons";
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { useSelector } from "react-redux";
-import { signInRequest } from "../../store/modules/auth/actions";
+import { signInRequest, signOut } from "../../store/modules/auth/actions";
 import { store } from "../../store/index";
+
+import history from "../../services/history";
 
 import {
   Container,
@@ -31,11 +34,16 @@ type SignProps = {
   navigation: any;
 };
 
-const SignIn: React.FC<SignProps> = ({ navigation }) => {
+const SignIn: React.FC<SignProps> = () => {
   const loading = useSelector((state: any) => state.auth.loading);
   const [visibleForgotPass, setVisibleForgotPass] = useState(false);
   const [emailForgot, setEmailForgot] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    store.dispatch(signOut());
+  }, []);
 
   const handleSubmit: Function = async (email: string, password: string) => {
     store.dispatch(signInRequest(email, password));
@@ -107,7 +115,7 @@ const SignIn: React.FC<SignProps> = ({ navigation }) => {
             <TextSignUp>Não é cadastrado? </TextSignUp>
           </View>
           <ButtonText
-            onPress={() => navigation.navigate("Cadastrar")}
+            onPress={() => navigation.navigate("Sacola")}
             text="Crie uma conta"
           />
         </SignUpView>
