@@ -5,8 +5,13 @@ const INITIAL_STATE = {
   loading: false,
 };
 
-const auth: Function = (state = INITIAL_STATE, action) => {
-  return produce(state, (draft) => {
+type InitialProps = {
+  signed: boolean;
+  loading: boolean;
+};
+
+const auth: Function = (state = INITIAL_STATE, action: any) => {
+  return produce(state, (draft: InitialProps) => {
     switch (action.type) {
       case "@auth/SIGN_IN_REQUEST": {
         draft.loading = true;

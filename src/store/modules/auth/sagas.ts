@@ -5,7 +5,7 @@ import api from "../../../services/api";
 
 import { signInSuccess, signFailure } from "./actions";
 
-export function* signIn({ payload }) {
+export function* signIn({ payload }: any): any {
   for (let i = 1; i <= 5; i += 1) {
     try {
       const emailPayload = payload.email;
@@ -22,45 +22,23 @@ export function* signIn({ payload }) {
       // const { phone } = response.data.passenger.user;
       // const { id } = response.data.passenger.user;
 
-      // api.defaults.headers.Authorization = `Bearer ${token}`;
+      api.defaults.headers.Authorization = `Bearer ${token}`;
 
       yield put(signInSuccess(token));
 
       return;
     } catch (error) {
-      console.log(error.response);
       if (i === 5) {
-        if (error.response) {
-          if (typeof error.response.data.error === "string") {
-            Alert.alert(
-              "Falha ao Entrar",
-              // 'Houve um erro no login, verifique seus dados'
-              error.response.data.error
-            );
-          } else if (typeof error.response.data.error.text === "string") {
-            Alert.alert(
-              "Falha ao Entrar",
-              // 'Houve um erro no login, verifique seus dados'
-              error.response.data.error.text
-            );
-          } else {
-            Alert.alert(
-              "Falha ao Entrar",
-              // 'Houve um erro no login, verifique seus dados'
-              typeof error.response.data.error === "string"
-                ? error.response.data.error
-                : "Não conseguimos entrar, verifique seus dados e tente novamente."
-            );
-          }
-        } else if (error.code === "ECONNABORTED") {
+        // console.log(error.response.status);
+        if (error.response.status === 400) {
           Alert.alert(
-            "Erro",
-            "Parece que demorou um pouquinho para conectar, aguarde alguns minutos e tente novamente."
+            "Ops..",
+            "Parece que seu email ou sua senha não estão corretos."
           );
-        } else {
+        } else if (error.response.status === 403) {
           Alert.alert(
-            "Erro",
-            "Não conseguimos conectar no servidor, aguarde alguns minutos e tente novamente."
+            "Ops..",
+            "Você precisa confirmar seu e-mail para poder acessar o sistema"
           );
         }
 
@@ -70,7 +48,7 @@ export function* signIn({ payload }) {
   }
 }
 
-export function setToken({ payload }): void {
+export function setToken({ payload }: any): any {
   if (!payload) return;
 
   const { token } = payload.auth;
@@ -80,7 +58,12 @@ export function setToken({ payload }): void {
   }
 }
 
+export enum TypeKeys {
+  PERSIST = "persist/REHYDRATE",
+  SIGN_IN_REQUEST = "@auth/SIGN_IN_REQUEST",
+}
+
 export default all([
-  takeLatest("persist/REHYDRATE", setToken),
-  takeLatest("@auth/SIGN_IN_REQUEST", signIn),
+  takeLatest(TypeKeys.PERSIST, setToken),
+  takeLatest(TypeKeys.SIGN_IN_REQUEST, signIn),
 ]);

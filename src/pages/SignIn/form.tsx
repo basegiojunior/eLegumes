@@ -82,8 +82,12 @@ export default withFormik({
   mapPropsToValues: () => ({ email: "", password: "" }),
 
   validationSchema: Yup.object().shape({
-    email: Yup.string().required("Preencha o campo e-mail"),
-    password: Yup.string().required("Preencha o campo de senha"),
+    email: Yup.string()
+      .email("Você precisa digitar um E-MAIL válido.")
+      .required("Você precisa preencher seu E-MAIL."),
+    password: Yup.string()
+      .min(8, "A senha deve ter no mínimo 8 caracteres")
+      .required("Você precisa preencher a SENHA"),
   }),
 
   handleSubmit: (values, { props, setSubmitting }) => {

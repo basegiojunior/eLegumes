@@ -38,7 +38,11 @@
       "declaration": "parens-new-line"
     }],
 		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-param-reassign": ["error", {
+      "props": true,
+      "ignorePropertyModificationsFor": ["draft"]
+    }],
 		"no-unused-expressions": "off",
 		"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
 		"import/prefer-default-export": "off",
