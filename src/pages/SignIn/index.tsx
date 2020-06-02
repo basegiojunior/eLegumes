@@ -4,17 +4,16 @@ import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { useSelector } from "react-redux";
+
 import { signInRequest, signOut } from "../../store/modules/auth/actions";
 import { store } from "../../store/index";
-
-import history from "../../services/history";
 
 import {
   Container,
   FalseModal,
   LineDiv,
   SignUpView,
-  TextSignUp,
+  LostPass,
   ModalContainer,
   ModalContainerIn,
   Exit,
@@ -35,15 +34,15 @@ type SignProps = {
 };
 
 const SignIn: React.FC<SignProps> = () => {
-  const loading = useSelector((state: any) => state.auth.loading);
+  const loading = useSelector((state) => state.auth.loading);
   const [visibleForgotPass, setVisibleForgotPass] = useState(false);
   const [emailForgot, setEmailForgot] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    store.dispatch(signOut());
-  }, []);
+  // useEffect(() => {
+  //   store.dispatch(signOut());
+  // }, []);
 
   const handleSubmit: Function = async (email: string, password: string) => {
     store.dispatch(signInRequest(email, password));
@@ -108,16 +107,20 @@ const SignIn: React.FC<SignProps> = () => {
           forgotPassword={() => setVisibleForgotPass(true)}
         />
 
-        <LineDiv />
+        {/* <LineDiv /> */}
 
         <SignUpView>
-          <View>
-            <TextSignUp>Não é cadastrado? </TextSignUp>
-          </View>
           <ButtonText
             onPress={() => navigation.navigate("Sacola")}
             text="Crie uma conta"
           />
+
+          <LostPass>
+            <ButtonText
+              text="Esqueceu sua senha?"
+              onPress={() => () => setVisibleForgotPass(true)}
+            />
+          </LostPass>
         </SignUpView>
       </Container>
     </>

@@ -4,7 +4,7 @@ export const widthPercentageToPx: Function = (widthPercent: string) => {
   const screenWidth = Dimensions.get("window").width;
   // Convert string input to decimal number
   const elemWidth = parseFloat(widthPercent) / 100;
-  return `${Math.round(screenWidth * elemWidth)}px`;
+  return `${screenWidth * elemWidth}px`;
 };
 
 export const widthPercentageToDP: Function = (widthPercent: string) => {

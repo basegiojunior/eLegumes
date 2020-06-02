@@ -71,8 +71,8 @@ const Form: React.FC<FormProps> = (propsForm) => {
       <Input
         icon="email"
         autoCorrect={false}
-        title="Email"
-        placeholder="Email"
+        title="E-mail"
+        placeholder="E-mail"
         autoCompleteType="email"
         autoCapitalize="none"
         keyboardType="email-address"

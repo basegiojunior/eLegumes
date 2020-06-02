@@ -30,8 +30,8 @@ const Form: React.FC<FormProps> = (propsForm) => {
         icon="email"
         autoCapitalize="none"
         autoCorrect={false}
-        title="Email"
-        placeholder="Email"
+        title="E-mail"
+        placeholder="E-mail"
         autoCompleteType="email"
         keyboardType="email-address"
         value={propsForm.values.email}
@@ -60,14 +60,6 @@ const Form: React.FC<FormProps> = (propsForm) => {
         ref={passwordInputRef}
       />
 
-      <LostPass>
-        <ButtonText
-          italic
-          text="Esqueceu sua senha?"
-          onPress={() => propsForm.forgotPassword()}
-        />
-      </LostPass>
-
       <Button
         text="Acessar"
         onPress={() => {
@@ -86,7 +78,7 @@ export default withFormik({
       .email("Você precisa digitar um E-MAIL válido.")
       .required("Você precisa preencher seu E-MAIL."),
     password: Yup.string()
-      .min(8, "A senha deve ter no mínimo 8 caracteres")
+      // .min(8, "A senha deve ter no mínimo 8 caracteres")
       .required("Você precisa preencher a SENHA"),
   }),
 

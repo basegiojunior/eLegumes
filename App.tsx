@@ -8,10 +8,9 @@ import Loading from "./src/Components/Loading";
 
 const App: React.FC = () => {
   const [fontsLoaded] = useFonts({
-    "Jost-Bold": require("./src/assets/fonts/Jost/Jost-Bold.ttf"),
-    "Jost-Regular": require("./src/assets/fonts/Jost/Jost-Regular.ttf"),
-    "Jost-Italic": require("./src/assets/fonts/Jost/Jost-Italic.ttf"),
-    "Jost-BoldItalic": require("./src/assets/fonts/Jost/Jost-BoldItalic.ttf"),
+    "Inter-Bold": require("./src/assets/fonts/Inter/Inter-Bold.ttf"),
+    "Inter-Regular": require("./src/assets/fonts/Inter/Inter-Regular.ttf"),
+    "Inter-SemiBold": require("./src/assets/fonts/Inter/Inter-SemiBold.ttf"),
     // "RobotoCondensed-Regular": require("./src/assets/fonts/Roboto-Condensed/RobotoCondensed-Regular.ttf"),
     // "RobotoCondensed-Bold": require("./src/assets/fonts/Roboto-Condensed/RobotoCondensed-Bold.ttf"),
     // "RobotoCondensed-BoldItalic": require("./src/assets/fonts/Roboto-Condensed/RobotoCondensed-BoldItalic.ttf"),

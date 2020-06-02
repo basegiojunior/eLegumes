@@ -1,4 +1,3 @@
-export const FONT_REGULAR = "Jost-Regular";
-export const FONT_ITALIC = "Jost-Italic";
-export const FONT_BOLD = "Jost-Bold";
-export const FONT_BOLD_ITALIC = "Jost-BoldItalic";
+export const FONT_REGULAR = "Inter-Regular";
+export const FONT_BOLD = "Inter-Bold";
+export const FONT_SEMIBOLD = "Inter-SemiBold";

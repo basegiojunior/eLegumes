@@ -1,25 +1,47 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  StackNavigationOptions,
+} from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import React from "react";
 
 import { widthPercentageToDP } from "../Components/PercentageConverter";
-import { FONT_REGULAR } from "../styles/fonts";
+import SearchBar from "../Components/SearchBar";
+import { FONT_REGULAR, FONT_BOLD } from "../styles/fonts";
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../styles/colors";
 
 import Dashboard from "../pages/Dashboard";
 import Account from "../pages/Account";
 import Cart from "../pages/Cart";
-import Categories from "../pages/Categories";
-import Products from "../pages/Products";
+import Search from "../pages/Search";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 
-const styleBarTop: Record<string, string | Record<string, string>> = {
-  headerStyle: { backgroundColor: SECONDARY_COLOR },
-  headerTitleStyle: { fontFamily: FONT_REGULAR },
-  headerTitleAlign: "center",
+const styleBarTop: StackNavigationOptions = {
+  headerStyle: { backgroundColor: "#fff" },
+  headerTitle: "eLegumes",
+  headerTitleContainerStyle: { left: 0 },
+  headerTitleStyle: {
+    color: "#242A22",
+    fontSize: widthPercentageToDP("5.5%"),
+    marginLeft: widthPercentageToDP("4%"),
+    fontFamily: FONT_BOLD,
+  },
+  headerTintColor: "#fff",
+};
+
+const styleBarTopBusca: StackNavigationOptions = {
+  headerStyle: { backgroundColor: "#fff" },
+  headerTitle: () => null,
+
+  headerLeftContainerStyle: {
+    width: "100%",
+  },
+  headerLeft: () => <SearchBar />,
+
+  headerRight: () => null,
   headerTintColor: "#fff",
 };
 
@@ -27,9 +49,9 @@ const DashboardStack = createStackNavigator();
 
 const DashboardStackScreen: React.FC = () => {
   return (
-    <DashboardStack.Navigator initialRouteName="Início">
+    <DashboardStack.Navigator initialRouteName="Produtos">
       <DashboardStack.Screen
-        name="Início"
+        name="Produtos"
         component={Dashboard}
         options={styleBarTop}
       />
@@ -37,22 +59,17 @@ const DashboardStackScreen: React.FC = () => {
   );
 };
 
-const CategoriesStack = createStackNavigator();
+const SearchStack = createStackNavigator();
 
-const CategoriesStackScreen: React.FC = () => {
+const SearchStackScreen: React.FC = () => {
   return (
-    <CategoriesStack.Navigator initialRouteName="Categorias">
-      <CategoriesStack.Screen
-        name="Categorias"
-        component={Categories}
-        options={styleBarTop}
+    <SearchStack.Navigator initialRouteName="Busca">
+      <SearchStack.Screen
+        name="Busca"
+        component={Search}
+        options={styleBarTopBusca}
       />
-      <CategoriesStack.Screen
-        name="Produtos"
-        component={Products}
-        options={styleBarTop}
-      />
-    </CategoriesStack.Navigator>
+    </SearchStack.Navigator>
   );
 };
 
@@ -85,18 +102,18 @@ const Tab = createBottomTabNavigator();
 const Routes: React.FC = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Início"
+      initialRouteName="Produtos"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName;
 
-          if (route.name === "Início") {
+          if (route.name === "Produtos") {
             iconName = "home";
           } else if (route.name === "Sacola") {
             iconName = "shopping";
           } else if (route.name === "Minha Conta") {
             iconName = "account";
-          } else if (route.name === "Categorias") {
+          } else if (route.name === "Busca") {
             iconName = "format-list-bulleted-type";
           }
 
@@ -125,8 +142,8 @@ const Routes: React.FC = () => {
         },
       }}
     >
-      <Tab.Screen name="Início" component={DashboardStackScreen} />
-      <Tab.Screen name="Categorias" component={CategoriesStackScreen} />
+      <Tab.Screen name="Produtos" component={DashboardStackScreen} />
+      <Tab.Screen name="Busca" component={SearchStackScreen} />
       <Tab.Screen name="Sacola" component={CartStackScreen} />
       <Tab.Screen name="Minha Conta" component={AccountStackScreen} />
     </Tab.Navigator>

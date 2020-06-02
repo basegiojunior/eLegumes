@@ -5,16 +5,10 @@ export const signInRequest: Function = (email: string, password: string) => {
   };
 };
 
-export const signInSuccess: Function = (
-  token: string
-  // name: string,
-  // email: string,
-  // phone: string,
-  // id: string
-) => {
+export const signInSuccess: Function = (userData: object) => {
   return {
     type: "@auth/SIGN_IN_SUCCESS",
-    payload: { token },
+    payload: { userData },
   };
 };
 

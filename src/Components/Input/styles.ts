@@ -5,16 +5,11 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import {
   FONT_SIZE_PRIMARY,
   FONT_SIZE_SECONDARY,
+  FONT_SIZE_TERTIARY,
   SPACE_SECONDARY,
-  BORDER_ROUND,
-  HEIGHT_PRIMARY,
 } from "../../styles/sizes";
 
-import {
-  PRIMARY_COLOR,
-  TEXT_PRIMARY,
-  SECONDARY_COLOR,
-} from "../../styles/colors";
+import { TEXT_PRIMARY, SECONDARY_COLOR } from "../../styles/colors";
 import { FONT_BOLD, FONT_REGULAR } from "../../styles/fonts";
 
 import { widthPercentageToPx } from "../PercentageConverter";
@@ -26,24 +21,14 @@ interface ContainerProps {
 
 export const ContainerAll = styled.View`
   width: 100%;
-  margin-top: ${widthPercentageToPx("2.5%")};
+  margin-bottom: ${widthPercentageToPx("2%")};
 `;
 
 export const Container = styled.View<ContainerProps>`
   padding: 0 ${SPACE_SECONDARY};
-  background: #f9f9f9;
-  border-radius: ${BORDER_ROUND};
-  height: ${HEIGHT_PRIMARY};
-  border-width: 1px;
-  border-color: ${(props) => {
-    if (props.error) {
-      return "#f00";
-    }
-    if (props.focused) {
-      return SECONDARY_COLOR;
-    }
-    return "rgba(0,0,0,.45)";
-  }};
+  background: #f0f0f0;
+  border-radius: ${widthPercentageToPx("2.5%")};
+  height: ${widthPercentageToPx("16%")};
   flex-direction: row;
   align-items: center;
   z-index: 1;
@@ -51,7 +36,7 @@ export const Container = styled.View<ContainerProps>`
 
 export const TInput = styled.TextInput`
   flex: 1;
-  font-size: ${FONT_SIZE_PRIMARY};
+  font-size: ${FONT_SIZE_TERTIARY};
   height: 100%;
   font-family: ${FONT_REGULAR};
   margin-left: 0px;
@@ -60,7 +45,7 @@ export const TInput = styled.TextInput`
 
 export const TInputMask = styled(TextInputMask)<TextInputMaskProps>`
   flex: 1;
-  font-size: ${FONT_SIZE_PRIMARY};
+  font-size: ${FONT_SIZE_TERTIARY};
   font-family: ${FONT_REGULAR};
   /* margin-left: 10px; */
   color: ${TEXT_PRIMARY};

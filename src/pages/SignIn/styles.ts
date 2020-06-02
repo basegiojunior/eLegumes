@@ -49,7 +49,9 @@ export const LostPass = styled.View`
 
 export const SignUpView = styled.View`
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: ${widthPercentageToPx("8%")};
 `;
 
 export const TextSignUp = styled.Text`

@@ -8,8 +8,8 @@
       "web"
     ],
     "androidStatusBar": {
-      "backgroundColor": "#3D8403",
-      "barStyle": "light-content",
+      "backgroundColor": "#fff",
+      "barStyle": "dark-content",
       "translucent": false
 		},
     "version": "1.0.0",
@@ -28,6 +28,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.eLegumes.eLegumes",
+      "versionCode": 3
     }
   }
 }

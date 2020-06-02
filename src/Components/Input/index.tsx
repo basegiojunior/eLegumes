@@ -10,7 +10,11 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { TouchableWithoutFeedback, View, TextInputProps } from "react-native";
 import { TextInputMaskProps } from "react-native-masked-text";
 
-import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../styles/colors";
+import {
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+  TEXT_SECONDARY,
+} from "../../styles/colors";
 import { ICON_SIZE } from "../../styles/sizes";
 
 import {
@@ -85,7 +89,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 
   return (
     <ContainerAll>
-      <CampName focused={focused}>{title}</CampName>
+      {/* <CampName focused={focused}>{title}</CampName> */}
       <Container style={style} focused={focused} error={showError}>
         {icon && (
           <Icon
@@ -99,6 +103,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
         <TInput
           {...rest}
           value={value}
+          placeholderTextColor={TEXT_SECONDARY}
           ref={inputRefElement}
           multiline={multiline}
           onFocus={() => {
@@ -193,6 +198,7 @@ const InputMaskForward: React.ForwardRefRenderFunction<
           {...rest}
           value={value}
           ref={inputRefElement}
+          placeholderTextColor={TEXT_SECONDARY}
           onFocus={() => {
             setFocused(true);
             setTouched(true);

@@ -16,15 +16,11 @@ export function* signIn({ payload }: any): any {
         password: passwordPayload,
       });
 
-      const { token } = response.data;
-      // const { name } = response.data.passenger.user;
-      // const { email } = response.data.passenger.user;
-      // const { phone } = response.data.passenger.user;
-      // const { id } = response.data.passenger.user;
+      const { token } = response.data.data;
 
       api.defaults.headers.Authorization = `Bearer ${token}`;
 
-      yield put(signInSuccess(token));
+      yield put(signInSuccess(response.data.data));
 
       return;
     } catch (error) {

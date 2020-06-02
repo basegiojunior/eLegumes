@@ -1,73 +1,78 @@
-import React from "react";
-import { RefreshControl } from "react-native";
+import React, { useEffect } from "react";
+import { RefreshControl, Animated, Easing } from "react-native";
+import { useSelector } from "react-redux";
 
 import { ContainerScroll } from "../../styles/scrollView";
-import SlideProducts from "../../Components/SlideProducts";
-import GridProducts from "../../Components/GridProducts";
+import SlideImages from "../../Components/SlideImages";
+import GridImages from "../../Components/GridImages";
+import SlidePartners from "../../Components/SlidePartners";
 
-interface ProductsArray extends ObjectArray {
-  title: string;
-  price: number;
-}
-
-const ListElements1: Array<object> = [
-  {
-    title: "Gato 01",
-  },
-  {
-    title: "Gato 02",
-  },
-  {
-    title: "Gato 03",
-  },
-  {
-    title: "Gato 04",
-  },
-  {
-    title: "Gato 05",
-  },
-  {
-    title: "Gato 06",
-  },
-];
-
-const ListElements2: Array<object> = [
-  {
-    title: "Gato 01",
-    price: 15.99,
-  },
-  {
-    title: "Gato 02",
-    price: 13.99,
-  },
-  {
-    title: "Gato 03",
-    price: 16.99,
-  },
-  {
-    title: "Gato 04",
-    price: 11.99,
-  },
-  {
-    title: "Gato 05",
-    price: 26.99,
-  },
-  {
-    title: "Gato 06",
-    price: 33.99,
-  },
-];
+import {
+  dashRequest,
+  promoRequest,
+} from "../../store/modules/dashboard/actions";
+import { store } from "../../store/index";
 
 const Dashboard: React.FC = () => {
+  // eslint-disable-next-line no-var
+  var x = new Animated.Value(0);
+
+  const color = x.interpolate({
+    inputRange: [0, 90, 180],
+    outputRange: [
+      "rgba(0, 0, 0, .07)",
+      "rgba(0, 0, 0, .25)",
+      "rgba(0, 0, 0, .07)",
+    ],
+  });
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(x, {
+        toValue: 180,
+        duration: 3000,
+        useNativeDriver: false,
+      })
+    ).start();
+  }, []);
+
+  const newCompanies = useSelector((state) => state.dash.newCompanies);
+  const topProducts = useSelector((state) => state.dash.topProducts);
+  const promotions = useSelector((state) => state.dash.promotions);
+
+  // const newCompanies = [];
+  // const topProducts = [];
+  // const promotions = [];
+
+  const handleRequest: Function = () => {
+    store.dispatch(dashRequest());
+    store.dispatch(promoRequest());
+  };
+
+  useEffect(() => {
+    handleRequest();
+  }, []);
+
   return (
-    <ContainerScroll refreshControl={<RefreshControl refreshing={false} />}>
-      <SlideProducts
-        title="Categorias"
-        listElements={ListElements1}
-        nItemsInScreen={4}
+    <ContainerScroll
+      refreshControl={
+        <RefreshControl onRefresh={() => handleRequest()} refreshing={false} />
+      }
+    >
+      <SlidePartners
+        color={color}
+        title="NOVOS PARCEIROS"
+        listElements={newCompanies}
       />
 
-      <GridProducts listElements={ListElements2} title="Mais Vendidos" />
+      <SlideImages
+        color={color}
+        title="MAIS COMPRADOS"
+        listElements={topProducts.slice().reverse()}
+        nItemsInScreen={1}
+      />
+
+      <GridImages color={color} listElements={promotions} title="OFERTAS" />
     </ContainerScroll>
   );
 };

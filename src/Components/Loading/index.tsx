@@ -8,7 +8,7 @@ type RequestProps = {
   visible: boolean;
 };
 
-const RequestConfirmation: React.FC<RequestProps> = ({ visible }) => (
+const Loading: React.FC<RequestProps> = ({ visible = true }) => (
   <Modal transparent visible={visible} animationType="fade">
     <ContainerOut>
       <ContainerIn>
@@ -18,4 +18,4 @@ const RequestConfirmation: React.FC<RequestProps> = ({ visible }) => (
   </Modal>
 );
 
-export default RequestConfirmation;
+export default Loading;

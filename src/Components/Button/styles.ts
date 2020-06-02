@@ -4,11 +4,17 @@ import { RectButton } from "react-native-gesture-handler";
 import {
   FONT_SIZE_PRIMARY,
   SPACE_SECONDARY,
-  BORDER_ROUND,
-  HEIGHT_PRIMARY,
+  FONT_SIZE_TERTIARY,
 } from "../../styles/sizes";
-import { FONT_BOLD_ITALIC, FONT_BOLD } from "../../styles/fonts";
-import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../styles/colors";
+import { FONT_BOLD, FONT_REGULAR } from "../../styles/fonts";
+import {
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+  TEXT_SECONDARY,
+  TEXT_PRIMARY,
+} from "../../styles/colors";
+
+import { widthPercentageToPx } from "../PercentageConverter";
 
 type ButtonTextProps = {
   textColor?: string;
@@ -16,16 +22,11 @@ type ButtonTextProps = {
 
 export const Container = styled(RectButton)`
   width: 100%;
-  height: ${HEIGHT_PRIMARY};
+  height: ${widthPercentageToPx("12%")};
+  margin-top: ${widthPercentageToPx("2%")};
   margin-bottom: ${SPACE_SECONDARY};
   background: ${PRIMARY_COLOR};
-  border-radius: ${BORDER_ROUND};
-
-  elevation: 3;
-  shadow-opacity: 0.22;
-  shadow-radius: 2.22px;
-  shadow-color: black;
-  shadow-offset: 4px;
+  border-radius: ${widthPercentageToPx("2.5%")};
 
   flex-direction: row;
   align-items: center;
@@ -33,7 +34,7 @@ export const Container = styled(RectButton)`
 `;
 
 export const ButtonText = styled.Text<ButtonTextProps>`
-  font-size: ${FONT_SIZE_PRIMARY};
+  font-size: ${FONT_SIZE_TERTIARY};
   color: ${(props) => (props.textColor ? props.textColor : "white")};
   /* font-weight: bold; */
   font-family: ${FONT_BOLD};
@@ -53,15 +54,13 @@ type Sec = {
 };
 
 export const ButtonTextSecondary = styled.Text<Sec>`
-  font-size: ${FONT_SIZE_PRIMARY};
-  color: ${SECONDARY_COLOR};
+  font-size: ${FONT_SIZE_TERTIARY};
+  color: ${TEXT_PRIMARY};
   /* font-style: italic; */
   padding: 0;
   /* font-weight: bold; */
-  ${(props) =>
-    props.italic
-      ? `font-family: ${FONT_BOLD_ITALIC}`
-      : `font-family: ${FONT_BOLD}`}
+  font-family: ${FONT_REGULAR};
+  text-decoration-line: underline;
 `;
 
 // ${(props) => (props.italic ? "font-style: italic" : "font-style: normal")};
