@@ -26,7 +26,7 @@ const GridImages: React.FC<ItemsArray> = ({ listElements, title, color }) => {
       {title && <Title>{title}</Title>}
       {listElements.length > 0 ? (
         listElements.map((item, index) => (
-          <LinkContainerLine>
+          <LinkContainerLine key={item.id}>
             <ViewLinkLine last={index % 2 !== 0}>
               <ImageProductLine
                 source={{

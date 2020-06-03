@@ -6,16 +6,21 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import React from "react";
+import { View } from "react-native";
+
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { navigationRef } from "./navigationService";
 
 import { widthPercentageToDP } from "../Components/PercentageConverter";
 import SearchBar from "../Components/SearchBar";
 import { FONT_REGULAR, FONT_BOLD } from "../styles/fonts";
-import { PRIMARY_COLOR, SECONDARY_COLOR } from "../styles/colors";
+import { PRIMARY_COLOR } from "../styles/colors";
 
 import Dashboard from "../pages/Dashboard";
 import Account from "../pages/Account";
 import Cart from "../pages/Cart";
 import Search from "../pages/Search";
+import SearchResults from "../pages/SearchResults";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 
@@ -34,14 +39,16 @@ const styleBarTop: StackNavigationOptions = {
 
 const styleBarTopBusca: StackNavigationOptions = {
   headerStyle: { backgroundColor: "#fff" },
-  headerTitle: () => null,
 
-  headerLeftContainerStyle: {
-    width: "100%",
+  headerTitleContainerStyle: {
+    right: 0,
+    left: 0,
+
+    marginLeft: widthPercentageToDP("4%"),
   },
-  headerLeft: () => <SearchBar />,
+  headerTitle: () => <SearchBar />,
 
-  headerRight: () => null,
+  headerLeft: () => null,
   headerTintColor: "#fff",
 };
 
@@ -69,6 +76,30 @@ const SearchStackScreen: React.FC = () => {
         component={Search}
         options={styleBarTopBusca}
       />
+      <SearchStack.Screen
+        name="ResultadosBusca"
+        component={SearchResults}
+        options={({ navigation }) => {
+          return {
+            ...styleBarTopBusca,
+            headerTitleContainerStyle: {
+              right: 0,
+              left: 0,
+              marginLeft: widthPercentageToDP("16%"),
+            },
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon
+                  name="arrow-left"
+                  style={{ marginLeft: widthPercentageToDP("4%") }}
+                  size={widthPercentageToDP("8%")}
+                  color="#555"
+                />
+              </TouchableOpacity>
+            ),
+          };
+        }}
+      />
     </SearchStack.Navigator>
   );
 };
@@ -82,6 +113,54 @@ const AccountStackScreen: React.FC = () => {
         name="Minha Conta"
         component={Account}
         options={styleBarTop}
+      />
+      <AccountStack.Screen
+        name="Entrar"
+        component={SignIn}
+        options={({ navigation }) => {
+          return {
+            ...styleBarTop,
+            headerTitleContainerStyle: {
+              right: 0,
+              left: 0,
+              marginLeft: widthPercentageToDP("12%"),
+            },
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon
+                  name="arrow-left"
+                  style={{ marginLeft: widthPercentageToDP("4%") }}
+                  size={widthPercentageToDP("8%")}
+                  color="#555"
+                />
+              </TouchableOpacity>
+            ),
+          };
+        }}
+      />
+      <AccountStack.Screen
+        name="Cadastrar"
+        component={SignUp}
+        options={({ navigation }) => {
+          return {
+            ...styleBarTop,
+            headerTitleContainerStyle: {
+              right: 0,
+              left: 0,
+              marginLeft: widthPercentageToDP("12%"),
+            },
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon
+                  name="arrow-left"
+                  style={{ marginLeft: widthPercentageToDP("4%") }}
+                  size={widthPercentageToDP("8%")}
+                  color="#555"
+                />
+              </TouchableOpacity>
+            ),
+          };
+        }}
       />
     </AccountStack.Navigator>
   );
@@ -154,22 +233,12 @@ const LoginStack = createStackNavigator();
 
 const LoginStackScreen: React.FC = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <LoginStack.Navigator initialRouteName="Route">
         <LoginStack.Screen
           name="Route"
           component={Routes}
           options={{ headerShown: false }}
-        />
-        <LoginStack.Screen
-          name="Entrar"
-          component={SignIn}
-          options={styleBarTop}
-        />
-        <LoginStack.Screen
-          name="Cadastrar"
-          component={SignUp}
-          options={styleBarTop}
         />
       </LoginStack.Navigator>
     </NavigationContainer>

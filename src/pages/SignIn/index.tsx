@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FontAwesome as Icon } from "@expo/vector-icons";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationActions } from "react-navigation";
 
 import { useSelector } from "react-redux";
 
@@ -111,7 +112,11 @@ const SignIn: React.FC<SignProps> = () => {
 
         <SignUpView>
           <ButtonText
-            onPress={() => navigation.navigate("Sacola")}
+            onPress={() =>
+              store.dispatch(
+                NavigationActions.navigate({ routeName: "Sacola" })
+              )
+            }
             text="Crie uma conta"
           />
 

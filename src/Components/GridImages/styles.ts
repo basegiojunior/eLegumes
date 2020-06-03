@@ -20,7 +20,7 @@ export const Title = styled.Text`
   font-size: ${FONT_SIZE_SECONDARY};
   font-family: ${FONT_SEMIBOLD};
   color: ${TEXT_SECONDARY};
-  margin: ${widthPercentageToPx("5%")} 0 ${widthPercentageToPx("5%")}
+  margin: ${widthPercentageToPx("8%")} 0 ${widthPercentageToPx("5%")}
     ${widthPercentageToPx("6%")};
 `;
 

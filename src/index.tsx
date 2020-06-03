@@ -13,11 +13,11 @@ import App from "./App";
 const Index: React.FC = () => {
   return (
     <View style={{ flex: 1 }}>
-      <Provider store={store}>
-        <PersistGate loading={<Loading visible />} persistor={persistor}>
+      <PersistGate loading={<Loading visible />} persistor={persistor}>
+        <Provider store={store}>
           <App />
-        </PersistGate>
-      </Provider>
+        </Provider>
+      </PersistGate>
     </View>
   );
 };

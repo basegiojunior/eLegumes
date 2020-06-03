@@ -44,7 +44,7 @@ const SlideImages: React.FC<ProductsArray> = ({
 
     let scrollTo = lastCard.last;
 
-    console.log(newP);
+    // console.log(newP);
 
     if (position > lastCard.position) {
       if (newP > 0.35) {

@@ -77,7 +77,7 @@ export const Title = styled.Text`
   font-family: ${FONT_SEMIBOLD};
   color: ${TEXT_SECONDARY};
   margin: ${widthPercentageToPx("8%")} 0 ${widthPercentageToPx("5%")}
-    ${widthPercentageToPx("7%")};
+    ${widthPercentageToPx("6%")};
 `;
 
 export const PricePartner = styled.Text`

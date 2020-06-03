@@ -7,31 +7,34 @@ import { FONT_SIZE_SECONDARY, FONT_SIZE_TERTIARY } from "../../styles/sizes";
 
 import { TEXT_PRIMARY, TEXT_SECONDARY } from "../../styles/colors";
 
-export const Recent = styled.View`
-  padding-right: ${widthPercentageToPx("6%")};
-  padding-bottom: ${widthPercentageToPx("2%")};
-  padding-left: ${widthPercentageToPx("6%")};
-  flex-direction: column;
-  width: 100%;
-`;
-
-export const RecentItem = styled.TouchableOpacity`
-  margin-top: ${widthPercentageToPx("2%")};
-  padding: ${widthPercentageToPx("2%")} 0;
+export const Item = styled.TouchableOpacity`
+  margin-top: ${widthPercentageToPx("5%")};
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
 `;
 
-export const RecentTitle = styled.Text`
+export const Container = styled.View`
+  width: 100%;
+  flex-direction: column;
+  padding-left: ${widthPercentageToPx("6%")};
+`;
+
+export const Title = styled.Text`
   margin-top: ${widthPercentageToPx("8%")};
-  margin-bottom: ${widthPercentageToPx("2%")};
   font-size: ${FONT_SIZE_SECONDARY};
   font-family: ${FONT_SEMIBOLD};
   color: ${TEXT_SECONDARY};
 `;
 
-export const RecentText = styled.Text`
+export const Image = styled.Image`
+  border-radius: ${widthPercentageToPx("2%")};
+  width: ${widthPercentageToPx("14%")};
+  height: ${widthPercentageToPx("14%")};
+`;
+
+export const Name = styled.Text`
   font-family: ${FONT_REGULAR};
   color: ${TEXT_PRIMARY};
   font-size: ${FONT_SIZE_TERTIARY};
+  margin-left: ${widthPercentageToPx("7%")};
 `;
