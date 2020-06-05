@@ -26,6 +26,14 @@ const Dashboard: React.FC = () => {
     ],
   });
 
+  const newCompanies = useSelector((state) => state.dash.newCompanies);
+  const topProducts = useSelector((state) => state.dash.topProducts);
+  const promotions = useSelector((state) => state.dash.promotions);
+
+  // const newCompanies = [];
+  // const topProducts = [];
+  // const promotions = [];
+
   useEffect(() => {
     Animated.loop(
       Animated.timing(x, {
@@ -36,21 +44,18 @@ const Dashboard: React.FC = () => {
     ).start();
   }, []);
 
-  const newCompanies = useSelector((state) => state.dash.newCompanies);
-  const topProducts = useSelector((state) => state.dash.topProducts);
-  const promotions = useSelector((state) => state.dash.promotions);
-
-  // const newCompanies = [];
-  // const topProducts = [];
-  // const promotions = [];
-
   const handleRequest: Function = () => {
     store.dispatch(dashRequest());
     store.dispatch(promoRequest());
   };
 
   useEffect(() => {
-    handleRequest();
+    if (newCompanies === [] || topProducts === []) {
+      store.dispatch(dashRequest());
+    }
+    if (promotions === []) {
+      store.dispatch(promoRequest());
+    }
   }, []);
 
   return (

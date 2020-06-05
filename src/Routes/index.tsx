@@ -13,16 +13,20 @@ import { navigationRef } from "./navigationService";
 
 import { widthPercentageToDP } from "../Components/PercentageConverter";
 import SearchBar from "../Components/SearchBar";
+
 import { FONT_REGULAR, FONT_BOLD } from "../styles/fonts";
 import { PRIMARY_COLOR } from "../styles/colors";
+import { SPACE_FOR_DP, SPACE_EIGHT_DP, SPACE_TWO_DP } from "../styles/sizes";
 
 import Dashboard from "../pages/Dashboard";
 import Account from "../pages/Account";
 import Cart from "../pages/Cart";
 import Search from "../pages/Search";
 import SearchResults from "../pages/SearchResults";
+import SearchEspecifyResults from "../pages/SearchEspecifyResults";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import Categories from "../pages/Categories";
 
 const styleBarTop: StackNavigationOptions = {
   headerStyle: { backgroundColor: "#fff" },
@@ -31,7 +35,7 @@ const styleBarTop: StackNavigationOptions = {
   headerTitleStyle: {
     color: "#242A22",
     fontSize: widthPercentageToDP("5.5%"),
-    marginLeft: widthPercentageToDP("4%"),
+    marginLeft: SPACE_FOR_DP,
     fontFamily: FONT_BOLD,
   },
   headerTintColor: "#fff",
@@ -44,7 +48,7 @@ const styleBarTopBusca: StackNavigationOptions = {
     right: 0,
     left: 0,
 
-    marginLeft: widthPercentageToDP("4%"),
+    marginLeft: SPACE_FOR_DP,
   },
   headerTitle: () => <SearchBar />,
 
@@ -91,8 +95,58 @@ const SearchStackScreen: React.FC = () => {
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon
                   name="arrow-left"
-                  style={{ marginLeft: widthPercentageToDP("4%") }}
-                  size={widthPercentageToDP("8%")}
+                  style={{ marginLeft: SPACE_FOR_DP }}
+                  size={SPACE_EIGHT_DP}
+                  color="#555"
+                />
+              </TouchableOpacity>
+            ),
+          };
+        }}
+      />
+      <SearchStack.Screen
+        name="ResultadosBuscaEspecificos"
+        component={SearchEspecifyResults}
+        options={({ route, navigation }) => {
+          return {
+            ...styleBarTop,
+            headerTitle: `${route.params.name} com "${route.params.search}"`,
+            headerTitleContainerStyle: {
+              right: 0,
+              left: 0,
+              marginLeft: widthPercentageToDP("16%"),
+            },
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon
+                  name="arrow-left"
+                  style={{ marginLeft: SPACE_FOR_DP }}
+                  size={SPACE_EIGHT_DP}
+                  color="#555"
+                />
+              </TouchableOpacity>
+            ),
+          };
+        }}
+      />
+      <SearchStack.Screen
+        name="Categoria"
+        component={Categories}
+        options={({ route, navigation }) => {
+          return {
+            ...styleBarTop,
+            headerTitle: route.params.name,
+            headerTitleContainerStyle: {
+              right: 0,
+              left: 0,
+              marginLeft: widthPercentageToDP("12%"),
+            },
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Icon
+                  name="arrow-left"
+                  style={{ marginLeft: SPACE_FOR_DP }}
+                  size={SPACE_EIGHT_DP}
                   color="#555"
                 />
               </TouchableOpacity>
@@ -129,8 +183,8 @@ const AccountStackScreen: React.FC = () => {
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon
                   name="arrow-left"
-                  style={{ marginLeft: widthPercentageToDP("4%") }}
-                  size={widthPercentageToDP("8%")}
+                  style={{ marginLeft: SPACE_FOR_DP }}
+                  size={SPACE_EIGHT_DP}
                   color="#555"
                 />
               </TouchableOpacity>
@@ -153,8 +207,8 @@ const AccountStackScreen: React.FC = () => {
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon
                   name="arrow-left"
-                  style={{ marginLeft: widthPercentageToDP("4%") }}
-                  size={widthPercentageToDP("8%")}
+                  style={{ marginLeft: SPACE_FOR_DP }}
+                  size={SPACE_EIGHT_DP}
                   color="#555"
                 />
               </TouchableOpacity>
@@ -200,7 +254,7 @@ const Routes: React.FC = () => {
           return (
             <Icon
               style={{
-                paddingTop: widthPercentageToDP("2%"),
+                paddingTop: SPACE_TWO_DP,
               }}
               name={iconName}
               size={size}
@@ -213,7 +267,7 @@ const Routes: React.FC = () => {
         activeTintColor: PRIMARY_COLOR,
         inactiveTintColor: "gray",
         labelStyle: {
-          paddingBottom: widthPercentageToDP("2%"),
+          paddingBottom: SPACE_TWO_DP,
           fontFamily: FONT_REGULAR,
         },
         style: {

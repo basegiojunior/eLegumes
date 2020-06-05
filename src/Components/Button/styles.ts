@@ -2,17 +2,12 @@ import styled, { css } from "styled-components/native";
 import { RectButton } from "react-native-gesture-handler";
 
 import {
-  FONT_SIZE_PRIMARY,
+  SPACE_TWO,
   SPACE_SECONDARY,
   FONT_SIZE_TERTIARY,
 } from "../../styles/sizes";
 import { FONT_BOLD, FONT_REGULAR } from "../../styles/fonts";
-import {
-  PRIMARY_COLOR,
-  SECONDARY_COLOR,
-  TEXT_SECONDARY,
-  TEXT_PRIMARY,
-} from "../../styles/colors";
+import { PRIMARY_COLOR, TEXT_PRIMARY } from "../../styles/colors";
 
 import { widthPercentageToPx } from "../PercentageConverter";
 
@@ -23,7 +18,7 @@ type ButtonTextProps = {
 export const Container = styled(RectButton)`
   width: 100%;
   height: ${widthPercentageToPx("12%")};
-  margin-top: ${widthPercentageToPx("2%")};
+  margin-top: ${SPACE_TWO};
   margin-bottom: ${SPACE_SECONDARY};
   background: ${PRIMARY_COLOR};
   border-radius: ${widthPercentageToPx("2.5%")};
@@ -56,11 +51,11 @@ type Sec = {
 export const ButtonTextSecondary = styled.Text<Sec>`
   font-size: ${FONT_SIZE_TERTIARY};
   color: ${TEXT_PRIMARY};
+  font-family: ${FONT_REGULAR};
+  text-decoration-line: underline;
   /* font-style: italic; */
   padding: 0;
   /* font-weight: bold; */
-  font-family: ${FONT_REGULAR};
-  text-decoration-line: underline;
 `;
 
 // ${(props) => (props.italic ? "font-style: italic" : "font-style: normal")};

@@ -13,7 +13,7 @@ const SearchBar: React.FC = ({ navigation }) => {
   const inputRef = useRef<TextInput>(null);
 
   const handleSubmit: Function = () => {
-    store.dispatch(searchRequest(searchValue));
+    store.dispatch(searchRequest(searchValue.trim()));
   };
 
   return (

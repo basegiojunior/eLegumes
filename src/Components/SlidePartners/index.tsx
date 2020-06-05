@@ -10,11 +10,13 @@ import {
   TextPartner,
   ViewAbout,
   Content,
-  Title,
   ViewAboutLazy,
 } from "./styles";
 
 import { widthPercentageToDP } from "../PercentageConverter";
+import Title from "../Title";
+
+import { SPACE_SIX_DP } from "../../styles/sizes";
 
 type ProductsArray = {
   listElements: object[];
@@ -43,7 +45,7 @@ const SlidePartners: React.FC<ProductsArray> = ({
 
   return (
     <Content>
-      {title && <Title>{title}</Title>}
+      {title && <Title style={{ marginLeft: SPACE_SIX_DP }}>{title}</Title>}
       <LateralSlide
         onScrollEndDrag={({ nativeEvent }) => {
           scrollCard(nativeEvent.contentOffset.x);

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import { ScrollView, Animated } from "react-native";
+import { ScrollView, Animated, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   LinkContainer,
@@ -9,16 +10,22 @@ import {
   TitleProduct,
   PriceProduct,
   Content,
-  Title,
+  TitleLine,
+  VerMais,
 } from "./styles";
 
 import { widthPercentageToDP } from "../PercentageConverter";
+import Title from "../Title";
+
+import { SPACE_SIX_DP } from "../../styles/sizes";
 
 type ProductsArray = {
   listElements: object[];
   nItemsInScreen?: number;
   title?: string;
   color: any;
+  seeMore?: boolean;
+  seeMoreData?: { id: string; name: string };
 };
 
 const SlideImages: React.FC<ProductsArray> = ({
@@ -26,12 +33,15 @@ const SlideImages: React.FC<ProductsArray> = ({
   nItemsInScreen = 1,
   title,
   color,
+  seeMore = false,
+  seeMoreData,
 }) => {
   const slideRef = useRef<ScrollView>(null);
   const lastCard = {
     last: 0,
     position: 0,
   };
+  const navigation = useNavigation();
 
   // const [lastCard, setLastCard] = useState(0);
 
@@ -43,8 +53,6 @@ const SlideImages: React.FC<ProductsArray> = ({
     const newP = Math.abs((position / perc) % 1);
 
     let scrollTo = lastCard.last;
-
-    // console.log(newP);
 
     if (position > lastCard.position) {
       if (newP > 0.35) {
@@ -70,7 +78,22 @@ const SlideImages: React.FC<ProductsArray> = ({
 
   return (
     <Content>
-      {title && <Title>{title}</Title>}
+      <TitleLine>
+        <Title style={{ marginLeft: SPACE_SIX_DP }}>{title}</Title>
+
+        {seeMore && (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Categoria", {
+                name: seeMoreData.name,
+                id: seeMoreData.id,
+              });
+            }}
+          >
+            <VerMais>Ver Mais</VerMais>
+          </TouchableOpacity>
+        )}
+      </TitleLine>
       <LateralSlide
         onMomentumScrollEnd={({ nativeEvent }) => {
           scrollCard(nativeEvent.contentOffset.x);
@@ -89,7 +112,9 @@ const SlideImages: React.FC<ProductsArray> = ({
                     }}
                   />
                   <TitleProduct>{item.name}</TitleProduct>
-                  <PriceProduct>{item.weekly_sales} vendidos</PriceProduct>
+                  {item.weekly_sales && (
+                    <PriceProduct>{item.weekly_sales} vendidos</PriceProduct>
+                  )}
                 </ViewLink>
               </LinkContainer>
             )

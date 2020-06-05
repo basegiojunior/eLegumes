@@ -1,40 +1,25 @@
 import styled from "styled-components/native";
-import { RectButton } from "react-native-gesture-handler";
 
 import { widthPercentageToPx } from "../../Components/PercentageConverter";
-import { FONT_REGULAR, FONT_SEMIBOLD } from "../../styles/fonts";
-import { FONT_SIZE_SECONDARY, FONT_SIZE_TERTIARY } from "../../styles/sizes";
+import ButtonText from "../../Components/Button/buttonText";
 
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "../../styles/colors";
+import { FONT_REGULAR } from "../../styles/fonts";
+import {
+  FONT_SIZE_TERTIARY,
+  SPACE_SIX,
+  SPACE_FIVE,
+  SPACE_FOR,
+  SPACE_SEVEN,
+} from "../../styles/sizes";
 
-export const Item = styled.TouchableOpacity`
-  margin-top: ${widthPercentageToPx("5%")};
-  flex-direction: row;
-  align-items: center;
-`;
+import { TEXT_PRIMARY } from "../../styles/colors";
 
 export const Container = styled.View`
   width: 100%;
   flex-direction: column;
-  padding-left: ${widthPercentageToPx("6%")};
+  padding-left: ${SPACE_SIX};
 `;
 
-export const Title = styled.Text`
-  margin-top: ${widthPercentageToPx("8%")};
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_SECONDARY};
-`;
-
-export const Image = styled.Image`
-  border-radius: ${widthPercentageToPx("2%")};
-  width: ${widthPercentageToPx("14%")};
-  height: ${widthPercentageToPx("14%")};
-`;
-
-export const Name = styled.Text`
-  font-family: ${FONT_REGULAR};
-  color: ${TEXT_PRIMARY};
-  font-size: ${FONT_SIZE_TERTIARY};
-  margin-left: ${widthPercentageToPx("7%")};
+export const Button = styled(ButtonText)`
+  margin-top: ${SPACE_FOR};
 `;

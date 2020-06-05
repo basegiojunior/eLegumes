@@ -4,6 +4,7 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { widthPercentageToPx } from "../PercentageConverter";
 
 import { FONT_BOLD } from "../../styles/fonts";
+import { SPACE_FOR } from "../../styles/sizes";
 
 export const Container = styled.View`
   flex-direction: row;
@@ -18,7 +19,7 @@ export const Input = styled.TextInput`
 `;
 
 export const Icone = styled(Icon)`
-  margin-right: ${widthPercentageToPx("4%")};
+  margin-right: ${SPACE_FOR};
 `;
 
 export const ButtonSearch = styled.TouchableOpacity``;

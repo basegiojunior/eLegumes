@@ -5,21 +5,14 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
 import { ContainerScroll } from "../../styles/scrollView";
 import SlideImages from "../../Components/SlideImages";
+import Title from "../../Components/Title";
 
-import {
-  Recent,
-  RecentItem,
-  RecentTitle,
-  RecentIcon,
-  RecentText,
-} from "./styles";
+import { Recent, RecentItem, RecentText } from "./styles";
 
-import {
-  dashRequest,
-  promoRequest,
-} from "../../store/modules/dashboard/actions";
+import { searchRequest } from "../../store/modules/search/actions";
+import { categoriesRequest } from "../../store/modules/categories/actions";
 
-import { ICON_CHECKBOX_SIZE } from "../../styles/sizes";
+import { ICON_CHECKBOX_SIZE, SPACE_TWO_DP } from "../../styles/sizes";
 import { TEXT_SECONDARY } from "../../styles/colors";
 
 import { store } from "../../store/index";
@@ -47,69 +40,65 @@ const Search: React.FC = () => {
     ).start();
   }, []);
 
-  const topProducts = useSelector((state) => state.dash.topProducts);
+  const recentSearchs = useSelector((state) => state.search.recentSearchs);
+  const categories = useSelector((state) => state.categories.categories);
+  const loading = useSelector((state) => state.categories.loading);
+
+  const handleRequest: Function = () => {
+    store.dispatch(categoriesRequest());
+  };
+
+  const handleSubmit: Function = (searchValue: string) => {
+    store.dispatch(searchRequest(searchValue.trim()));
+  };
 
   useEffect(() => {
-    store.dispatch(dashRequest());
-    store.dispatch(promoRequest());
+    if (categories === []) {
+      store.dispatch(categoriesRequest());
+    }
   }, []);
 
   return (
-    <ContainerScroll refreshControl={<RefreshControl refreshing={false} />}>
-      <Recent>
-        <RecentTitle>BUSCAS RECENTES</RecentTitle>
-        <RecentItem>
-          <RecentText>&ldquo;Acerola&rdquo;</RecentText>
-          <Icon
-            style={{ marginRight: 5 }}
-            name="arrow-top-left"
-            size={ICON_CHECKBOX_SIZE}
-            color={TEXT_SECONDARY}
+    <ContainerScroll
+      refreshControl={
+        <RefreshControl
+          onRefresh={() => handleRequest()}
+          refreshing={loading}
+        />
+      }
+    >
+      {recentSearchs.length > 0 && (
+        <Recent>
+          <Title style={{ marginBottom: SPACE_TWO_DP }}>BUSCAS RECENTES</Title>
+          {recentSearchs.map((item, index) => (
+            <RecentItem
+              onPress={() => handleSubmit(item)}
+              key={item.repeat(index)}
+            >
+              <RecentText>&ldquo;{item}&rdquo;</RecentText>
+              <Icon
+                style={{ marginRight: 5 }}
+                name="arrow-top-left"
+                size={ICON_CHECKBOX_SIZE}
+                color={TEXT_SECONDARY}
+              />
+            </RecentItem>
+          ))}
+        </Recent>
+      )}
+
+      {Object.entries(categories).length > 0 &&
+        Object.entries(categories).map((item) => (
+          <SlideImages
+            color={color}
+            seeMore
+            seeMoreData={{ name: item[1].name, id: item[1].id }}
+            title={item[1].name.toUpperCase()}
+            listElements={item[1].products}
+            nItemsInScreen={2}
+            key={item[1].id}
           />
-        </RecentItem>
-        <RecentItem>
-          <RecentText>&ldquo;Acerola&rdquo;</RecentText>
-          <Icon
-            style={{ marginRight: 5 }}
-            name="arrow-top-left"
-            size={ICON_CHECKBOX_SIZE}
-            color={TEXT_SECONDARY}
-          />
-        </RecentItem>
-        <RecentItem>
-          <RecentText>&ldquo;Acerola&rdquo;</RecentText>
-          <Icon
-            style={{ marginRight: 5 }}
-            name="arrow-top-left"
-            size={ICON_CHECKBOX_SIZE}
-            color={TEXT_SECONDARY}
-          />
-        </RecentItem>
-      </Recent>
-      <SlideImages
-        color={color}
-        title="Raízes"
-        listElements={topProducts}
-        nItemsInScreen={2}
-      />
-      <SlideImages
-        color={color}
-        title="Raízes"
-        listElements={topProducts}
-        nItemsInScreen={2}
-      />
-      <SlideImages
-        color={color}
-        title="Raízes"
-        listElements={topProducts}
-        nItemsInScreen={2}
-      />
-      <SlideImages
-        color={color}
-        title="Raízes"
-        listElements={topProducts}
-        nItemsInScreen={2}
-      />
+        ))}
     </ContainerScroll>
   );
 };

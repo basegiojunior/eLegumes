@@ -12,8 +12,6 @@ import {
   Title,
 } from "./styles";
 
-import produto from "../../assets/product.jpg";
-
 interface ItemsArray {
   listElements: Array<{ title: string; price: number }>;
   title: string;

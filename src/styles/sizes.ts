@@ -3,12 +3,35 @@ import {
   widthPercentageToPx,
 } from "../Components/PercentageConverter";
 
-export const ICON_SIZE = widthPercentageToDP("5%");
-export const ICON_CHECKBOX_SIZE = widthPercentageToDP("6%");
+export const SPACE_ONE = widthPercentageToPx("1%");
 
-export const SPACE_PRIMARY = widthPercentageToPx("3%");
-export const SPACE_PRIMARY_DP = widthPercentageToDP("3%");
-export const SPACE_SECONDARY = widthPercentageToPx("2%");
+export const SPACE_TWO = widthPercentageToPx("2%");
+export const SPACE_TWO_DP = widthPercentageToDP("2%");
+
+export const SPACE_THREE = widthPercentageToPx("3%");
+export const SPACE_THREE_DP = widthPercentageToDP("3%");
+
+export const SPACE_FOR = widthPercentageToPx("4%");
+export const SPACE_FOR_DP = widthPercentageToDP("4%");
+
+export const SPACE_FIVE = widthPercentageToPx("5%");
+export const SPACE_FIVE_DP = widthPercentageToDP("5%");
+
+export const SPACE_SIX = widthPercentageToPx("6%");
+export const SPACE_SIX_DP = widthPercentageToDP("6%");
+
+export const SPACE_SEVEN = widthPercentageToPx("7%");
+export const SPACE_SEVEN_DP = widthPercentageToDP("7%");
+
+export const SPACE_EIGHT = widthPercentageToPx("8%");
+export const SPACE_EIGHT_DP = widthPercentageToDP("8%");
+
+export const ICON_SIZE = SPACE_FIVE_DP;
+export const ICON_CHECKBOX_SIZE = SPACE_SIX_DP;
+
+export const SPACE_PRIMARY = SPACE_THREE;
+export const SPACE_PRIMARY_DP = SPACE_THREE_DP;
+export const SPACE_SECONDARY = SPACE_TWO;
 
 export const HEIGHT_PRIMARY = widthPercentageToPx("13%");
 export const HEIGHT_PRIMARY_DP = widthPercentageToDP("13%");

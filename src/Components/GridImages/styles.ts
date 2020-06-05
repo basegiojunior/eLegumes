@@ -5,7 +5,10 @@ import { widthPercentageToPx } from "../PercentageConverter";
 
 import {
   FONT_SIZE_QUATERNARY,
-  SPACE_PRIMARY,
+  SPACE_TWO,
+  SPACE_EIGHT,
+  SPACE_FIVE,
+  SPACE_SIX,
   FONT_SIZE_SECONDARY,
 } from "../../styles/sizes";
 import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "../../styles/fonts";
@@ -20,20 +23,19 @@ export const Title = styled.Text`
   font-size: ${FONT_SIZE_SECONDARY};
   font-family: ${FONT_SEMIBOLD};
   color: ${TEXT_SECONDARY};
-  margin: ${widthPercentageToPx("8%")} 0 ${widthPercentageToPx("5%")}
-    ${widthPercentageToPx("6%")};
+  margin: ${SPACE_EIGHT} 0 ${SPACE_FIVE} ${SPACE_SIX};
 `;
 
 export const TitleProduct = styled.Text`
   font-size: ${FONT_SIZE_QUATERNARY};
-  margin-top: ${widthPercentageToPx("2%")};
-  margin-left: ${widthPercentageToPx("2%")};
+  margin-top: ${SPACE_TWO};
+  margin-left: ${SPACE_TWO};
   font-family: ${FONT_BOLD};
   color: ${TEXT_PRIMARY};
 `;
 
 export const PriceProduct = styled.Text`
-  margin-left: ${widthPercentageToPx("2%")};
+  margin-left: ${SPACE_TWO};
   font-size: ${FONT_SIZE_SECONDARY};
   font-family: ${FONT_REGULAR};
   color: ${TEXT_SECONDARY};
@@ -50,15 +52,13 @@ export const LinkContainerLine = styled.TouchableWithoutFeedback``;
 export const ViewLinkLine = styled.View<Margin>`
   width: 50%;
   flex-direction: column;
-  padding-left: ${({ last }) =>
-    last ? widthPercentageToPx("2%") : widthPercentageToPx("6%")};
-  padding-right: ${({ last }) =>
-    last ? widthPercentageToPx("6%") : widthPercentageToPx("2%")};
+  padding-left: ${({ last }) => (last ? SPACE_TWO : SPACE_SIX)};
+  padding-right: ${({ last }) => (last ? SPACE_SIX : SPACE_TWO)};
   margin-bottom: 15px;
 `;
 
 export const ImageProductLine = styled.Image`
-  border-radius: ${widthPercentageToPx("2%")};
+  border-radius: ${SPACE_TWO};
   width: ${widthPercentageToPx("42%")};
   height: ${widthPercentageToPx("25%")};
 `;

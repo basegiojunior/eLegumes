@@ -1,6 +1,14 @@
 import styled from "styled-components/native";
 
-import { SPACE_PRIMARY_DP, FONT_SIZE_PRIMARY } from "../../styles/sizes";
+import {
+  SPACE_PRIMARY_DP,
+  FONT_SIZE_PRIMARY,
+  SPACE_EIGHT,
+  SPACE_TWO,
+  SPACE_FIVE,
+  SPACE_SEVEN,
+  SPACE_SIX,
+} from "../../styles/sizes";
 import { COLOR_BACKGROUND_PRIMARY, TEXT_PRIMARY } from "../../styles/colors";
 import { FONT_REGULAR } from "../../styles/fonts";
 
@@ -36,7 +44,7 @@ export const LogoImage = styled.Image`
 export const LineDiv = styled.View`
   width: 100%;
   height: 0px;
-  margin: ${widthPercentageToPx("6%")} 0;
+  margin: ${SPACE_SIX} 0;
   border-top-width: 1px;
   border-bottom-width: 0;
   border-color: "rgba(0,0,0,.08)";
@@ -51,7 +59,7 @@ export const SignUpView = styled.View`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  margin-top: ${widthPercentageToPx("8%")};
+  margin-top: ${SPACE_EIGHT};
 `;
 
 export const TextSignUp = styled.Text`
@@ -64,13 +72,13 @@ export const TextSignUp = styled.Text`
 export const ModalContainerIn = styled.View`
   width: ${widthPercentageToPx("80%")};
   background-color: #fff;
-  padding: ${widthPercentageToPx("7%")} ${widthPercentageToPx("5%")};
-  border-radius: ${widthPercentageToPx("2%")};
+  padding: ${SPACE_SEVEN} ${SPACE_FIVE};
+  border-radius: ${SPACE_TWO};
 `;
 
 export const FalseModal = styled.View`
 	/* width: ${widthPercentageToPx("90%")}; */
-	padding: ${widthPercentageToPx("5%")};
+	padding: ${SPACE_FIVE};
 	align-items: center;
 	background-color: transparent;
 `;
@@ -91,7 +99,7 @@ export const Exit = styled.View`
   justify-content: center;
   width: ${widthPercentageToPx("10%")};
   height: ${widthPercentageToPx("10%")};
-  border-radius: ${widthPercentageToPx("5%")};
+  border-radius: ${SPACE_FIVE};
 `;
 
 export const ExitButton = styled.TouchableOpacity`

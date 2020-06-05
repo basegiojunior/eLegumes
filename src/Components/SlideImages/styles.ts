@@ -7,9 +7,14 @@ import {
 
 import {
   FONT_SIZE_QUATERNARY,
-  SPACE_PRIMARY,
   FONT_SIZE_SECONDARY,
+  SPACE_TWO_DP,
+  SPACE_SIX_DP,
+  SPACE_FOR,
+  SPACE_TWO,
+  SPACE_FIVE,
   FONT_SIZE_TERTIARY,
+  SPACE_SIX,
 } from "../../styles/sizes";
 import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "../../styles/fonts";
 import { TEXT_PRIMARY, TEXT_SECONDARY } from "../../styles/colors";
@@ -30,8 +35,8 @@ export const Content = styled.View`
 export const LateralSlide = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
     flexDirection: "row",
-    paddingRight: widthPercentageToDP("6%"),
-    paddingLeft: widthPercentageToDP("2%"),
+    paddingRight: SPACE_SIX_DP,
+    paddingLeft: SPACE_TWO_DP,
   },
   keyboardShouldPersistTaps: "always",
   horizontal: true,
@@ -45,11 +50,12 @@ export const LinkContainer = styled.TouchableWithoutFeedback``;
 
 export const ViewLink = styled.View`
   flex-direction: column;
-  margin-left: ${widthPercentageToPx("4%")};
+  margin-left: ${SPACE_FOR};
+  padding-top: ${SPACE_FIVE};
 `;
 
 export const ImageProduct = styled.Image<ImageProp>`
-  border-radius: ${widthPercentageToPx("2%")};
+  border-radius: ${SPACE_TWO};
   width: ${(props) =>
     props.nItemsInScreen
       ? widthPercentageToPx(`${92 / props.nItemsInScreen - 4}%`)
@@ -62,23 +68,29 @@ export const ImageProduct = styled.Image<ImageProp>`
 
 export const TitleProduct = styled.Text`
   font-size: ${FONT_SIZE_QUATERNARY};
-  margin-top: ${widthPercentageToPx("2%")};
-  margin-left: ${widthPercentageToPx("2%")};
+  margin-top: ${SPACE_TWO};
+  margin-left: ${SPACE_TWO};
   font-family: ${FONT_BOLD};
   color: ${TEXT_PRIMARY};
 `;
 
-export const Title = styled.Text`
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_SECONDARY};
-  margin: ${widthPercentageToPx("8%")} 0 ${widthPercentageToPx("5%")}
-    ${widthPercentageToPx("6%")};
-`;
-
 export const PriceProduct = styled.Text`
-  margin-left: ${widthPercentageToPx("2%")};
+  margin-left: ${SPACE_TWO};
   font-size: ${FONT_SIZE_SECONDARY};
   font-family: ${FONT_REGULAR};
   color: ${TEXT_SECONDARY};
+`;
+
+export const TitleLine = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+export const VerMais = styled.Text`
+  font-size: ${FONT_SIZE_TERTIARY};
+  color: ${TEXT_SECONDARY};
+  font-family: ${FONT_REGULAR};
+  text-decoration-line: underline;
+  margin-right: ${SPACE_SIX};
 `;

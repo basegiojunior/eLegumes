@@ -1,58 +1,54 @@
 import React from "react";
 import { RefreshControl } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import { useSelector } from "react-redux";
 
 import { ContainerScroll } from "../../styles/scrollView";
 
-import { Title, Container, Item, Image, Name } from "./styles";
+import ItemResult from "../../Components/ItemResult";
 
-import { ICON_CHECKBOX_SIZE } from "../../styles/sizes";
-import { TEXT_SECONDARY } from "../../styles/colors";
+import { Container, Button } from "./styles";
 
 import { store } from "../../store/index";
 
 const SearchResults: React.FC = () => {
+  const navigation = useNavigation();
+
   const products = useSelector(
     (state) => state.search.searchProductsResults
-  ).slice(0, 6);
+  ).slice(0, 3);
   const stores = useSelector((state) => state.search.searchStoresResults).slice(
     0,
-    5
+    3
   );
+
+  const search = useSelector((state) => state.search.recentSearchs)[0];
 
   return (
     <ContainerScroll refreshControl={<RefreshControl refreshing={false} />}>
       <Container>
-        <Title>PRODUTOS</Title>
-        {products.map(
-          (item): JSX.Element => (
-            <>
-              <Item>
-                <Image
-                  source={{
-                    uri: item.image.url,
-                  }}
-                />
-                <Name>{item.name}</Name>
-              </Item>
-            </>
-          )
-        )}
-        <Title>VENDEDORES</Title>
-        {stores.map(
-          (item): JSX.Element => (
-            <>
-              <Item>
-                <Image
-                  source={{
-                    uri: item.image.url,
-                  }}
-                />
-                <Name>{item.name}</Name>
-              </Item>
-            </>
-          )
-        )}
+        <ItemResult title="PRODUTOS" listItems={products} />
+        <Button
+          onPress={() => {
+            navigation.navigate("ResultadosBuscaEspecificos", {
+              name: "Produtos",
+              search,
+            });
+          }}
+          text="Ver Mais Produtos"
+        />
+
+        <ItemResult title="VENDEDORES" listItems={stores} />
+        <Button
+          onPress={() => {
+            navigation.navigate("ResultadosBuscaEspecificos", {
+              name: "Vendedores",
+              search,
+            });
+          }}
+          text="Ver Mais Vendedores"
+        />
       </Container>
     </ContainerScroll>
   );
