@@ -36,11 +36,22 @@ const dash: Reducer = (state = INITIAL_STATE, action) => {
       }
       case "@promo/PROMO_REQUEST": {
         draft.pageLoading = true;
+        if (action.payload.page === 0) {
+          action.payload.page = Math.floor(draft.promotions.length / 10 + 1);
+        }
+        break;
+      }
+      case "@promo/PROMO_SUCCESS_RESET": {
+        draft.pageLoading = false;
+        draft.promotions = action.payload.promotions;
         break;
       }
       case "@promo/PROMO_SUCCESS": {
         draft.pageLoading = false;
-        draft.promotions = action.payload.promotions;
+        draft.promotions = [
+          ...draft.promotions.slice(0, 10 * action.payload.page),
+          ...action.payload.promotions,
+        ];
         break;
       }
       case "@promo/PROMO_FAILURE": {

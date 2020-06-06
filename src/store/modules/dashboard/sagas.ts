@@ -7,6 +7,7 @@ import {
   dashFailure,
   dashSuccess,
   promoFailure,
+  promoSuccessReset,
   promoSuccess,
 } from "./actions";
 
@@ -28,16 +29,21 @@ export function* dashRequestSaga(): any {
   }
 }
 
-export function* promoRequestSaga(): any {
+export function* promoRequestSaga({ payload }): any {
+  const { page } = payload;
   for (let i = 1; i <= 5; i += 1) {
     try {
       const response = yield call(api.get, "/v1/client/promotions", {
-        params: { page: 1, perpage: 10 },
+        params: { page, perpage: 10 },
       });
 
       const promotions = response.data.data;
 
-      yield put(promoSuccess(promotions));
+      if (page === 1) {
+        yield put(promoSuccessReset(promotions));
+      } else {
+        yield put(promoSuccess(promotions, page));
+      }
 
       return;
     } catch (error) {

@@ -10,8 +10,10 @@ import {
   searchSuccess,
   searchProductsFailure,
   searchProductsSuccess,
+  searchProductsSuccessReset,
   searchCompaniesFailure,
   searchCompaniesSuccess,
+  searchCompaniesSuccessReset,
 } from "./actions";
 
 export function* searchRequestSaga({ payload }: any): any {
@@ -19,10 +21,8 @@ export function* searchRequestSaga({ payload }: any): any {
   for (let i = 1; i <= 5; i += 1) {
     try {
       const response = yield call(api.get, "/v1/client/search", {
-        params: { name, perpage: 4 },
+        params: { name, perpage: 10 },
       });
-
-      // console.log(response.data.products.data);
 
       const products = response.data.products.data;
       const companies = response.data.companies.data;
@@ -43,14 +43,16 @@ export function* searchProductsRequestSaga({ payload }: any): any {
   for (let i = 1; i <= 5; i += 1) {
     try {
       const response = yield call(api.get, "/v1/client/search/products", {
-        params: { name, page, perpage: 4 },
+        params: { name, page, perpage: 10 },
       });
-
-      // console.log(response.data);
 
       const products = response.data.data;
 
-      yield put(searchProductsSuccess(products));
+      if (page === 1) {
+        yield put(searchProductsSuccessReset(products));
+      } else {
+        yield put(searchProductsSuccess(products, page));
+      }
 
       return;
     } catch (error) {
@@ -72,7 +74,11 @@ export function* searchCompaniesRequestSaga({ payload }: any): any {
 
       const companies = response.data.data;
 
-      yield put(searchCompaniesSuccess(companies));
+      if (page === 1) {
+        yield put(searchCompaniesSuccessReset(companies));
+      } else {
+        yield put(searchCompaniesSuccess(companies, page));
+      }
 
       return;
     } catch (error) {

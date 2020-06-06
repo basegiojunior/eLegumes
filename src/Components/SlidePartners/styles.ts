@@ -39,7 +39,7 @@ export const LateralSlide = styled.ScrollView.attrs(() => ({
   background-color: transparent;
 `;
 
-export const LinkContainer = styled.TouchableWithoutFeedback``;
+export const LinkContainer = styled.TouchableOpacity``;
 
 export const ViewLink = styled.View`
   flex-direction: row;

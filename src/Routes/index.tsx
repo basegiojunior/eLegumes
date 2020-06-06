@@ -27,6 +27,7 @@ import SearchEspecifyResults from "../pages/SearchEspecifyResults";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Categories from "../pages/Categories";
+import Companies from "../pages/Companies";
 
 const styleBarTop: StackNavigationOptions = {
   headerStyle: { backgroundColor: "#fff" },
@@ -300,6 +301,55 @@ const LoginStackScreen: React.FC = () => {
           name="Route"
           component={Routes}
           options={{ headerShown: false }}
+        />
+
+        <LoginStack.Screen
+          name="Companie"
+          component={Companies}
+          options={({ navigation }) => {
+            return {
+              ...styleBarTop,
+              headerTransparent: true,
+              headerTitle: "",
+              headerTitleContainerStyle: {
+                right: 0,
+                left: 0,
+                marginLeft: widthPercentageToDP("12%"),
+              },
+              headerRight: () => (
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: "rgba(0,0,0,.4)",
+                    marginRight: SPACE_FOR_DP,
+                    width: widthPercentageToDP("10%"),
+                    height: widthPercentageToDP("10%"),
+                    borderRadius: widthPercentageToDP("5%"),
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  onPress={() => navigation.goBack()}
+                >
+                  <Icon name="share" size={SPACE_EIGHT_DP} color="#fff" />
+                </TouchableOpacity>
+              ),
+              headerLeft: () => (
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: "rgba(0,0,0,.4)",
+                    marginLeft: SPACE_FOR_DP,
+                    width: widthPercentageToDP("10%"),
+                    height: widthPercentageToDP("10%"),
+                    borderRadius: widthPercentageToDP("5%"),
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  onPress={() => navigation.goBack()}
+                >
+                  <Icon name="arrow-left" size={SPACE_EIGHT_DP} color="#fff" />
+                </TouchableOpacity>
+              ),
+            };
+          }}
         />
       </LoginStack.Navigator>
     </NavigationContainer>

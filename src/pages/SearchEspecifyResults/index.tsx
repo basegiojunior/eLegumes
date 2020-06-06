@@ -29,12 +29,21 @@ const SearchEspecifyResults: React.FC<Results> = ({ route }) => {
     (state) => state.search.searchProductsResults
   );
   const resultStores = useSelector((state) => state.search.searchStoresResults);
+  const loading = useSelector((state) => state.search.searchLoadingEspecify);
 
   const loadRepositories: any = () => {
-    if (name === "Produtos") {
+    if (name === "Produtos" && resultProducts.length > 10) {
       store.dispatch(searchProductsRequest(search));
-    } else if (name === "Vendedores") {
+    } else if (name === "Vendedores" && resultStores.length > 10) {
       store.dispatch(searchStoresRequest(search));
+    }
+  };
+
+  const handleRefresh: any = () => {
+    if (name === "Produtos") {
+      store.dispatch(searchProductsRequest(search, 1));
+    } else if (name === "Vendedores") {
+      store.dispatch(searchStoresRequest(search, 1));
     }
   };
 
@@ -57,6 +66,12 @@ const SearchEspecifyResults: React.FC<Results> = ({ route }) => {
           backgroundColor: "#fff",
           paddingBottom: SPACE_SIX_DP,
         }}
+        refreshControl={
+          <RefreshControl
+            onRefresh={() => handleRefresh()}
+            refreshing={loading}
+          />
+        }
         renderItem={renderItem}
         data={name === "Produtos" ? resultProducts : resultStores}
         keyExtractor={(item) => item.id}

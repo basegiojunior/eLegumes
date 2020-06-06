@@ -34,6 +34,8 @@ const Dashboard: React.FC = () => {
   const newCompanies = useSelector((state) => state.dash.newCompanies);
   const topProducts = useSelector((state) => state.dash.topProducts);
   const promotions = useSelector((state) => state.dash.promotions);
+  const pageLoading = useSelector((state) => state.dash.pageLoading);
+  const noPageLoading = useSelector((state) => state.dash.noPageLoading);
 
   // const newCompanies = [];
   // const topProducts = [];
@@ -49,9 +51,15 @@ const Dashboard: React.FC = () => {
     ).start();
   }, []);
 
-  const handleRequest: Function = () => {
+  const handleRequestPromotions: Function = () => {
+    if (promotions.length > 10 || promotions.length === 0) {
+      store.dispatch(promoRequest());
+    }
+  };
+
+  const handleRefresh: Function = () => {
     store.dispatch(dashRequest());
-    store.dispatch(promoRequest());
+    store.dispatch(promoRequest(1));
   };
 
   useEffect(() => {
@@ -72,11 +80,17 @@ const Dashboard: React.FC = () => {
         paddingBottom: SPACE_SIX_DP,
         flexDirection: "column",
       }}
+      refreshControl={
+        <RefreshControl
+          onRefresh={() => handleRefresh()}
+          refreshing={pageLoading || noPageLoading}
+        />
+      }
       numColumns={2}
       renderItem={GridImages}
       data={promotions}
       keyExtractor={(item) => item.id}
-      // onEndReached={loadRepositories}
+      onEndReached={() => handleRequestPromotions()}
       onEndReachedThreshold={0.1}
       ListHeaderComponent={() => (
         <>

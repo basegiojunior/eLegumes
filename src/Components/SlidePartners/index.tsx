@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { ScrollView, Animated } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   LinkContainer,
@@ -33,6 +34,8 @@ const SlidePartners: React.FC<ProductsArray> = ({
 }) => {
   const slideRef = useRef<ScrollView>(null);
 
+  const navigation = useNavigation();
+
   const scrollCard: Function = (position: number) => {
     const scrollTo = Math.round(position / widthPercentageToDP("92%"));
 
@@ -55,7 +58,10 @@ const SlidePartners: React.FC<ProductsArray> = ({
         {listElements.length > 0 ? (
           listElements.map(
             (item): JSX.Element => (
-              <LinkContainer key={item.id}>
+              <LinkContainer
+                onPress={() => navigation.navigate("Companie", { data: item })}
+                key={item.id}
+              >
                 <ViewLink>
                   <ImagePartner
                     nItemsInScreen={nItemsInScreen || 2}

@@ -20,16 +20,23 @@ export const dashFailure: Function = () => {
   };
 };
 
-export const promoRequest: Function = (page: number, perpage: number) => {
+export const promoRequest: Function = (page = 0) => {
   return {
     type: "@promo/PROMO_REQUEST",
-    payload: { page, perpage },
+    payload: { page },
   };
 };
 
-export const promoSuccess: Function = (promotions: object[]) => {
+export const promoSuccess: Function = (promotions: object[], page: number) => {
   return {
     type: "@promo/PROMO_SUCCESS",
+    payload: { promotions, page },
+  };
+};
+
+export const promoSuccessReset: Function = (promotions: object[]) => {
+  return {
+    type: "@promo/PROMO_SUCCESS_RESET",
     payload: { promotions },
   };
 };
