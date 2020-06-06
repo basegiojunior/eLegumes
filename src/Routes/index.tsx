@@ -83,7 +83,7 @@ const SearchStackScreen: React.FC = () => {
       <SearchStack.Screen
         name="ResultadosBusca"
         component={SearchResults}
-        options={({ navigation }) => {
+        options={({ route, navigation }) => {
           return {
             ...styleBarTopBusca,
             headerTitleContainerStyle: {
@@ -91,6 +91,9 @@ const SearchStackScreen: React.FC = () => {
               left: 0,
               marginLeft: widthPercentageToDP("16%"),
             },
+            headerTitle: () => (
+              <SearchBar showRecent={`"${route.params.search}"`} />
+            ),
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon
@@ -109,13 +112,17 @@ const SearchStackScreen: React.FC = () => {
         component={SearchEspecifyResults}
         options={({ route, navigation }) => {
           return {
-            ...styleBarTop,
-            headerTitle: `${route.params.name} com "${route.params.search}"`,
+            ...styleBarTopBusca,
             headerTitleContainerStyle: {
               right: 0,
               left: 0,
               marginLeft: widthPercentageToDP("16%"),
             },
+            headerTitle: () => (
+              <SearchBar
+                showRecent={`${route.params.name} com "${route.params.search}"`}
+              />
+            ),
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon

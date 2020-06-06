@@ -18,10 +18,9 @@ const SearchResults: React.FC = () => {
   const products = useSelector(
     (state) => state.search.searchProductsResults
   ).slice(0, 3);
-  const stores = useSelector((state) => state.search.searchStoresResults).slice(
-    0,
-    3
-  );
+  const companies = useSelector(
+    (state) => state.search.searchCompaniesResults
+  ).slice(0, 3);
 
   const search = useSelector((state) => state.search.recentSearchs)[0];
 
@@ -39,7 +38,7 @@ const SearchResults: React.FC = () => {
           text="Ver Mais Produtos"
         />
 
-        <ItemResult title="VENDEDORES" listItems={stores} />
+        <ItemResult title="VENDEDORES" listItems={companies} />
         <Button
           onPress={() => {
             navigation.navigate("ResultadosBuscaEspecificos", {

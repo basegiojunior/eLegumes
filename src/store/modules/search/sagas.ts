@@ -10,8 +10,8 @@ import {
   searchSuccess,
   searchProductsFailure,
   searchProductsSuccess,
-  searchStoresFailure,
-  searchStoresSuccess,
+  searchCompaniesFailure,
+  searchCompaniesSuccess,
 } from "./actions";
 
 export function* searchRequestSaga({ payload }: any): any {
@@ -28,7 +28,7 @@ export function* searchRequestSaga({ payload }: any): any {
       const companies = response.data.companies.data;
 
       yield put(searchSuccess(products, companies));
-      NavigationService.navigate("ResultadosBusca");
+      NavigationService.navigate("ResultadosBusca", { search: name });
 
       return;
     } catch (error) {
@@ -60,7 +60,7 @@ export function* searchProductsRequestSaga({ payload }: any): any {
   }
 }
 
-export function* searchStoresRequestSaga({ payload }: any): any {
+export function* searchCompaniesRequestSaga({ payload }: any): any {
   const { name, page } = payload;
   for (let i = 1; i <= 5; i += 1) {
     try {
@@ -72,11 +72,11 @@ export function* searchStoresRequestSaga({ payload }: any): any {
 
       const companies = response.data.data;
 
-      yield put(searchStoresSuccess(companies));
+      yield put(searchCompaniesSuccess(companies));
 
       return;
     } catch (error) {
-      yield put(searchStoresFailure());
+      yield put(searchCompaniesFailure());
       console.log(error);
     }
   }
@@ -85,11 +85,11 @@ export function* searchStoresRequestSaga({ payload }: any): any {
 export enum TypeKeys {
   SEARCH_REQUEST = "@search/SEARCH_REQUEST",
   SEARCH_PRODUCTS_REQUEST = "@search/SEARCH_PRODUCTS_REQUEST",
-  SEARCH_STORES_REQUEST = "@search/SEARCH_STORES_REQUEST",
+  SEARCH_COMPANIES_REQUEST = "@search/SEARCH_COMPANIES_REQUEST",
 }
 
 export default all([
   takeLatest(TypeKeys.SEARCH_REQUEST, searchRequestSaga),
   takeLatest(TypeKeys.SEARCH_PRODUCTS_REQUEST, searchProductsRequestSaga),
-  takeLatest(TypeKeys.SEARCH_STORES_REQUEST, searchStoresRequestSaga),
+  takeLatest(TypeKeys.SEARCH_COMPANIES_REQUEST, searchCompaniesRequestSaga),
 ]);

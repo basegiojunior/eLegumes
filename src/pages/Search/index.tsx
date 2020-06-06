@@ -5,6 +5,7 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
 import { ContainerScroll } from "../../styles/scrollView";
 import SlideImages from "../../Components/SlideImages";
+import Loading from "../../Components/Loading";
 import Title from "../../Components/Title";
 
 import { Recent, RecentItem, RecentText } from "./styles";
@@ -42,7 +43,8 @@ const Search: React.FC = () => {
 
   const recentSearchs = useSelector((state) => state.search.recentSearchs);
   const categories = useSelector((state) => state.categories.categories);
-  const loading = useSelector((state) => state.categories.loading);
+  const loadingCategories = useSelector((state) => state.categories.loading);
+  const loading = useSelector((state) => state.search.searchLoading);
 
   const handleRequest: Function = () => {
     store.dispatch(categoriesRequest());
@@ -63,10 +65,11 @@ const Search: React.FC = () => {
       refreshControl={
         <RefreshControl
           onRefresh={() => handleRequest()}
-          refreshing={loading}
+          refreshing={loadingCategories}
         />
       }
     >
+      <Loading visible={loading} />
       {recentSearchs.length > 0 && (
         <Recent>
           <Title style={{ marginBottom: SPACE_TWO_DP }}>BUSCAS RECENTES</Title>

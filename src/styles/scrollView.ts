@@ -11,5 +11,5 @@ export const ContainerScroll = styled.ScrollView.attrs(() => ({
   },
   keyboardShouldPersistTaps: "always",
 }))`
-  background-color: ${COLOR_BACKGROUND_PRIMARY};
+  background-color: #fff;
 `;

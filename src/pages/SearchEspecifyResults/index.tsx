@@ -53,7 +53,10 @@ const SearchEspecifyResults: React.FC<Results> = ({ route }) => {
     // <ContainerScroll refreshControl={<RefreshControl refreshing={false} />}>
     <Container>
       <FlatList
-        contentContainerStyle={{ paddingBottom: SPACE_SIX_DP }}
+        contentContainerStyle={{
+          backgroundColor: "#fff",
+          paddingBottom: SPACE_SIX_DP,
+        }}
         renderItem={renderItem}
         data={name === "Produtos" ? resultProducts : resultStores}
         keyExtractor={(item) => item.id}

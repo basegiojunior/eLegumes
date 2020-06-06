@@ -95,7 +95,7 @@ const SlideImages: React.FC<ProductsArray> = ({
         )}
       </TitleLine>
       <LateralSlide
-        onMomentumScrollEnd={({ nativeEvent }) => {
+        onScrollEndDrag={({ nativeEvent }) => {
           scrollCard(nativeEvent.contentOffset.x);
         }}
         ref={slideRef}

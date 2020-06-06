@@ -73,7 +73,7 @@ const Dashboard: React.FC = () => {
       <SlideImages
         color={color}
         title="MAIS COMPRADOS"
-        listElements={topProducts.slice().reverse()}
+        listElements={topProducts}
         nItemsInScreen={1}
       />
 

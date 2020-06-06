@@ -28,14 +28,20 @@ const GridImages: React.FC<ItemsArray> = ({ listElements, title, color }) => {
             <ViewLinkLine last={index % 2 !== 0}>
               <ImageProductLine
                 source={{
-                  uri: item.image ? item.image.url : item.default.image.url,
+                  uri: item.image
+                    ? item.image.url
+                    : item.productDefault.image.url,
                 }}
               />
               <TitleProduct>{item.description}</TitleProduct>
               <PriceProduct style={{ textDecorationLine: "line-through" }}>
-                R$ ${item.price}
+                R$ {item.price.replace(".", ",")} /
+                {item.type === "weight" ? ` ${item.weight}g` : " 1 uni."}
               </PriceProduct>
-              <PriceProduct>R$ ${item.price_promotion}</PriceProduct>
+              <PriceProduct>
+                R$ {item.price_promotion.replace(".", ",")} /
+                {item.type === "weight" ? ` ${item.weight}g` : " 1 uni."}
+              </PriceProduct>
             </ViewLinkLine>
           </LinkContainerLine>
         ))

@@ -31,7 +31,7 @@
     },
     "android": {
       "package": "com.eLegumes.eLegumes",
-      "versionCode": 4
+      "versionCode": 5
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { TextInput } from "react-native";
 
 import { Input, Container, Icone, ButtonSearch } from "./styles";
@@ -7,11 +7,10 @@ import { widthPercentageToDP } from "../PercentageConverter";
 import { searchRequest } from "../../store/modules/search/actions";
 import { store } from "../../store/index";
 
-const SearchBar: React.FC = ({ navigation }) => {
+const SearchBar: React.FC = ({ showRecent, navigation }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const inputRef = useRef<TextInput>(null);
-
   const handleSubmit: Function = () => {
     store.dispatch(searchRequest(searchValue.trim()));
   };
@@ -21,7 +20,9 @@ const SearchBar: React.FC = ({ navigation }) => {
       <Input
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        placeholder={isFocused ? "Insira um termo de busca" : "Busca"}
+        placeholder={
+          isFocused ? "Insira um termo de busca" : showRecent || "Busca"
+        }
         placeholderTextColor={isFocused ? "#969D95" : "#242A22"}
         onChangeText={(text: string) => setSearchValue(text)}
         returnKeyType="send"
@@ -33,7 +34,7 @@ const SearchBar: React.FC = ({ navigation }) => {
 
       <ButtonSearch
         onPress={() => {
-          if (searchValue !== "") {
+          if (searchValue !== "" && isFocused) {
             handleSubmit();
           } else {
             inputRef.current?.focus();

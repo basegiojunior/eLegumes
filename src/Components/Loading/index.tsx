@@ -4,18 +4,25 @@ import { Modal, ActivityIndicator } from "react-native";
 import { ContainerOut, ContainerIn } from "./styles";
 import { widthPercentageToDP } from "../PercentageConverter";
 
+import { PRIMARY_COLOR } from "../../styles/colors";
+
 type RequestProps = {
   visible: boolean;
 };
 
-const Loading: React.FC<RequestProps> = ({ visible = true }) => (
-  <Modal transparent visible={visible} animationType="fade">
-    <ContainerOut>
-      <ContainerIn>
-        <ActivityIndicator size={widthPercentageToDP("10%")} color="black" />
-      </ContainerIn>
-    </ContainerOut>
-  </Modal>
-);
+const Loading: React.FC<RequestProps> = ({ visible }) => {
+  return (
+    <Modal transparent visible={visible} animationType="fade">
+      <ContainerOut>
+        <ContainerIn>
+          <ActivityIndicator
+            size={widthPercentageToDP("10%")}
+            color={PRIMARY_COLOR}
+          />
+        </ContainerIn>
+      </ContainerOut>
+    </Modal>
+  );
+};
 
 export default Loading;

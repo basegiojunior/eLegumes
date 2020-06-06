@@ -15,8 +15,10 @@ import { TEXT_PRIMARY } from "../../styles/colors";
 
 export const Container = styled.View`
   width: 100%;
+  height: 100%;
   flex-direction: column;
   padding-left: ${SPACE_SIX};
+  background-color: #fff;
 `;
 
 export const Item = styled.TouchableOpacity`

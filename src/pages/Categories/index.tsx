@@ -10,6 +10,7 @@ import { Container, Item, Image, Name } from "./styles";
 
 import { categoriesRequest } from "../../store/modules/categories/actions";
 import { store } from "../../store/index";
+import { SPACE_SIX_DP } from "../../styles/sizes";
 
 type Results = {
   categoryName: string;
@@ -23,13 +24,13 @@ const Categories: React.FC<Results> = ({ route }) => {
 
   const categories = useSelector((state) => state.categories.categories);
 
-  useEffect(() => {
-    for (let i = 0; i < categories.length; i += 1) {
-      if (categories[i].name === name) {
-        setActualCat(categories[i].products);
-      }
-    }
-  }, [categories]);
+  // useEffect(() => {
+  //   for (let i = 0; i < categories.length; i += 1) {
+  //     if (categories[i].name === name) {
+  //       setActualCat(categories[i].products);
+  //     }
+  //   }
+  // }, [categories]);
 
   const loadRepositories: any = () => {
     store.dispatch(categoriesRequest(id, name));
@@ -50,8 +51,12 @@ const Categories: React.FC<Results> = ({ route }) => {
     // <ContainerScroll refreshControl={<RefreshControl refreshing={false} />}>
     <Container>
       <FlatList
+        contentContainerStyle={{
+          backgroundColor: "#fff",
+          paddingBottom: SPACE_SIX_DP,
+        }}
         renderItem={renderItem}
-        data={actualCat}
+        data={categories[name].products}
         keyExtractor={(item) => item.id}
         onEndReached={loadRepositories}
         onEndReachedThreshold={0.1}

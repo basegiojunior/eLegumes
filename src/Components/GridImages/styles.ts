@@ -32,6 +32,7 @@ export const TitleProduct = styled.Text`
   margin-left: ${SPACE_TWO};
   font-family: ${FONT_BOLD};
   color: ${TEXT_PRIMARY};
+  width: ${widthPercentageToPx("42%")};
 `;
 
 export const PriceProduct = styled.Text`
@@ -39,11 +40,11 @@ export const PriceProduct = styled.Text`
   font-size: ${FONT_SIZE_SECONDARY};
   font-family: ${FONT_REGULAR};
   color: ${TEXT_SECONDARY};
+  width: ${widthPercentageToPx("42%")};
 `;
 
 export const ProductsView = styled.View`
   flex-direction: row;
-  margin-top: 20px;
   flex-wrap: wrap;
 `;
 

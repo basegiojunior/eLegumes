@@ -7,11 +7,11 @@ export const searchRequest: Function = (name: string) => {
 
 export const searchSuccess: Function = (
   searchProductsResults: object[],
-  searchStoresResults: object[]
+  searchCompaniesResults: object[]
 ) => {
   return {
     type: "@search/SEARCH_SUCCESS",
-    payload: { searchProductsResults, searchStoresResults },
+    payload: { searchProductsResults, searchCompaniesResults },
   };
 };
 
@@ -44,25 +44,25 @@ export const searchProductsFailure: Function = () => {
   };
 };
 
-// STORES
-export const searchStoresRequest: Function = (name: string) => {
+// COMPANIES
+export const searchCompaniesRequest: Function = (name: string) => {
   return {
-    type: "@search/SEARCH_STORES_REQUEST",
+    type: "@search/SEARCH_COMPANIES_REQUEST",
     payload: { name },
   };
 };
 
-export const searchStoresSuccess: Function = (
-  searchStoresResults: object[]
+export const searchCompaniesSuccess: Function = (
+  searchCompaniesResults: object[]
 ) => {
   return {
-    type: "@search/SEARCH_STORES_SUCCESS",
-    payload: { searchStoresResults },
+    type: "@search/SEARCH_COMPANIES_SUCCESS",
+    payload: { searchCompaniesResults },
   };
 };
 
-export const searchStoresFailure: Function = () => {
+export const searchCompaniesFailure: Function = () => {
   return {
-    type: "@search/SEARCH_STORES_FAILURE",
+    type: "@search/SEARCH_COMPANIES_FAILURE",
   };
 };

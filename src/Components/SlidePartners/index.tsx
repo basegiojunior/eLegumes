@@ -63,7 +63,7 @@ const SlidePartners: React.FC<ProductsArray> = ({
                   />
                   <ViewAbout>
                     <TitlePartner>{item.name}</TitlePartner>
-                    <TextPartner>{item.adress.description}</TextPartner>
+                    <TextPartner>{item.address.description}</TextPartner>
                   </ViewAbout>
                 </ViewLink>
               </LinkContainer>

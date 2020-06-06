@@ -4,14 +4,14 @@ import { Reducer } from "redux";
 const INITIAL_STATE = {
   searchLoading: false,
   searchProductsResults: [],
-  searchStoresResults: [],
+  searchCompaniesResults: [],
   recentSearchs: [],
 };
 
 type InitialProps = {
   searchLoading: boolean;
   searchProductsResults: object[];
-  searchStoresResults: object[];
+  searchCompaniesResults: object[];
   recentSearchs: string[];
 };
 
@@ -30,7 +30,7 @@ const search: Reducer = (state = INITIAL_STATE, action) => {
       case "@search/SEARCH_SUCCESS": {
         draft.searchLoading = false;
         draft.searchProductsResults = action.payload.searchProductsResults;
-        draft.searchStoresResults = action.payload.searchStoresResults;
+        draft.searchCompaniesResults = action.payload.searchCompaniesResults;
         break;
       }
       case "@search/SEARCH_FAILURE": {
@@ -55,21 +55,21 @@ const search: Reducer = (state = INITIAL_STATE, action) => {
         draft.searchLoading = false;
         break;
       }
-      // STORES
-      case "@search/SEARCH_STORES_REQUEST": {
+      // COMPANIES
+      case "@search/SEARCH_COMPANIES_REQUEST": {
         draft.searchLoading = true;
-        action.payload.page = draft.searchStoresResults.length / 4 + 1;
+        action.payload.page = draft.searchCompaniesResults.length / 4 + 1;
         break;
       }
-      case "@search/SEARCH_STORES_SUCCESS": {
+      case "@search/SEARCH_COMPANIES_SUCCESS": {
         draft.searchLoading = false;
-        draft.searchStoresResults = [
-          ...draft.searchStoresResults,
-          ...action.payload.searchStoresResults,
+        draft.searchCompaniesResults = [
+          ...draft.searchCompaniesResults,
+          ...action.payload.searchCompaniesResults,
         ];
         break;
       }
-      case "@search/SEARCH_STORES_FAILURE": {
+      case "@search/SEARCH_COMPANIES_FAILURE": {
         draft.searchLoading = false;
         break;
       }
