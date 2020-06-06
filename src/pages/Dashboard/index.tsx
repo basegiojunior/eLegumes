@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { RefreshControl, Animated, Easing } from "react-native";
+import { RefreshControl, Animated, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 
 import { ContainerScroll } from "../../styles/scrollView";
@@ -7,11 +7,16 @@ import SlideImages from "../../Components/SlideImages";
 import GridImages from "../../Components/GridImages";
 import SlidePartners from "../../Components/SlidePartners";
 
+import { widthPercentageToDP } from "../../Components/PercentageConverter";
+
 import {
   dashRequest,
   promoRequest,
 } from "../../store/modules/dashboard/actions";
 import { store } from "../../store/index";
+import { SPACE_SIX_DP } from "../../styles/sizes";
+
+import { Container, LinkContainerLine, ViewLinkLine, Title } from "./styles";
 
 const Dashboard: React.FC = () => {
   // eslint-disable-next-line no-var
@@ -59,26 +64,115 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <ContainerScroll
-      refreshControl={
-        <RefreshControl onRefresh={() => handleRequest()} refreshing={false} />
-      }
-    >
-      <SlidePartners
-        color={color}
-        title="NOVOS PARCEIROS"
-        listElements={newCompanies}
-      />
+    // <Container>
+    <FlatList
+      contentContainerStyle={{
+        backgroundColor: "#fff",
+        width: "100%",
+        paddingBottom: SPACE_SIX_DP,
+        flexDirection: "column",
+      }}
+      numColumns={2}
+      renderItem={GridImages}
+      data={promotions}
+      keyExtractor={(item) => item.id}
+      // onEndReached={loadRepositories}
+      onEndReachedThreshold={0.1}
+      ListHeaderComponent={() => (
+        <>
+          <SlidePartners
+            color={color}
+            title="NOVOS PARCEIROS"
+            listElements={newCompanies}
+          />
 
-      <SlideImages
-        color={color}
-        title="MAIS COMPRADOS"
-        listElements={topProducts}
-        nItemsInScreen={1}
-      />
+          <SlideImages
+            color={color}
+            title="MAIS COMPRADOS"
+            listElements={topProducts}
+            nItemsInScreen={1}
+          />
 
-      <GridImages color={color} listElements={promotions} title="OFERTAS" />
-    </ContainerScroll>
+          <Title>OFERTAS</Title>
+
+          <Container>
+            {promotions.length === 0 && (
+              <>
+                <LinkContainerLine>
+                  <ViewLinkLine last={false}>
+                    <Animated.View
+                      style={{
+                        width: widthPercentageToDP("42%"),
+                        height: widthPercentageToDP("25%"),
+                        marginBottom: widthPercentageToDP("2%"),
+                        borderRadius: widthPercentageToDP("2%"),
+                        backgroundColor: color,
+                      }}
+                    />
+                    <Animated.View
+                      style={{
+                        width: widthPercentageToDP("25%"),
+                        height: widthPercentageToDP("4.5%"),
+                        marginTop: widthPercentageToDP("2%"),
+                        marginLeft: widthPercentageToDP("2%"),
+                        borderRadius: widthPercentageToDP("2%"),
+                        backgroundColor: color,
+                      }}
+                    />
+                    <Animated.View
+                      style={{
+                        width: widthPercentageToDP("20%"),
+                        height: widthPercentageToDP("3.4%"),
+                        marginTop: widthPercentageToDP("2%"),
+                        marginLeft: widthPercentageToDP("2%"),
+                        borderRadius: widthPercentageToDP("2%"),
+                        backgroundColor: color,
+                      }}
+                    />
+                  </ViewLinkLine>
+                </LinkContainerLine>
+                <LinkContainerLine>
+                  <ViewLinkLine last>
+                    <Animated.View
+                      style={{
+                        width: widthPercentageToDP("42%"),
+                        height: widthPercentageToDP("25%"),
+                        marginBottom: widthPercentageToDP("2%"),
+                        borderRadius: widthPercentageToDP("2%"),
+                        backgroundColor: color,
+                      }}
+                    />
+                    <Animated.View
+                      style={{
+                        width: widthPercentageToDP("25%"),
+                        height: widthPercentageToDP("4.5%"),
+                        marginTop: widthPercentageToDP("2%"),
+                        marginLeft: widthPercentageToDP("2%"),
+                        borderRadius: widthPercentageToDP("2%"),
+                        backgroundColor: color,
+                      }}
+                    />
+                    <Animated.View
+                      style={{
+                        width: widthPercentageToDP("20%"),
+                        height: widthPercentageToDP("3.4%"),
+                        marginTop: widthPercentageToDP("2%"),
+                        marginLeft: widthPercentageToDP("2%"),
+                        borderRadius: widthPercentageToDP("2%"),
+                        backgroundColor: color,
+                      }}
+                    />
+                  </ViewLinkLine>
+                </LinkContainerLine>
+              </>
+            )}
+          </Container>
+        </>
+      )}
+    />
+
+    // {/* <GridImages color={color} listElements={promotions} title="OFERTAS" /> */}
+    // </Container>
   );
 };
 
