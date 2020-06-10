@@ -4,7 +4,8 @@ import auth from "./auth/sagas";
 import dash from "./dashboard/sagas";
 import search from "./search/sagas";
 import categories from "./categories/sagas";
+import companies from "./companies/sagas";
 
 export default function* rootSaga(): any {
-  return yield all([auth, dash, search, categories]);
+  return yield all([auth, dash, search, categories, companies]);
 }

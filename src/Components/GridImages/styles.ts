@@ -48,7 +48,7 @@ export const ProductsView = styled.View`
   flex-wrap: wrap;
 `;
 
-export const LinkContainerLine = styled.TouchableWithoutFeedback``;
+export const LinkContainerLine = styled.TouchableOpacity``;
 
 export const ViewLinkLine = styled.View<Margin>`
   width: 50%;

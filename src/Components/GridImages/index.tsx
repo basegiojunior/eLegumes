@@ -1,6 +1,9 @@
 import React from "react";
 import { Animated, ListRenderItem, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { widthPercentageToDP } from "../PercentageConverter";
+
+import * as NavigationService from "../../Routes/navigationService";
 
 import {
   TitleProduct,
@@ -12,13 +15,22 @@ import {
   Title,
 } from "./styles";
 
-const GridImages: any = ({ item, index }) => {
-  // console.log(item);
+type GridTypes = {
+  item: object;
+};
+
+const GridImages: React.FC<GridTypes> = ({ item, index }) => {
+  // const navigation = useNavigation();
 
   return (
     // <Text>a</Text>
     <ProductsView>
-      <LinkContainerLine key={item.id}>
+      <LinkContainerLine
+        onPress={() => {
+          NavigationService.navigate("Produto", { data: item });
+        }}
+        key={item.id}
+      >
         <ViewLinkLine last={index % 2 !== 0}>
           <ImageProductLine
             source={{

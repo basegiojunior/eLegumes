@@ -43,9 +43,8 @@ const search: Reducer = (state = INITIAL_STATE, action) => {
       case "@search/SEARCH_PRODUCTS_REQUEST": {
         draft.searchLoadingEspecify = true;
         if (action.payload.page === 0) {
-          action.payload.page = Math.floor(
-            draft.searchProductsResults.length / 10 + 1
-          );
+          action.payload.page =
+            Math.floor(draft.searchProductsResults.length / 10) + 1;
         }
         break;
       }
@@ -70,9 +69,8 @@ const search: Reducer = (state = INITIAL_STATE, action) => {
       case "@search/SEARCH_COMPANIES_REQUEST": {
         draft.searchLoadingEspecify = true;
         if (action.payload.page === 0) {
-          action.payload.page = Math.floor(
-            draft.searchCompaniesResults.length / 10 + 1
-          );
+          action.payload.page =
+            Math.floor(draft.searchCompaniesResults.length / 10) + 1;
         }
         break;
       }

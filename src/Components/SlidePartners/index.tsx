@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { ScrollView, Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { RectButton } from "react-native-gesture-handler";
 
 import {
   LinkContainer,

@@ -26,6 +26,7 @@ type ProductsArray = {
   color: any;
   seeMore?: boolean;
   seeMoreData?: { id: string; name: string };
+  show?: boolean;
 };
 
 const SlideImages: React.FC<ProductsArray> = ({
@@ -35,6 +36,7 @@ const SlideImages: React.FC<ProductsArray> = ({
   color,
   seeMore = false,
   seeMoreData,
+  show = true,
 }) => {
   const slideRef = useRef<ScrollView>(null);
   const lastCard = {
@@ -78,82 +80,108 @@ const SlideImages: React.FC<ProductsArray> = ({
 
   return (
     <Content>
-      <TitleLine>
-        <Title style={{ marginLeft: SPACE_SIX_DP }}>{title}</Title>
+      {show && (
+        <>
+          <TitleLine>
+            <Title style={{ marginLeft: SPACE_SIX_DP }}>{title}</Title>
 
-        {seeMore && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Categoria", {
-                name: seeMoreData.name,
-                id: seeMoreData.id,
-              });
+            {seeMore && (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("Categoria", {
+                    name: seeMoreData.name,
+                    id: seeMoreData.id,
+                  });
+                }}
+              >
+                <VerMais>Ver Mais</VerMais>
+              </TouchableOpacity>
+            )}
+          </TitleLine>
+          <LateralSlide
+            onScrollEndDrag={({ nativeEvent }) => {
+              scrollCard(nativeEvent.contentOffset.x);
             }}
+            ref={slideRef}
           >
-            <VerMais>Ver Mais</VerMais>
-          </TouchableOpacity>
-        )}
-      </TitleLine>
-      <LateralSlide
-        onScrollEndDrag={({ nativeEvent }) => {
-          scrollCard(nativeEvent.contentOffset.x);
-        }}
-        ref={slideRef}
-      >
-        {listElements.length > 0 ? (
-          listElements.map(
-            (item): JSX.Element => (
-              <LinkContainer key={item.id}>
+            {listElements.length > 0 ? (
+              listElements.map(
+                (item): JSX.Element => {
+                  // console.log(item);
+                  return (
+                    <LinkContainer
+                      onPress={() => {
+                        navigation.navigate("Produto", { data: item });
+                      }}
+                      key={item.id}
+                    >
+                      <ViewLink>
+                        <ImageProduct
+                          nItemsInScreen={nItemsInScreen || 2}
+                          source={{
+                            uri: item.image
+                              ? item.image.url
+                              : item.productDefault.image.url,
+                          }}
+                        />
+                        <TitleProduct>
+                          {item.name ? item.name : item.productDefault.name}
+                        </TitleProduct>
+                        {item.weekly_sales && (
+                          <PriceProduct>
+                            {item.weekly_sales} vendidos
+                          </PriceProduct>
+                        )}
+                        {item.price && (
+                          <PriceProduct>
+                            R$ {item.price.replace(".", ",")} /
+                            {item.type === "weight"
+                              ? ` ${item.weight}g`
+                              : " 1 uni."}
+                          </PriceProduct>
+                        )}
+                      </ViewLink>
+                    </LinkContainer>
+                  );
+                }
+              )
+            ) : (
+              <LinkContainer>
                 <ViewLink>
-                  <ImageProduct
-                    nItemsInScreen={nItemsInScreen || 2}
-                    source={{
-                      uri: item.image.url,
+                  <Animated.View
+                    style={{
+                      width: widthPercentageToDP("88%"),
+                      height: widthPercentageToDP("51%"),
+                      borderRadius: widthPercentageToDP("2%"),
+                      backgroundColor: color,
                     }}
                   />
-                  <TitleProduct>{item.name}</TitleProduct>
-                  {item.weekly_sales && (
-                    <PriceProduct>{item.weekly_sales} vendidos</PriceProduct>
-                  )}
+                  <Animated.View
+                    style={{
+                      width: widthPercentageToDP("25%"),
+                      height: widthPercentageToDP("4.5%"),
+                      marginTop: widthPercentageToDP("2%"),
+                      marginLeft: widthPercentageToDP("2%"),
+                      borderRadius: widthPercentageToDP("2%"),
+                      backgroundColor: color,
+                    }}
+                  />
+                  <Animated.View
+                    style={{
+                      width: widthPercentageToDP("20%"),
+                      height: widthPercentageToDP("3.4%"),
+                      marginTop: widthPercentageToDP("2%"),
+                      marginLeft: widthPercentageToDP("2%"),
+                      borderRadius: widthPercentageToDP("2%"),
+                      backgroundColor: color,
+                    }}
+                  />
                 </ViewLink>
               </LinkContainer>
-            )
-          )
-        ) : (
-          <LinkContainer>
-            <ViewLink>
-              <Animated.View
-                style={{
-                  width: widthPercentageToDP("88%"),
-                  height: widthPercentageToDP("51%"),
-                  borderRadius: widthPercentageToDP("2%"),
-                  backgroundColor: color,
-                }}
-              />
-              <Animated.View
-                style={{
-                  width: widthPercentageToDP("25%"),
-                  height: widthPercentageToDP("4.5%"),
-                  marginTop: widthPercentageToDP("2%"),
-                  marginLeft: widthPercentageToDP("2%"),
-                  borderRadius: widthPercentageToDP("2%"),
-                  backgroundColor: color,
-                }}
-              />
-              <Animated.View
-                style={{
-                  width: widthPercentageToDP("20%"),
-                  height: widthPercentageToDP("3.4%"),
-                  marginTop: widthPercentageToDP("2%"),
-                  marginLeft: widthPercentageToDP("2%"),
-                  borderRadius: widthPercentageToDP("2%"),
-                  backgroundColor: color,
-                }}
-              />
-            </ViewLink>
-          </LinkContainer>
-        )}
-      </LateralSlide>
+            )}
+          </LateralSlide>
+        </>
+      )}
     </Content>
   );
 };

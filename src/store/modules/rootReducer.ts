@@ -4,12 +4,14 @@ import auth from "./auth/reducer";
 import dash from "./dashboard/reducer";
 import search from "./search/reducer";
 import categories from "./categories/reducer";
+import companies from "./companies/reducer";
 
 const appReducer = combineReducers({
   auth,
   dash,
   search,
   categories,
+  companies,
 });
 
 const Reducer: ReducerProps = (state, action) => {

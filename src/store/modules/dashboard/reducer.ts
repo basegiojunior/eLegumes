@@ -37,7 +37,7 @@ const dash: Reducer = (state = INITIAL_STATE, action) => {
       case "@promo/PROMO_REQUEST": {
         draft.pageLoading = true;
         if (action.payload.page === 0) {
-          action.payload.page = Math.floor(draft.promotions.length / 10 + 1);
+          action.payload.page = Math.floor(draft.promotions.length / 10) + 1;
         }
         break;
       }

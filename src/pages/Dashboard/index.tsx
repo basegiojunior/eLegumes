@@ -20,16 +20,17 @@ import { Container, LinkContainerLine, ViewLinkLine, Title } from "./styles";
 
 const Dashboard: React.FC = () => {
   // eslint-disable-next-line no-var
-  var x = new Animated.Value(0);
+  // var x = new Animated.Value(0);
 
-  const color = x.interpolate({
-    inputRange: [0, 90, 180],
-    outputRange: [
-      "rgba(0, 0, 0, .07)",
-      "rgba(0, 0, 0, .25)",
-      "rgba(0, 0, 0, .07)",
-    ],
-  });
+  const color = "rgba(0,0,0,.1)";
+  // const color = x.interpolate({
+  //   inputRange: [0, 90, 180],
+  //   outputRange: [
+  //     "rgba(0, 0, 0, .07)",
+  //     "rgba(0, 0, 0, .25)",
+  //     "rgba(0, 0, 0, .07)",
+  //   ],
+  // });
 
   const newCompanies = useSelector((state) => state.dash.newCompanies);
   const topProducts = useSelector((state) => state.dash.topProducts);
@@ -41,15 +42,15 @@ const Dashboard: React.FC = () => {
   // const topProducts = [];
   // const promotions = [];
 
-  useEffect(() => {
-    Animated.loop(
-      Animated.timing(x, {
-        toValue: 180,
-        duration: 3000,
-        useNativeDriver: false,
-      })
-    ).start();
-  }, []);
+  // useEffect(() => {
+  //   Animated.loop(
+  //     Animated.timing(x, {
+  //       toValue: 180,
+  //       duration: 3000,
+  //       useNativeDriver: false,
+  //     })
+  //   ).start();
+  // }, []);
 
   const handleRequestPromotions: Function = () => {
     if (promotions.length > 10 || promotions.length === 0) {
