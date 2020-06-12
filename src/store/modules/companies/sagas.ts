@@ -15,6 +15,8 @@ import {
   companieCommentsSuccessReset,
   companieFailure,
   companieSuccess,
+  companiesFromProductsFailure,
+  companiesFromProductsSuccess,
 } from "./actions";
 
 export function* companieProductsRequestSaga({ payload }: any): any {
@@ -97,14 +99,42 @@ export function* companieCommentsRequestSaga({ payload }: any): any {
   }
 }
 
+export function* companiesFromProductsRequestSaga({ payload }: any): any {
+  const { productId } = payload;
+  for (let i = 1; i <= 5; i += 1) {
+    let response;
+
+    try {
+      response = yield call(
+        api.get,
+        `/v1/client/companies/sell/product/${productId}`
+      );
+
+      const companies = response.data.data;
+
+      yield put(companiesFromProductsSuccess(companies, productId));
+
+      return;
+    } catch (error) {
+      yield put(companiesFromProductsFailure());
+      console.log(error);
+    }
+  }
+}
+
 export enum TypeKeys {
   COMPANIES_PRODUCTS_REQUEST = "@companies/COMPANIES_PRODUCTS_REQUEST",
   COMPANIES_COMMENTS_REQUEST = "@companies/COMPANIES_COMMENTS_REQUEST",
   COMPANIE_REQUEST = "@companies/COMPANIE_REQUEST",
+  COMPANIES_FROM_PRODUCTS_REQUEST = "@companies/COMPANIES_FROM_PRODUCTS_REQUEST",
 }
 
 export default all([
   takeLatest(TypeKeys.COMPANIES_PRODUCTS_REQUEST, companieProductsRequestSaga),
   takeLatest(TypeKeys.COMPANIE_REQUEST, companieRequestSaga),
   takeLatest(TypeKeys.COMPANIES_COMMENTS_REQUEST, companieCommentsRequestSaga),
+  takeLatest(
+    TypeKeys.COMPANIES_FROM_PRODUCTS_REQUEST,
+    companiesFromProductsRequestSaga
+  ),
 ]);

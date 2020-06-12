@@ -27,27 +27,35 @@ const SearchResults: React.FC = () => {
   return (
     <ContainerScroll refreshControl={<RefreshControl refreshing={false} />}>
       <Container>
-        <ItemResult title="PRODUTOS" listItems={products} />
-        <Button
-          onPress={() => {
-            navigation.navigate("ResultadosBuscaEspecificos", {
-              name: "Produtos",
-              search,
-            });
-          }}
-          text="Ver Mais Produtos"
-        />
+        {products.length > 0 && (
+          <>
+            <ItemResult title="PRODUTOS" listItems={products} />
+            <Button
+              onPress={() => {
+                navigation.navigate("ResultadosBuscaEspecificos", {
+                  name: "Produtos",
+                  search,
+                });
+              }}
+              text="Ver Mais Produtos"
+            />
+          </>
+        )}
 
-        <ItemResult title="VENDEDORES" listItems={companies} />
-        <Button
-          onPress={() => {
-            navigation.navigate("ResultadosBuscaEspecificos", {
-              name: "Vendedores",
-              search,
-            });
-          }}
-          text="Ver Mais Vendedores"
-        />
+        {companies.length > 0 && (
+          <>
+            <ItemResult title="VENDEDORES" listItems={companies} />
+            <Button
+              onPress={() => {
+                navigation.navigate("ResultadosBuscaEspecificos", {
+                  name: "Vendedores",
+                  search,
+                });
+              }}
+              text="Ver Mais Vendedores"
+            />
+          </>
+        )}
       </Container>
     </ContainerScroll>
   );

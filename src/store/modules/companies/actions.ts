@@ -93,3 +93,27 @@ export const companieCommentsFailure: Function = () => {
     type: "@companies/COMPANIES_COMMENTS_FAILURE",
   };
 };
+
+// PRODUCTS FROM ONE COMPANIE
+
+export const companiesFromProductsRequest: Function = (productId: string) => {
+  return {
+    type: "@companies/COMPANIES_FROM_PRODUCTS_REQUEST",
+    payload: { productId },
+  };
+};
+
+export const companiesFromProductsSuccess: Function = (
+  companies: object[],
+  id: string
+) => {
+  return {
+    type: "@companies/COMPANIES_FROM_PRODUCTS_SUCCESS",
+    payload: { companies, id },
+  };
+};
+export const companiesFromProductsFailure: Function = () => {
+  return {
+    type: "@companies/COMPANIES_FROM_PRODUCTS_FAILURE",
+  };
+};

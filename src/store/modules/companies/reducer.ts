@@ -3,15 +3,19 @@ import { Reducer } from "redux";
 
 const INITIAL_STATE = {
   loading: false,
+  loadingProduct: false,
   companieProducts: { id: "", products: [] },
   companieComments: { id: "", comments: [] },
   companie: {},
+  companiesFromProduct: { id: "", companies: [] },
 };
 
 type InitialProps = {
   loading: boolean;
+  loadingProduct: boolean;
   companieProducts: { id: string; products: object[] };
   companieComments: { id: string; comments: object[] };
+  companiesFromProduct: { id: string; companies: object[] };
   companie: object;
 };
 
@@ -94,6 +98,22 @@ const companie: Reducer = (state = INITIAL_STATE, action) => {
       }
       case "@companies/COMPANIES_COMMENTS_FAILURE": {
         draft.loading = false;
+        break;
+      }
+
+      // COMPANIES FROM PRODUCT
+      case "@companies/COMPANIES_FROM_PRODUCTS_REQUEST": {
+        draft.loadingProduct = true;
+        break;
+      }
+      case "@companies/COMPANIES_FROM_PRODUCTS_SUCCESS": {
+        draft.loadingProduct = false;
+        draft.companiesFromProduct.companies = action.payload.companies;
+        draft.companiesFromProduct.id = action.payload.id;
+        break;
+      }
+      case "@companies/COMPANIES_FROM_PRODUCTS_FAILURE": {
+        draft.loadingProduct = false;
         break;
       }
       default:

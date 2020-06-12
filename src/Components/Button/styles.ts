@@ -15,7 +15,9 @@ type ButtonTextProps = {
   textColor?: string;
 };
 
-export const Container = styled(RectButton)`
+export const Container = styled(RectButton).attrs(() => ({
+  rippleColor: "rgba(0,0,0,0.1)",
+}))`
   width: 100%;
   height: ${widthPercentageToPx("12%")};
   margin-top: ${SPACE_TWO};

@@ -37,6 +37,7 @@ export const CompanieName = styled.Text`
   font-size: ${SPACE_SIX};
   font-family: ${FONT_BOLD};
   margin-top: ${SPACE_SIX};
+  color: ${TEXT_PRIMARY};
 `;
 
 export const Address = styled.View`
@@ -119,6 +120,7 @@ export const StarLineNumber = styled.Text`
   font-size: ${widthPercentageToPx("3.5%")};
   height: ${widthPercentageToPx("3.5%")};
   margin-right: ${SPACE_ONE};
+  color: ${TEXT_PRIMARY};
 `;
 
 export const StarLineBarView = styled.View`
