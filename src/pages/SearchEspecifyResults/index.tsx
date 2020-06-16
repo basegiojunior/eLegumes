@@ -12,7 +12,7 @@ import { Container, Item, Image, Name } from "./styles";
 
 import {
   searchProductsRequest,
-  searchStoresRequest,
+  searchCompaniesRequest,
 } from "../../store/modules/search/actions";
 import { store } from "../../store/index";
 
@@ -35,7 +35,7 @@ const SearchEspecifyResults: React.FC<Results> = ({ route }) => {
     if (name === "Produtos" && resultProducts.length > 10) {
       store.dispatch(searchProductsRequest(search));
     } else if (name === "Vendedores" && resultStores.length > 10) {
-      store.dispatch(searchStoresRequest(search));
+      store.dispatch(searchCompaniesRequest(search));
     }
   };
 
@@ -43,19 +43,12 @@ const SearchEspecifyResults: React.FC<Results> = ({ route }) => {
     if (name === "Produtos") {
       store.dispatch(searchProductsRequest(search, 1));
     } else if (name === "Vendedores") {
-      store.dispatch(searchStoresRequest(search, 1));
+      store.dispatch(searchCompaniesRequest(search, 1));
     }
   };
 
   const renderItem: ListRenderItem<any> = ({ item }) => (
-    <Item>
-      <Image
-        source={{
-          uri: item.image.url,
-        }}
-      />
-      <Name>{item.name}</Name>
-    </Item>
+    <ItemResult item={item} />
   );
 
   return (

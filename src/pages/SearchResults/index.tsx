@@ -7,10 +7,9 @@ import { useSelector } from "react-redux";
 import { ContainerScroll } from "../../styles/scrollView";
 
 import ItemResult from "../../Components/ItemResult";
+import Title from "../../Components/Title";
 
 import { Container, Button } from "./styles";
-
-import { store } from "../../store/index";
 
 const SearchResults: React.FC = () => {
   const navigation = useNavigation();
@@ -29,7 +28,10 @@ const SearchResults: React.FC = () => {
       <Container>
         {products.length > 0 && (
           <>
-            <ItemResult title="PRODUTOS" listItems={products} />
+            <Title>PRODUTOS</Title>
+            {products.map((item: object) => (
+              <ItemResult key={item.id} item={item} />
+            ))}
             <Button
               onPress={() => {
                 navigation.navigate("ResultadosBuscaEspecificos", {
@@ -44,7 +46,10 @@ const SearchResults: React.FC = () => {
 
         {companies.length > 0 && (
           <>
-            <ItemResult title="VENDEDORES" listItems={companies} />
+            <Title>VENDEDORES</Title>
+            {companies.map((item: object) => (
+              <ItemResult item={item} />
+            ))}
             <Button
               onPress={() => {
                 navigation.navigate("ResultadosBuscaEspecificos", {

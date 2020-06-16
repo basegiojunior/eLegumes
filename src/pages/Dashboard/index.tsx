@@ -38,7 +38,6 @@ const Dashboard: React.FC = () => {
   const noPageLoading = useSelector((state) => state.dash.noPageLoading);
 
   useEffect(() => {
-    console.log("promotions");
     if (newCompanies === [] || topProducts === []) {
       store.dispatch(dashRequest());
     }

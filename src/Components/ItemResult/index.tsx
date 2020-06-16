@@ -6,30 +6,21 @@ import Title from "../Title";
 import { Item, Image, Name } from "./styles";
 
 type Lista = {
-  listItems: object[];
-  title?: string;
+  item: object;
 };
 
-const ItemResult: React.FC<Lista> = ({ listItems, title }) => {
+const ItemResult: React.FC<Lista> = ({ item }) => {
   const navigation = useNavigation();
 
   return (
-    <>
-      {title && <Title>{title}</Title>}
-      {listItems.map((item) => (
-        <Item
-          onPress={() => navigation.navigate("Produto", { data: item })}
-          key={item.id}
-        >
-          <Image
-            source={{
-              uri: item.image.url,
-            }}
-          />
-          <Name>{item.name}</Name>
-        </Item>
-      ))}
-    </>
+    <Item onPress={() => navigation.navigate("Produto", { data: item })}>
+      <Image
+        source={{
+          uri: item.image.url,
+        }}
+      />
+      <Name>{item.name}</Name>
+    </Item>
   );
 };
 
