@@ -1,7 +1,4 @@
-import React from "react";
-import { Animated, ListRenderItem, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { widthPercentageToDP } from "../PercentageConverter";
+import React, { memo } from "react";
 
 import * as NavigationService from "../../Routes/navigationService";
 
@@ -12,15 +9,15 @@ import {
   ProductsView,
   ImageProductLine,
   ViewLinkLine,
-  Title,
 } from "./styles";
 
 type GridTypes = {
   item: object;
+  index: number;
 };
 
 const GridImages: React.FC<GridTypes> = ({ item, index }) => {
-  // const navigation = useNavigation();
+  // console.log(index);
 
   return (
     // <Text>a</Text>

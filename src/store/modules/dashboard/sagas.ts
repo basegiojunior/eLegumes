@@ -34,7 +34,7 @@ export function* promoRequestSaga({ payload }): any {
   for (let i = 1; i <= 5; i += 1) {
     try {
       const response = yield call(api.get, "/v1/client/promotions", {
-        params: { page, perpage: 10 },
+        params: { page, perpage: 8 },
       });
 
       const promotions = response.data.data;

@@ -1,18 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useCallback } from "react";
 import { ScrollView, Animated, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import {
   LinkContainer,
   LateralSlide,
-  ImageProduct,
   ViewLink,
-  TitleProduct,
-  PriceProduct,
   Content,
   TitleLine,
   VerMais,
 } from "./styles";
+
+import SlideItem from "./SlideItem";
 
 import { widthPercentageToDP } from "../PercentageConverter";
 import Title from "../Title";
@@ -43,9 +42,15 @@ const SlideImages: React.FC<ProductsArray> = ({
     last: 0,
     position: 0,
   };
+
   const navigation = useNavigation();
 
-  // const [lastCard, setLastCard] = useState(0);
+  const SlideCallback = useCallback(
+    (item) => (
+      <SlideItem item={item} key={item.id} nItemsInScreen={nItemsInScreen} />
+    ),
+    [nItemsInScreen]
+  );
 
   const scrollCard: Function = (position: number) => {
     const perc = widthPercentageToDP(`${92 / nItemsInScreen}%`);
@@ -105,46 +110,7 @@ const SlideImages: React.FC<ProductsArray> = ({
             ref={slideRef}
           >
             {listElements.length > 0 ? (
-              listElements.map(
-                (item): JSX.Element => {
-                  // console.log(item);
-                  return (
-                    <LinkContainer
-                      onPress={() => {
-                        navigation.navigate("Produto", { data: item });
-                      }}
-                      key={item.id}
-                    >
-                      <ViewLink>
-                        <ImageProduct
-                          nItemsInScreen={nItemsInScreen || 2}
-                          source={{
-                            uri: item.image
-                              ? item.image.url
-                              : item.productDefault.image.url,
-                          }}
-                        />
-                        <TitleProduct>
-                          {item.name ? item.name : item.productDefault.name}
-                        </TitleProduct>
-                        {item.weekly_sales && (
-                          <PriceProduct>
-                            {item.weekly_sales} vendidos
-                          </PriceProduct>
-                        )}
-                        {item.price && (
-                          <PriceProduct>
-                            R$ {item.price.replace(".", ",")} /
-                            {item.type === "weight"
-                              ? ` ${item.weight}g`
-                              : " 1 uni."}
-                          </PriceProduct>
-                        )}
-                      </ViewLink>
-                    </LinkContainer>
-                  );
-                }
-              )
+              listElements.map(SlideCallback)
             ) : (
               <LinkContainer>
                 <ViewLink>

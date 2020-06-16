@@ -46,17 +46,18 @@ import { TEXT_SECONDARY } from "../../styles/colors";
 import { widthPercentageToDP } from "../../Components/PercentageConverter";
 
 const Products: React.FC = ({ route }) => {
+  // dados do produto
+  const { data } = route.params;
+
+  // dimensões do retrátil
   const maxHeight = widthPercentageToDP("63.4%");
   const minHeight = widthPercentageToDP("15%");
   // eslint-disable-next-line no-var
   const height = useRef(new Animated.Value(minHeight)).current;
-  const [expanded, setExpanded] = useState(true);
 
-  const { data } = route.params;
-  const text =
-    "Atenção! Selecione um vendedor para então adicionar este produto à sacola";
-
+  // dados da loja selecionada
   const [storeSelected, setStoreSelected] = useState({ id: "" });
+
   const [nProductsInCart, setNProductsInCart] = useState(1);
 
   function addCart(): void {
@@ -122,7 +123,10 @@ const Products: React.FC = ({ route }) => {
                 size={widthPercentageToDP("8%")}
                 name="alert-outline"
               />
-              <AlertText>{text}</AlertText>
+              <AlertText>
+                Atenção! Selecione um vendedor para então adicionar este produto
+                à sacola
+              </AlertText>
             </AlertStore>
           ) : (
             <>
