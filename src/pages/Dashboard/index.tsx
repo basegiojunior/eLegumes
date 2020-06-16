@@ -58,7 +58,6 @@ const Dashboard: React.FC = () => {
   // }, []);
 
   const handleRequestPromotions: Function = () => {
-    console.log("get more data");
     if (promotions.length >= 4 || promotions.length === 0) {
       store.dispatch(promoRequest());
     }

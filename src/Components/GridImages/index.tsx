@@ -17,8 +17,6 @@ type GridTypes = {
 };
 
 const GridImages: React.FC<GridTypes> = ({ item, index }) => {
-  // console.log(index);
-
   return (
     // <Text>a</Text>
     <ProductsView>

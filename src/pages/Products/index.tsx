@@ -94,6 +94,18 @@ const Products: React.FC = ({ route }) => {
     store.dispatch(companiesFromProductsRequest(data.id));
   }, []);
 
+  useEffect(() => {
+    if (data.company) {
+      const companie = companies.companies.filter(
+        (item) => item.id === data.company.id
+      );
+
+      if (companie.length !== 0) {
+        setStoreSelected(companie[0]);
+      }
+    }
+  }, [companies]);
+
   return (
     <ContainerScroll>
       <ImageProduct
