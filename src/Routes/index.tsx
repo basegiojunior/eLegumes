@@ -1,22 +1,16 @@
 import { NavigationContainer } from "@react-navigation/native";
-import {
-  createStackNavigator,
-  StackNavigationOptions,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import React from "react";
-import { View } from "react-native";
 
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { navigationRef } from "./navigationService";
 
 import { widthPercentageToDP } from "../Components/PercentageConverter";
-import SearchBar from "../Components/SearchBar";
 
-import { FONT_REGULAR, FONT_BOLD } from "../styles/fonts";
+import { FONT_REGULAR } from "../styles/fonts";
 import { PRIMARY_COLOR } from "../styles/colors";
-import { SPACE_FOR_DP, SPACE_EIGHT_DP, SPACE_TWO_DP } from "../styles/sizes";
+import { SPACE_TWO_DP } from "../styles/sizes";
 
 import Dashboard from "../pages/Dashboard";
 import Account from "../pages/Account";
@@ -30,33 +24,14 @@ import Categories from "../pages/Categories";
 import Companies from "../pages/Companies";
 import Products from "../pages/Products";
 
-const styleBarTop: StackNavigationOptions = {
-  headerStyle: { backgroundColor: "#fff" },
-  headerTitle: "eLegumes",
-  headerTitleContainerStyle: { left: 0 },
-  headerTitleStyle: {
-    color: "#242A22",
-    fontSize: widthPercentageToDP("5.5%"),
-    marginLeft: SPACE_FOR_DP,
-    fontFamily: FONT_BOLD,
-  },
-  headerTintColor: "#fff",
-};
-
-const styleBarTopBusca: StackNavigationOptions = {
-  headerStyle: { backgroundColor: "#fff" },
-
-  headerTitleContainerStyle: {
-    right: 0,
-    left: 0,
-
-    marginLeft: SPACE_FOR_DP,
-  },
-  headerTitle: () => <SearchBar />,
-
-  headerLeft: () => null,
-  headerTintColor: "#fff",
-};
+import {
+  styleBarTop,
+  styleBarTopBusca,
+  styleBarTopBuscaSecond,
+  styleBarCategory,
+  styleBarOnlyBack,
+  styleBarTransparent,
+} from "./styles";
 
 const DashboardStack = createStackNavigator();
 
@@ -86,81 +61,27 @@ const SearchStackScreen: React.FC = () => {
         name="ResultadosBusca"
         component={SearchResults}
         options={({ route, navigation }) => {
-          return {
-            ...styleBarTopBusca,
-            headerTitleContainerStyle: {
-              right: 0,
-              left: 0,
-              marginLeft: widthPercentageToDP("16%"),
-            },
-            headerTitle: () => (
-              <SearchBar showRecent={`"${route.params.search}"`} />
-            ),
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Icon
-                  name="arrow-left"
-                  style={{ marginLeft: SPACE_FOR_DP }}
-                  size={SPACE_EIGHT_DP}
-                  color="#555"
-                />
-              </TouchableOpacity>
-            ),
-          };
+          return styleBarTopBuscaSecond(
+            () => navigation.goBack(),
+            `"${route.params.search}"`
+          );
         }}
       />
       <SearchStack.Screen
         name="ResultadosBuscaEspecificos"
         component={SearchEspecifyResults}
         options={({ route, navigation }) => {
-          return {
-            ...styleBarTopBusca,
-            headerTitleContainerStyle: {
-              right: 0,
-              left: 0,
-              marginLeft: widthPercentageToDP("16%"),
-            },
-            headerTitle: () => (
-              <SearchBar
-                showRecent={`${route.params.name} com "${route.params.search}"`}
-              />
-            ),
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Icon
-                  name="arrow-left"
-                  style={{ marginLeft: SPACE_FOR_DP }}
-                  size={SPACE_EIGHT_DP}
-                  color="#555"
-                />
-              </TouchableOpacity>
-            ),
-          };
+          return styleBarTopBuscaSecond(
+            () => navigation.goBack(),
+            `${route.params.name} com "${route.params.search}"`
+          );
         }}
       />
       <SearchStack.Screen
         name="Categoria"
         component={Categories}
         options={({ route, navigation }) => {
-          return {
-            ...styleBarTop,
-            headerTitle: route.params.name,
-            headerTitleContainerStyle: {
-              right: 0,
-              left: 0,
-              marginLeft: widthPercentageToDP("12%"),
-            },
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Icon
-                  name="arrow-left"
-                  style={{ marginLeft: SPACE_FOR_DP }}
-                  size={SPACE_EIGHT_DP}
-                  color="#555"
-                />
-              </TouchableOpacity>
-            ),
-          };
+          return styleBarCategory(() => navigation.goBack(), route.params.name);
         }}
       />
     </SearchStack.Navigator>
@@ -181,48 +102,14 @@ const AccountStackScreen: React.FC = () => {
         name="Entrar"
         component={SignIn}
         options={({ navigation }) => {
-          return {
-            ...styleBarTop,
-            headerTitleContainerStyle: {
-              right: 0,
-              left: 0,
-              marginLeft: widthPercentageToDP("12%"),
-            },
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Icon
-                  name="arrow-left"
-                  style={{ marginLeft: SPACE_FOR_DP }}
-                  size={SPACE_EIGHT_DP}
-                  color="#555"
-                />
-              </TouchableOpacity>
-            ),
-          };
+          return styleBarOnlyBack(() => navigation.goBack());
         }}
       />
       <AccountStack.Screen
         name="Cadastrar"
         component={SignUp}
         options={({ navigation }) => {
-          return {
-            ...styleBarTop,
-            headerTitleContainerStyle: {
-              right: 0,
-              left: 0,
-              marginLeft: widthPercentageToDP("12%"),
-            },
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Icon
-                  name="arrow-left"
-                  style={{ marginLeft: SPACE_FOR_DP }}
-                  size={SPACE_EIGHT_DP}
-                  color="#555"
-                />
-              </TouchableOpacity>
-            ),
-          };
+          return styleBarOnlyBack(() => navigation.goBack());
         }}
       />
     </AccountStack.Navigator>
@@ -308,96 +195,20 @@ const LoginStackScreen: React.FC = () => {
           name="Companie"
           component={Companies}
           options={({ navigation }) => {
-            return {
-              ...styleBarTop,
-              headerTransparent: true,
-              headerTitle: "",
-              headerTitleContainerStyle: {
-                right: 0,
-                left: 0,
-                marginLeft: widthPercentageToDP("12%"),
-              },
-              headerRight: () => (
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: "rgba(0,0,0,.4)",
-                    marginRight: SPACE_FOR_DP,
-                    width: widthPercentageToDP("10%"),
-                    height: widthPercentageToDP("10%"),
-                    borderRadius: widthPercentageToDP("5%"),
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  onPress={() => navigation.goBack()}
-                >
-                  <Icon name="share" size={SPACE_EIGHT_DP} color="#fff" />
-                </TouchableOpacity>
-              ),
-              headerLeft: () => (
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: "rgba(0,0,0,.4)",
-                    marginLeft: SPACE_FOR_DP,
-                    width: widthPercentageToDP("10%"),
-                    height: widthPercentageToDP("10%"),
-                    borderRadius: widthPercentageToDP("5%"),
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  onPress={() => navigation.goBack()}
-                >
-                  <Icon name="arrow-left" size={SPACE_EIGHT_DP} color="#fff" />
-                </TouchableOpacity>
-              ),
-            };
+            return styleBarTransparent(
+              () => navigation.goBack(),
+              () => navigation.goBack()
+            );
           }}
         />
         <LoginStack.Screen
           name="Produto"
           component={Products}
           options={({ navigation }) => {
-            return {
-              ...styleBarTop,
-              headerTransparent: true,
-              headerTitle: "",
-              headerTitleContainerStyle: {
-                right: 0,
-                left: 0,
-                marginLeft: widthPercentageToDP("12%"),
-              },
-              headerRight: () => (
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: "rgba(0,0,0,.4)",
-                    marginRight: SPACE_FOR_DP,
-                    width: widthPercentageToDP("10%"),
-                    height: widthPercentageToDP("10%"),
-                    borderRadius: widthPercentageToDP("5%"),
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  onPress={() => navigation.goBack()}
-                >
-                  <Icon name="share" size={SPACE_EIGHT_DP} color="#fff" />
-                </TouchableOpacity>
-              ),
-              headerLeft: () => (
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: "rgba(0,0,0,.4)",
-                    marginLeft: SPACE_FOR_DP,
-                    width: widthPercentageToDP("10%"),
-                    height: widthPercentageToDP("10%"),
-                    borderRadius: widthPercentageToDP("5%"),
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  onPress={() => navigation.goBack()}
-                >
-                  <Icon name="arrow-left" size={SPACE_EIGHT_DP} color="#fff" />
-                </TouchableOpacity>
-              ),
-            };
+            return styleBarTransparent(
+              () => navigation.goBack(),
+              () => navigation.goBack()
+            );
           }}
         />
       </LoginStack.Navigator>

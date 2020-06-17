@@ -7,22 +7,38 @@ import { widthPercentageToDP } from "../PercentageConverter";
 import { searchRequest } from "../../store/modules/search/actions";
 import { store } from "../../store/index";
 
-const SearchBar: React.FC = ({ showRecent, navigation }) => {
+type SearchType = {
+  showRecent?: string;
+};
+
+const SearchBar: React.FC<SearchType> = ({ showRecent }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [placeholder, setPlaceholder] = useState(
+    isFocused ? "Insira um termo de busca" : showRecent || "Busca"
+  );
+
   const inputRef = useRef<TextInput>(null);
   const handleSubmit: Function = () => {
     store.dispatch(searchRequest(searchValue.trim()));
   };
+
+  useEffect(() => {
+    if (isFocused) {
+      setPlaceholder("Insira um termo de busca");
+    } else if (showRecent) {
+      setPlaceholder(showRecent);
+    } else {
+      setPlaceholder("Busca");
+    }
+  }, [isFocused, showRecent]);
 
   return (
     <Container>
       <Input
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        placeholder={
-          isFocused ? "Insira um termo de busca" : showRecent || "Busca"
-        }
+        placeholder={placeholder}
         placeholderTextColor={isFocused ? "#969D95" : "#242A22"}
         onChangeText={(text: string) => setSearchValue(text)}
         returnKeyType="send"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Animated } from "react-native";
 
 import { ContainerScroll } from "../../styles/scrollView";
