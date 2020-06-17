@@ -107,7 +107,7 @@ export function* companiesFromProductsRequestSaga({ payload }: any): any {
     try {
       response = yield call(
         api.get,
-        `/v1/client/companies/sell/product/${productId}`
+        `/v1/client/companies/sell/product_default/${productId}`
       );
 
       const companies = response.data.data;

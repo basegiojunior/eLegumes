@@ -91,7 +91,11 @@ const Products: React.FC = ({ route }) => {
   }, [storeSelected]);
 
   useEffect(() => {
-    store.dispatch(companiesFromProductsRequest(data.id));
+    if (data.productDefault) {
+      store.dispatch(companiesFromProductsRequest(data.productDefault.id));
+    } else {
+      store.dispatch(companiesFromProductsRequest(data.id));
+    }
   }, []);
 
   useEffect(() => {
@@ -154,7 +158,13 @@ const Products: React.FC = ({ route }) => {
                 </AddProductLeft>
                 <AddProductPrice>
                   R${" "}
-                  {(parseFloat(storeSelected.price_product) * nProductsInCart)
+                  {(
+                    parseFloat(
+                      storeSelected.active_promotion
+                        ? storeSelected.price_promotion
+                        : storeSelected.price_product
+                    ) * nProductsInCart
+                  )
                     .toFixed(2)
                     .toString()
                     .replace(".", ",")}
@@ -192,39 +202,43 @@ const Products: React.FC = ({ route }) => {
             </>
           )}
         </ContainerRetrac>
-        <Title
-          style={{
-            alignSelf: "flex-start",
-          }}
-        >
-          QUEM VENDE ESSE PRODUTO
-        </Title>
 
-        {companies.id === data.id &&
-          companies.companies.map((item) => (
-            <Store onPress={() => setStoreSelected(item)} key={item.id}>
-              <StoreView>
-                <StoreViewLeft>
-                  <StoreCircle isPressed={storeSelected.id === item.id} />
-                  <StoreTextView>
-                    <StoreTextName>{item.name}</StoreTextName>
-                    <StoreTextPrice>
-                      R$ {item.price_product.replace(".", ",")}
-                    </StoreTextPrice>
-                  </StoreTextView>
-                </StoreViewLeft>
-                <StoreViewRight>
-                  <StoreTextPrice>{item.rating}/5</StoreTextPrice>
-                  <Icone
-                    size={widthPercentageToDP("6%")}
-                    color={TEXT_SECONDARY}
-                    name="star"
-                    style={{ marginLeft: 5 }}
-                  />
-                </StoreViewRight>
-              </StoreView>
-            </Store>
-          ))}
+        {companies.id === data.id && companies.companies.length > 0 && (
+          <>
+            <Title
+              style={{
+                alignSelf: "flex-start",
+              }}
+            >
+              QUEM VENDE ESSE PRODUTO
+            </Title>
+
+            {companies.companies.map((item) => (
+              <Store onPress={() => setStoreSelected(item)} key={item.id}>
+                <StoreView>
+                  <StoreViewLeft>
+                    <StoreCircle isPressed={storeSelected.id === item.id} />
+                    <StoreTextView>
+                      <StoreTextName>{item.name}</StoreTextName>
+                      <StoreTextPrice>
+                        R$ {item.price_product.replace(".", ",")}
+                      </StoreTextPrice>
+                    </StoreTextView>
+                  </StoreViewLeft>
+                  <StoreViewRight>
+                    <StoreTextPrice>{item.rating}/5</StoreTextPrice>
+                    <Icone
+                      size={widthPercentageToDP("6%")}
+                      color={TEXT_SECONDARY}
+                      name="star"
+                      style={{ marginLeft: 5 }}
+                    />
+                  </StoreViewRight>
+                </StoreView>
+              </Store>
+            ))}
+          </>
+        )}
       </Container>
     </ContainerScroll>
   );
