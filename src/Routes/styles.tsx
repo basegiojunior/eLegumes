@@ -1,12 +1,13 @@
 import React from "react";
 
 import { StackNavigationOptions } from "@react-navigation/stack";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity, RectButton } from "react-native-gesture-handler";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { SPACE_FOR_DP, SPACE_EIGHT_DP } from "../styles/sizes";
 import { FONT_BOLD } from "../styles/fonts";
 import SearchBar from "../Components/SearchBar";
 import { widthPercentageToDP } from "../Components/PercentageConverter";
+import { PRIMARY_COLOR, TEXT_PRIMARY } from "../styles/colors";
 
 export const styleBarTop = {
   headerStyle: { backgroundColor: "#fff" },
@@ -19,6 +20,40 @@ export const styleBarTop = {
     fontFamily: FONT_BOLD,
   },
   headerTintColor: "#fff",
+};
+
+export const styleBarTopCart = (
+  ButtonRight: Function
+): StackNavigationOptions => {
+  return {
+    headerStyle: { backgroundColor: "#fff" },
+    headerTitle: "Sacola",
+    headerTitleContainerStyle: { left: 0 },
+    headerTitleStyle: {
+      color: "#242A22",
+      fontSize: widthPercentageToDP("5.5%"),
+      marginLeft: SPACE_FOR_DP,
+      fontFamily: FONT_BOLD,
+    },
+    headerTintColor: "#fff",
+    headerRight: () => (
+      <RectButton
+        rippleColor="rgba(0,0,0,0.1)"
+        style={{
+          backgroundColor: "transparent",
+          marginRight: SPACE_FOR_DP,
+          width: widthPercentageToDP("10%"),
+          height: widthPercentageToDP("10%"),
+          borderRadius: widthPercentageToDP("1.5%"),
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        // onPress={() => ButtonRight()}
+      >
+        <Icon name="delete" size={SPACE_EIGHT_DP} color={TEXT_PRIMARY} />
+      </RectButton>
+    ),
+  };
 };
 
 export const styleBarTopBusca = {

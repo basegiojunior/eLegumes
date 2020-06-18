@@ -31,6 +31,7 @@ import {
   styleBarCategory,
   styleBarOnlyBack,
   styleBarTransparent,
+  styleBarTopCart,
 } from "./styles";
 
 const DashboardStack = createStackNavigator();
@@ -121,7 +122,13 @@ const CartStack = createStackNavigator();
 const CartStackScreen: React.FC = () => {
   return (
     <CartStack.Navigator initialRouteName="Sacola">
-      <CartStack.Screen name="Sacola" component={Cart} options={styleBarTop} />
+      <CartStack.Screen
+        name="Sacola"
+        component={Cart}
+        options={({ navigation }) => {
+          return styleBarTopCart(() => navigation.goBack());
+        }}
+      />
     </CartStack.Navigator>
   );
 };
