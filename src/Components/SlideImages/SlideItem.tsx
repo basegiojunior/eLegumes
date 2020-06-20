@@ -22,7 +22,9 @@ const SlideItem: React.FC = ({ item, nItemsInScreen }) => {
         <ImageProduct
           nItemsInScreen={nItemsInScreen || 2}
           source={{
-            uri: item.image ? item.image.url : item.productDefault.image.url,
+            uri: item.productDefault
+              ? item.productDefault.image.url
+              : item.image.url,
           }}
         />
         <TitleProduct>

@@ -1,13 +1,45 @@
 import React from "react";
-
 import { StackNavigationOptions } from "@react-navigation/stack";
 import { TouchableOpacity, RectButton } from "react-native-gesture-handler";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
-import { SPACE_FOR_DP, SPACE_EIGHT_DP } from "../styles/sizes";
-import { FONT_BOLD } from "../styles/fonts";
+import { useSelector, useDispatch } from "react-redux";
+
 import SearchBar from "../Components/SearchBar";
 import { widthPercentageToDP } from "../Components/PercentageConverter";
-import { PRIMARY_COLOR, TEXT_PRIMARY } from "../styles/colors";
+
+import { PRIMARY_COLOR, TEXT_PRIMARY, TEXT_SECONDARY } from "../styles/colors";
+import { SPACE_FOR_DP, SPACE_EIGHT_DP } from "../styles/sizes";
+import { FONT_BOLD } from "../styles/fonts";
+
+import { deleteCompanie } from "../store/modules/cart/actions";
+
+export const DeleteButton: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const isSelected = useSelector((state) => state.cart.companieSelectedId);
+
+  return (
+    <RectButton
+      rippleColor="rgba(0,0,0,0.1)"
+      style={{
+        backgroundColor: "transparent",
+        marginRight: SPACE_FOR_DP,
+        width: widthPercentageToDP("10%"),
+        height: widthPercentageToDP("10%"),
+        borderRadius: widthPercentageToDP("1.5%"),
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      onPress={() => dispatch(deleteCompanie())}
+    >
+      <Icon
+        name="delete"
+        size={SPACE_EIGHT_DP}
+        color={isSelected !== "" ? TEXT_PRIMARY : TEXT_SECONDARY}
+      />
+    </RectButton>
+  );
+};
 
 export const styleBarTop = {
   headerStyle: { backgroundColor: "#fff" },
@@ -36,23 +68,7 @@ export const styleBarTopCart = (
       fontFamily: FONT_BOLD,
     },
     headerTintColor: "#fff",
-    headerRight: () => (
-      <RectButton
-        rippleColor="rgba(0,0,0,0.1)"
-        style={{
-          backgroundColor: "transparent",
-          marginRight: SPACE_FOR_DP,
-          width: widthPercentageToDP("10%"),
-          height: widthPercentageToDP("10%"),
-          borderRadius: widthPercentageToDP("1.5%"),
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        // onPress={() => ButtonRight()}
-      >
-        <Icon name="delete" size={SPACE_EIGHT_DP} color={TEXT_PRIMARY} />
-      </RectButton>
-    ),
+    headerRight: () => <DeleteButton />,
   };
 };
 

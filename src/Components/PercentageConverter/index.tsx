@@ -22,8 +22,8 @@ export const heightPercentageToDP: Function = (heightPercent: string) => {
 };
 
 export const heightPercentageToPx: Function = (heightPercent: string) => {
-  const screenWidth = Dimensions.get("window").height * PixelRatio.get();
+  const screenHeight = Dimensions.get("window").height;
   // Convert string input to decimal number
-  const elemWidth = parseFloat(heightPercent) / 100;
-  return `${Math.round(screenWidth * elemWidth)}px`;
+  const elemHeight = parseFloat(heightPercent) / 100;
+  return `${screenHeight * elemHeight}px`;
 };

@@ -1,7 +1,11 @@
 import styled from "styled-components/native";
 import { RectButton } from "react-native-gesture-handler";
+import { Animated } from "react-native";
 
-import { widthPercentageToPx } from "../../Components/PercentageConverter";
+import {
+  widthPercentageToPx,
+  heightPercentageToPx,
+} from "../../Components/PercentageConverter";
 import {
   SPACE_ONE,
   SPACE_TWO,
@@ -10,6 +14,7 @@ import {
   SPACE_FIVE,
   SPACE_SIX,
   SPACE_SEVEN,
+  SPACE_EIGHT,
   FONT_SIZE_SECONDARY,
   FONT_SIZE_TERTIARY,
   FONT_SIZE_QUATERNARY,
@@ -19,6 +24,7 @@ import {
   TEXT_PRIMARY,
   TEXT_SECONDARY,
   PRIMARY_COLOR,
+  SECONDARY_COLOR,
 } from "../../styles/colors";
 
 export const Container = styled.View`
@@ -120,7 +126,9 @@ export const ProductChangeQuantityIntern = styled.View`
   width: 100%;
 `;
 
-export const ProductChangeQuantityButton = styled(RectButton)`
+export const ProductChangeQuantityButton = styled(RectButton).attrs(() => ({
+  rippleColor: "rgba(0,0,0,0.1)",
+}))`
   width: ${widthPercentageToPx("10%")};
   height: ${widthPercentageToPx("10%")};
   border-radius: ${SPACE_TWO};
@@ -139,4 +147,95 @@ export const ProductChangeQuantityText = styled.Text`
   font-family: ${FONT_REGULAR};
   font-size: ${SPACE_FIVE};
   color: ${TEXT_PRIMARY};
+`;
+
+// ABA DE FINALIZAR COMPRA
+
+export const EndContainer = styled(Animated.View)`
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: ${widthPercentageToPx("20%")};
+  padding: 0 ${SPACE_SIX};
+  width: 100%;
+  position: absolute;
+  background-color: #fff;
+  border-top-color: #f0f0f0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-width: 3px;
+  flex-direction: row;
+`;
+
+export const EndContainerLeftLink = styled.TouchableWithoutFeedback``;
+
+export const EndContainerLeft = styled.View`
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1;
+`;
+
+export const EndContainerRight = styled.View`
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+`;
+
+export const EndContainerTitle = styled.Text`
+  font-size: ${SPACE_THREE};
+  font-family: ${FONT_SEMIBOLD};
+  color: ${TEXT_SECONDARY};
+`;
+
+export const EndContainerViewLeft = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const EndContainerPrice = styled.Text`
+  font-size: ${SPACE_SIX};
+  font-family: ${FONT_BOLD};
+  color: ${SECONDARY_COLOR};
+  margin-right: 6px;
+`;
+
+// EXPANDED END
+
+export const ExpandedEndOff = styled.Modal`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 4;
+`;
+
+export const ExpandedEndBackground = styled(Animated.View)`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 5;
+`;
+
+export const ExpandedEnd = styled(Animated.View)`
+  height: ${heightPercentageToPx("65%")};
+  width: 100%;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  border-top-left-radius: ${SPACE_EIGHT};
+  border-top-right-radius: ${SPACE_EIGHT};
 `;

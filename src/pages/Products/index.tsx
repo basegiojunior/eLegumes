@@ -6,7 +6,7 @@ import { ContainerScroll } from "../../styles/scrollView";
 import Title from "../../Components/Title";
 
 import { companiesFromProductsRequest } from "../../store/modules/companies/actions";
-import { store } from "../../store";
+import { addToCart } from "../../store/modules/cart/actions";
 
 import profile from "../../assets/product.jpg";
 
@@ -45,7 +45,9 @@ import { TEXT_SECONDARY } from "../../styles/colors";
 
 import { widthPercentageToDP } from "../../Components/PercentageConverter";
 
-const Products: React.FC = ({ route }) => {
+const Products: React.FC = ({ route, navigation }) => {
+  const dispatch = useDispatch();
+
   // dados do produto
   const { data } = route.params;
 
@@ -54,6 +56,10 @@ const Products: React.FC = ({ route }) => {
   const minHeight = widthPercentageToDP("15%");
   // eslint-disable-next-line no-var
   const height = useRef(new Animated.Value(minHeight)).current;
+
+  const companies = useSelector(
+    (state) => state.companies.companiesFromProduct
+  );
 
   // dados da loja selecionada
   const [storeSelected, setStoreSelected] = useState({ id: "" });
@@ -70,9 +76,15 @@ const Products: React.FC = ({ route }) => {
     }
   }
 
-  const companies = useSelector(
-    (state) => state.companies.companiesFromProduct
-  );
+  const getProductUnity = (): string => {
+    if (storeSelected.id === "") {
+      return "1 unidade";
+    }
+    if (storeSelected.product.type === "weight") {
+      return `aproximadamente ${storeSelected.product.weight} g`;
+    }
+    return "1 unidade";
+  };
 
   function changeHeight(toValue: number): void {
     Animated.timing(height, {
@@ -92,9 +104,9 @@ const Products: React.FC = ({ route }) => {
 
   useEffect(() => {
     if (data.productDefault) {
-      store.dispatch(companiesFromProductsRequest(data.productDefault.id));
+      dispatch(companiesFromProductsRequest(data.productDefault.id));
     } else {
-      store.dispatch(companiesFromProductsRequest(data.id));
+      dispatch(companiesFromProductsRequest(data.id));
     }
   }, []);
 
@@ -114,18 +126,16 @@ const Products: React.FC = ({ route }) => {
     <ContainerScroll>
       <ImageProduct
         source={{
-          uri: data.image ? data.image.url : data.productDefault.image.url,
+          uri: data.productDefault
+            ? data.productDefault.image.url
+            : data.image.url,
         }}
       />
       <Container>
         <ProductName>
           {data.name ? data.name : data.productDefault.name}
         </ProductName>
-        <ProductAmount>
-          {data.type === "weight"
-            ? `aproximadamente ${data.weight} g`
-            : "1 unidade"}
-        </ProductAmount>
+        <ProductAmount>{getProductUnity()}</ProductAmount>
 
         <ContainerRetrac
           style={{
@@ -160,9 +170,9 @@ const Products: React.FC = ({ route }) => {
                   R${" "}
                   {(
                     parseFloat(
-                      storeSelected.active_promotion
-                        ? storeSelected.price_promotion
-                        : storeSelected.price_product
+                      storeSelected.product.active_promotion
+                        ? storeSelected.product.price_promotion
+                        : storeSelected.product.price
                     ) * nProductsInCart
                   )
                     .toFixed(2)
@@ -171,7 +181,21 @@ const Products: React.FC = ({ route }) => {
                 </AddProductPrice>
               </AddProductView>
 
-              <AddToCart>
+              <AddToCart
+                onPress={() => {
+                  dispatch(
+                    addToCart(
+                      {
+                        id: storeSelected.id,
+                        name: storeSelected.name,
+                      },
+                      storeSelected.product,
+                      nProductsInCart
+                    )
+                  );
+                  navigation.navigate("Sacola");
+                }}
+              >
                 <AddToCartText>adicionar à sacola</AddToCartText>
               </AddToCart>
 
@@ -221,7 +245,10 @@ const Products: React.FC = ({ route }) => {
                     <StoreTextView>
                       <StoreTextName>{item.name}</StoreTextName>
                       <StoreTextPrice>
-                        R$ {item.price_product.replace(".", ",")}
+                        R${" "}
+                        {item.product.active_promotion
+                          ? item.product.price_promotion.replace(".", ",")
+                          : item.product.price.replace(".", ",")}
                       </StoreTextPrice>
                     </StoreTextView>
                   </StoreViewLeft>

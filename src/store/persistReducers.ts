@@ -6,7 +6,7 @@ const persistReducers: React.FC = (reducers) => {
     {
       key: "marketplace",
       storage: AsyncStorage,
-      whitelist: ["auth"],
+      whitelist: ["auth", "search"],
     },
     reducers
   );

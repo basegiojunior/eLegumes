@@ -5,6 +5,7 @@ import dash from "./dashboard/reducer";
 import search from "./search/reducer";
 import categories from "./categories/reducer";
 import companies from "./companies/reducer";
+import cart from "./cart/reducer";
 
 const appReducer = combineReducers({
   auth,
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
   search,
   categories,
   companies,
+  cart,
 });
 
 const Reducer: ReducerProps = (state, action) => {
