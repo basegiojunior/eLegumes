@@ -4,21 +4,17 @@ import { Reducer } from "redux";
 const INITIAL_STATE = {
   loading: false,
   categories: [],
-  companieSelectedId: "",
-  cart: [
-    {
-      companie: { id: "adb", name: "Loja Teste" },
-      products: [{ quantity: 2, data: { name: "Produdo 01", price: "2.50" } }],
-    },
-  ],
+  companieSelected: { id: "" },
+  cart: [],
 };
 
 type InitialProps = {
   loading: boolean;
   categories: object[];
-  companieSelectedId: string;
+  companieSelected: { id: string };
   cart: {
     companie: object;
+    totalPrice: number;
     products: { quantity: number; data: object }[];
   }[];
 };
@@ -42,6 +38,9 @@ const cart: Reducer = (state = INITIAL_STATE, action) => {
 
       case "@cart/ADD_TO_CART": {
         const { product, companie, quantity } = action.payload;
+        const price = product.active_promotion
+          ? parseFloat(product.price_promotion) * quantity
+          : parseFloat(product.price) * quantity;
 
         // verifica se já existe essa empresa
         const companieIndex = draft.cart.findIndex(
@@ -64,8 +63,22 @@ const cart: Reducer = (state = INITIAL_STATE, action) => {
                 data: product,
               },
             ];
+
+            draft.cart[companieIndex].totalPrice += price;
           } else {
             // se já existir, sobrescreve ele com os novos dados
+            const lastProduct =
+              draft.cart[companieIndex].products[productIndex].data;
+
+            const lastPrice =
+              parseFloat(
+                lastProduct.active_promotion
+                  ? lastProduct.price_promotion
+                  : lastProduct.price
+              ) * draft.cart[companieIndex].products[productIndex].quantity;
+
+            draft.cart[companieIndex].totalPrice -= lastPrice + price;
+
             draft.cart[companieIndex].products[productIndex] = {
               quantity,
               data: product,
@@ -77,6 +90,7 @@ const cart: Reducer = (state = INITIAL_STATE, action) => {
             ...draft.cart,
             {
               companie,
+              totalPrice: price,
               products: [
                 {
                   quantity,
@@ -100,7 +114,13 @@ const cart: Reducer = (state = INITIAL_STATE, action) => {
           (item) => item.data.id === productId
         );
 
+        const product = draft.cart[companieIndex].products[productIndex].data;
+        const price = parseFloat(
+          product.active_promotion ? product.price_promotion : product.price
+        );
+
         draft.cart[companieIndex].products[productIndex].quantity += 1;
+        draft.cart[companieIndex].totalPrice += price;
         break;
       }
 
@@ -115,21 +135,35 @@ const cart: Reducer = (state = INITIAL_STATE, action) => {
           (item) => item.data.id === productId
         );
 
+        const product = draft.cart[companieIndex].products[productIndex].data;
+        const price = parseFloat(
+          product.active_promotion ? product.price_promotion : product.price
+        );
+
+        // se tiver mais que um produto no carrinho, pode iminuir uma unidade
         if (draft.cart[companieIndex].products[productIndex].quantity > 1) {
           draft.cart[companieIndex].products[productIndex].quantity -= 1;
+          draft.cart[companieIndex].totalPrice -= price;
         }
         break;
       }
 
       case "@cart/SELECT_COMPANIE": {
-        draft.companieSelectedId = action.payload.id;
+        draft.companieSelected.id = action.payload.id;
+        break;
+      }
+
+      case "@cart/DESELECT_COMPANIE": {
+        draft.companieSelected.id = "";
         break;
       }
 
       case "@cart/DELETE_COMPANIE": {
-        draft.cart = draft.cart.filter(
-          (item) => item.companie.id !== draft.companieSelectedId
-        );
+        const { id } = draft.companieSelected;
+
+        draft.companieSelected.id = "";
+
+        draft.cart = draft.cart.filter((item) => item.companie.id !== id);
         break;
       }
 

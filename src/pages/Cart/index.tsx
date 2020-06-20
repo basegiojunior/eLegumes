@@ -1,9 +1,10 @@
-import React, { useEffect, useCallback, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TouchableWithoutFeedback, Animated, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
-import Button from "../../Components/Button";
+import Button, { ButtonGhost } from "../../Components/Button";
+import ProductItem from "./ProductItem";
 
 import { ContainerScroll } from "../../styles/scrollView";
 
@@ -12,18 +13,6 @@ import {
   HeaderCompanie,
   HeaderCompanieCheck,
   HeaderCompanieTitle,
-  ProductAboutContainer,
-  ProductChangeQuantityIntern,
-  ProductAboutTop,
-  ProductChangeQuantityButton,
-  ProductChangeQuantityButtonText,
-  ProductChangeQuantityContainer,
-  ProductChangeQuantityText,
-  ProductContainer,
-  ProductImage,
-  ProductPrice,
-  ProductQuantity,
-  ProductTitle,
   EndContainer,
   EndContainerLeft,
   EndContainerLeftLink,
@@ -32,23 +21,33 @@ import {
   EndContainerTitle,
   EndContainerViewLeft,
   ExpandedEnd,
+  ExpandedLink,
   ExpandedEndOff,
   ExpandedEndBackground,
+  DeliveryContainer,
+  DeliveryPrice,
+  DeliveryText,
+  TotalPriceContainer,
+  TotalPricePrice,
+  TotalPriceTitle,
+  TotalPriceLeft,
+  ButtonsContainer,
+  ButtonsIntern,
+  InformationContainer,
+  InformationContainerIntern,
+  InfomationSec,
+  InfomationTitle,
 } from "./styles";
 
 import {
-  decreaseProduct,
-  increaseProduct,
+  deselectCompanie,
   selectCompanie,
 } from "../../store/modules/cart/actions";
 
-import product from "../../assets/product.jpg";
-
-import { TEXT_SECONDARY } from "../../styles/colors";
+import { TEXT_SECONDARY, PRIMARY_COLOR } from "../../styles/colors";
 import {
   SPACE_FIVE_DP,
   SPACE_SEVEN_DP,
-  SPACE_EIGHT_DP,
   SPACE_SIX_DP,
 } from "../../styles/sizes";
 import {
@@ -63,23 +62,27 @@ const Cart: React.FC = () => {
 
   // selectors
   const cart = useSelector((state) => state.cart.cart);
-  const companieSelectedId = useSelector(
-    (state) => state.cart.companieSelectedId
-  );
+  const companieSelected = useSelector((state) => state.cart.companieSelected);
 
-  const endContainerPosition = useRef(new Animated.Value(0)).current;
+  // variaveis das animações
+  const endContainerPosition = useRef(
+    new Animated.Value(companieSelected.id === "" ? sizeEndContainer : 0)
+  ).current;
   const expandedEnd = useRef(new Animated.Value(sizeExpandEnd)).current;
-  const [showModal, setShowModal] = useState(false);
-
   const colorBack = expandedEnd.interpolate({
     inputRange: [sizeExpandEnd, 0],
     outputRange: ["rgba(0, 0, 0, .0)", "rgba(0, 0, 0, .35)"],
   });
 
+  // states
+  const [showModal, setShowModal] = useState(false);
+  const [actualPrice, setActualPrice] = useState("0,00");
+
+  // gerencia a animação do conteiner expansível MAIOR
   function animatedExpandEnd(to: number): void {
     Animated.timing(expandedEnd, {
       toValue: to,
-      duration: 400,
+      duration: 500,
       useNativeDriver: false,
     }).start(() => {
       if (to !== 0) {
@@ -88,102 +91,89 @@ const Cart: React.FC = () => {
     });
   }
 
+  // gerencia a animação do conteiner expansível MENOR
   function animatedEndContainer(to: number): void {
-    Animated.spring(endContainerPosition, {
+    Animated.timing(endContainerPosition, {
       toValue: to,
-      speed: 1,
+      duration: 300,
       useNativeDriver: false,
     }).start();
   }
 
+  // gerencia o preço do total da compania selecionada
+  useEffect(() => {
+    if (companieSelected.id !== "") {
+      setActualPrice(
+        cart
+          .filter((item: any) => item.companie.id === companieSelected.id)[0]
+          .totalPrice.toFixed(2)
+          .toString()
+      );
+    }
+  }, [cart, companieSelected]);
+
+  // gerencia quando a animação do conteiner menor será executada
   useEffect(() => {
     if (
-      companieSelectedId === "" &&
+      companieSelected.id === "" &&
       endContainerPosition._value > sizeEndContainer
     ) {
       animatedEndContainer(sizeEndContainer);
-    } else if (companieSelectedId !== "" && endContainerPosition._value < 0) {
+    } else if (companieSelected.id !== "" && endContainerPosition._value < 0) {
       animatedEndContainer(0);
     }
-  }, [companieSelectedId]);
-
-  const ProductItem = useCallback(
-    ({ productItem, companieId }) => (
-      <ProductContainer>
-        <ProductImage source={product} />
-        <ProductAboutContainer>
-          <ProductAboutTop>
-            <ProductTitle>
-              {productItem.data.name || productItem.data.productDefault.name}
-            </ProductTitle>
-            <ProductPrice>
-              R${" "}
-              {productItem.data.active_promotion
-                ? productItem.data.price_promotion.replace(".", ",")
-                : productItem.data.price.replace(".", ",")}
-            </ProductPrice>
-          </ProductAboutTop>
-          <ProductQuantity>
-            {productItem.quantity} x{" "}
-            {productItem.data.type === "weight"
-              ? `${productItem.data.weight} g`
-              : "1 unidade"}
-          </ProductQuantity>
-        </ProductAboutContainer>
-
-        <ProductChangeQuantityContainer>
-          <ProductChangeQuantityIntern>
-            <ProductChangeQuantityButton
-              onPress={() => {
-                dispatch(decreaseProduct(productItem.data.id, companieId));
-              }}
-            >
-              <ProductChangeQuantityButtonText
-                style={{
-                  includeFontPadding: false,
-                }}
-              >
-                -
-              </ProductChangeQuantityButtonText>
-            </ProductChangeQuantityButton>
-
-            <ProductChangeQuantityText>
-              {productItem.quantity}
-            </ProductChangeQuantityText>
-
-            <ProductChangeQuantityButton
-              onPress={() => {
-                dispatch(increaseProduct(productItem.data.id, companieId));
-              }}
-            >
-              <ProductChangeQuantityButtonText
-                style={{
-                  includeFontPadding: false,
-                }}
-              >
-                +
-              </ProductChangeQuantityButtonText>
-            </ProductChangeQuantityButton>
-          </ProductChangeQuantityIntern>
-        </ProductChangeQuantityContainer>
-      </ProductContainer>
-    ),
-    [cart]
-  );
+  }, [companieSelected]);
 
   return (
     <>
       <ExpandedEndOff transparent visible={showModal}>
-        <ExpandedEndBackground style={{ backgroundColor: colorBack }}>
-          <ExpandedEnd style={{ bottom: expandedEnd }}>
-            <TouchableWithoutFeedback
-              style={{ marginTop: 400 }}
-              onPress={() => animatedExpandEnd(sizeExpandEnd)}
-            >
-              <Text>Fechar</Text>
-            </TouchableWithoutFeedback>
-          </ExpandedEnd>
-        </ExpandedEndBackground>
+        <ExpandedLink onPress={() => null}>
+          <ExpandedEndBackground style={{ backgroundColor: colorBack }}>
+            <ExpandedEnd style={{ bottom: expandedEnd }}>
+              <TotalPriceContainer>
+                <TotalPriceLeft>
+                  <TotalPriceTitle>PREÇO TOTAL DA SACOLA</TotalPriceTitle>
+                  <TotalPricePrice>R$ 16,00</TotalPricePrice>
+                </TotalPriceLeft>
+                <Icon
+                  name="shopping"
+                  color={PRIMARY_COLOR}
+                  size={widthPercentageToDP("17%")}
+                />
+              </TotalPriceContainer>
+
+              <InformationContainer>
+                <InformationContainerIntern>
+                  <InfomationTitle>TOTAL DE PRODUTOS</InfomationTitle>
+                  <InfomationSec>R$ 8,00</InfomationSec>
+                </InformationContainerIntern>
+                <InformationContainerIntern>
+                  <InfomationTitle>TOTAL DE FRETE</InfomationTitle>
+                  <InfomationSec>R$ 5,00</InfomationSec>
+                </InformationContainerIntern>
+              </InformationContainer>
+
+              <InformationContainer>
+                <InformationContainerIntern>
+                  <InfomationTitle>VENDEDORES SELECIONADOS</InfomationTitle>
+                  <InfomationSec>Frutaria da Maria</InfomationSec>
+                </InformationContainerIntern>
+              </InformationContainer>
+
+              <ButtonsContainer>
+                <ButtonsIntern>
+                  <ButtonGhost
+                    text="Fechar"
+                    onPress={() => animatedExpandEnd(sizeExpandEnd)}
+                  />
+                </ButtonsIntern>
+                <ButtonsIntern last>
+                  <Button text="Finalizar Pedido" />
+                </ButtonsIntern>
+              </ButtonsContainer>
+            </ExpandedEnd>
+          </ExpandedEndBackground>
+        </ExpandedLink>
       </ExpandedEndOff>
 
       <EndContainer style={{ bottom: endContainerPosition }}>
@@ -196,7 +186,7 @@ const Cart: React.FC = () => {
           <EndContainerLeft>
             <EndContainerTitle>PREÇO TOTAL</EndContainerTitle>
             <EndContainerViewLeft>
-              <EndContainerPrice>R$16,99</EndContainerPrice>
+              <EndContainerPrice>R$ {actualPrice}</EndContainerPrice>
               <Icon
                 name="information-outline"
                 size={SPACE_SIX_DP}
@@ -222,8 +212,8 @@ const Cart: React.FC = () => {
                   height: 100,
                 }}
                 onPress={() => {
-                  if (item.companie.id === companieSelectedId) {
-                    dispatch(selectCompanie(""));
+                  if (item.companie.id === companieSelected.id) {
+                    dispatch(deselectCompanie());
                   } else {
                     dispatch(selectCompanie(item.companie.id));
                   }
@@ -231,7 +221,7 @@ const Cart: React.FC = () => {
               >
                 <HeaderCompanie>
                   <HeaderCompanieCheck
-                    selected={item.companie.id === companieSelectedId}
+                    selected={item.companie.id === companieSelected.id}
                   >
                     <Icon name="check" size={SPACE_FIVE_DP} color="#fff" />
                   </HeaderCompanieCheck>
@@ -253,6 +243,11 @@ const Cart: React.FC = () => {
                   companieId={item.companie.id}
                 />
               ))}
+
+              <DeliveryContainer>
+                <DeliveryText>Entrega</DeliveryText>
+                <DeliveryPrice>R$ 0,00</DeliveryPrice>
+              </DeliveryContainer>
             </React.Fragment>
           ))}
         </Container>

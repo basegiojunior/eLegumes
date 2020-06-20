@@ -15,19 +15,52 @@ type ButtonTextProps = {
   textColor?: string;
 };
 
+export const ContainerLink = styled.TouchableWithoutFeedback``;
+
+export const ContainerView = styled.View`
+  width: 100%;
+  background-color: ${PRIMARY_COLOR};
+  border-radius: ${widthPercentageToPx("2.5%")};
+  margin-top: ${SPACE_TWO};
+  margin-bottom: ${SPACE_SECONDARY};
+`;
+
 export const Container = styled(RectButton).attrs(() => ({
   rippleColor: "rgba(0,0,0,0.1)",
 }))`
-  width: 100%;
   height: ${widthPercentageToPx("12%")};
-  margin-top: ${SPACE_TWO};
-  margin-bottom: ${SPACE_SECONDARY};
-  background: ${PRIMARY_COLOR};
-  border-radius: ${widthPercentageToPx("2.5%")};
-
   flex-direction: row;
   align-items: center;
   justify-content: center;
+`;
+
+export const ContainerGhostLink = styled.TouchableWithoutFeedback``;
+
+export const ContainerGhostView = styled.View`
+  width: 100%;
+  background-color: #fff;
+  border-color: ${PRIMARY_COLOR};
+  border-width: ${widthPercentageToPx("0.8%")};
+  border-radius: ${widthPercentageToPx("2.5%")};
+  margin-top: ${SPACE_TWO};
+  margin-bottom: ${SPACE_SECONDARY};
+`;
+
+export const ContainerGhost = styled(RectButton).attrs(() => ({
+  rippleColor: "rgba(0,0,0,0.1)",
+}))`
+  height: ${widthPercentageToPx("11.2%")};
+  background-color: transparent;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ButtonTextGhost = styled.Text<ButtonTextProps>`
+  font-size: ${FONT_SIZE_TERTIARY};
+  color: ${(props) => (props.textColor ? props.textColor : PRIMARY_COLOR)};
+  /* font-weight: bold; */
+  font-family: ${FONT_BOLD};
 `;
 
 export const ButtonText = styled.Text<ButtonTextProps>`

@@ -25,11 +25,11 @@ import {
   TEXT_SECONDARY,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
+  TERT_COLOR,
 } from "../../styles/colors";
 
 export const Container = styled.View`
   flex-direction: column;
-  padding: 0 ${SPACE_SIX};
   width: 100%;
 `;
 
@@ -38,7 +38,7 @@ export const HeaderCompanie = styled.View`
   align-items: center;
   justify-content: space-between;
   flex: 1;
-  margin: ${SPACE_SIX} 0;
+  margin: ${SPACE_SIX} ${SPACE_SIX} ${SPACE_TWO} ${SPACE_SIX};
   padding: ${SPACE_THREE} 0;
 `;
 
@@ -68,6 +68,9 @@ export const HeaderCompanieTitle = styled.Text`
 
 export const ProductContainer = styled.View`
   flex-direction: row;
+  padding: ${SPACE_FOR} ${SPACE_SIX} ${SPACE_FOR} ${SPACE_SIX};
+  border-bottom-width: 1px;
+  border-bottom-color: #f0f0f0;
 `;
 
 export const ProductImage = styled.Image`
@@ -149,6 +152,30 @@ export const ProductChangeQuantityText = styled.Text`
   color: ${TEXT_PRIMARY};
 `;
 
+// TOTAL PRICE
+
+export const DeliveryContainer = styled.View`
+  width: 100%;
+  padding: ${SPACE_FOR} ${SPACE_SIX};
+  border-bottom-color: #f0f0f0;
+  border-bottom-width: 1px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const DeliveryText = styled.Text`
+  font-family: ${FONT_REGULAR};
+  font-size: ${FONT_SIZE_TERTIARY};
+  color: ${TEXT_PRIMARY};
+`;
+
+export const DeliveryPrice = styled.Text`
+  font-family: ${FONT_REGULAR};
+  font-size: ${FONT_SIZE_TERTIARY};
+  color: ${PRIMARY_COLOR};
+`;
+
 // ABA DE FINALIZAR COMPRA
 
 export const EndContainer = styled(Animated.View)`
@@ -228,14 +255,88 @@ export const ExpandedEndBackground = styled(Animated.View)`
   z-index: 5;
 `;
 
+export const ExpandedLink = styled.TouchableWithoutFeedback`
+  z-index: 5;
+`;
+
 export const ExpandedEnd = styled(Animated.View)`
   height: ${heightPercentageToPx("65%")};
+  padding-top: ${SPACE_SEVEN};
+  padding-bottom: ${SPACE_SEVEN};
+  padding-left: ${SPACE_SIX};
+  padding-right: ${SPACE_SIX};
   width: 100%;
   background-color: #fff;
   position: absolute;
   left: 0;
   right: 0;
   z-index: 6;
-  border-top-left-radius: ${SPACE_EIGHT};
-  border-top-right-radius: ${SPACE_EIGHT};
+  border-top-left-radius: ${SPACE_SIX};
+  border-top-right-radius: ${SPACE_SIX};
+  justify-content: space-between;
+`;
+
+export const TotalPriceContainer = styled.View`
+  padding: ${heightPercentageToPx("3%")} ${SPACE_SIX};
+  border-radius: ${SPACE_THREE};
+  background-color: ${TERT_COLOR};
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const TotalPriceLeft = styled.View`
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+
+export const TotalPriceTitle = styled.Text`
+  font-size: ${FONT_SIZE_SECONDARY};
+  font-family: ${FONT_SEMIBOLD};
+  color: #fff;
+`;
+
+export const TotalPricePrice = styled.Text`
+  font-size: ${SPACE_SEVEN};
+  font-family: ${FONT_SEMIBOLD};
+  color: #fff;
+`;
+
+export const ButtonsContainer = styled.View`
+  flex-direction: row;
+`;
+
+type LastType = {
+  last?: boolean;
+};
+
+export const ButtonsIntern = styled.View<LastType>`
+  flex-direction: row;
+  padding-left: ${({ last }) => (last ? SPACE_FOR : 0)};
+  flex: 1;
+`;
+
+export const InformationContainer = styled.View`
+  flex-direction: row;
+`;
+
+export const InformationContainerIntern = styled.View`
+  flex-direction: column;
+  height: ${widthPercentageToPx("16%")};
+  align-items: flex-start;
+  flex: 1;
+  justify-content: space-between;
+`;
+
+export const InfomationTitle = styled.Text`
+  font-size: ${FONT_SIZE_SECONDARY};
+  font-family: ${FONT_SEMIBOLD};
+  color: ${TEXT_SECONDARY};
+`;
+
+export const InfomationSec = styled.Text`
+  font-size: ${SPACE_FIVE};
+  font-family: ${FONT_SEMIBOLD};
+  color: ${TEXT_PRIMARY};
 `;

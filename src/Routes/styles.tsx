@@ -16,7 +16,7 @@ import { deleteCompanie } from "../store/modules/cart/actions";
 export const DeleteButton: React.FC = () => {
   const dispatch = useDispatch();
 
-  const isSelected = useSelector((state) => state.cart.companieSelectedId);
+  const isSelected = useSelector((state) => state.cart.companieSelected);
 
   return (
     <RectButton
@@ -35,7 +35,7 @@ export const DeleteButton: React.FC = () => {
       <Icon
         name="delete"
         size={SPACE_EIGHT_DP}
-        color={isSelected !== "" ? TEXT_PRIMARY : TEXT_SECONDARY}
+        color={isSelected.id !== "" ? TEXT_PRIMARY : TEXT_SECONDARY}
       />
     </RectButton>
   );

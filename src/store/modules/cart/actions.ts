@@ -55,6 +55,12 @@ export const selectCompanie: Function = (id: string) => {
   };
 };
 
+export const deselectCompanie: Function = () => {
+  return {
+    type: "@cart/DESELECT_COMPANIE",
+  };
+};
+
 export const deleteCompanie: Function = () => {
   return {
     type: "@cart/DELETE_COMPANIE",
