@@ -21,8 +21,6 @@ import {
   increaseProduct,
 } from "../../store/modules/cart/actions";
 
-import product from "../../assets/product.jpg";
-
 type ItemType = {
   productItem: object;
   companieId: string;
@@ -33,7 +31,13 @@ const ProductItem: React.FC<ItemType> = ({ productItem, companieId }) => {
 
   return (
     <ProductContainer>
-      <ProductImage source={product} />
+      <ProductImage
+        source={{
+          uri: productItem.data.image
+            ? productItem.data.image.url
+            : productItem.data.productDefault.image.url,
+        }}
+      />
       <ProductAboutContainer>
         <ProductAboutTop>
           <ProductTitle>

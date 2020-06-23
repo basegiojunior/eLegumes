@@ -32,8 +32,10 @@ export function* searchRequestSaga({ payload }: any): any {
 
       return;
     } catch (error) {
-      yield put(searchFailure());
-      console.log(error);
+      if (i === 5) {
+        yield put(searchFailure());
+        console.log(error);
+      }
     }
   }
 }
@@ -56,8 +58,10 @@ export function* searchProductsRequestSaga({ payload }: any): any {
 
       return;
     } catch (error) {
-      yield put(searchProductsFailure());
-      console.log(error);
+      if (i === 5) {
+        yield put(searchProductsFailure());
+        console.log(error);
+      }
     }
   }
 }
@@ -82,8 +86,10 @@ export function* searchCompaniesRequestSaga({ payload }: any): any {
 
       return;
     } catch (error) {
-      yield put(searchCompaniesFailure());
-      console.log(error);
+      if (i === 5) {
+        yield put(searchCompaniesFailure());
+        console.log(error);
+      }
     }
   }
 }

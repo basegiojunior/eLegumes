@@ -1,14 +1,14 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Animated } from "react-native";
 
 import { ContainerScroll } from "../../styles/scrollView";
 import Title from "../../Components/Title";
+import ExpandedContainer from "../../Components/ExpandedContainer";
 
 import { companiesFromProductsRequest } from "../../store/modules/companies/actions";
 import { addToCart } from "../../store/modules/cart/actions";
-
-import profile from "../../assets/product.jpg";
 
 import {
   Container,
@@ -39,6 +39,9 @@ import {
   StoreSelectedImage,
   StoreSelectedName,
   StoreViewSeledted,
+  InfomationSec,
+  InformationContainer,
+  InformationContainerIntern,
 } from "./styles";
 
 import { TEXT_SECONDARY } from "../../styles/colors";
@@ -61,21 +64,24 @@ const Products: React.FC = ({ route, navigation }) => {
     (state) => state.companies.companiesFromProduct
   );
 
-  // dados da loja selecionada
+  // states
   const [storeSelected, setStoreSelected] = useState({ id: "" });
-
   const [nProductsInCart, setNProductsInCart] = useState(1);
+  const [expanded, setExpanded] = useState(false);
 
+  // adiciona mais um produto
   function addCart(): void {
     setNProductsInCart(nProductsInCart + 1);
   }
 
+  // remove um produto
   function removeCart(): void {
     if (nProductsInCart > 1) {
       setNProductsInCart(nProductsInCart - 1);
     }
   }
 
+  // gera a string da unidade de venda do produto
   const getProductUnity = (): string => {
     if (storeSelected.id === "") {
       return "1 unidade";
@@ -86,6 +92,7 @@ const Products: React.FC = ({ route, navigation }) => {
     return "1 unidade";
   };
 
+  // exibe ou oculta a aba de adicionar o produto ao carrinho
   function changeHeight(toValue: number): void {
     Animated.timing(height, {
       toValue,
@@ -94,6 +101,7 @@ const Products: React.FC = ({ route, navigation }) => {
     }).start();
   }
 
+  // se uma loja for selecionada, exibe ou oculta a aba
   useEffect(() => {
     if (storeSelected.id === "" && height._value > minHeight) {
       changeHeight(minHeight);
@@ -102,6 +110,7 @@ const Products: React.FC = ({ route, navigation }) => {
     }
   }, [storeSelected]);
 
+  // faz a requisição para exibir o produto selecionado
   useEffect(() => {
     if (data.productDefault) {
       dispatch(companiesFromProductsRequest(data.productDefault.id));
@@ -110,6 +119,7 @@ const Products: React.FC = ({ route, navigation }) => {
     }
   }, []);
 
+  // muda a loja selecionada
   useEffect(() => {
     if (data.company) {
       const companie = companies.companies.filter(
@@ -123,151 +133,172 @@ const Products: React.FC = ({ route, navigation }) => {
   }, [companies]);
 
   return (
-    <ContainerScroll>
-      <ImageProduct
-        source={{
-          uri: data.productDefault
-            ? data.productDefault.image.url
-            : data.image.url,
+    <>
+      <ExpandedContainer
+        infoTopText={data.name ? data.name : data.productDefault.name}
+        infoTopTitle="ADICIONADO À SACOLA"
+        buttonLeftTitle="não, obrigado"
+        buttonLeftCall={() => setExpanded(false)}
+        buttonRightTitle="ir para a loja"
+        buttonRightCall={() => {
+          navigation.navigate("Sacola");
         }}
-      />
-      <Container>
-        <ProductName>
-          {data.name ? data.name : data.productDefault.name}
-        </ProductName>
-        <ProductAmount>{getProductUnity()}</ProductAmount>
+        expanded={expanded}
+      >
+        <InformationContainer>
+          <InfomationSec>
+            Você acabou de adicionar um produto de "{storeSelected.name}".
+            Gostaria de visitar este vendedor para ver mais produtos?
+          </InfomationSec>
+        </InformationContainer>
+      </ExpandedContainer>
 
-        <ContainerRetrac
-          style={{
-            height,
+      <ContainerScroll>
+        <ImageProduct
+          source={{
+            uri: data.productDefault
+              ? data.productDefault.image.url
+              : data.image.url,
           }}
-        >
-          {storeSelected.id === "" ? (
-            <AlertStore>
-              <Icone
-                color="#736626"
-                size={widthPercentageToDP("8%")}
-                name="alert-outline"
-              />
-              <AlertText>
-                Atenção! Selecione um vendedor para então adicionar este produto
-                à sacola
-              </AlertText>
-            </AlertStore>
-          ) : (
-            <>
-              <AddProductView>
-                <AddProductLeft>
-                  <AddProductButton onPress={removeCart}>
-                    <AddProductButtonText>-</AddProductButtonText>
-                  </AddProductButton>
-                  <AddProductNumber>{nProductsInCart}</AddProductNumber>
-                  <AddProductButton onPress={addCart}>
-                    <AddProductButtonText>+</AddProductButtonText>
-                  </AddProductButton>
-                </AddProductLeft>
-                <AddProductPrice>
-                  R${" "}
-                  {(
-                    parseFloat(
-                      storeSelected.product.active_promotion
-                        ? storeSelected.product.price_promotion
-                        : storeSelected.product.price
-                    ) * nProductsInCart
-                  )
-                    .toFixed(2)
-                    .toString()
-                    .replace(".", ",")}
-                </AddProductPrice>
-              </AddProductView>
+        />
+        <Container>
+          <ProductName>
+            {data.name ? data.name : data.productDefault.name}
+          </ProductName>
+          <ProductAmount>{getProductUnity()}</ProductAmount>
 
-              <AddToCart
-                onPress={() => {
-                  dispatch(
-                    addToCart(
-                      {
-                        id: storeSelected.id,
-                        name: storeSelected.name,
-                      },
-                      storeSelected.product,
-                      nProductsInCart
-                    )
-                  );
-                  navigation.navigate("Sacola");
-                }}
-              >
-                <AddToCartText>adicionar à sacola</AddToCartText>
-              </AddToCart>
-
-              <TitleText
-                style={{
-                  includeFontPadding: false,
-                }}
-              >
-                VENDEDOR SELECIONADO
-              </TitleText>
-
-              <StoreViewSeledted>
-                <StoreViewLeft>
-                  <StoreSelectedImage
-                    source={{
-                      uri: storeSelected.image.url,
-                    }}
-                  />
-                  <StoreSelectedName>{storeSelected.name}</StoreSelectedName>
-                </StoreViewLeft>
-
+          <ContainerRetrac
+            style={{
+              height,
+            }}
+          >
+            {storeSelected.id === "" ? (
+              <AlertStore>
                 <Icone
+                  color="#736626"
                   size={widthPercentageToDP("8%")}
-                  color={TEXT_SECONDARY}
-                  name="store"
+                  name="alert-outline"
                 />
-              </StoreViewSeledted>
+                <AlertText>
+                  Atenção! Selecione um vendedor para então adicionar este
+                  produto à sacola
+                </AlertText>
+              </AlertStore>
+            ) : (
+              <>
+                <AddProductView>
+                  <AddProductLeft>
+                    <AddProductButton onPress={removeCart}>
+                      <AddProductButtonText>-</AddProductButtonText>
+                    </AddProductButton>
+                    <AddProductNumber>{nProductsInCart}</AddProductNumber>
+                    <AddProductButton onPress={addCart}>
+                      <AddProductButtonText>+</AddProductButtonText>
+                    </AddProductButton>
+                  </AddProductLeft>
+                  <AddProductPrice>
+                    R${" "}
+                    {(
+                      parseFloat(
+                        storeSelected.product.active_promotion
+                          ? storeSelected.product.price_promotion
+                          : storeSelected.product.price
+                      ) * nProductsInCart
+                    )
+                      .toFixed(2)
+                      .toString()
+                      .replace(".", ",")}
+                  </AddProductPrice>
+                </AddProductView>
+
+                <AddToCart
+                  onPress={() => {
+                    dispatch(
+                      addToCart(
+                        {
+                          id: storeSelected.id,
+                          name: storeSelected.name,
+                        },
+                        storeSelected.product,
+                        nProductsInCart
+                      )
+                    );
+                    setExpanded(true);
+                  }}
+                >
+                  <AddToCartText>adicionar à sacola</AddToCartText>
+                </AddToCart>
+
+                <TitleText
+                  style={{
+                    includeFontPadding: false,
+                  }}
+                >
+                  VENDEDOR SELECIONADO
+                </TitleText>
+
+                <StoreViewSeledted>
+                  <StoreViewLeft>
+                    <StoreSelectedImage
+                      source={{
+                        uri: storeSelected.image.url,
+                      }}
+                    />
+                    <StoreSelectedName>{storeSelected.name}</StoreSelectedName>
+                  </StoreViewLeft>
+
+                  <Icone
+                    size={widthPercentageToDP("8%")}
+                    color={TEXT_SECONDARY}
+                    name="store"
+                  />
+                </StoreViewSeledted>
+              </>
+            )}
+          </ContainerRetrac>
+
+          {companies.id === data.id && companies.companies.length > 0 && (
+            <>
+              <Title
+                style={{
+                  alignSelf: "flex-start",
+                }}
+              >
+                QUEM VENDE ESSE PRODUTO
+              </Title>
+
+              {companies.companies.map((item) => (
+                <Store onPress={() => setStoreSelected(item)} key={item.id}>
+                  <StoreView>
+                    <StoreViewLeft>
+                      <StoreCircle isPressed={storeSelected.id === item.id} />
+                      <StoreTextView>
+                        <StoreTextName>{item.name}</StoreTextName>
+                        <StoreTextPrice>
+                          R${" "}
+                          {item.product.active_promotion
+                            ? item.product.price_promotion.replace(".", ",")
+                            : item.product.price.replace(".", ",")}
+                        </StoreTextPrice>
+                      </StoreTextView>
+                    </StoreViewLeft>
+                    <StoreViewRight>
+                      <StoreTextPrice>{item.rating}/5</StoreTextPrice>
+                      <Icone
+                        size={widthPercentageToDP("6%")}
+                        color={TEXT_SECONDARY}
+                        name="star"
+                        style={{ marginLeft: 5 }}
+                      />
+                    </StoreViewRight>
+                  </StoreView>
+                </Store>
+              ))}
             </>
           )}
-        </ContainerRetrac>
-
-        {companies.id === data.id && companies.companies.length > 0 && (
-          <>
-            <Title
-              style={{
-                alignSelf: "flex-start",
-              }}
-            >
-              QUEM VENDE ESSE PRODUTO
-            </Title>
-
-            {companies.companies.map((item) => (
-              <Store onPress={() => setStoreSelected(item)} key={item.id}>
-                <StoreView>
-                  <StoreViewLeft>
-                    <StoreCircle isPressed={storeSelected.id === item.id} />
-                    <StoreTextView>
-                      <StoreTextName>{item.name}</StoreTextName>
-                      <StoreTextPrice>
-                        R${" "}
-                        {item.product.active_promotion
-                          ? item.product.price_promotion.replace(".", ",")
-                          : item.product.price.replace(".", ",")}
-                      </StoreTextPrice>
-                    </StoreTextView>
-                  </StoreViewLeft>
-                  <StoreViewRight>
-                    <StoreTextPrice>{item.rating}/5</StoreTextPrice>
-                    <Icone
-                      size={widthPercentageToDP("6%")}
-                      color={TEXT_SECONDARY}
-                      name="star"
-                      style={{ marginLeft: 5 }}
-                    />
-                  </StoreViewRight>
-                </StoreView>
-              </Store>
-            ))}
-          </>
-        )}
-      </Container>
-    </ContainerScroll>
+        </Container>
+      </ContainerScroll>
+    </>
   );
 };
 

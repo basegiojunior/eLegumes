@@ -4,14 +4,14 @@ import { Reducer } from "redux";
 const INITIAL_STATE = {
   loading: false,
   categories: [],
-  companieSelected: { id: "" },
+  companieSelected: { id: "", name: "" },
   cart: [],
 };
 
 type InitialProps = {
   loading: boolean;
   categories: object[];
-  companieSelected: { id: string };
+  companieSelected: { id: string; name: string };
   cart: {
     companie: object;
     totalPrice: number;
@@ -149,19 +149,24 @@ const cart: Reducer = (state = INITIAL_STATE, action) => {
       }
 
       case "@cart/SELECT_COMPANIE": {
-        draft.companieSelected.id = action.payload.id;
+        const { companie } = draft.cart.find(
+          (item) => item.companie.id === action.payload.id
+        )[0];
+
+        draft.companieSelected = { id: companie.id, name: companie.name };
         break;
       }
 
       case "@cart/DESELECT_COMPANIE": {
-        draft.companieSelected.id = "";
+        draft.companieSelected = { id: "", name: "" };
+
         break;
       }
 
       case "@cart/DELETE_COMPANIE": {
         const { id } = draft.companieSelected;
 
-        draft.companieSelected.id = "";
+        draft.companieSelected = { id: "", name: "" };
 
         draft.cart = draft.cart.filter((item) => item.companie.id !== id);
         break;

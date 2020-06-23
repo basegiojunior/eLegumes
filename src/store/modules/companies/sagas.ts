@@ -1,8 +1,4 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import { NavigationActions, StackActions } from "react-navigation";
-
-import { object } from "prop-types";
-import * as NavigationService from "../../../Routes/navigationService";
 
 import api from "../../../services/api";
 
@@ -43,8 +39,10 @@ export function* companieProductsRequestSaga({ payload }: any): any {
 
       return;
     } catch (error) {
-      yield put(companieProductsFailure());
-      console.log(error);
+      if (i === 5) {
+        yield put(companieProductsFailure());
+        console.log(error);
+      }
     }
   }
 }
@@ -63,8 +61,10 @@ export function* companieRequestSaga({ payload }: any): any {
 
       return;
     } catch (error) {
-      yield put(companieFailure());
-      console.log(error);
+      if (i === 5) {
+        yield put(companieFailure());
+        console.log(error);
+      }
     }
   }
 }
@@ -93,8 +93,10 @@ export function* companieCommentsRequestSaga({ payload }: any): any {
 
       return;
     } catch (error) {
-      yield put(companieCommentsFailure());
-      console.log(error);
+      if (i === 5) {
+        yield put(companieCommentsFailure());
+        console.log(error);
+      }
     }
   }
 }
@@ -116,8 +118,10 @@ export function* companiesFromProductsRequestSaga({ payload }: any): any {
 
       return;
     } catch (error) {
-      yield put(companiesFromProductsFailure());
-      console.log(error);
+      if (i === 5) {
+        yield put(companiesFromProductsFailure());
+        console.log(error);
+      }
     }
   }
 }

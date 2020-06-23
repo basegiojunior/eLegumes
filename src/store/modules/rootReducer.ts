@@ -6,6 +6,7 @@ import search from "./search/reducer";
 import categories from "./categories/reducer";
 import companies from "./companies/reducer";
 import cart from "./cart/reducer";
+import orders from "./orders/reducer";
 
 const appReducer = combineReducers({
   auth,
@@ -14,6 +15,7 @@ const appReducer = combineReducers({
   categories,
   companies,
   cart,
+  orders,
 });
 
 const Reducer: ReducerProps = (state, action) => {

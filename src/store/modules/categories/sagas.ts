@@ -1,8 +1,4 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import { NavigationActions, StackActions } from "react-navigation";
-
-import { object } from "prop-types";
-import * as NavigationService from "../../../Routes/navigationService";
 
 import api from "../../../services/api";
 
@@ -33,8 +29,10 @@ export function* categoriesRequestSaga({ payload }: any): any {
 
       return;
     } catch (error) {
-      yield put(categoriesFailure());
-      console.log(error);
+      if (i === 5) {
+        yield put(categoriesFailure());
+        console.log(error);
+      }
     }
   }
 }
@@ -79,8 +77,10 @@ export function* categoriesEspecifyRequestSaga({ payload }: any): any {
 
       return;
     } catch (error) {
-      yield put(categoriesFailure());
-      console.log(error);
+      if (i === 5) {
+        yield put(categoriesFailure());
+        console.log(error);
+      }
     }
   }
 }

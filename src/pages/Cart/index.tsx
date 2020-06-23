@@ -1,9 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useRef, useState } from "react";
-import { TouchableWithoutFeedback, Animated, Text } from "react-native";
+import { TouchableWithoutFeedback, Animated } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
-import Button, { ButtonGhost } from "../../Components/Button";
+import Button from "../../Components/Button";
 import ProductItem from "./ProductItem";
 
 import { ContainerScroll } from "../../styles/scrollView";
@@ -20,45 +21,35 @@ import {
   EndContainerPrice,
   EndContainerTitle,
   EndContainerViewLeft,
-  ExpandedEnd,
-  ExpandedLink,
-  ExpandedEndOff,
-  ExpandedEndBackground,
   DeliveryContainer,
   DeliveryPrice,
   DeliveryText,
-  TotalPriceContainer,
-  TotalPricePrice,
-  TotalPriceTitle,
-  TotalPriceLeft,
-  ButtonsContainer,
-  ButtonsIntern,
   InformationContainer,
   InformationContainerIntern,
   InfomationSec,
   InfomationTitle,
 } from "./styles";
 
+import ExpandedContainer from "../../Components/ExpandedContainer";
+
 import {
   deselectCompanie,
   selectCompanie,
 } from "../../store/modules/cart/actions";
 
-import { TEXT_SECONDARY, PRIMARY_COLOR } from "../../styles/colors";
+import { orderRequest } from "../../store/modules/orders/actions";
+
+import { TEXT_SECONDARY } from "../../styles/colors";
 import {
   SPACE_FIVE_DP,
   SPACE_SEVEN_DP,
   SPACE_SIX_DP,
 } from "../../styles/sizes";
-import {
-  widthPercentageToDP,
-  heightPercentageToDP,
-} from "../../Components/PercentageConverter";
+import { widthPercentageToDP } from "../../Components/PercentageConverter";
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const sizeEndContainer = -widthPercentageToDP("20%");
-  const sizeExpandEnd = -heightPercentageToDP("65%");
 
   // selectors
   const cart = useSelector((state) => state.cart.cart);
@@ -68,28 +59,9 @@ const Cart: React.FC = () => {
   const endContainerPosition = useRef(
     new Animated.Value(companieSelected.id === "" ? sizeEndContainer : 0)
   ).current;
-  const expandedEnd = useRef(new Animated.Value(sizeExpandEnd)).current;
-  const colorBack = expandedEnd.interpolate({
-    inputRange: [sizeExpandEnd, 0],
-    outputRange: ["rgba(0, 0, 0, .0)", "rgba(0, 0, 0, .35)"],
-  });
 
-  // states
-  const [showModal, setShowModal] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [actualPrice, setActualPrice] = useState("0,00");
-
-  // gerencia a animação do conteiner expansível MAIOR
-  function animatedExpandEnd(to: number): void {
-    Animated.timing(expandedEnd, {
-      toValue: to,
-      duration: 500,
-      useNativeDriver: false,
-    }).start(() => {
-      if (to !== 0) {
-        setShowModal(false);
-      }
-    });
-  }
 
   // gerencia a animação do conteiner expansível MENOR
   function animatedEndContainer(to: number): void {
@@ -98,6 +70,37 @@ const Cart: React.FC = () => {
       duration: 300,
       useNativeDriver: false,
     }).start();
+  }
+
+  function handleOrder(): void {
+    type requestType = {
+      items: { product_id: string; weight: number }[];
+      company: string;
+    };
+
+    const request: requestType = { items: [], company: "" };
+
+    const company = cart.find(
+      (item: any) => item.companie.id === companieSelected.id
+    );
+
+    request.company = company.companie.id;
+
+    for (let i = 0; i < company.products.length; i += 1) {
+      if (company.products[i].data.type === "weight") {
+        request.items = [
+          ...request.items,
+          {
+            // eslint-disable-next-line @typescript-eslint/camelcase
+            product_id: company.products[i].data.id,
+            weight:
+              company.products[i].data.weight * company.products[i].quantity,
+          },
+        ];
+      }
+    }
+
+    dispatch(orderRequest(request));
   }
 
   // gerencia o preço do total da compania selecionada
@@ -126,61 +129,38 @@ const Cart: React.FC = () => {
 
   return (
     <>
-      <ExpandedEndOff transparent visible={showModal}>
-        <ExpandedLink onPress={() => null}>
-          <ExpandedEndBackground style={{ backgroundColor: colorBack }}>
-            <ExpandedEnd style={{ bottom: expandedEnd }}>
-              <TotalPriceContainer>
-                <TotalPriceLeft>
-                  <TotalPriceTitle>PREÇO TOTAL DA SACOLA</TotalPriceTitle>
-                  <TotalPricePrice>R$ 16,00</TotalPricePrice>
-                </TotalPriceLeft>
-                <Icon
-                  name="shopping"
-                  color={PRIMARY_COLOR}
-                  size={widthPercentageToDP("17%")}
-                />
-              </TotalPriceContainer>
+      <ExpandedContainer
+        infoTopText={`R$ ${actualPrice}`}
+        infoTopTitle="PREÇO TOTAL DA SACOLA"
+        buttonLeftTitle="fechar"
+        buttonLeftCall={() => setExpanded(false)}
+        buttonRightTitle="fazer pedido"
+        buttonRightCall={() => handleOrder()}
+        expanded={expanded}
+      >
+        <InformationContainer>
+          <InformationContainerIntern>
+            <InfomationTitle>TOTAL DE PRODUTOS</InfomationTitle>
+            <InfomationSec>R$ {actualPrice}</InfomationSec>
+          </InformationContainerIntern>
+          <InformationContainerIntern>
+            <InfomationTitle>TOTAL DE FRETE</InfomationTitle>
+            <InfomationSec>R$ 0,00</InfomationSec>
+          </InformationContainerIntern>
+        </InformationContainer>
 
-              <InformationContainer>
-                <InformationContainerIntern>
-                  <InfomationTitle>TOTAL DE PRODUTOS</InfomationTitle>
-                  <InfomationSec>R$ 8,00</InfomationSec>
-                </InformationContainerIntern>
-                <InformationContainerIntern>
-                  <InfomationTitle>TOTAL DE FRETE</InfomationTitle>
-                  <InfomationSec>R$ 5,00</InfomationSec>
-                </InformationContainerIntern>
-              </InformationContainer>
-
-              <InformationContainer>
-                <InformationContainerIntern>
-                  <InfomationTitle>VENDEDORES SELECIONADOS</InfomationTitle>
-                  <InfomationSec>Frutaria da Maria</InfomationSec>
-                </InformationContainerIntern>
-              </InformationContainer>
-
-              <ButtonsContainer>
-                <ButtonsIntern>
-                  <ButtonGhost
-                    text="Fechar"
-                    onPress={() => animatedExpandEnd(sizeExpandEnd)}
-                  />
-                </ButtonsIntern>
-                <ButtonsIntern last>
-                  <Button text="Finalizar Pedido" />
-                </ButtonsIntern>
-              </ButtonsContainer>
-            </ExpandedEnd>
-          </ExpandedEndBackground>
-        </ExpandedLink>
-      </ExpandedEndOff>
+        <InformationContainer>
+          <InformationContainerIntern>
+            <InfomationTitle>VENDEDORES SELECIONADOS</InfomationTitle>
+            <InfomationSec>{companieSelected.name}</InfomationSec>
+          </InformationContainerIntern>
+        </InformationContainer>
+      </ExpandedContainer>
 
       <EndContainer style={{ bottom: endContainerPosition }}>
         <EndContainerLeftLink
           onPress={() => {
-            setShowModal(true);
-            animatedExpandEnd(0);
+            setExpanded(true);
           }}
         >
           <EndContainerLeft>
@@ -201,7 +181,7 @@ const Cart: React.FC = () => {
       </EndContainer>
 
       <ContainerScroll>
-        <Container>
+        <Container style={{ paddingBottom: sizeEndContainer * -1 }}>
           {cart.map((item: any) => (
             <React.Fragment key={item.companie.id}>
               <TouchableWithoutFeedback
