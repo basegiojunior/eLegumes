@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { RefreshControl, Animated, FlatList } from "react-native";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useSelector } from "../../store/modules/rootReducer";
 
 import SlideImages from "../../Components/SlideImages";
 import GridImages from "../../Components/GridImages";
@@ -67,7 +68,7 @@ const Dashboard: React.FC = () => {
     store.dispatch(promoRequest(1));
   };
 
-  const headerComponent = () => {
+  const headerComponent: Function = () => {
     return (
       <>
         <SlidePartners

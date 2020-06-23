@@ -1,4 +1,8 @@
 import { combineReducers, Reducer as ReducerProps } from "redux";
+import {
+  useSelector as useReduxSelector,
+  TypedUseSelectorHook,
+} from "react-redux";
 
 import auth from "./auth/reducer";
 import dash from "./dashboard/reducer";
@@ -25,5 +29,9 @@ const Reducer: ReducerProps = (state, action) => {
 
   return appReducer(state, action);
 };
+
+type RootState = ReturnType<typeof appReducer>;
+
+export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
 
 export default Reducer;

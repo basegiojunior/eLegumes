@@ -19,7 +19,7 @@ type InitialProps = {
   }[];
 };
 
-const cart: Reducer = (state = INITIAL_STATE, action) => {
+const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
   return produce(state, (draft: InitialProps) => {
     switch (action.type) {
       case "@cart/CART_REQUEST": {
@@ -151,7 +151,7 @@ const cart: Reducer = (state = INITIAL_STATE, action) => {
       case "@cart/SELECT_COMPANIE": {
         const { companie } = draft.cart.find(
           (item) => item.companie.id === action.payload.id
-        )[0];
+        );
 
         draft.companieSelected = { id: companie.id, name: companie.name };
         break;
