@@ -46,7 +46,17 @@ import {
 
 import { widthPercentageToDP } from "../../Components/PercentageConverter";
 
-const Companies: React.FC = ({ route }) => {
+import { Companie } from "../../types";
+
+type CompaniesProps = {
+  route: {
+    params: {
+      data: Companie;
+    };
+  };
+};
+
+const Companies: React.FC<CompaniesProps> = ({ route }) => {
   const [stars, setStars] = useState([
     { id: 5, value: 1 },
     { id: 4, value: 1 },
@@ -68,8 +78,9 @@ const Companies: React.FC = ({ route }) => {
   const color = "rgba(0,0,0,.1)";
 
   useEffect(() => {
-    if (!(JSON.stringify(companie) === "{}") && companie.id === data.id) {
+    if (companie.id === data.id) {
       const { five, four, three, two, one } = companie.stars;
+      // const { one } = companie.stars;
 
       const total = five + four + three + two + one;
 

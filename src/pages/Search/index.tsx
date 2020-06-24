@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { RefreshControl, Animated } from "react-native";
-import { useSelector } from "react-redux";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import { useSelector } from "../../store/modules/rootReducer";
 
 import { ContainerScroll } from "../../styles/scrollView";
 import SlideImages from "../../Components/SlideImages";
@@ -94,7 +94,6 @@ const Search: React.FC = () => {
         Object.entries(categories).map((item) => (
           <SlideImages
             color={color}
-            seeMore
             seeMoreData={{ name: item[1].name, id: item[1].id }}
             title={item[1].name.toUpperCase()}
             listElements={item[1].products}

@@ -82,22 +82,28 @@ const Cart: React.FC = () => {
     const request: requestType = { items: [], company: "" };
 
     const company = cart.find(
-      (item: any) => item.companie.id === companieSelected.id
+      (item) => item.companie.id === companieSelected.id
     );
 
-    request.company = company.companie.id;
+    if (company) {
+      request.company = company?.companie.id;
 
-    for (let i = 0; i < company.products.length; i += 1) {
-      if (company.products[i].data.type === "weight") {
-        request.items = [
-          ...request.items,
-          {
-            // eslint-disable-next-line @typescript-eslint/camelcase
-            product_id: company.products[i].data.id,
-            weight:
-              company.products[i].data.weight * company.products[i].quantity,
-          },
-        ];
+      for (let i = 0; i < company?.products.length; i += 1) {
+        const dado = company.products[i].data;
+        if (
+          dado.type === "weight" &&
+          dado.weight !== undefined &&
+          dado.weight !== null
+        ) {
+          request.items = [
+            ...request.items,
+            {
+              // eslint-disable-next-line @typescript-eslint/camelcase
+              product_id: dado.id,
+              weight: company.products[i].quantity * dado.weight,
+            },
+          ];
+        }
       }
     }
 
@@ -118,12 +124,9 @@ const Cart: React.FC = () => {
 
   // gerencia quando a animação do conteiner menor será executada
   useEffect(() => {
-    if (
-      companieSelected.id === "" &&
-      endContainerPosition._value > sizeEndContainer
-    ) {
+    if (companieSelected.id === "") {
       animatedEndContainer(sizeEndContainer);
-    } else if (companieSelected.id !== "" && endContainerPosition._value < 0) {
+    } else if (companieSelected.id !== "") {
       animatedEndContainer(0);
     }
   }, [companieSelected]);
@@ -183,7 +186,7 @@ const Cart: React.FC = () => {
 
       <ContainerScroll>
         <Container style={{ paddingBottom: sizeEndContainer * -1 }}>
-          {cart.map((item: any) => (
+          {cart.map((item) => (
             <React.Fragment key={item.companie.id}>
               <TouchableWithoutFeedback
                 style={{
@@ -217,7 +220,7 @@ const Cart: React.FC = () => {
                 </HeaderCompanie>
               </TouchableWithoutFeedback>
 
-              {item.products.map((itemInside: any) => (
+              {item.products.map((itemInside) => (
                 <ProductItem
                   key={itemInside.data.id}
                   productItem={itemInside}

@@ -1,6 +1,8 @@
 import produce from "immer";
 import { Reducer } from "redux";
 
+import { Category } from "../../../types";
+
 const INITIAL_STATE = {
   loading: false,
   categories: [],
@@ -8,7 +10,7 @@ const INITIAL_STATE = {
 
 type InitialProps = {
   loading: boolean;
-  categories: object[];
+  categories: Category[];
 };
 
 const search: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {

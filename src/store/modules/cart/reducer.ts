@@ -1,41 +1,27 @@
 import produce from "immer";
 import { Reducer } from "redux";
 
+import { Companie, Product } from "../../../types";
+
 const INITIAL_STATE = {
   loading: false,
-  categories: [],
   companieSelected: { id: "", name: "" },
   cart: [],
 };
 
 type InitialProps = {
   loading: boolean;
-  categories: object[];
   companieSelected: { id: string; name: string };
   cart: {
-    companie: object;
+    companie: Companie;
     totalPrice: number;
-    products: { quantity: number; data: object }[];
+    products: { quantity: number; data: Product }[];
   }[];
 };
 
 const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
   return produce(state, (draft: InitialProps) => {
     switch (action.type) {
-      case "@cart/CART_REQUEST": {
-        draft.loading = true;
-        break;
-      }
-      case "@cart/CART_SUCCESS": {
-        draft.loading = false;
-        draft.categories = action.payload.categories;
-        break;
-      }
-      case "@cart/CART_FAILURE": {
-        draft.loading = false;
-        break;
-      }
-
       case "@cart/ADD_TO_CART": {
         const { product, companie, quantity } = action.payload;
         const price = product.active_promotion

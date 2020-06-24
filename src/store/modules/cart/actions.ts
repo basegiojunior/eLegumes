@@ -1,22 +1,3 @@
-export const cartRequest: Function = () => {
-  return {
-    type: "@cart/CART_REQUEST",
-  };
-};
-
-export const cartSuccess: Function = (categories: object[]) => {
-  return {
-    type: "@cart/CART_SUCCESS",
-    payload: { categories },
-  };
-};
-
-export const cartFailure: Function = () => {
-  return {
-    type: "@cart/CART_FAILURE",
-  };
-};
-
 export const addToCart: Function = (
   companie: object,
   product: object,

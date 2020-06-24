@@ -6,7 +6,7 @@ export type Product = {
   active_promotion: boolean;
   price_promotion: string;
   type: "amount" | "weight";
-  weight: string | null;
+  weight?: number | null;
   image?: null | {
     url: string;
   };
@@ -40,18 +40,16 @@ export type TopProduct = {
   weekly_sales: number;
 };
 
-export type Companie = {
+export interface Companie {
   id: string;
   name: string;
   owner: string;
-  rating: number;
-  totalStars?: number;
-  primary_phone: string;
-  secundary_phone: string;
+  primary_phone?: string;
+  secundary_phone?: string;
   image: {
     url: string;
   };
-  adress: {
+  address: {
     id: string;
     description: string;
     street: string;
@@ -60,14 +58,36 @@ export type Companie = {
     city: string;
     state: string;
   };
-  stars?: {
+}
+
+export interface CompaniePage extends Companie {
+  id: string;
+  name: string;
+  owner: string;
+  rating: number;
+  totalStars: number;
+  primary_phone: string;
+  secundary_phone: string;
+  image: {
+    url: string;
+  };
+  address: {
+    id: string;
+    description: string;
+    street: string;
+    cep: number;
+    neighborhood: string;
+    city: string;
+    state: string;
+  };
+  stars: {
     one: number;
     two: number;
     three: number;
     four: number;
     five: number;
   };
-};
+}
 
 export type CompanieFromProduct = {
   id: string;

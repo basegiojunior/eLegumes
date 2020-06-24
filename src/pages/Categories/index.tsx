@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FlatList, ListRenderItem } from "react-native";
 import { useSelector } from "../../store/modules/rootReducer";
 
@@ -11,7 +11,12 @@ import { SPACE_SIX_DP } from "../../styles/sizes";
 type Results = {
   categoryName: string;
   id: string;
-  route: object;
+  route: {
+    params: {
+      name: string;
+      id: string;
+    };
+  };
 };
 
 const Categories: React.FC<Results> = ({ route }) => {
@@ -19,14 +24,25 @@ const Categories: React.FC<Results> = ({ route }) => {
   const [actualCat, setActualCat] = useState([]);
 
   const categories = useSelector((state) => state.categories.categories);
+  const [actualCategory, setActualCategory] = useState<
+    | {
+        id: string;
+        name: string;
+        image: {
+          url: string;
+        };
+      }[]
+    | []
+  >([]);
 
-  // useEffect(() => {
-  //   for (let i = 0; i < categories.length; i += 1) {
-  //     if (categories[i].name === name) {
-  //       setActualCat(categories[i].products);
-  //     }
-  //   }
-  // }, [categories]);
+  useEffect(() => {
+    const resp = categories.find((item) => item.name === name);
+    if (resp) {
+      setActualCategory(resp.products);
+    } else {
+      setActualCategory([]);
+    }
+  }, [categories]);
 
   const loadRepositories: any = () => {
     store.dispatch(categoriesRequest(id, name));
@@ -52,7 +68,7 @@ const Categories: React.FC<Results> = ({ route }) => {
           paddingBottom: SPACE_SIX_DP,
         }}
         renderItem={renderItem}
-        data={categories[name].products}
+        data={actualCategory}
         keyExtractor={(item) => item.id}
         onEndReached={loadRepositories}
         onEndReachedThreshold={0.1}

@@ -33,7 +33,6 @@ const SlideImages: React.FC<ProductsArray> = ({
   nItemsInScreen = 1,
   title,
   color,
-  seeMore = false,
   seeMoreData,
   show = true,
 }) => {
@@ -90,7 +89,7 @@ const SlideImages: React.FC<ProductsArray> = ({
           <TitleLine>
             <Title style={{ marginLeft: SPACE_SIX_DP }}>{title}</Title>
 
-            {seeMore && (
+            {seeMoreData && (
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate("Categoria", {

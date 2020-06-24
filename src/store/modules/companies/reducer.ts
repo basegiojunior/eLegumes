@@ -1,23 +1,60 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import produce from "immer";
 import { Reducer } from "redux";
-import { CompanieFromProduct } from "../../../types";
+import { string } from "prop-types";
+import { CompanieFromProduct, CompaniePage, Product } from "../../../types";
 
 const INITIAL_STATE = {
   loading: false,
   loadingProduct: false,
   companieProducts: { id: "", products: [] },
   companieComments: { id: "", comments: [] },
-  companie: {},
+  companie: {
+    id: "",
+    name: "",
+    owner: "",
+    rating: 0,
+    totalStars: 0,
+    primary_phone: "",
+    secundary_phone: "",
+    image: {
+      url: "",
+    },
+    address: {
+      id: "",
+      description: "",
+      street: "",
+      cep: 0,
+      neighborhood: "",
+      city: "",
+      state: "",
+    },
+    stars: {
+      one: 0,
+      two: 0,
+      three: 0,
+      four: 0,
+      five: 0,
+    },
+  },
   companiesFromProduct: { id: "", companies: [] },
 };
 
 type InitialProps = {
   loading: boolean;
   loadingProduct: boolean;
-  companieProducts: { id: string; products: object[] };
-  companieComments: { id: string; comments: object[] };
+  companieProducts: { id: string; products: Product[] };
+  companieComments: {
+    id: string;
+    comments: {
+      id: string;
+      rate: number;
+      comment: string;
+      user: { id: string; username: string };
+    }[];
+  };
   companiesFromProduct: { id: string; companies: CompanieFromProduct[] };
-  companie: object;
+  companie: CompaniePage;
 };
 
 const companie: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
