@@ -17,7 +17,7 @@ type InitialProps = {
   recentSearchs: string[];
 };
 
-const search: Reducer = (state = INITIAL_STATE, action) => {
+const search: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
   return produce(state, (draft: InitialProps) => {
     switch (action.type) {
       case "@search/SEARCH_REQUEST": {

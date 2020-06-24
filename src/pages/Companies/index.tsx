@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../store/modules/rootReducer";
 
 import { ContainerScroll } from "../../styles/scrollView";
 import Button from "../../Components/Button";

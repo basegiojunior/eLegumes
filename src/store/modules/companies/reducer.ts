@@ -1,5 +1,6 @@
 import produce from "immer";
 import { Reducer } from "redux";
+import { CompanieFromProduct } from "../../../types";
 
 const INITIAL_STATE = {
   loading: false,
@@ -15,11 +16,11 @@ type InitialProps = {
   loadingProduct: boolean;
   companieProducts: { id: string; products: object[] };
   companieComments: { id: string; comments: object[] };
-  companiesFromProduct: { id: string; companies: object[] };
+  companiesFromProduct: { id: string; companies: CompanieFromProduct[] };
   companie: object;
 };
 
-const companie: Reducer = (state = INITIAL_STATE, action) => {
+const companie: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
   return produce(state, (draft: InitialProps) => {
     switch (action.type) {
       case "@companies/COMPANIES_PRODUCTS_REQUEST": {

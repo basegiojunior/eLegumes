@@ -19,7 +19,7 @@ type InitialProps = {
   promotions: object[];
 };
 
-const dash: Reducer = (state = INITIAL_STATE, action) => {
+const dash: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
   return produce(state, (draft: InitialProps) => {
     switch (action.type) {
       case "@dash/DASHBOARD_REQUEST": {

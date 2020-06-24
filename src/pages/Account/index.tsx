@@ -1,7 +1,7 @@
 import React from "react";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
-import { useSelector } from "react-redux";
+import { useSelector } from "../../store/modules/rootReducer";
 // import { store } from "../../store/index";
 
 import profile from "../../assets/product.jpg";
@@ -22,7 +22,7 @@ type AccProps = {
 };
 
 const Account: React.FC<AccProps> = ({ navigation }) => {
-  const signed = useSelector((state: any) => state.auth.signed);
+  const signed = useSelector((state) => state.auth.signed);
 
   return (
     <ContainerScroll>

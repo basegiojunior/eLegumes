@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { RefreshControl, FlatList, ListRenderItem } from "react-native";
-import { useSelector } from "react-redux";
-
-import { ContainerScroll } from "../../styles/scrollView";
-
-import ItemResult from "../../Components/ItemResult";
+import React, { useState } from "react";
+import { FlatList, ListRenderItem } from "react-native";
+import { useSelector } from "../../store/modules/rootReducer";
 
 import { Container, Item, Image, Name } from "./styles";
 

@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useRef, useState } from "react";
 import { TouchableWithoutFeedback, Animated } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import { useSelector } from "../../store/modules/rootReducer";
 
 import Button from "../../Components/Button";
 import ProductItem from "./ProductItem";

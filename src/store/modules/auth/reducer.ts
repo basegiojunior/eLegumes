@@ -13,7 +13,7 @@ type InitialProps = {
   userData: object;
 };
 
-const auth: Reducer = (state = INITIAL_STATE, action: any) => {
+const auth: Reducer<InitialProps> = (state = INITIAL_STATE, action: any) => {
   return produce(state, (draft: InitialProps) => {
     switch (action.type) {
       case "@auth/SIGN_IN_REQUEST": {

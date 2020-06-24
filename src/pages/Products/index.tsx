@@ -1,7 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Animated } from "react-native";
+import { useSelector } from "../../store/modules/rootReducer";
 
 import { ContainerScroll } from "../../styles/scrollView";
 import Title from "../../Components/Title";
@@ -41,14 +42,18 @@ import {
   StoreViewSeledted,
   InfomationSec,
   InformationContainer,
-  InformationContainerIntern,
 } from "./styles";
 
 import { TEXT_SECONDARY } from "../../styles/colors";
 
 import { widthPercentageToDP } from "../../Components/PercentageConverter";
 
-const Products: React.FC = ({ route, navigation }) => {
+type ProductsProps = {
+  route: any;
+  navigation: any;
+};
+
+const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   // dados do produto
@@ -65,7 +70,10 @@ const Products: React.FC = ({ route, navigation }) => {
   );
 
   // states
-  const [storeSelected, setStoreSelected] = useState({ id: "" });
+  const [storeSelected, setStoreSelected] = useState<
+    typeof companies.companies[0] | undefined
+  >(undefined);
+
   const [nProductsInCart, setNProductsInCart] = useState(1);
   const [expanded, setExpanded] = useState(false);
 
@@ -83,10 +91,10 @@ const Products: React.FC = ({ route, navigation }) => {
 
   // gera a string da unidade de venda do produto
   const getProductUnity = (): string => {
-    if (storeSelected.id === "") {
+    if (storeSelected === undefined) {
       return "1 unidade";
     }
-    if (storeSelected.product.type === "weight") {
+    if (storeSelected.product?.type === "weight") {
       return `aproximadamente ${storeSelected.product.weight} g`;
     }
     return "1 unidade";
@@ -103,9 +111,9 @@ const Products: React.FC = ({ route, navigation }) => {
 
   // se uma loja for selecionada, exibe ou oculta a aba
   useEffect(() => {
-    if (storeSelected.id === "" && height._value > minHeight) {
+    if (storeSelected === undefined) {
       changeHeight(minHeight);
-    } else if (storeSelected.id !== "" && height._value < maxHeight) {
+    } else if (storeSelected !== undefined) {
       changeHeight(maxHeight);
     }
   }, [storeSelected]);
@@ -122,12 +130,12 @@ const Products: React.FC = ({ route, navigation }) => {
   // muda a loja selecionada
   useEffect(() => {
     if (data.company) {
-      const companie = companies.companies.filter(
+      const companie = companies.companies.find(
         (item) => item.id === data.company.id
       );
 
-      if (companie.length !== 0) {
-        setStoreSelected(companie[0]);
+      if (companie) {
+        setStoreSelected(companie);
       }
     }
   }, [companies]);
@@ -147,8 +155,8 @@ const Products: React.FC = ({ route, navigation }) => {
       >
         <InformationContainer>
           <InfomationSec>
-            Você acabou de adicionar um produto de "{storeSelected.name}".
-            Gostaria de visitar este vendedor para ver mais produtos?
+            Você acabou de adicionar um produto de &ldquo;{storeSelected?.name}
+            &rdquo;. Gostaria de visitar este vendedor para ver mais produtos?
           </InfomationSec>
         </InformationContainer>
       </ExpandedContainer>
@@ -172,7 +180,7 @@ const Products: React.FC = ({ route, navigation }) => {
               height,
             }}
           >
-            {storeSelected.id === "" ? (
+            {storeSelected === undefined ? (
               <AlertStore>
                 <Icone
                   color="#736626"
@@ -200,7 +208,7 @@ const Products: React.FC = ({ route, navigation }) => {
                     R${" "}
                     {(
                       parseFloat(
-                        storeSelected.product.active_promotion
+                        storeSelected?.product.active_promotion
                           ? storeSelected.product.price_promotion
                           : storeSelected.product.price
                       ) * nProductsInCart
@@ -271,14 +279,14 @@ const Products: React.FC = ({ route, navigation }) => {
                 <Store onPress={() => setStoreSelected(item)} key={item.id}>
                   <StoreView>
                     <StoreViewLeft>
-                      <StoreCircle isPressed={storeSelected.id === item.id} />
+                      <StoreCircle isPressed={storeSelected?.id === item.id} />
                       <StoreTextView>
                         <StoreTextName>{item.name}</StoreTextName>
                         <StoreTextPrice>
                           R${" "}
-                          {item.product.active_promotion
-                            ? item.product.price_promotion.replace(".", ",")
-                            : item.product.price.replace(".", ",")}
+                          {item?.product.active_promotion
+                            ? item?.product.price_promotion.replace(".", ",")
+                            : item?.product.price.replace(".", ",")}
                         </StoreTextPrice>
                       </StoreTextView>
                     </StoreViewLeft>

@@ -81,7 +81,7 @@ export const Icone = styled(Icon)`
   margin-right: ${SPACE_FOR};
 `;
 
-export const Store = styled.TouchableNativeFeedback``;
+export const Store = styled.TouchableWithoutFeedback``;
 
 export const StoreView = styled.View`
   flex-direction: row;

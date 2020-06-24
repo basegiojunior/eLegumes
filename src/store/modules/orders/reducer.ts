@@ -9,7 +9,7 @@ type InitialProps = {
   loading: boolean;
 };
 
-const orders: Reducer = (state = INITIAL_STATE, action) => {
+const orders: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
   return produce(state, (draft: InitialProps) => {
     switch (action.type) {
       case "@orders/ORDERS_REQUEST": {
