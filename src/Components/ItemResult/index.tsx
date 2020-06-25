@@ -1,12 +1,11 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-
-import Title from "../Title";
-
 import { Item, Image, Name } from "./styles";
 
+import { TopProduct } from "../../types";
+
 type Lista = {
-  item: object;
+  item: TopProduct;
 };
 
 const ItemResult: React.FC<Lista> = ({ item }) => {

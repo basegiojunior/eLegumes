@@ -1,8 +1,7 @@
 import React from "react";
 import { RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
-import { useSelector } from "react-redux";
+import { useSelector } from "../../store/modules/rootReducer";
 
 import { ContainerScroll } from "../../styles/scrollView";
 
@@ -29,7 +28,7 @@ const SearchResults: React.FC = () => {
         {products.length > 0 && (
           <>
             <Title>PRODUTOS</Title>
-            {products.map((item: object) => (
+            {products.map((item) => (
               <ItemResult key={item.id} item={item} />
             ))}
             <Button

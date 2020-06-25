@@ -37,7 +37,7 @@ export type TopProduct = {
   };
   id: string;
   name: string;
-  weekly_sales: number;
+  weekly_sales?: number;
 };
 
 export interface Companie {

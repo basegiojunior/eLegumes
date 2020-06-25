@@ -1,6 +1,4 @@
 import React from "react";
-// import PropTypes from "prop-types";
-import { RectButtonProperties } from "react-native-gesture-handler";
 
 import {
   Container,
@@ -13,13 +11,14 @@ import {
   ButtonTextGhost,
 } from "./styles";
 
-interface ButtonProps extends RectButtonProperties {
+type ButtonProps = {
   text: string;
-}
+  onPress: CallableFunction;
+};
 
-const Button: React.FC<ButtonProps> = ({ text, ...rest }) => {
+const Button: React.FC<ButtonProps> = ({ text, onPress, ...rest }) => {
   return (
-    <ContainerLink {...rest}>
+    <ContainerLink onPress={() => onPress()} {...rest}>
       <ContainerView>
         <Container>
           <ButtonText>{text}</ButtonText>
@@ -29,9 +28,13 @@ const Button: React.FC<ButtonProps> = ({ text, ...rest }) => {
   );
 };
 
-export const ButtonGhost: React.FC<ButtonProps> = ({ text, ...rest }) => {
+export const ButtonGhost: React.FC<ButtonProps> = ({
+  text,
+  onPress,
+  ...rest
+}) => {
   return (
-    <ContainerGhostLink {...rest}>
+    <ContainerGhostLink onPress={() => onPress()} {...rest}>
       <ContainerGhostView>
         <ContainerGhost>
           <ButtonTextGhost>{text}</ButtonTextGhost>

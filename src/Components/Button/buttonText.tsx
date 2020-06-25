@@ -1,24 +1,16 @@
 import React from "react";
-import { RectButtonProperties } from "react-native-gesture-handler";
 
 import { ContainerSecondary, ButtonTextSecondary } from "./styles";
 
-interface ButtonProps extends RectButtonProperties {
-  italic?: boolean;
+type ButtonProps = {
   text: string;
-}
+  onPress: CallableFunction;
+};
 
-const ButtonText: React.FC<ButtonProps> = ({
-  italic = false,
-  text,
-  onPress,
-  ...rest
-}) => {
+const ButtonText: React.FC<ButtonProps> = ({ text, onPress }) => {
   return (
-    <ContainerSecondary onPress={onPress}>
-      <ButtonTextSecondary italic={italic} {...rest}>
-        {text}
-      </ButtonTextSecondary>
+    <ContainerSecondary onPress={() => onPress()}>
+      <ButtonTextSecondary>{text}</ButtonTextSecondary>
     </ContainerSecondary>
   );
 };

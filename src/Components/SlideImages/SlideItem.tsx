@@ -9,7 +9,14 @@ import {
   PriceProduct,
 } from "./styles";
 
-const SlideItem: React.FC = ({ item, nItemsInScreen }) => {
+import { TopProduct } from "../../types";
+
+type ItemType = {
+  item: TopProduct;
+  nItemsInScreen: number;
+};
+
+const SlideItem: React.FC<ItemType> = ({ item, nItemsInScreen }) => {
   const navigation = useNavigation();
 
   return (
@@ -22,22 +29,12 @@ const SlideItem: React.FC = ({ item, nItemsInScreen }) => {
         <ImageProduct
           nItemsInScreen={nItemsInScreen || 2}
           source={{
-            uri: item.productDefault
-              ? item.productDefault.image.url
-              : item.image.url,
+            uri: item.image?.url,
           }}
         />
-        <TitleProduct>
-          {item.name ? item.name : item.productDefault.name}
-        </TitleProduct>
+        <TitleProduct>{item.name}</TitleProduct>
         {item.weekly_sales && (
           <PriceProduct>{item.weekly_sales} vendidos</PriceProduct>
-        )}
-        {item.price && (
-          <PriceProduct>
-            R$ {item.price.replace(".", ",")} /
-            {item.type === "weight" ? ` ${item.weight}g` : " 1 uni."}
-          </PriceProduct>
         )}
       </ViewLink>
     </LinkContainer>

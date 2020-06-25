@@ -70,7 +70,7 @@ export const ButtonText = styled.Text<ButtonTextProps>`
   font-family: ${FONT_BOLD};
 `;
 
-export const ContainerSecondary = styled.TouchableWithoutFeedback`
+export const ContainerSecondary = styled.TouchableOpacity`
   margin-bottom: ${SPACE_SECONDARY};
   background: transparent;
 
@@ -79,18 +79,12 @@ export const ContainerSecondary = styled.TouchableWithoutFeedback`
   justify-content: center;
 `;
 
-type Sec = {
-  italic: boolean;
-};
-
-export const ButtonTextSecondary = styled.Text<Sec>`
+export const ButtonTextSecondary = styled.Text`
   font-size: ${FONT_SIZE_TERTIARY};
   color: ${TEXT_PRIMARY};
   font-family: ${FONT_REGULAR};
   text-decoration-line: underline;
-  /* font-style: italic; */
   padding: 0;
-  /* font-weight: bold; */
 `;
 
 // ${(props) => (props.italic ? "font-style: italic" : "font-style: normal")};

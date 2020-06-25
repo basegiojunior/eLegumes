@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 
 import * as NavigationService from "../../Routes/navigationService";
 
@@ -11,8 +11,10 @@ import {
   ViewLinkLine,
 } from "./styles";
 
+import { Product } from "../../types";
+
 type GridTypes = {
-  item: object;
+  item: Product;
   index: number;
 };
 
@@ -29,7 +31,7 @@ const GridImages: React.FC<GridTypes> = ({ item, index }) => {
         <ViewLinkLine last={index % 2 !== 0}>
           <ImageProductLine
             source={{
-              uri: item.image ? item.image.url : item.productDefault.image.url,
+              uri: item.image ? item.image.url : item.productDefault?.image.url,
             }}
           />
           <TitleProduct>{item.description}</TitleProduct>

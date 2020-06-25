@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { RefreshControl, FlatList, ListRenderItem } from "react-native";
-import { useSelector } from "react-redux";
-
-import { ContainerScroll } from "../../styles/scrollView";
+import { useSelector } from "../../store/modules/rootReducer";
 
 import ItemResult from "../../Components/ItemResult";
 
 import { SPACE_SIX_DP } from "../../styles/sizes";
 
-import { Container, Item, Image, Name } from "./styles";
+import { Container } from "./styles";
 
 import {
   searchProductsRequest,
@@ -17,9 +15,14 @@ import {
 import { store } from "../../store/index";
 
 type Results = {
+  route: {
+    params: {
+      search: string;
+      name: "Produtos" | "Vendedores";
+    };
+  };
   categoryName: string;
   id: string;
-  route: object;
 };
 
 const SearchEspecifyResults: React.FC<Results> = ({ route }) => {
@@ -28,7 +31,9 @@ const SearchEspecifyResults: React.FC<Results> = ({ route }) => {
   const resultProducts = useSelector(
     (state) => state.search.searchProductsResults
   );
-  const resultStores = useSelector((state) => state.search.searchStoresResults);
+  const resultStores = useSelector(
+    (state) => state.search.searchCompaniesResults
+  );
   const loading = useSelector((state) => state.search.searchLoadingEspecify);
 
   const loadRepositories: any = () => {
@@ -67,7 +72,7 @@ const SearchEspecifyResults: React.FC<Results> = ({ route }) => {
         }
         renderItem={renderItem}
         data={name === "Produtos" ? resultProducts : resultStores}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item: any) => item.id}
         onEndReached={loadRepositories}
         onEndReachedThreshold={0.1}
       />

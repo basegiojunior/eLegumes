@@ -18,8 +18,10 @@ import Title from "../Title";
 
 import { SPACE_SIX_DP } from "../../styles/sizes";
 
+import { TopProduct } from "../../types";
+
 type ProductsArray = {
-  listElements: object[];
+  listElements: TopProduct[];
   nItemsInScreen?: number;
   title?: string;
   color: any;

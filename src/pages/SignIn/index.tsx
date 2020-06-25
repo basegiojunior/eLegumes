@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesome as Icon } from "@expo/vector-icons";
-import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationActions } from "react-navigation";
+import { useSelector } from "../../store/modules/rootReducer";
 
-import { useSelector } from "react-redux";
-
-import { signInRequest, signOut } from "../../store/modules/auth/actions";
+import { signInRequest } from "../../store/modules/auth/actions";
 import { store } from "../../store/index";
 
 import {
@@ -34,16 +32,11 @@ type SignProps = {
   navigation: any;
 };
 
-const SignIn: React.FC<SignProps> = () => {
+const SignIn: React.FC<SignProps> = ({ navigation }) => {
   const loading = useSelector((state) => state.auth.loading);
   const [visibleForgotPass, setVisibleForgotPass] = useState(false);
   const [emailForgot, setEmailForgot] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const navigation = useNavigation();
-
-  // useEffect(() => {
-  //   store.dispatch(signOut());
-  // }, []);
 
   const handleSubmit: Function = async (email: string, password: string) => {
     store.dispatch(signInRequest(email, password));
@@ -112,11 +105,9 @@ const SignIn: React.FC<SignProps> = () => {
 
         <SignUpView>
           <ButtonText
-            onPress={() =>
-              store.dispatch(
-                NavigationActions.navigate({ routeName: "Sacola" })
-              )
-            }
+            onPress={() => {
+              navigation.navigate("Sacola");
+            }}
             text="Crie uma conta"
           />
 
