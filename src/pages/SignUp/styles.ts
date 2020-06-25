@@ -2,8 +2,8 @@ import styled from "styled-components/native";
 import { CheckBox, CheckBoxProps } from "react-native-elements";
 // import { RectButton } from "react-native-gesture-handler";
 
-import { COLOR_BACKGROUND_PRIMARY } from "../../styles/colors";
-import { SPACE_PRIMARY_DP } from "../../styles/sizes";
+import { COLOR_BACKGROUND_PRIMARY } from "~/styles/colors";
+import { SPACE_PRIMARY_DP } from "~/styles/sizes";
 
 type Button = {
   onPress: CallableFunction;

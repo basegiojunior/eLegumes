@@ -1,20 +1,16 @@
 import React, { useEffect } from "react";
 import { RefreshControl, Animated, FlatList } from "react-native";
-// import { useSelector } from "react-redux";
-import { useSelector } from "../../store/modules/rootReducer";
+import { useSelector } from "~/store/modules/rootReducer";
 
-import SlideImages from "../../Components/SlideImages";
-import GridImages from "../../Components/GridImages";
-import SlidePartners from "../../Components/SlidePartners";
+import SlideImages from "~/Components/SlideImages";
+import GridImages from "~/Components/GridImages";
+import SlidePartners from "~/Components/SlidePartners";
 
-import { widthPercentageToDP } from "../../Components/PercentageConverter";
+import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
-import {
-  dashRequest,
-  promoRequest,
-} from "../../store/modules/dashboard/actions";
-import { store } from "../../store/index";
-import { SPACE_SIX_DP } from "../../styles/sizes";
+import { dashRequest, promoRequest } from "~/store/modules/dashboard/actions";
+import { store } from "~/store/index";
+import { SPACE_SIX_DP } from "~/styles/sizes";
 
 import { Container, LinkContainerLine, ViewLinkLine, Title } from "./styles";
 

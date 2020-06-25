@@ -8,11 +8,11 @@ import {
   SPACE_TWO,
   FONT_SIZE_QUATERNARY,
   SPACE_EIGHT,
-} from "../../styles/sizes";
-import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "../../styles/fonts";
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "../../styles/colors";
+} from "~/styles/sizes";
+import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "~/styles/fonts";
+import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
 
-import { widthPercentageToPx } from "../../Components/PercentageConverter";
+import { widthPercentageToPx } from "~/Components/PercentageConverter";
 
 interface Margin extends ViewProps {
   last?: boolean;

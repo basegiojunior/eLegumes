@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { signUpRequest } from "../../store/modules/auth/actions";
+import { signUpRequest } from "~/store/modules/auth/actions";
 import { Container } from "./styles";
 import SignUpForm from "./form";
-import Loading from "../../Components/Loading";
+import Loading from "~/Components/Loading";
 
 type SignProps = {
   navigation: any;

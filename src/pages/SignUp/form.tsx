@@ -6,15 +6,15 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
 import { CheckContainer, ButtonCheck } from "./styles";
 
-import { PRIMARY_COLOR } from "../../styles/colors";
+import { PRIMARY_COLOR } from "~/styles/colors";
 import {
   ICON_CHECKBOX_SIZE,
   SPACE_PRIMARY_DP,
   FONT_SIZE_PRIMARY_DP,
-} from "../../styles/sizes";
+} from "~/styles/sizes";
 
-import Input, { InputMask } from "../../Components/Input";
-import Button from "../../Components/Button";
+import Input, { InputMask } from "~/Components/Input";
+import Button from "~/Components/Button";
 
 type FormProps = {
   values: {
