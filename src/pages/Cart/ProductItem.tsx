@@ -16,10 +16,7 @@ import {
   ProductTitle,
 } from "./styles";
 
-import {
-  decreaseProduct,
-  increaseProduct,
-} from "../../store/modules/cart/actions";
+import { decreaseProduct, increaseProduct } from "~/store/modules/cart/actions";
 
 type ItemType = {
   productItem: object;

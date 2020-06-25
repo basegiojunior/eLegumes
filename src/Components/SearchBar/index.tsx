@@ -4,8 +4,8 @@ import { TextInput } from "react-native";
 import { Input, Container, Icone, ButtonSearch } from "./styles";
 import { widthPercentageToDP } from "../PercentageConverter";
 
-import { searchRequest } from "../../store/modules/search/actions";
-import { store } from "../../store/index";
+import { searchRequest } from "~/store/modules/search/actions";
+import { store } from "~/store/index";
 
 type SearchType = {
   showRecent?: string;

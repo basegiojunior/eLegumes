@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Item, Image, Name } from "./styles";
 
-import { TopProduct } from "../../types";
+import { TopProduct } from "~/types";
 
 type Lista = {
   item: TopProduct;

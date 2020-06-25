@@ -14,8 +14,8 @@ import {
   PRIMARY_COLOR,
   SECONDARY_COLOR,
   TEXT_SECONDARY,
-} from "../../styles/colors";
-import { ICON_SIZE } from "../../styles/sizes";
+} from "~/styles/colors";
+import { ICON_SIZE } from "~/styles/sizes";
 
 import {
   Container,

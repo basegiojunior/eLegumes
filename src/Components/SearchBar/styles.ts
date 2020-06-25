@@ -3,8 +3,8 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
 import { widthPercentageToPx } from "../PercentageConverter";
 
-import { FONT_BOLD } from "../../styles/fonts";
-import { SPACE_FOR } from "../../styles/sizes";
+import { FONT_BOLD } from "~/styles/fonts";
+import { SPACE_FOR } from "~/styles/sizes";
 
 export const Container = styled.View`
   flex-direction: row;

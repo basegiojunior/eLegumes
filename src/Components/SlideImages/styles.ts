@@ -1,9 +1,6 @@
 import styled from "styled-components/native";
 
-import {
-  widthPercentageToPx,
-  widthPercentageToDP,
-} from "../PercentageConverter";
+import { widthPercentageToPx } from "../PercentageConverter";
 
 import {
   FONT_SIZE_QUATERNARY,
@@ -16,8 +13,8 @@ import {
   FONT_SIZE_TERTIARY,
   SPACE_SIX,
 } from "../../styles/sizes";
-import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "../../styles/fonts";
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "../../styles/colors";
+import { FONT_BOLD, FONT_REGULAR } from "~/styles/fonts";
+import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
 
 interface Margin {
   last?: boolean;

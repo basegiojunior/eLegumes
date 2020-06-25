@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import produce from "immer";
 import { Reducer } from "redux";
-import { string } from "prop-types";
-import { CompanieFromProduct, CompaniePage, Product } from "../../../types";
+import { CompanieFromProduct, CompaniePage, Product } from "~/types";
 
 const INITIAL_STATE = {
   loading: false,

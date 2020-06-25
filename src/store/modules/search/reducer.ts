@@ -1,6 +1,6 @@
 import produce from "immer";
 import { Reducer } from "redux";
-import { ResumeProductCompanie } from "../../../types";
+import { ResumeProductCompanie } from "~/types";
 
 const INITIAL_STATE = {
   searchLoading: false,

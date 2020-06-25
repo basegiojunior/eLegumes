@@ -1,15 +1,10 @@
 import styled from "styled-components/native";
 import { RectButton } from "react-native-gesture-handler";
 
-import { widthPercentageToPx } from "../../Components/PercentageConverter";
-import {
-  SPACE_TWO,
-  SPACE_THREE,
-  SPACE_FOR,
-  SPACE_SEVEN,
-} from "../../styles/sizes";
-import { FONT_REGULAR } from "../../styles/fonts";
-import { TEXT_PRIMARY } from "../../styles/colors";
+import { widthPercentageToPx } from "~/Components/PercentageConverter";
+import { SPACE_TWO, SPACE_THREE, SPACE_FOR, SPACE_SEVEN } from "~/styles/sizes";
+import { FONT_REGULAR } from "~/styles/fonts";
+import { TEXT_PRIMARY } from "~/styles/colors";
 
 export const Profile = styled(RectButton)`
   background-color: white;

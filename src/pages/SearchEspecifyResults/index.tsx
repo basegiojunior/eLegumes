@@ -1,18 +1,18 @@
 import React from "react";
 import { RefreshControl, FlatList, ListRenderItem } from "react-native";
-import { useSelector } from "../../store/modules/rootReducer";
+import { useSelector } from "~/store/modules/rootReducer";
 
-import ItemResult from "../../Components/ItemResult";
+import ItemResult from "~/Components/ItemResult";
 
-import { SPACE_SIX_DP } from "../../styles/sizes";
+import { SPACE_SIX_DP } from "~/styles/sizes";
 
 import { Container } from "./styles";
 
 import {
   searchProductsRequest,
   searchCompaniesRequest,
-} from "../../store/modules/search/actions";
-import { store } from "../../store/index";
+} from "~/store/modules/search/actions";
+import { store } from "~/store/index";
 
 type Results = {
   route: {

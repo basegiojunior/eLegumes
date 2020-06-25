@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import { RefreshControl, Animated } from "react-native";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
-import { useSelector } from "../../store/modules/rootReducer";
+import { useSelector } from "~/store/modules/rootReducer";
 
-import { ContainerScroll } from "../../styles/scrollView";
-import SlideImages from "../../Components/SlideImages";
-import Loading from "../../Components/Loading";
-import Title from "../../Components/Title";
+import { ContainerScroll } from "~/styles/scrollView";
+import SlideImages from "~/Components/SlideImages";
+import Loading from "~/Components/Loading";
+import Title from "~/Components/Title";
 
 import { Recent, RecentItem, RecentText } from "./styles";
 
-import { searchRequest } from "../../store/modules/search/actions";
-import { categoriesRequest } from "../../store/modules/categories/actions";
+import { searchRequest } from "~/store/modules/search/actions";
+import { categoriesRequest } from "~/store/modules/categories/actions";
 
-import { ICON_CHECKBOX_SIZE, SPACE_TWO_DP } from "../../styles/sizes";
-import { TEXT_SECONDARY } from "../../styles/colors";
+import { ICON_CHECKBOX_SIZE, SPACE_TWO_DP } from "~/styles/sizes";
+import { TEXT_SECONDARY } from "~/styles/colors";
 
-import { store } from "../../store/index";
+import { store } from "~/store/index";
 
 const Search: React.FC = () => {
   // eslint-disable-next-line no-var

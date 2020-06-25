@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 import { widthPercentageToPx } from "../PercentageConverter";
-import { SPACE_SEVEN } from "../../styles/sizes";
+import { SPACE_SEVEN } from "~/styles/sizes";
 
 export const ContainerOut = styled.View`
   background-color: rgba(0, 0, 0, 0.3);

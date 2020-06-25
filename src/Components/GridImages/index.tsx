@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as NavigationService from "../../Routes/navigationService";
+import * as NavigationService from "~/Routes/navigationService";
 
 import {
   TitleProduct,
@@ -11,7 +11,7 @@ import {
   ViewLinkLine,
 } from "./styles";
 
-import { Product } from "../../types";
+import { Product } from "~/types";
 
 type GridTypes = {
   item: Product;

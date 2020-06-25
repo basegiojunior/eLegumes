@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { FontAwesome as Icon } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { NavigationActions } from "react-navigation";
-import { useSelector } from "../../store/modules/rootReducer";
+import { useSelector } from "~/store/modules/rootReducer";
 
-import { signInRequest } from "../../store/modules/auth/actions";
-import { store } from "../../store/index";
+import { signInRequest } from "~/store/modules/auth/actions";
+import { store } from "~/store/index";
 
 import {
   Container,
   FalseModal,
-  LineDiv,
   SignUpView,
   LostPass,
   ModalContainer,
@@ -20,13 +17,13 @@ import {
   ExitButton,
 } from "./styles";
 
-import Input from "../../Components/Input";
+import Input from "~/Components/Input";
 import SignInForm from "./form";
-import ButtonText from "../../Components/Button/buttonText";
-import Button from "../../Components/Button";
-import logo from "../../assets/icon.png";
-import { widthPercentageToDP } from "../../Components/PercentageConverter";
-import Loading from "../../Components/Loading";
+import ButtonText from "~/Components/Button/buttonText";
+import Button from "~/Components/Button";
+import logo from "~/assets/icon.png";
+import { widthPercentageToDP } from "~/Components/PercentageConverter";
+import Loading from "~/Components/Loading";
 
 type SignProps = {
   navigation: any;

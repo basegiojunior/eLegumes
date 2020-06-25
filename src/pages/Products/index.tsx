@@ -2,14 +2,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Animated } from "react-native";
-import { useSelector } from "../../store/modules/rootReducer";
+import { useSelector } from "~/store/modules/rootReducer";
 
-import { ContainerScroll } from "../../styles/scrollView";
-import Title from "../../Components/Title";
-import ExpandedContainer from "../../Components/ExpandedContainer";
+import { ContainerScroll } from "~/styles/scrollView";
+import Title from "~/Components/Title";
+import ExpandedContainer from "~/Components/ExpandedContainer";
 
-import { companiesFromProductsRequest } from "../../store/modules/companies/actions";
-import { addToCart } from "../../store/modules/cart/actions";
+import { companiesFromProductsRequest } from "~/store/modules/companies/actions";
+import { addToCart } from "~/store/modules/cart/actions";
 
 import {
   Container,

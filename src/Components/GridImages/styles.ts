@@ -10,9 +10,9 @@ import {
   SPACE_FIVE,
   SPACE_SIX,
   FONT_SIZE_SECONDARY,
-} from "../../styles/sizes";
-import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "../../styles/fonts";
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "../../styles/colors";
+} from "~/styles/sizes";
+import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "~/styles/fonts";
+import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
 
 interface Margin extends ViewProps {
   last?: boolean;

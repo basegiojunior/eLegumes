@@ -1,9 +1,8 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import { NavigationActions, StackActions } from "react-navigation";
 
-import * as NavigationService from "../../../Routes/navigationService";
+import * as NavigationService from "~/Routes/navigationService";
 
-import api from "../../../services/api";
+import api from "~/services/api";
 
 import {
   searchFailure,

@@ -1,18 +1,8 @@
 import styled from "styled-components/native";
 
-import { widthPercentageToPx } from "../../Components/PercentageConverter";
-import ButtonText from "../../Components/Button/buttonText";
+import ButtonText from "~/Components/Button/buttonText";
 
-import { FONT_REGULAR } from "../../styles/fonts";
-import {
-  FONT_SIZE_TERTIARY,
-  SPACE_SIX,
-  SPACE_FIVE,
-  SPACE_FOR,
-  SPACE_SEVEN,
-} from "../../styles/sizes";
-
-import { TEXT_PRIMARY } from "../../styles/colors";
+import { SPACE_SIX, SPACE_FOR } from "~/styles/sizes";
 
 export const Container = styled.View`
   width: 100%;

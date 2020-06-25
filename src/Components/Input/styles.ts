@@ -3,14 +3,13 @@ import { TextInputMask, TextInputMaskProps } from "react-native-masked-text";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
 import {
-  FONT_SIZE_PRIMARY,
   FONT_SIZE_SECONDARY,
   FONT_SIZE_TERTIARY,
   SPACE_SECONDARY,
-} from "../../styles/sizes";
+} from "~/styles/sizes";
 
-import { TEXT_PRIMARY, SECONDARY_COLOR } from "../../styles/colors";
-import { FONT_BOLD, FONT_REGULAR } from "../../styles/fonts";
+import { TEXT_PRIMARY, SECONDARY_COLOR } from "~/styles/colors";
+import { FONT_BOLD, FONT_REGULAR } from "~/styles/fonts";
 
 import { widthPercentageToPx } from "../PercentageConverter";
 

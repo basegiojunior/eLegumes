@@ -2,16 +2,17 @@ import React from "react";
 import { StackNavigationOptions } from "@react-navigation/stack";
 import { TouchableOpacity, RectButton } from "react-native-gesture-handler";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "~/store/modules/rootReducer";
 
-import SearchBar from "../Components/SearchBar";
-import { widthPercentageToDP } from "../Components/PercentageConverter";
+import SearchBar from "~/Components/SearchBar";
+import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
-import { PRIMARY_COLOR, TEXT_PRIMARY, TEXT_SECONDARY } from "../styles/colors";
-import { SPACE_FOR_DP, SPACE_EIGHT_DP } from "../styles/sizes";
-import { FONT_BOLD } from "../styles/fonts";
+import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
+import { SPACE_FOR_DP, SPACE_EIGHT_DP } from "~/styles/sizes";
+import { FONT_BOLD } from "~/styles/fonts";
 
-import { deleteCompanie } from "../store/modules/cart/actions";
+import { deleteCompanie } from "~/store/modules/cart/actions";
 
 export const DeleteButton: React.FC = () => {
   const dispatch = useDispatch();

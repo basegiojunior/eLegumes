@@ -9,7 +9,7 @@ import {
   PriceProduct,
 } from "./styles";
 
-import { TopProduct } from "../../types";
+import { TopProduct } from "~/types";
 
 type ItemType = {
   item: TopProduct;

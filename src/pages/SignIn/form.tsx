@@ -2,13 +2,9 @@ import React, { useRef } from "react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import { TextInput } from "react-native";
-// import CampInformation from "../../Components/CampInformation";
 
-import Input from "../../Components/Input";
-import Button from "../../Components/Button";
-import ButtonText from "../../Components/Button/buttonText";
-
-import { LostPass } from "./styles";
+import Input from "~/Components/Input";
+import Button from "~/Components/Button";
 
 type FormProps = {
   values: {

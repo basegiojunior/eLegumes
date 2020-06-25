@@ -7,23 +7,17 @@ import {
   FONT_SIZE_SECONDARY,
   SPACE_SIX,
   SPACE_FIVE,
-  SPACE_TWO,
   FONT_SIZE_QUATERNARY,
   SPACE_EIGHT,
-  FONT_SIZE_PRIMARY,
   FONT_SIZE_TERTIARY,
   SPACE_SEVEN,
   SPACE_FOR,
   SPACE_ONE,
-  SPACE_THREE,
-} from "../../styles/sizes";
-import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "../../styles/fonts";
-import { TEXT_PRIMARY, TEXT_SECONDARY, TERT_COLOR } from "../../styles/colors";
+} from "~/styles/sizes";
+import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "~/styles/fonts";
+import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
 
-import {
-  widthPercentageToPx,
-  heightPercentageToPx,
-} from "../../Components/PercentageConverter";
+import { widthPercentageToPx } from "~/Components/PercentageConverter";
 
 export const Container = styled.View`
   width: 100%;

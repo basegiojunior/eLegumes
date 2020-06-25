@@ -1,15 +1,11 @@
 import styled, { css } from "styled-components/native";
 import { RectButton } from "react-native-gesture-handler";
 
-import {
-  SPACE_TWO,
-  SPACE_SECONDARY,
-  FONT_SIZE_TERTIARY,
-} from "../../styles/sizes";
-import { FONT_BOLD, FONT_REGULAR } from "../../styles/fonts";
-import { PRIMARY_COLOR, TEXT_PRIMARY } from "../../styles/colors";
+import { SPACE_TWO, SPACE_SECONDARY, FONT_SIZE_TERTIARY } from "~/styles/sizes";
+import { FONT_BOLD, FONT_REGULAR } from "~/styles/fonts";
+import { PRIMARY_COLOR, TEXT_PRIMARY } from "~/styles/colors";
 
-import { widthPercentageToPx } from "../PercentageConverter";
+import { widthPercentageToPx } from "~/Components/PercentageConverter";
 
 type ButtonTextProps = {
   textColor?: string;

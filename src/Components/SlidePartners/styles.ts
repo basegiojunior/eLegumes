@@ -1,6 +1,4 @@
 import styled from "styled-components/native";
-// import { RectButton } from "react-native-gesture-handler";
-import { TouchableOpacity } from "react-native";
 
 import { widthPercentageToPx } from "../PercentageConverter";
 
@@ -10,9 +8,9 @@ import {
   SPACE_FOR,
   SPACE_TWO_DP,
   SPACE_SIX_DP,
-} from "../../styles/sizes";
-import { FONT_BOLD, FONT_REGULAR } from "../../styles/fonts";
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "../../styles/colors";
+} from "~/styles/sizes";
+import { FONT_BOLD, FONT_REGULAR } from "~/styles/fonts";
+import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
 
 interface Margin {
   last?: boolean;

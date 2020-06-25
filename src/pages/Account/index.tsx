@@ -1,12 +1,11 @@
 import React from "react";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
-import { useSelector } from "../../store/modules/rootReducer";
-// import { store } from "../../store/index";
+import { useSelector } from "~/store/modules/rootReducer";
 
-import profile from "../../assets/product.jpg";
+import profile from "~/assets/product.jpg";
 
-import { ContainerScroll } from "../../styles/scrollView";
+import { ContainerScroll } from "~/styles/scrollView";
 import {
   Profile,
   AccountContainer,
@@ -15,7 +14,7 @@ import {
   ProfileData,
   ProfileImage,
 } from "./styles";
-import { widthPercentageToDP } from "../../Components/PercentageConverter";
+import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
 type AccProps = {
   navigation: any;

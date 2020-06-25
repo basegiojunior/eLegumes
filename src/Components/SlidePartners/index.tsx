@@ -1,7 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { ScrollView, Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { RectButton } from "react-native-gesture-handler";
 
 import {
   LinkContainer,
@@ -18,7 +17,7 @@ import {
 import { widthPercentageToDP } from "../PercentageConverter";
 import Title from "../Title";
 
-import { SPACE_SIX_DP } from "../../styles/sizes";
+import { SPACE_SIX_DP } from "~/styles/sizes";
 
 type ProductsArray = {
   listElements: object[];

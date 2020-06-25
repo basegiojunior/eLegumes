@@ -8,11 +8,11 @@ import {
   SPACE_FIVE,
   SPACE_SEVEN,
   SPACE_SIX,
-} from "../../styles/sizes";
-import { COLOR_BACKGROUND_PRIMARY, TEXT_PRIMARY } from "../../styles/colors";
-import { FONT_REGULAR } from "../../styles/fonts";
+} from "~/styles/sizes";
+import { COLOR_BACKGROUND_PRIMARY, TEXT_PRIMARY } from "~/styles/colors";
+import { FONT_REGULAR } from "~/styles/fonts";
 
-import { widthPercentageToPx } from "../../Components/PercentageConverter";
+import { widthPercentageToPx } from "~/Components/PercentageConverter";
 
 export const Container = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {

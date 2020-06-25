@@ -1,16 +1,15 @@
 import styled from "styled-components/native";
 
 import { widthPercentageToPx } from "../PercentageConverter";
-import { FONT_REGULAR } from "../../styles/fonts";
+import { FONT_REGULAR } from "~/styles/fonts";
 import {
   FONT_SIZE_TERTIARY,
-  SPACE_SIX,
   SPACE_FIVE,
   SPACE_TWO,
   SPACE_SEVEN,
-} from "../../styles/sizes";
+} from "~/styles/sizes";
 
-import { TEXT_PRIMARY } from "../../styles/colors";
+import { TEXT_PRIMARY } from "~/styles/colors";
 
 export const Item = styled.TouchableOpacity`
   margin-top: ${SPACE_FIVE};

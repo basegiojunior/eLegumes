@@ -3,12 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { TouchableWithoutFeedback, Animated } from "react-native";
 import { useDispatch } from "react-redux";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
-import { useSelector } from "../../store/modules/rootReducer";
+import { useSelector } from "~/store/modules/rootReducer";
 
-import Button from "../../Components/Button";
+import Button from "~/Components/Button";
 import ProductItem from "./ProductItem";
 
-import { ContainerScroll } from "../../styles/scrollView";
+import { ContainerScroll } from "~/styles/scrollView";
 
 import {
   Container,
@@ -31,22 +31,15 @@ import {
   InfomationTitle,
 } from "./styles";
 
-import ExpandedContainer from "../../Components/ExpandedContainer";
+import ExpandedContainer from "~/Components/ExpandedContainer";
 
-import {
-  deselectCompanie,
-  selectCompanie,
-} from "../../store/modules/cart/actions";
+import { deselectCompanie, selectCompanie } from "~/store/modules/cart/actions";
 
-import { orderRequest } from "../../store/modules/orders/actions";
+import { orderRequest } from "~/store/modules/orders/actions";
 
-import { TEXT_SECONDARY } from "../../styles/colors";
-import {
-  SPACE_FIVE_DP,
-  SPACE_SEVEN_DP,
-  SPACE_SIX_DP,
-} from "../../styles/sizes";
-import { widthPercentageToDP } from "../../Components/PercentageConverter";
+import { TEXT_SECONDARY } from "~/styles/colors";
+import { SPACE_FIVE_DP, SPACE_SEVEN_DP, SPACE_SIX_DP } from "~/styles/sizes";
+import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();

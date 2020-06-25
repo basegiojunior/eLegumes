@@ -1,7 +1,7 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
 import { Alert } from "react-native";
 
-import api from "../../../services/api";
+import api from "~/services/api";
 
 import { signInSuccess, signFailure } from "./actions";
 

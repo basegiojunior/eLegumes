@@ -1,6 +1,6 @@
 import produce from "immer";
 import { Reducer } from "redux";
-import { Companie, TopProduct, Product } from "../../../types";
+import { Companie, TopProduct, Product } from "~/types";
 
 const INITIAL_STATE = {
   noPageLoading: false,

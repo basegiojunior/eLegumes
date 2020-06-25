@@ -6,23 +6,23 @@ import React from "react";
 
 import { navigationRef } from "./navigationService";
 
-import { widthPercentageToDP } from "../Components/PercentageConverter";
+import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
-import { FONT_REGULAR } from "../styles/fonts";
-import { PRIMARY_COLOR } from "../styles/colors";
-import { SPACE_TWO_DP } from "../styles/sizes";
+import { FONT_REGULAR } from "~/styles/fonts";
+import { PRIMARY_COLOR } from "~/styles/colors";
+import { SPACE_TWO_DP } from "~/styles/sizes";
 
-import Dashboard from "../pages/Dashboard";
-import Account from "../pages/Account";
-import Cart from "../pages/Cart";
-import Search from "../pages/Search";
-import SearchResults from "../pages/SearchResults";
-import SearchEspecifyResults from "../pages/SearchEspecifyResults";
-import SignIn from "../pages/SignIn";
-import SignUp from "../pages/SignUp";
-import Categories from "../pages/Categories";
-import Companies from "../pages/Companies";
-import Products from "../pages/Products";
+import Dashboard from "~/pages/Dashboard";
+import Account from "~/pages/Account";
+import Cart from "~/pages/Cart";
+import Search from "~/pages/Search";
+import SearchResults from "~/pages/SearchResults";
+import SearchEspecifyResults from "~/pages/SearchEspecifyResults";
+import SignIn from "~/pages/SignIn";
+import SignUp from "~/pages/SignUp";
+import Categories from "~/pages/Categories";
+import Companies from "~/pages/Companies";
+import Products from "~/pages/Products";
 
 import {
   styleBarTop,

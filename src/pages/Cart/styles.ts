@@ -2,10 +2,7 @@ import styled from "styled-components/native";
 import { RectButton } from "react-native-gesture-handler";
 import { Animated } from "react-native";
 
-import {
-  widthPercentageToPx,
-  heightPercentageToPx,
-} from "../../Components/PercentageConverter";
+import { widthPercentageToPx } from "~/Components/PercentageConverter";
 import {
   SPACE_ONE,
   SPACE_TWO,
@@ -14,19 +11,17 @@ import {
   SPACE_FIVE,
   SPACE_SIX,
   SPACE_SEVEN,
-  SPACE_EIGHT,
   FONT_SIZE_SECONDARY,
   FONT_SIZE_TERTIARY,
   FONT_SIZE_QUATERNARY,
-} from "../../styles/sizes";
-import { FONT_REGULAR, FONT_SEMIBOLD, FONT_BOLD } from "../../styles/fonts";
+} from "~/styles/sizes";
+import { FONT_REGULAR, FONT_SEMIBOLD, FONT_BOLD } from "~/styles/fonts";
 import {
   TEXT_PRIMARY,
   TEXT_SECONDARY,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
-  TERT_COLOR,
-} from "../../styles/colors";
+} from "~/styles/colors";
 
 export const Container = styled.View`
   flex-direction: column;

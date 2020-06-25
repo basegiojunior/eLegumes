@@ -6,12 +6,12 @@ import {
   SPACE_FIVE,
   SPACE_TWO,
   SPACE_SEVEN,
-} from "../../styles/sizes";
+} from "~/styles/sizes";
 
-import { widthPercentageToPx } from "../../Components/PercentageConverter";
-import { FONT_REGULAR } from "../../styles/fonts";
+import { widthPercentageToPx } from "~/Components/PercentageConverter";
+import { FONT_REGULAR } from "~/styles/fonts";
 
-import { TEXT_PRIMARY } from "../../styles/colors";
+import { TEXT_PRIMARY } from "~/styles/colors";
 
 export const Container = styled.View`
   width: 100%;

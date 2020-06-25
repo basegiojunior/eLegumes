@@ -1,5 +1,4 @@
 import styled from "styled-components/native";
-import { RectButton } from "react-native-gesture-handler";
 import { Animated } from "react-native";
 
 import {
@@ -7,26 +6,15 @@ import {
   heightPercentageToPx,
 } from "../PercentageConverter";
 import {
-  SPACE_ONE,
-  SPACE_TWO,
   SPACE_THREE,
   SPACE_FOR,
   SPACE_FIVE,
   SPACE_SIX,
   SPACE_SEVEN,
-  SPACE_EIGHT,
   FONT_SIZE_SECONDARY,
-  FONT_SIZE_TERTIARY,
-  FONT_SIZE_QUATERNARY,
-} from "../../styles/sizes";
-import { FONT_REGULAR, FONT_SEMIBOLD, FONT_BOLD } from "../../styles/fonts";
-import {
-  TEXT_PRIMARY,
-  TEXT_SECONDARY,
-  PRIMARY_COLOR,
-  SECONDARY_COLOR,
-  TERT_COLOR,
-} from "../../styles/colors";
+} from "~/styles/sizes";
+import { FONT_SEMIBOLD } from "~/styles/fonts";
+import { TEXT_PRIMARY, TEXT_SECONDARY, TERT_COLOR } from "~/styles/colors";
 
 // EXPANDED END
 

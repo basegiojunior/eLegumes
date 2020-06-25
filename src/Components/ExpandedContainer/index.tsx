@@ -6,7 +6,7 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
 import Button, { ButtonGhost } from "../Button";
 
-import { PRIMARY_COLOR } from "../../styles/colors";
+import { PRIMARY_COLOR } from "~/styles/colors";
 import {
   widthPercentageToDP,
   heightPercentageToDP,

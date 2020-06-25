@@ -16,9 +16,9 @@ import SlideItem from "./SlideItem";
 import { widthPercentageToDP } from "../PercentageConverter";
 import Title from "../Title";
 
-import { SPACE_SIX_DP } from "../../styles/sizes";
+import { SPACE_SIX_DP } from "~/styles/sizes";
 
-import { TopProduct } from "../../types";
+import { TopProduct } from "~/types";
 
 type ProductsArray = {
   listElements: TopProduct[];

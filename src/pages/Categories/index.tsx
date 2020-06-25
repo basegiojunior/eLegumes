@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, ListRenderItem } from "react-native";
-import { useSelector } from "../../store/modules/rootReducer";
+import { useSelector } from "~/store/modules/rootReducer";
 
 import { Container, Item, Image, Name } from "./styles";
 
-import { categoriesRequest } from "../../store/modules/categories/actions";
-import { store } from "../../store/index";
-import { SPACE_SIX_DP } from "../../styles/sizes";
+import { categoriesRequest } from "~/store/modules/categories/actions";
+import { store } from "~/store/index";
+import { SPACE_SIX_DP } from "~/styles/sizes";
 
 type Results = {
   categoryName: string;

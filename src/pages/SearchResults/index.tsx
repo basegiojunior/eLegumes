@@ -1,12 +1,12 @@
 import React from "react";
 import { RefreshControl } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "../../store/modules/rootReducer";
+import { useSelector } from "~/store/modules/rootReducer";
 
-import { ContainerScroll } from "../../styles/scrollView";
+import { ContainerScroll } from "~/styles/scrollView";
 
-import ItemResult from "../../Components/ItemResult";
-import Title from "../../Components/Title";
+import ItemResult from "~/Components/ItemResult";
+import Title from "~/Components/Title";
 
 import { Container, Button } from "./styles";
 
@@ -46,7 +46,7 @@ const SearchResults: React.FC = () => {
         {companies.length > 0 && (
           <>
             <Title>VENDEDORES</Title>
-            {companies.map((item: object) => (
+            {companies.map((item) => (
               <ItemResult item={item} />
             ))}
             <Button

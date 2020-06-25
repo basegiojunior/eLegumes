@@ -4,7 +4,7 @@ import { Modal, ActivityIndicator } from "react-native";
 import { ContainerOut, ContainerIn } from "./styles";
 import { widthPercentageToDP } from "../PercentageConverter";
 
-import { PRIMARY_COLOR } from "../../styles/colors";
+import { PRIMARY_COLOR } from "~/styles/colors";
 
 type RequestProps = {
   visible: boolean;

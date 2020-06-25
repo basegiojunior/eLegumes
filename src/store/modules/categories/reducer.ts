@@ -1,7 +1,7 @@
 import produce from "immer";
 import { Reducer } from "redux";
 
-import { Category } from "../../../types";
+import { Category } from "~/types";
 
 const INITIAL_STATE = {
   loading: false,

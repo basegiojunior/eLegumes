@@ -1,17 +1,15 @@
 import styled from "styled-components/native";
 
-import { FONT_REGULAR, FONT_SEMIBOLD } from "../../styles/fonts";
+import { FONT_REGULAR, FONT_SEMIBOLD } from "~/styles/fonts";
 import {
   FONT_SIZE_SECONDARY,
   FONT_SIZE_TERTIARY,
   SPACE_SIX,
   SPACE_EIGHT,
   SPACE_TWO,
-  SPACE_FOR,
-  SPACE_THREE,
-} from "../../styles/sizes";
+} from "~/styles/sizes";
 
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "../../styles/colors";
+import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
 
 export const Recent = styled.View`
   padding-right: ${SPACE_SIX};
