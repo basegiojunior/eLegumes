@@ -10,6 +10,8 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { TouchableWithoutFeedback, View, TextInputProps } from "react-native";
 import { TextInputMaskProps } from "react-native-masked-text";
 
+import { widthPercentageToDP } from "~/Components/PercentageConverter";
+
 import {
   PRIMARY_COLOR,
   SECONDARY_COLOR,
@@ -24,6 +26,7 @@ import {
   CampName,
   ContainerCamp,
   AlertIcon,
+  Icone,
   CampInformationView,
   TInputMask,
 } from "./styles";
@@ -92,10 +95,9 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
       {/* <CampName focused={focused}>{title}</CampName> */}
       <Container style={style} focused={focused} error={showError}>
         {icon && (
-          <Icon
-            style={{ marginRight: 5 }}
+          <Icone
             name={icon}
-            size={ICON_SIZE}
+            size={widthPercentageToDP("6%")}
             color={focused || !!value ? SECONDARY_COLOR : "rgba(0,0,0,.45)"}
           />
         )}
@@ -118,9 +120,9 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 
         {secureTextEntry && (
           <TouchableWithoutFeedback onPress={() => setSecurePass(!securePass)}>
-            <Icon
+            <Icone
               name={securePass ? "eye-off" : "eye"}
-              size={ICON_SIZE}
+              size={widthPercentageToDP("6%")}
               color={focused ? SECONDARY_COLOR : "rgba(0,0,0,.45)"}
             />
           </TouchableWithoutFeedback>
@@ -128,10 +130,9 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 
         {!error && value !== "" && (
           <View>
-            <Icon
-              style={{ marginLeft: 5 }}
+            <Icone
               name="check-circle"
-              size={ICON_SIZE}
+              size={widthPercentageToDP("6%")}
               color={PRIMARY_COLOR}
             />
           </View>
@@ -183,13 +184,11 @@ const InputMaskForward: React.ForwardRefRenderFunction<
 
   return (
     <ContainerAll>
-      <CampName focused={focused}>{title}</CampName>
       <Container style={style} focused={focused} error={showError}>
         {icon && (
-          <Icon
-            style={{ marginRight: 5 }}
+          <Icone
             name={icon}
-            size={ICON_SIZE}
+            size={widthPercentageToDP("6%")}
             color={focused || !!value ? SECONDARY_COLOR : "rgba(0,0,0,.45)"}
           />
         )}
@@ -210,9 +209,9 @@ const InputMaskForward: React.ForwardRefRenderFunction<
 
         {secureTextEntry && (
           <TouchableWithoutFeedback onPress={() => setSecurePass(!securePass)}>
-            <Icon
+            <Icone
               name={securePass ? "eye-off" : "eye"}
-              size={ICON_SIZE}
+              size={widthPercentageToDP("6%")}
               color={focused ? SECONDARY_COLOR : "rgba(0,0,0,.45)"}
             />
           </TouchableWithoutFeedback>
@@ -220,7 +219,7 @@ const InputMaskForward: React.ForwardRefRenderFunction<
 
         {!error && value !== "" && (
           <View>
-            <Icon
+            <Icone
               style={{ marginLeft: 5 }}
               name="check-circle"
               size={ICON_SIZE}

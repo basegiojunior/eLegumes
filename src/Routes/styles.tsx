@@ -3,6 +3,7 @@ import { StackNavigationOptions } from "@react-navigation/stack";
 import { TouchableOpacity, RectButton } from "react-native-gesture-handler";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
+import { View } from "react-native";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import SearchBar from "~/Components/SearchBar";
@@ -42,13 +43,37 @@ export const DeleteButton: React.FC = () => {
   );
 };
 
+export const EditButton: React.FC = () => {
+  const isSigned = useSelector((state) => state.auth.signed);
+
+  if (isSigned) {
+    return (
+      <TouchableOpacity
+        style={{
+          backgroundColor: "transparent",
+          marginRight: SPACE_FOR_DP,
+          width: widthPercentageToDP("10%"),
+          height: widthPercentageToDP("10%"),
+          borderRadius: widthPercentageToDP("5%"),
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        onPress={() => null}
+      >
+        <Icon name="pen" size={SPACE_EIGHT_DP} color="#fff" />
+      </TouchableOpacity>
+    );
+  }
+  return <View />;
+};
+
 export const styleBarTop = {
   headerStyle: { backgroundColor: "#fff" },
   headerTitle: "eLegumes",
   headerTitleContainerStyle: { left: 0 },
   headerTitleStyle: {
-    color: "#242A22",
     fontSize: widthPercentageToDP("5.5%"),
+    color: "#242A22",
     marginLeft: SPACE_FOR_DP,
     fontFamily: FONT_BOLD,
   },
@@ -85,6 +110,25 @@ export const styleBarTopBusca = {
 
   headerLeft: () => null,
   headerTintColor: "#fff",
+};
+
+export const styleBarAcc = (): StackNavigationOptions => {
+  return {
+    ...styleBarTop,
+    headerTransparent: true,
+    headerTitle: "Perfil",
+    headerTitleContainerStyle: {
+      right: 0,
+      left: 0,
+    },
+    headerTitleStyle: {
+      fontSize: widthPercentageToDP("5.5%"),
+      color: "#fff",
+      marginLeft: SPACE_FOR_DP,
+      fontFamily: FONT_BOLD,
+    },
+    headerRight: () => <EditButton />,
+  };
 };
 
 export const styleBarTransparent = (
@@ -130,6 +174,38 @@ export const styleBarTransparent = (
         onPress={() => ButtonLeft()}
       >
         <Icon name="arrow-left" size={SPACE_EIGHT_DP} color="#fff" />
+      </TouchableOpacity>
+    ),
+  };
+};
+
+export const styleBarOnlyBackTransparent = (
+  ButtonLeft: Function,
+  title: string
+): StackNavigationOptions => {
+  return {
+    ...styleBarTop,
+    headerTransparent: true,
+    headerTitle: title,
+    headerTitleStyle: {
+      fontSize: widthPercentageToDP("5.5%"),
+      color: "#fff",
+      marginLeft: SPACE_FOR_DP,
+      fontFamily: FONT_BOLD,
+    },
+    headerTitleContainerStyle: {
+      right: 0,
+      left: 0,
+      marginLeft: widthPercentageToDP("12%"),
+    },
+    headerLeft: () => (
+      <TouchableOpacity onPress={() => ButtonLeft()}>
+        <Icon
+          name="arrow-left"
+          style={{ marginLeft: SPACE_FOR_DP }}
+          size={SPACE_EIGHT_DP}
+          color="#fff"
+        />
       </TouchableOpacity>
     ),
   };

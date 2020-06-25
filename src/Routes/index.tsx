@@ -30,7 +30,9 @@ import {
   styleBarTopBuscaSecond,
   styleBarCategory,
   styleBarOnlyBack,
+  styleBarOnlyBackTransparent,
   styleBarTransparent,
+  styleBarAcc,
   styleBarTopCart,
 } from "./styles";
 
@@ -97,20 +99,28 @@ const AccountStackScreen: React.FC = () => {
       <AccountStack.Screen
         name="Minha Conta"
         component={Account}
-        options={styleBarTop}
+        options={() => {
+          return styleBarAcc();
+        }}
       />
       <AccountStack.Screen
         name="Entrar"
         component={SignIn}
         options={({ navigation }) => {
-          return styleBarOnlyBack(() => navigation.goBack());
+          return styleBarOnlyBackTransparent(
+            () => navigation.goBack(),
+            "Entrar"
+          );
         }}
       />
       <AccountStack.Screen
         name="Cadastrar"
         component={SignUp}
         options={({ navigation }) => {
-          return styleBarOnlyBack(() => navigation.goBack());
+          return styleBarOnlyBackTransparent(
+            () => navigation.goBack(),
+            "Cadastro"
+          );
         }}
       />
     </AccountStack.Navigator>

@@ -2,8 +2,17 @@ import styled from "styled-components/native";
 import { CheckBox, CheckBoxProps } from "react-native-elements";
 // import { RectButton } from "react-native-gesture-handler";
 
-import { COLOR_BACKGROUND_PRIMARY } from "~/styles/colors";
-import { SPACE_PRIMARY_DP } from "~/styles/sizes";
+import Title from "~/Components/Title";
+
+import { widthPercentageToPx } from "~/Components/PercentageConverter";
+
+import { COLOR_BACKGROUND_PRIMARY, SECONDARY_COLOR } from "~/styles/colors";
+import {
+  SPACE_SIX_DP,
+  SPACE_THREE,
+  SPACE_FIVE,
+  SPACE_SIX,
+} from "~/styles/sizes";
 
 type Button = {
   onPress: CallableFunction;
@@ -13,13 +22,28 @@ export const Container = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
     justifyContent: "center",
     flexGrow: 1,
-    padding: SPACE_PRIMARY_DP * 1.5,
+    padding: SPACE_SIX_DP,
   },
   keyboardShouldPersistTaps: "handled",
 }))`
   flex: 1;
   height: 100%;
   background-color: ${COLOR_BACKGROUND_PRIMARY};
+`;
+
+export const ContainerTop = styled.View`
+  width: 100%;
+  background-color: ${SECONDARY_COLOR};
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TopImage = styled.Image`
+  width: ${widthPercentageToPx("55%")};
+  height: ${widthPercentageToPx("28%")};
+  margin-top: ${widthPercentageToPx("20%")};
+  margin-bottom: ${widthPercentageToPx("20%")};
 `;
 
 export const CheckContainer = styled.View`
@@ -40,13 +64,14 @@ export const ButtonCheck = styled(CheckBox)<CheckBoxProps>`
   background-color: transparent;
 `;
 
-// export const containerScroll = styled.View`
-// 	justify-content: start
-// `;
+export const TitleText = styled(Title)`
+  margin-top: ${SPACE_FIVE};
+  margin-bottom: ${SPACE_THREE};
+`;
 
-// contentContainerStyle={[
-// 	BasicStyle.containerScroll,
-// 	BasicStyle.justifyStart,
-// 	BasicStyle.p_horizontalSec,
-// 	BasicStyle.p_verticalSec,
-// ]}
+export const ToLoginContainer = styled.View`
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: ${SPACE_SIX};
+`;

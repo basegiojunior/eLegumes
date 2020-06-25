@@ -2,9 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { signUpRequest } from "~/store/modules/auth/actions";
-import { Container } from "./styles";
+import { Container, ContainerTop, TopImage, ToLoginContainer } from "./styles";
 import SignUpForm from "./form";
 import Loading from "~/Components/Loading";
+import ButtonText from "~/Components/Button/buttonText";
+
+import logo from "~/assets/icon.png";
 
 type SignProps = {
   navigation: any;
@@ -24,10 +27,14 @@ const SignUp: React.FC<SignProps> = ({ navigation }) => {
   };
 
   return (
-    <Container>
-      <Loading visible={loading} />
+    <>
+      <ContainerTop>
+        <TopImage source={logo} />
+      </ContainerTop>
+      <Container>
+        <Loading visible={loading} />
 
-      {/* <Image
+        {/* <Image
 				source={logo}
 				style={{
 					width: widthPercentageToDP("25%"),
@@ -35,8 +42,16 @@ const SignUp: React.FC<SignProps> = ({ navigation }) => {
 					marginBottom: widthPercentageToDP("0%"),
 				}}
 			/> */}
-      <SignUpForm termsViz={() => null} handleSubmitSignUp={handleSubmit} />
-    </Container>
+        <SignUpForm termsViz={() => null} handleSubmitSignUp={handleSubmit} />
+
+        <ToLoginContainer>
+          <ButtonText
+            text="Entrar com um usuário existente"
+            onPress={() => navigation.navigate("Entrar")}
+          />
+        </ToLoginContainer>
+      </Container>
+    </>
   );
 };
 

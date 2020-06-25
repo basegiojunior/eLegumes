@@ -9,12 +9,12 @@ import {
   Container,
   FalseModal,
   SignUpView,
-  LostPass,
   ModalContainer,
   ModalContainerIn,
   Exit,
-  LogoImage,
   ExitButton,
+  TopImage,
+  ContainerTop,
 } from "./styles";
 
 import Input from "~/Components/Input";
@@ -88,9 +88,12 @@ const SignIn: React.FC<SignProps> = ({ navigation }) => {
   return (
     <>
       {forgotPasswordReturn()}
+      <Loading visible={loading} />
+      <ContainerTop>
+        <TopImage source={logo} />
+      </ContainerTop>
+
       <Container>
-        <Loading visible={loading} />
-        <LogoImage source={logo} />
         <SignInForm
           handleSubmitSignIn={(email: string, password: string) => {
             handleSubmit(email, password);
@@ -103,17 +106,15 @@ const SignIn: React.FC<SignProps> = ({ navigation }) => {
         <SignUpView>
           <ButtonText
             onPress={() => {
-              navigation.navigate("Sacola");
+              navigation.navigate("Cadastrar");
             }}
             text="Crie uma conta"
           />
 
-          <LostPass>
-            <ButtonText
-              text="Esqueceu sua senha?"
-              onPress={() => () => setVisibleForgotPass(true)}
-            />
-          </LostPass>
+          <ButtonText
+            text="Esqueceu sua senha?"
+            onPress={() => () => setVisibleForgotPass(true)}
+          />
         </SignUpView>
       </Container>
     </>

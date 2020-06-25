@@ -6,6 +6,7 @@ import {
   FONT_SIZE_SECONDARY,
   FONT_SIZE_TERTIARY,
   SPACE_SECONDARY,
+  SPACE_TWO,
 } from "~/styles/sizes";
 
 import { TEXT_PRIMARY, SECONDARY_COLOR } from "~/styles/colors";
@@ -80,4 +81,9 @@ export const ContainerCamp = styled.View`
 
 export const AlertIcon = styled(Icon)`
   margin: 0 ${SPACE_SECONDARY};
+`;
+
+export const Icone = styled(Icon)`
+  margin-left: ${SPACE_TWO};
+  margin-right: ${SPACE_TWO};
 `;

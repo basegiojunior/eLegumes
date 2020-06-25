@@ -4,7 +4,7 @@ import { Alert, TextInput } from "react-native";
 import * as Yup from "yup";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
-import { CheckContainer, ButtonCheck } from "./styles";
+import { CheckContainer, ButtonCheck, TitleText } from "./styles";
 
 import { PRIMARY_COLOR } from "~/styles/colors";
 import {
@@ -12,6 +12,8 @@ import {
   SPACE_PRIMARY_DP,
   FONT_SIZE_PRIMARY_DP,
 } from "~/styles/sizes";
+
+import { FONT_REGULAR } from "~/styles/fonts";
 
 import Input, { InputMask } from "~/Components/Input";
 import Button from "~/Components/Button";
@@ -50,6 +52,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
 
   return (
     <>
+      <TitleText>SEUS DADOS</TitleText>
       <Input
         icon="account"
         autoCorrect={false}
@@ -96,7 +99,6 @@ const Form: React.FC<FormProps> = (propsForm) => {
           dddMask: "(99) ",
         }}
         autoCorrect={false}
-        title="Celular"
         placeholder="(99) 99999-9999"
         keyboardType="numeric"
         value={propsForm.values.phone}
@@ -109,6 +111,8 @@ const Form: React.FC<FormProps> = (propsForm) => {
         onSubmitEditing={() => passwordInputRef.current?.focus()}
         ref={phoneInputRef}
       />
+
+      <TitleText>SEGURANÇA</TitleText>
 
       <Input
         icon="lock"
@@ -154,7 +158,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
         ref={passwordConfirmInputRef}
       />
 
-      <CheckContainer>
+      {/* <CheckContainer>
         <ButtonCheck
           title="Li e aceito os termos e condições"
           containerStyle={{
@@ -168,7 +172,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
             fontWeight: "normal",
             fontSize: FONT_SIZE_PRIMARY_DP,
           }}
-          fontFamily="Jost-Regular"
+          fontFamily={FONT_REGULAR}
           checkedIcon={
             <Icon
               style={{ marginRight: 5 }}
@@ -190,14 +194,10 @@ const Form: React.FC<FormProps> = (propsForm) => {
             setCheck(!check);
           }}
         />
-      </CheckContainer>
+      </CheckContainer> */}
 
       <Button
         onPress={() => {
-          Alert.alert(
-            "Ops",
-            "Você tem que aceitar os termos e condições para prosseguir."
-          );
           propsForm.handleSubmit();
         }}
         style={{ marginTop: SPACE_PRIMARY_DP }}

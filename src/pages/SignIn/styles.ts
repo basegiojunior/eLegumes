@@ -7,9 +7,14 @@ import {
   SPACE_TWO,
   SPACE_FIVE,
   SPACE_SEVEN,
+  SPACE_SIX_DP,
   SPACE_SIX,
 } from "~/styles/sizes";
-import { COLOR_BACKGROUND_PRIMARY, TEXT_PRIMARY } from "~/styles/colors";
+import {
+  COLOR_BACKGROUND_PRIMARY,
+  TEXT_PRIMARY,
+  SECONDARY_COLOR,
+} from "~/styles/colors";
 import { FONT_REGULAR } from "~/styles/fonts";
 
 import { widthPercentageToPx } from "~/Components/PercentageConverter";
@@ -18,7 +23,7 @@ export const Container = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
     justifyContent: "center",
     flexGrow: 1,
-    padding: SPACE_PRIMARY_DP * 1.5,
+    paddingHorizontal: SPACE_SIX_DP,
     alignItems: "center",
   },
   keyboardShouldPersistTaps: "handled",
@@ -26,6 +31,21 @@ export const Container = styled.ScrollView.attrs(() => ({
   flex: 1;
   height: 100%;
   background-color: ${COLOR_BACKGROUND_PRIMARY};
+`;
+
+export const ContainerTop = styled.View`
+  width: 100%;
+  background-color: ${SECONDARY_COLOR};
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TopImage = styled.Image`
+  width: ${widthPercentageToPx("55%")};
+  height: ${widthPercentageToPx("28%")};
+  margin-top: ${widthPercentageToPx("20%")};
+  margin-bottom: ${widthPercentageToPx("20%")};
 `;
 
 export const LogoImage = styled.Image`
@@ -50,14 +70,10 @@ export const LineDiv = styled.View`
   border-color: "rgba(0,0,0,.08)";
 `;
 
-export const LostPass = styled.View`
-  align-self: flex-end;
-  margin-bottom: 8px;
-`;
-
 export const SignUpView = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin-top: ${SPACE_EIGHT};
 `;

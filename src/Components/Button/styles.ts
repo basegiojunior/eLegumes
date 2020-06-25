@@ -36,7 +36,7 @@ export const ContainerGhostView = styled.View`
   width: 100%;
   background-color: #fff;
   border-color: ${PRIMARY_COLOR};
-  border-width: ${widthPercentageToPx("0.8%")};
+  border-width: 2px;
   border-radius: ${widthPercentageToPx("2.5%")};
   margin-top: ${SPACE_TWO};
   margin-bottom: ${SPACE_SECONDARY};
