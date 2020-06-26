@@ -26,7 +26,7 @@ export const ProfileImage = styled.Image`
   width: ${widthPercentageToPx("36%")};
   height: ${widthPercentageToPx("36%")};
   border-radius: ${widthPercentageToPx("18%")};
-  margin-top: ${widthPercentageToPx("15%")};
+  margin-top: ${widthPercentageToPx("8%")};
   margin-bottom: ${SPACE_FIVE};
 `;
 

@@ -2,7 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { signUpRequest } from "~/store/modules/auth/actions";
-import { Container, ContainerTop, TopImage, ToLoginContainer } from "./styles";
+import {
+  Container,
+  ContainerTop,
+  TopImage,
+  ToLoginContainer,
+  ContainerIntern,
+} from "./styles";
 import SignUpForm from "./form";
 import Loading from "~/Components/Loading";
 import ButtonText from "~/Components/Button/buttonText";
@@ -20,21 +26,33 @@ const SignUp: React.FC<SignProps> = ({ navigation }) => {
   const handleSubmit: Function = async (
     name: string,
     email: string,
+    birthdate: string,
+    phone: string,
     password: string,
-    phone: string
+    passwordConfirmation: string
   ) => {
-    dispatch(signUpRequest(name, email, password, phone, navigation));
+    dispatch(
+      signUpRequest(
+        name,
+        email,
+        birthdate,
+        phone,
+        password,
+        passwordConfirmation
+      )
+    );
   };
 
   return (
     <>
-      <ContainerTop>
-        <TopImage source={logo} />
-      </ContainerTop>
       <Container>
-        <Loading visible={loading} />
+        <ContainerTop>
+          <TopImage source={logo} />
+        </ContainerTop>
+        <ContainerIntern>
+          <Loading visible={loading} />
 
-        {/* <Image
+          {/* <Image
 				source={logo}
 				style={{
 					width: widthPercentageToDP("25%"),
@@ -42,14 +60,15 @@ const SignUp: React.FC<SignProps> = ({ navigation }) => {
 					marginBottom: widthPercentageToDP("0%"),
 				}}
 			/> */}
-        <SignUpForm termsViz={() => null} handleSubmitSignUp={handleSubmit} />
+          <SignUpForm termsViz={() => null} handleSubmitSignUp={handleSubmit} />
 
-        <ToLoginContainer>
-          <ButtonText
-            text="Entrar com um usuário existente"
-            onPress={() => navigation.navigate("Entrar")}
-          />
-        </ToLoginContainer>
+          <ToLoginContainer>
+            <ButtonText
+              text="Entrar com um usuário existente"
+              onPress={() => navigation.navigate("Entrar")}
+            />
+          </ToLoginContainer>
+        </ContainerIntern>
       </Container>
     </>
   );

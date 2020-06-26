@@ -20,17 +20,20 @@ import { FONT_REGULAR } from "~/styles/fonts";
 import { widthPercentageToPx } from "~/Components/PercentageConverter";
 
 export const Container = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: {
-    justifyContent: "center",
-    flexGrow: 1,
-    paddingHorizontal: SPACE_SIX_DP,
-    alignItems: "center",
-  },
   keyboardShouldPersistTaps: "handled",
 }))`
   flex: 1;
   height: 100%;
   background-color: ${COLOR_BACKGROUND_PRIMARY};
+`;
+
+export const ContainerIntern = styled.View`
+  justify-content: center;
+  padding-left: ${SPACE_SIX};
+  padding-right: ${SPACE_SIX};
+  padding-top: ${SPACE_SEVEN};
+  padding-bottom: ${SPACE_SEVEN};
+  align-items: center;
 `;
 
 export const ContainerTop = styled.View`
@@ -44,7 +47,7 @@ export const ContainerTop = styled.View`
 export const TopImage = styled.Image`
   width: ${widthPercentageToPx("55%")};
   height: ${widthPercentageToPx("28%")};
-  margin-top: ${widthPercentageToPx("20%")};
+  margin-top: ${widthPercentageToPx("8%")};
   margin-bottom: ${widthPercentageToPx("20%")};
 `;
 

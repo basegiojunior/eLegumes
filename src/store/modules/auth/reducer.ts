@@ -4,13 +4,23 @@ import { Reducer } from "redux";
 const INITIAL_STATE = {
   signed: false,
   loading: false,
-  userData: {},
+  userData: {
+    id: "",
+    name: "",
+    email: "",
+    phone: "",
+  },
 };
 
 type InitialProps = {
   signed: boolean;
   loading: boolean;
-  userData: object;
+  userData: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+  };
 };
 
 const auth: Reducer<InitialProps> = (state = INITIAL_STATE, action: any) => {

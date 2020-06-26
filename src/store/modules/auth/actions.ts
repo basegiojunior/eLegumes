@@ -5,7 +5,12 @@ export const signInRequest: Function = (email: string, password: string) => {
   };
 };
 
-export const signInSuccess: Function = (userData: object) => {
+export const signInSuccess: Function = (userData: {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+}) => {
   return {
     type: "@auth/SIGN_IN_SUCCESS",
     payload: { userData },
@@ -21,16 +26,20 @@ export const signUpSuccess: Function = () => {
 export const signUpRequest: Function = (
   name: string,
   email: string,
+  birth: string,
+  phone: string,
   password: string,
-  phone: string
+  passwordConfirmation: string
 ) => {
   return {
     type: "@auth/SIGN_UP_REQUEST",
     payload: {
       name,
       email,
-      password,
+      birth,
       phone,
+      password,
+      passwordConfirmation,
     },
   };
 };

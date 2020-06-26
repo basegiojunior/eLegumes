@@ -8,10 +8,11 @@ import { widthPercentageToPx } from "~/Components/PercentageConverter";
 
 import { COLOR_BACKGROUND_PRIMARY, SECONDARY_COLOR } from "~/styles/colors";
 import {
-  SPACE_SIX_DP,
+  SPACE_ONE,
   SPACE_THREE,
   SPACE_FIVE,
   SPACE_SIX,
+  SPACE_SEVEN,
 } from "~/styles/sizes";
 
 type Button = {
@@ -19,16 +20,20 @@ type Button = {
 };
 
 export const Container = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: {
-    justifyContent: "center",
-    flexGrow: 1,
-    padding: SPACE_SIX_DP,
-  },
   keyboardShouldPersistTaps: "handled",
 }))`
   flex: 1;
   height: 100%;
   background-color: ${COLOR_BACKGROUND_PRIMARY};
+`;
+
+export const ContainerIntern = styled.View`
+  justify-content: flex-start;
+  padding-left: ${SPACE_SIX};
+  padding-right: ${SPACE_SIX};
+  padding-top: ${SPACE_ONE};
+  padding-bottom: ${SPACE_SEVEN};
+  align-items: flex-start;
 `;
 
 export const ContainerTop = styled.View`
@@ -42,7 +47,7 @@ export const ContainerTop = styled.View`
 export const TopImage = styled.Image`
   width: ${widthPercentageToPx("55%")};
   height: ${widthPercentageToPx("28%")};
-  margin-top: ${widthPercentageToPx("20%")};
+  margin-top: ${widthPercentageToPx("8%")};
   margin-bottom: ${widthPercentageToPx("20%")};
 `;
 

@@ -15,6 +15,7 @@ import {
   ExitButton,
   TopImage,
   ContainerTop,
+  ContainerIntern,
 } from "./styles";
 
 import Input from "~/Components/Input";
@@ -89,33 +90,34 @@ const SignIn: React.FC<SignProps> = ({ navigation }) => {
     <>
       {forgotPasswordReturn()}
       <Loading visible={loading} />
-      <ContainerTop>
-        <TopImage source={logo} />
-      </ContainerTop>
-
       <Container>
-        <SignInForm
-          handleSubmitSignIn={(email: string, password: string) => {
-            handleSubmit(email, password);
-          }}
-          forgotPassword={() => setVisibleForgotPass(true)}
-        />
-
-        {/* <LineDiv /> */}
-
-        <SignUpView>
-          <ButtonText
-            onPress={() => {
-              navigation.navigate("Cadastrar");
+        <ContainerTop>
+          <TopImage source={logo} />
+        </ContainerTop>
+        <ContainerIntern>
+          <SignInForm
+            handleSubmitSignIn={(email: string, password: string) => {
+              handleSubmit(email, password);
             }}
-            text="Crie uma conta"
+            forgotPassword={() => setVisibleForgotPass(true)}
           />
 
-          <ButtonText
-            text="Esqueceu sua senha?"
-            onPress={() => () => setVisibleForgotPass(true)}
-          />
-        </SignUpView>
+          {/* <LineDiv /> */}
+
+          <SignUpView>
+            <ButtonText
+              onPress={() => {
+                navigation.navigate("Cadastrar");
+              }}
+              text="Crie uma conta"
+            />
+
+            <ButtonText
+              text="Esqueceu sua senha?"
+              onPress={() => () => setVisibleForgotPass(true)}
+            />
+          </SignUpView>
+        </ContainerIntern>
       </Container>
     </>
   );

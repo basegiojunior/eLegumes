@@ -22,16 +22,18 @@ type FormProps = {
   values: {
     name: string;
     phone: string;
-    password: string;
     email: string;
+    birthdate: string;
+    password: string;
     passwordConfirmation: string;
     checkbox: boolean;
   };
   errors: {
     name: string;
     phone: string;
-    password: string;
     email: string;
+    birthdate: string;
+    password: string;
     passwordConfirmation: string;
   };
   submitCount: number;
@@ -47,6 +49,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
   const nameInputRef = useRef<TextInput>(null);
   const emailInputRef = useRef<TextInput>(null);
   const phoneInputRef = useRef<TextInput>(null);
+  const birthdateInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const passwordConfirmInputRef = useRef<TextInput>(null);
 
@@ -56,8 +59,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
       <Input
         icon="account"
         autoCorrect={false}
-        title="Nome"
-        placeholder="Nome Completo"
+        placeholder="Nome"
         autoCompleteType="name"
         autoCapitalize="words"
         value={propsForm.values.name}
@@ -74,7 +76,6 @@ const Form: React.FC<FormProps> = (propsForm) => {
       <Input
         icon="email"
         autoCorrect={false}
-        title="E-mail"
         placeholder="E-mail"
         autoCompleteType="email"
         autoCapitalize="none"
@@ -86,8 +87,25 @@ const Form: React.FC<FormProps> = (propsForm) => {
           propsForm.setFieldValue("email", text);
         }}
         returnKeyType="next"
-        onSubmitEditing={() => phoneInputRef.current?.focus()}
+        onSubmitEditing={() => birthdateInputRef.current?.focus()}
         ref={emailInputRef}
+      />
+
+      <InputMask
+        icon="calendar"
+        type="datetime"
+        autoCorrect={false}
+        placeholder="Data de Nascimento"
+        keyboardType="numeric"
+        value={propsForm.values.birthdate}
+        error={propsForm.errors.birthdate}
+        submitted={propsForm.submitCount > 0}
+        onChangeText={(text: string) => {
+          propsForm.setFieldValue("birthdate", text);
+        }}
+        returnKeyType="next"
+        onSubmitEditing={() => phoneInputRef.current?.focus()}
+        ref={birthdateInputRef}
       />
 
       <InputMask
@@ -99,7 +117,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
           dddMask: "(99) ",
         }}
         autoCorrect={false}
-        placeholder="(99) 99999-9999"
+        placeholder="Celular"
         keyboardType="numeric"
         value={propsForm.values.phone}
         error={propsForm.errors.phone}
@@ -220,6 +238,7 @@ export default withFormik({
     passwordConfirmation: "",
     phone: "",
     name: "",
+    birthdate: "",
   }),
 
   validationSchema: Yup.object().shape({
@@ -230,6 +249,9 @@ export default withFormik({
     phone: Yup.string()
       .min(15, "Você precisa preencher seu CELULAR")
       .required("Você precisa preencher seu CELULAR"),
+    birthdate: Yup.string()
+      .min(8, "Você precisa preencher seu NASCIMENTO")
+      .required("Você precisa preencher seu NASCIMENTO"),
     password: Yup.string()
       .min(8, "A senha deve ter no mínimo 8 caracteres")
       .required("Você precisa preencher a SENHA"),
@@ -241,8 +263,23 @@ export default withFormik({
 
   handleSubmit: (values, { props, setSubmitting }) => {
     // setTimeout(() => {
-    const { name, email, password, phone } = values;
-    props.handleSubmitSignUp(name, email, password, phone);
+    const {
+      name,
+      email,
+      birthdate,
+      phone,
+      password,
+      passwordConfirmation,
+    } = values;
+
+    props.handleSubmitSignUp(
+      name,
+      email,
+      birthdate,
+      phone,
+      password,
+      passwordConfirmation
+    );
     setSubmitting(false);
     // });
   },

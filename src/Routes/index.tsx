@@ -30,7 +30,7 @@ import {
   styleBarTopBuscaSecond,
   styleBarCategory,
   styleBarOnlyBack,
-  styleBarOnlyBackTransparent,
+  styleBarAccSign,
   styleBarTransparent,
   styleBarAcc,
   styleBarTopCart,
@@ -107,20 +107,14 @@ const AccountStackScreen: React.FC = () => {
         name="Entrar"
         component={SignIn}
         options={({ navigation }) => {
-          return styleBarOnlyBackTransparent(
-            () => navigation.goBack(),
-            "Entrar"
-          );
+          return styleBarAccSign(() => navigation.goBack(), "Entrar");
         }}
       />
       <AccountStack.Screen
         name="Cadastrar"
         component={SignUp}
         options={({ navigation }) => {
-          return styleBarOnlyBackTransparent(
-            () => navigation.goBack(),
-            "Cadastro"
-          );
+          return styleBarAccSign(() => navigation.goBack(), "Cadastro");
         }}
       />
     </AccountStack.Navigator>

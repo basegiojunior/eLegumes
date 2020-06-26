@@ -36,14 +36,14 @@ interface InputProps extends TextInputProps {
   value: string;
   error?: string;
   submitted: boolean;
-  title: string;
+  title?: string;
 }
 interface InputMaskProps extends TextInputMaskProps {
   icon: string;
   value: string;
   error?: string;
   submitted: boolean;
-  title: string;
+  title?: string;
 }
 
 interface InputRef {

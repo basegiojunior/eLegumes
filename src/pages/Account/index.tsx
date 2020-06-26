@@ -1,6 +1,7 @@
 import React from "react";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
+import { useDispatch } from "react-redux";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import profile from "~/assets/product.jpg";
@@ -24,12 +25,17 @@ import Button, { ButtonGhost } from "~/Components/Button";
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
 import { PRIMARY_COLOR } from "~/styles/colors";
 
+import { signOut } from "~/store/modules/auth/actions";
+
 type AccProps = {
   navigation: any;
 };
 
 const Account: React.FC<AccProps> = ({ navigation }) => {
   const signed = useSelector((state) => state.auth.signed);
+  const userData = useSelector((state) => state.auth.userData);
+
+  const dispatch = useDispatch();
 
   return (
     <ContainerScroll>
@@ -37,15 +43,15 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
         <>
           <ContainerProfile>
             <ProfileImage source={profile} />
-            <ProfileName>Ademir Baségio Junior</ProfileName>
+            <ProfileName>{userData.name}</ProfileName>
           </ContainerProfile>
           <ItemsContainer>
             <ItemLink>
               <Item>
                 <Icon
-                  name="share"
-                  color="green"
-                  size={widthPercentageToDP("10%")}
+                  name="clock-outline"
+                  color="#30a8c0"
+                  size={widthPercentageToDP("7%")}
                 />
                 <ItemText>Meus Pedidos</ItemText>
               </Item>
@@ -53,9 +59,9 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="share"
-                  color="green"
-                  size={widthPercentageToDP("10%")}
+                  name="home"
+                  color="#66cc91"
+                  size={widthPercentageToDP("7%")}
                 />
                 <ItemText>Meus Endereços</ItemText>
               </Item>
@@ -63,9 +69,9 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="share"
-                  color="green"
-                  size={widthPercentageToDP("10%")}
+                  name="credit-card"
+                  color="#7c6"
+                  size={widthPercentageToDP("7%")}
                 />
                 <ItemText>Meus Cartões</ItemText>
               </Item>
@@ -75,9 +81,9 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="share"
-                  color="green"
-                  size={widthPercentageToDP("10%")}
+                  name="message-outline"
+                  color="#f0c74c"
+                  size={widthPercentageToDP("7%")}
                 />
                 <ItemText>Fale Conosco</ItemText>
               </Item>
@@ -85,21 +91,21 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="share"
-                  color="green"
-                  size={widthPercentageToDP("10%")}
+                  name="help-circle-outline"
+                  color="#f3a372"
+                  size={widthPercentageToDP("7%")}
                 />
-                <ItemText>Fale Conosco</ItemText>
+                <ItemText>Dúvidas Frequentes</ItemText>
               </Item>
             </ItemLink>
-            <ItemLink>
+            <ItemLink onPress={() => dispatch(signOut())}>
               <Item>
                 <Icon
-                  name="share"
-                  color="green"
-                  size={widthPercentageToDP("10%")}
+                  name="exit-run"
+                  color="#ed5e5e"
+                  size={widthPercentageToDP("7%")}
                 />
-                <ItemText>Fale Conosco</ItemText>
+                <ItemText>Sair</ItemText>
               </Item>
             </ItemLink>
           </ItemsContainer>
@@ -136,9 +142,9 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="share"
-                  color="green"
-                  size={widthPercentageToDP("10%")}
+                  name="message-outline"
+                  color="#f0c74c"
+                  size={widthPercentageToDP("7%")}
                 />
                 <ItemText>Fale Conosco</ItemText>
               </Item>
@@ -146,9 +152,9 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="share"
-                  color="green"
-                  size={widthPercentageToDP("10%")}
+                  name="help-circle-outline"
+                  color="#f3a372"
+                  size={widthPercentageToDP("7%")}
                 />
                 <ItemText>Dúvidas Frequentes</ItemText>
               </Item>

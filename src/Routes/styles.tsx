@@ -9,7 +9,7 @@ import { useSelector } from "~/store/modules/rootReducer";
 import SearchBar from "~/Components/SearchBar";
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
+import { TEXT_PRIMARY, TEXT_SECONDARY, SECONDARY_COLOR } from "~/styles/colors";
 import { SPACE_FOR_DP, SPACE_EIGHT_DP } from "~/styles/sizes";
 import { FONT_BOLD } from "~/styles/fonts";
 
@@ -68,7 +68,6 @@ export const EditButton: React.FC = () => {
 };
 
 export const styleBarTop = {
-  headerStyle: { backgroundColor: "#fff" },
   headerTitle: "eLegumes",
   headerTitleContainerStyle: { left: 0 },
   headerTitleStyle: {
@@ -115,7 +114,7 @@ export const styleBarTopBusca = {
 export const styleBarAcc = (): StackNavigationOptions => {
   return {
     ...styleBarTop,
-    headerTransparent: true,
+    headerStyle: { backgroundColor: SECONDARY_COLOR, elevation: 0 },
     headerTitle: "Perfil",
     headerTitleContainerStyle: {
       right: 0,
@@ -179,13 +178,13 @@ export const styleBarTransparent = (
   };
 };
 
-export const styleBarOnlyBackTransparent = (
+export const styleBarAccSign = (
   ButtonLeft: Function,
   title: string
 ): StackNavigationOptions => {
   return {
     ...styleBarTop,
-    headerTransparent: true,
+    headerStyle: { backgroundColor: SECONDARY_COLOR, elevation: 0 },
     headerTitle: title,
     headerTitleStyle: {
       fontSize: widthPercentageToDP("5.5%"),
