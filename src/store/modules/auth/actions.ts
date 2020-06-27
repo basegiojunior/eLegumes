@@ -1,7 +1,11 @@
-export const signInRequest: Function = (email: string, password: string) => {
+export const signInRequest: Function = (
+  email: string,
+  password: string,
+  afterNavTo = ""
+) => {
   return {
     type: "@auth/SIGN_IN_REQUEST",
-    payload: { email, password },
+    payload: { email, password, afterNavTo },
   };
 };
 

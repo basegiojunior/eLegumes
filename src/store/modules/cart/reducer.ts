@@ -63,14 +63,8 @@ const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
                   : lastProduct.price
               ) * draft.cart[companieIndex].products[productIndex].quantity;
 
-            console.log(`lastPrice: ${lastPrice}`);
-            console.log(`price: ${price}`);
-            console.log(`totalPrice: ${draft.cart[companieIndex].totalPrice}`);
-
             draft.cart[companieIndex].totalPrice =
               draft.cart[companieIndex].totalPrice - lastPrice + price;
-
-            console.log(`totalPrice: ${draft.cart[companieIndex].totalPrice}`);
 
             draft.cart[companieIndex].products[productIndex] = {
               quantity,

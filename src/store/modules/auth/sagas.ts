@@ -12,6 +12,7 @@ export function* signIn({ payload }: any): any {
     try {
       const emailPayload = payload.email;
       const passwordPayload = payload.password;
+      const { afterNavTo } = payload;
 
       const response = yield call(api.post, "v1/auth/client/login", {
         email: emailPayload,
@@ -25,7 +26,11 @@ export function* signIn({ payload }: any): any {
 
       yield put(signInSuccess({ id, name: username, email, phone }));
 
-      Navigation.navigate("Minha Conta");
+      if (afterNavTo === "") {
+        Navigation.navigate("Minha Conta");
+      } else {
+        Navigation.navigate(afterNavTo);
+      }
 
       return;
     } catch (error) {

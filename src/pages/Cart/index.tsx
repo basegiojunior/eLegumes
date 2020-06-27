@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { TouchableWithoutFeedback, Animated } from "react-native";
 import { useDispatch } from "react-redux";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import Button from "~/Components/Button";
@@ -41,13 +42,20 @@ import { TEXT_SECONDARY } from "~/styles/colors";
 import { SPACE_FIVE_DP, SPACE_SEVEN_DP, SPACE_SIX_DP } from "~/styles/sizes";
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
+type CartType = {
+  navigation: any;
+};
+
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   const sizeEndContainer = -widthPercentageToDP("20%");
 
   // selectors
   const cart = useSelector((state) => state.cart.cart);
   const companieSelected = useSelector((state) => state.cart.companieSelected);
+  const isSigned = useSelector((state) => state.auth.signed);
 
   // variaveis das animações
   const endContainerPosition = useRef(
@@ -66,41 +74,49 @@ const Cart: React.FC = () => {
     }).start();
   }
 
+  // gerencia a ação do botão de fazer pedido
   function handleOrder(): void {
-    type requestType = {
-      items: { product_id: string; weight: number }[];
-      company: string;
-    };
+    if (isSigned) {
+      type requestType = {
+        items: { product_id: string; weight: number }[];
+        company: string;
+      };
 
-    const request: requestType = { items: [], company: "" };
+      const request: requestType = { items: [], company: "" };
 
-    const company = cart.find(
-      (item) => item.companie.id === companieSelected.id
-    );
+      const company = cart.find(
+        (item) => item.companie.id === companieSelected.id
+      );
 
-    if (company) {
-      request.company = company?.companie.id;
+      if (company) {
+        request.company = company?.companie.id;
 
-      for (let i = 0; i < company?.products.length; i += 1) {
-        const dado = company.products[i].data;
-        if (
-          dado.type === "weight" &&
-          dado.weight !== undefined &&
-          dado.weight !== null
-        ) {
-          request.items = [
-            ...request.items,
-            {
-              // eslint-disable-next-line @typescript-eslint/camelcase
-              product_id: dado.id,
-              weight: company.products[i].quantity * dado.weight,
-            },
-          ];
+        for (let i = 0; i < company?.products.length; i += 1) {
+          const dado = company.products[i].data;
+          if (
+            dado.type === "weight" &&
+            dado.weight !== undefined &&
+            dado.weight !== null
+          ) {
+            request.items = [
+              ...request.items,
+              {
+                // eslint-disable-next-line @typescript-eslint/camelcase
+                product_id: dado.id,
+                weight: company.products[i].quantity * dado.weight,
+              },
+            ];
+          }
         }
-      }
-    }
 
-    dispatch(orderRequest(request));
+        dispatch(orderRequest(request));
+      }
+    } else {
+      navigation.navigate("Minha Conta", {
+        screen: "Entrar",
+        params: { afterNavTo: "Sacola" },
+      });
+    }
   }
 
   // gerencia o preço do total da compania selecionada
@@ -173,7 +189,7 @@ const Cart: React.FC = () => {
           </EndContainerLeft>
         </EndContainerLeftLink>
         <EndContainerRight>
-          <Button text="fazer pedido" />
+          <Button text="fazer pedido" onPress={() => handleOrder()} />
         </EndContainerRight>
       </EndContainer>
 

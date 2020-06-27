@@ -28,15 +28,22 @@ import Loading from "~/Components/Loading";
 
 type SignProps = {
   navigation: any;
+  route: any;
 };
 
-const SignIn: React.FC<SignProps> = ({ navigation }) => {
+const SignIn: React.FC<SignProps> = ({ navigation, route }) => {
   const loading = useSelector((state) => state.auth.loading);
   const [visibleForgotPass, setVisibleForgotPass] = useState(false);
   const [emailForgot, setEmailForgot] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit: Function = async (email: string, password: string) => {
+    if (route.params) {
+      if (route.params.afterNavTo) {
+        store.dispatch(signInRequest(email, password, route.params.afterNavTo));
+        return;
+      }
+    }
     store.dispatch(signInRequest(email, password));
   };
 
