@@ -1,13 +1,13 @@
 import styled from "styled-components/native";
 
-import { FONT_SEMIBOLD } from "~/styles/fonts";
-import { FONT_SIZE_SECONDARY, SPACE_EIGHT } from "~/styles/sizes";
+import FONTS from "~/styles/fonts";
+import SIZES from "~/styles/sizes";
 
-import { TEXT_SECONDARY } from "~/styles/colors";
+import COLORS from "~/styles/colors";
 
 export const TitleText = styled.Text`
-  margin-top: ${SPACE_EIGHT};
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_SECONDARY};
+  margin-top: ${SIZES.SPACE_EIGHT};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_SEMIBOLD};
+  color: ${COLORS.TEXT_SECONDARY};
 `;

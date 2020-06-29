@@ -3,16 +3,9 @@ import { ViewProps } from "react-native";
 
 import { widthPercentageToPx } from "../PercentageConverter";
 
-import {
-  FONT_SIZE_QUATERNARY,
-  SPACE_TWO,
-  SPACE_EIGHT,
-  SPACE_FIVE,
-  SPACE_SIX,
-  FONT_SIZE_SECONDARY,
-} from "~/styles/sizes";
-import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "~/styles/fonts";
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
+import SIZES from "~/styles/sizes";
+import FONTS from "~/styles/fonts";
+import COLORS from "~/styles/colors";
 
 interface Margin extends ViewProps {
   last?: boolean;
@@ -20,26 +13,26 @@ interface Margin extends ViewProps {
 
 export const Title = styled.Text`
   width: 100%;
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_SECONDARY};
-  margin: ${SPACE_EIGHT} 0 ${SPACE_FIVE} ${SPACE_SIX};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_SEMIBOLD};
+  color: ${COLORS.TEXT_SECONDARY};
+  margin: ${SIZES.SPACE_EIGHT} 0 ${SIZES.SPACE_FIVE} ${SIZES.SPACE_SIX};
 `;
 
 export const TitleProduct = styled.Text`
-  font-size: ${FONT_SIZE_QUATERNARY};
-  margin-top: ${SPACE_TWO};
-  margin-left: ${SPACE_TWO};
-  font-family: ${FONT_BOLD};
-  color: ${TEXT_PRIMARY};
+  font-size: ${SIZES.FONT_SIZE_QUATERNARY};
+  margin-top: ${SIZES.SPACE_TWO};
+  margin-left: ${SIZES.SPACE_TWO};
+  font-family: ${FONTS.FONT_BOLD};
+  color: ${COLORS.TEXT_PRIMARY};
   width: ${widthPercentageToPx("42%")};
 `;
 
 export const PriceProduct = styled.Text`
-  margin-left: ${SPACE_TWO};
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_REGULAR};
-  color: ${TEXT_SECONDARY};
+  margin-left: ${SIZES.SPACE_TWO};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  color: ${COLORS.TEXT_SECONDARY};
   width: ${widthPercentageToPx("42%")};
 `;
 
@@ -53,13 +46,13 @@ export const LinkContainerLine = styled.TouchableOpacity``;
 export const ViewLinkLine = styled.View<Margin>`
   width: 50%;
   flex-direction: column;
-  padding-left: ${({ last }) => (last ? SPACE_TWO : SPACE_SIX)};
-  padding-right: ${({ last }) => (last ? SPACE_SIX : SPACE_TWO)};
+  padding-left: ${({ last }) => (last ? SIZES.SPACE_TWO : SIZES.SPACE_SIX)};
+  padding-right: ${({ last }) => (last ? SIZES.SPACE_SIX : SIZES.SPACE_TWO)};
   margin-bottom: 15px;
 `;
 
 export const ImageProductLine = styled.Image`
-  border-radius: ${SPACE_TWO};
+  border-radius: ${SIZES.SPACE_TWO};
   width: ${widthPercentageToPx("42%")};
   height: ${widthPercentageToPx("25%")};
 `;

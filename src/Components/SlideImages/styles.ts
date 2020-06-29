@@ -2,19 +2,9 @@ import styled from "styled-components/native";
 
 import { widthPercentageToPx } from "../PercentageConverter";
 
-import {
-  FONT_SIZE_QUATERNARY,
-  FONT_SIZE_SECONDARY,
-  SPACE_TWO_DP,
-  SPACE_SIX_DP,
-  SPACE_FOR,
-  SPACE_TWO,
-  SPACE_FIVE,
-  FONT_SIZE_TERTIARY,
-  SPACE_SIX,
-} from "../../styles/sizes";
-import { FONT_BOLD, FONT_REGULAR } from "~/styles/fonts";
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
+import SIZES from "../../styles/sizes";
+import FONTS from "~/styles/fonts";
+import COLORS from "~/styles/colors";
 
 interface Margin {
   last?: boolean;
@@ -32,8 +22,8 @@ export const Content = styled.View`
 export const LateralSlide = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
     flexDirection: "row",
-    paddingRight: SPACE_SIX_DP,
-    paddingLeft: SPACE_TWO_DP,
+    paddingRight: SIZES.SPACE_SIX_DP,
+    paddingLeft: SIZES.SPACE_TWO_DP,
   },
   keyboardShouldPersistTaps: "always",
   horizontal: true,
@@ -47,12 +37,12 @@ export const LinkContainer = styled.TouchableOpacity``;
 
 export const ViewLink = styled.View`
   flex-direction: column;
-  margin-left: ${SPACE_FOR};
-  padding-top: ${SPACE_FIVE};
+  margin-left: ${SIZES.SPACE_FOR};
+  padding-top: ${SIZES.SPACE_FIVE};
 `;
 
 export const ImageProduct = styled.Image<ImageProp>`
-  border-radius: ${SPACE_TWO};
+  border-radius: ${SIZES.SPACE_TWO};
   width: ${(props) =>
     props.nItemsInScreen
       ? widthPercentageToPx(`${92 / props.nItemsInScreen - 4}%`)
@@ -64,18 +54,18 @@ export const ImageProduct = styled.Image<ImageProp>`
 `;
 
 export const TitleProduct = styled.Text`
-  font-size: ${FONT_SIZE_QUATERNARY};
-  margin-top: ${SPACE_TWO};
-  margin-left: ${SPACE_TWO};
-  font-family: ${FONT_BOLD};
-  color: ${TEXT_PRIMARY};
+  font-size: ${SIZES.FONT_SIZE_QUATERNARY};
+  margin-top: ${SIZES.SPACE_TWO};
+  margin-left: ${SIZES.SPACE_TWO};
+  font-family: ${FONTS.FONT_BOLD};
+  color: ${COLORS.TEXT_PRIMARY};
 `;
 
 export const PriceProduct = styled.Text`
-  margin-left: ${SPACE_TWO};
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_REGULAR};
-  color: ${TEXT_SECONDARY};
+  margin-left: ${SIZES.SPACE_TWO};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  color: ${COLORS.TEXT_SECONDARY};
 `;
 
 export const TitleLine = styled.View`
@@ -85,9 +75,9 @@ export const TitleLine = styled.View`
 `;
 
 export const VerMais = styled.Text`
-  font-size: ${FONT_SIZE_TERTIARY};
-  color: ${TEXT_SECONDARY};
-  font-family: ${FONT_REGULAR};
+  font-size: ${SIZES.FONT_SIZE_TERTIARY};
+  color: ${COLORS.TEXT_SECONDARY};
+  font-family: ${FONTS.FONT_REGULAR};
   text-decoration-line: underline;
-  margin-right: ${SPACE_SIX};
+  margin-right: ${SIZES.SPACE_SIX};
 `;

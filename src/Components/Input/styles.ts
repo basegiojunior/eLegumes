@@ -2,15 +2,9 @@ import styled from "styled-components/native";
 import { TextInputMask, TextInputMaskProps } from "react-native-masked-text";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
-import {
-  FONT_SIZE_SECONDARY,
-  FONT_SIZE_TERTIARY,
-  SPACE_SECONDARY,
-  SPACE_TWO,
-} from "~/styles/sizes";
-
-import { TEXT_PRIMARY, SECONDARY_COLOR } from "~/styles/colors";
-import { FONT_BOLD, FONT_REGULAR } from "~/styles/fonts";
+import SIZES from "~/styles/sizes";
+import COLORS from "~/styles/colors";
+import FONTS from "~/styles/fonts";
 
 import { widthPercentageToPx } from "../PercentageConverter";
 
@@ -25,7 +19,7 @@ export const ContainerAll = styled.View`
 `;
 
 export const Container = styled.View<ContainerProps>`
-  padding: 0 ${SPACE_SECONDARY};
+  padding: 0 ${SIZES.SPACE_SECONDARY};
   background: #f0f0f0;
   border-radius: ${widthPercentageToPx("2.5%")};
   height: ${widthPercentageToPx("16%")};
@@ -36,39 +30,40 @@ export const Container = styled.View<ContainerProps>`
 
 export const TInput = styled.TextInput`
   flex: 1;
-  font-size: ${FONT_SIZE_TERTIARY};
+  font-size: ${SIZES.FONT_SIZE_TERTIARY};
   height: 100%;
-  font-family: ${FONT_REGULAR};
+  font-family: ${FONTS.FONT_REGULAR};
   margin-left: 0px;
-  color: ${TEXT_PRIMARY};
+  color: ${COLORS.TEXT_PRIMARY};
 `;
 
 export const TInputMask = styled(TextInputMask)<TextInputMaskProps>`
   flex: 1;
-  font-size: ${FONT_SIZE_TERTIARY};
-  font-family: ${FONT_REGULAR};
+  font-size: ${SIZES.FONT_SIZE_TERTIARY};
+  font-family: ${FONTS.FONT_REGULAR};
   /* margin-left: 10px; */
-  color: ${TEXT_PRIMARY};
+  color: ${COLORS.TEXT_PRIMARY};
 `;
 
 export const CampName = styled.Text<ContainerProps>`
   font-size: ${widthPercentageToPx("4.4%")};
   margin-left: ${widthPercentageToPx("5%")};
   /* font-weight: bold; */
-  color: ${(props) => (props.focused ? SECONDARY_COLOR : "rgba(0,0,0,.75)")};
-  font-family: ${FONT_BOLD};
+  color: ${(props) =>
+    props.focused ? COLORS.SECONDARY_COLOR : "rgba(0,0,0,.75)"};
+  font-family: ${FONTS.FONT_BOLD};
 `;
 
 // CAMPO DE ALERTA
 
 export const CampInformationView = styled.Text`
   z-index: 0;
-  font-size: ${FONT_SIZE_SECONDARY};
-  color: ${TEXT_PRIMARY};
-  margin-right: ${SPACE_SECONDARY};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  color: ${COLORS.TEXT_PRIMARY};
+  margin-right: ${SIZES.SPACE_SECONDARY};
   padding: 0;
   justify-content: flex-end;
-  font-family: ${FONT_REGULAR};
+  font-family: ${FONTS.FONT_REGULAR};
 `;
 
 export const ContainerCamp = styled.View`
@@ -80,10 +75,10 @@ export const ContainerCamp = styled.View`
 `;
 
 export const AlertIcon = styled(Icon)`
-  margin: 0 ${SPACE_SECONDARY};
+  margin: 0 ${SIZES.SPACE_SECONDARY};
 `;
 
 export const Icone = styled(Icon)`
-  margin-left: ${SPACE_TWO};
-  margin-right: ${SPACE_TWO};
+  margin-left: ${SIZES.SPACE_TWO};
+  margin-right: ${SIZES.SPACE_TWO};
 `;

@@ -8,9 +8,9 @@ import { navigationRef } from "./navigationService";
 
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
-import { FONT_REGULAR } from "~/styles/fonts";
-import { PRIMARY_COLOR } from "~/styles/colors";
-import { SPACE_TWO_DP } from "~/styles/sizes";
+import FONTS from "~/styles/fonts";
+import COLORS from "~/styles/colors";
+import SIZES from "~/styles/sizes";
 
 import Dashboard from "~/pages/Dashboard";
 import Account from "~/pages/Account";
@@ -29,7 +29,6 @@ import {
   styleBarTopBusca,
   styleBarTopBuscaSecond,
   styleBarCategory,
-  styleBarOnlyBack,
   styleBarAccSign,
   styleBarTransparent,
   styleBarAcc,
@@ -161,7 +160,7 @@ const Routes: React.FC = () => {
           return (
             <Icon
               style={{
-                paddingTop: SPACE_TWO_DP,
+                paddingTop: SIZES.SPACE_TWO_DP,
               }}
               name={iconName}
               size={size}
@@ -171,11 +170,11 @@ const Routes: React.FC = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: PRIMARY_COLOR,
+        activeTintColor: COLORS.PRIMARY_COLOR,
         inactiveTintColor: "gray",
         labelStyle: {
-          paddingBottom: SPACE_TWO_DP,
-          fontFamily: FONT_REGULAR,
+          paddingBottom: SIZES.SPACE_TWO_DP,
+          fontFamily: FONTS.FONT_REGULAR,
         },
         style: {
           height: widthPercentageToDP("16%"),

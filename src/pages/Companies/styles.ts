@@ -1,19 +1,9 @@
 import styled from "styled-components/native";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
-import {
-  FONT_SIZE_SECONDARY,
-  SPACE_SIX,
-  SPACE_FIVE,
-  SPACE_TWO,
-  FONT_SIZE_TERTIARY,
-  SPACE_SEVEN,
-  SPACE_FOR,
-  SPACE_ONE,
-  SPACE_THREE,
-} from "~/styles/sizes";
-import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "~/styles/fonts";
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
+import SIZES from "~/styles/sizes";
+import FONTS from "~/styles/fonts";
+import COLORS from "~/styles/colors";
 
 import { widthPercentageToPx } from "~/Components/PercentageConverter";
 
@@ -21,7 +11,7 @@ export const Container = styled.View`
   width: 100%;
   flex-direction: column;
   background-color: #fff;
-  padding: 0 ${SPACE_SIX};
+  padding: 0 ${SIZES.SPACE_SIX};
 `;
 
 export const ImageCompanie = styled.Image`
@@ -30,15 +20,15 @@ export const ImageCompanie = styled.Image`
 `;
 
 export const CompanieName = styled.Text`
-  font-size: ${SPACE_SIX};
-  font-family: ${FONT_BOLD};
-  margin-top: ${SPACE_SIX};
-  color: ${TEXT_PRIMARY};
+  font-size: ${SIZES.SPACE_SIX};
+  font-family: ${FONTS.FONT_BOLD};
+  margin-top: ${SIZES.SPACE_SIX};
+  color: ${COLORS.TEXT_PRIMARY};
 `;
 
 export const Address = styled.View`
-  margin-top: ${SPACE_FIVE};
-  margin-bottom: ${SPACE_SEVEN};
+  margin-top: ${SIZES.SPACE_FIVE};
+  margin-bottom: ${SIZES.SPACE_SEVEN};
   flex-direction: row;
   align-items: center;
 `;
@@ -46,14 +36,14 @@ export const Address = styled.View`
 export const CompanieAddress = styled.Text`
   font-size: ${widthPercentageToPx("4%")};
   color: #000;
-  font-family: ${FONT_REGULAR};
+  font-family: ${FONTS.FONT_REGULAR};
 `;
 
 // RATING
 
 export const RatingView = styled.View`
   flex-direction: row;
-  padding: 0 ${SPACE_SIX} 0 ${SPACE_SIX};
+  padding: 0 ${SIZES.SPACE_SIX} 0 ${SIZES.SPACE_SIX};
 `;
 
 export const RatingLeft = styled.View`
@@ -65,8 +55,8 @@ export const RatingLeft = styled.View`
 export const RatingRight = styled.View`
   flex-direction: column;
   width: ${widthPercentageToPx("41%")};
-  margin-left: ${SPACE_SIX};
-  padding-top: ${SPACE_ONE};
+  margin-left: ${SIZES.SPACE_SIX};
+  padding-top: ${SIZES.SPACE_ONE};
 `;
 
 export const RatingNumbersView = styled.View`
@@ -77,25 +67,25 @@ export const RatingNumbersView = styled.View`
 
 export const RatingNumbersActual = styled.Text`
   font-size: ${widthPercentageToPx("17%")};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_PRIMARY};
+  font-family: ${FONTS.FONT_SEMIBOLD};
+  color: ${COLORS.TEXT_PRIMARY};
   height: ${widthPercentageToPx("17%")};
 `;
 
 export const RatingNumbersTotal = styled.Text`
   font-size: ${widthPercentageToPx("7%")};
-  font-family: ${FONT_REGULAR};
-  color: ${TEXT_SECONDARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  color: ${COLORS.TEXT_SECONDARY};
   height: ${widthPercentageToPx("7%")};
 `;
 
 export const Icone = styled(Icon)`
-  margin-right: ${SPACE_ONE};
+  margin-right: ${SIZES.SPACE_ONE};
 `;
 
 export const Stars = styled.View`
   flex-direction: row;
-  padding-top: ${SPACE_FOR};
+  padding-top: ${SIZES.SPACE_FOR};
 `;
 
 // RIGHT
@@ -115,8 +105,8 @@ export const StarLineViewLeft = styled.View`
 export const StarLineNumber = styled.Text`
   font-size: ${widthPercentageToPx("3.5%")};
   height: ${widthPercentageToPx("3.5%")};
-  margin-right: ${SPACE_ONE};
-  color: ${TEXT_PRIMARY};
+  margin-right: ${SIZES.SPACE_ONE};
+  color: ${COLORS.TEXT_PRIMARY};
 `;
 
 export const StarLineBarView = styled.View`
@@ -145,14 +135,14 @@ export const StarLineBarLeft = styled.View<Bar>`
 export const CommentView = styled.View`
   flex-direction: column;
   width: 100%;
-  padding: 0 ${SPACE_SIX};
-  margin-top: ${SPACE_TWO};
-  margin-bottom: ${SPACE_SEVEN};
+  padding: 0 ${SIZES.SPACE_SIX};
+  margin-top: ${SIZES.SPACE_TWO};
+  margin-bottom: ${SIZES.SPACE_SEVEN};
 `;
 
 export const CommentTopView = styled.View`
   flex-direction: row;
-  padding-bottom: ${SPACE_THREE};
+  padding-bottom: ${SIZES.SPACE_THREE};
   justify-content: space-between;
   align-items: center;
 `;
@@ -174,15 +164,15 @@ export const Profile = styled.Image`
 `;
 
 export const Name = styled.Text`
-  font-size: ${FONT_SIZE_TERTIARY};
-  color: ${TEXT_PRIMARY};
-  font-family: ${FONT_REGULAR};
-  margin-left: ${SPACE_FIVE};
+  font-size: ${SIZES.FONT_SIZE_TERTIARY};
+  color: ${COLORS.TEXT_PRIMARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  margin-left: ${SIZES.SPACE_FIVE};
 `;
 
 export const CommentText = styled.Text`
-  font-size: ${FONT_SIZE_SECONDARY};
-  color: ${TEXT_PRIMARY};
-  font-family: ${FONT_REGULAR};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  color: ${COLORS.TEXT_PRIMARY};
+  font-family: ${FONTS.FONT_REGULAR};
   text-align: justify;
 `;

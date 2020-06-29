@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "../../store/modules/rootReducer";
+import { useSelector } from "~/store/modules/rootReducer";
 
-import { ContainerScroll } from "../../styles/scrollView";
-import Button from "../../Components/Button";
-import Slide from "../../Components/SlideImages";
-import Title from "../../Components/Title";
+import { ContainerScroll } from "~/styles/scrollView";
+import Button from "~/Components/Button";
+import Slide from "~/Components/SlideImages";
+import Title from "~/Components/Title";
 
 import {
   companieProductsRequest,
   companieRequest,
   companieCommentsRequest,
-} from "../../store/modules/companies/actions";
-import { store } from "../../store";
+} from "~/store/modules/companies/actions";
+import { store } from "~/store";
 
-import profile from "../../assets/product.jpg";
+import profile from "~/assets/product.jpg";
 
 import {
   Container,
@@ -44,9 +44,9 @@ import {
   CommentText,
 } from "./styles";
 
-import { widthPercentageToDP } from "../../Components/PercentageConverter";
+import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
-import { Companie } from "../../types";
+import { Companie } from "~/types";
 
 type CompaniesProps = {
   route: {
@@ -114,7 +114,7 @@ const Companies: React.FC<CompaniesProps> = ({ route }) => {
           <CompanieAddress>{data.address.description}</CompanieAddress>
         </Address>
 
-        <Button text="entrar em contato" />
+        <Button text="entrar em contato" onPress={() => null} />
       </Container>
       <Slide
         listElements={companieProducts.products}

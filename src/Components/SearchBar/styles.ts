@@ -3,8 +3,8 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
 import { widthPercentageToPx } from "../PercentageConverter";
 
-import { FONT_BOLD } from "~/styles/fonts";
-import { SPACE_FOR } from "~/styles/sizes";
+import FONTS from "~/styles/fonts";
+import SIZES from "~/styles/sizes";
 
 export const Container = styled.View`
   flex-direction: row;
@@ -12,14 +12,14 @@ export const Container = styled.View`
 `;
 
 export const Input = styled.TextInput`
-  font-family: ${FONT_BOLD};
+  font-family: ${FONTS.FONT_BOLD};
   flex: 1;
   font-size: ${widthPercentageToPx("5.5%")};
   color: #969d95;
 `;
 
 export const Icone = styled(Icon)`
-  margin-right: ${SPACE_FOR};
+  margin-right: ${SIZES.SPACE_FOR};
 `;
 
 export const ButtonSearch = styled.TouchableOpacity``;

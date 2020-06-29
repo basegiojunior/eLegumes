@@ -4,7 +4,7 @@ import { useSelector } from "~/store/modules/rootReducer";
 
 import ItemResult from "~/Components/ItemResult";
 
-import { SPACE_SIX_DP } from "~/styles/sizes";
+import SIZES from "~/styles/sizes";
 
 import { Container } from "./styles";
 
@@ -62,7 +62,7 @@ const SearchEspecifyResults: React.FC<Results> = ({ route }) => {
       <FlatList
         contentContainerStyle={{
           backgroundColor: "#fff",
-          paddingBottom: SPACE_SIX_DP,
+          paddingBottom: SIZES.SPACE_SIX_DP,
         }}
         refreshControl={
           <RefreshControl

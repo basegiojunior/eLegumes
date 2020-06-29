@@ -16,7 +16,7 @@ import SlideItem from "./SlideItem";
 import { widthPercentageToDP } from "../PercentageConverter";
 import Title from "../Title";
 
-import { SPACE_SIX_DP } from "~/styles/sizes";
+import SIZES from "~/styles/sizes";
 
 import { TopProduct } from "~/types";
 
@@ -89,7 +89,7 @@ const SlideImages: React.FC<ProductsArray> = ({
       {show && (
         <>
           <TitleLine>
-            <Title style={{ marginLeft: SPACE_SIX_DP }}>{title}</Title>
+            <Title style={{ marginLeft: SIZES.SPACE_SIX_DP }}>{title}</Title>
 
             {seeMoreData && (
               <TouchableOpacity

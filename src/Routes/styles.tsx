@@ -9,9 +9,9 @@ import { useSelector } from "~/store/modules/rootReducer";
 import SearchBar from "~/Components/SearchBar";
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
-import { TEXT_PRIMARY, TEXT_SECONDARY, SECONDARY_COLOR } from "~/styles/colors";
-import { SPACE_FOR_DP, SPACE_EIGHT_DP } from "~/styles/sizes";
-import { FONT_BOLD } from "~/styles/fonts";
+import COLORS from "~/styles/colors";
+import SIZES from "~/styles/sizes";
+import FONTS from "~/styles/fonts";
 
 import { deleteCompanie } from "~/store/modules/cart/actions";
 
@@ -25,7 +25,7 @@ export const DeleteButton: React.FC = () => {
       rippleColor="rgba(0,0,0,0.1)"
       style={{
         backgroundColor: "transparent",
-        marginRight: SPACE_FOR_DP,
+        marginRight: SIZES.SPACE_FOR_DP,
         width: widthPercentageToDP("10%"),
         height: widthPercentageToDP("10%"),
         borderRadius: widthPercentageToDP("1.5%"),
@@ -36,8 +36,10 @@ export const DeleteButton: React.FC = () => {
     >
       <Icon
         name="delete"
-        size={SPACE_EIGHT_DP}
-        color={isSelected.id !== "" ? TEXT_PRIMARY : TEXT_SECONDARY}
+        size={SIZES.SPACE_EIGHT_DP}
+        color={
+          isSelected.id !== "" ? COLORS.TEXT_PRIMARY : COLORS.TEXT_SECONDARY
+        }
       />
     </RectButton>
   );
@@ -51,7 +53,7 @@ export const EditButton: React.FC = () => {
       <TouchableOpacity
         style={{
           backgroundColor: "transparent",
-          marginRight: SPACE_FOR_DP,
+          marginRight: SIZES.SPACE_FOR_DP,
           width: widthPercentageToDP("10%"),
           height: widthPercentageToDP("10%"),
           borderRadius: widthPercentageToDP("5%"),
@@ -60,7 +62,7 @@ export const EditButton: React.FC = () => {
         }}
         onPress={() => null}
       >
-        <Icon name="pen" size={SPACE_EIGHT_DP} color="#fff" />
+        <Icon name="pen" size={SIZES.SPACE_EIGHT_DP} color="#fff" />
       </TouchableOpacity>
     );
   }
@@ -73,8 +75,8 @@ export const styleBarTop = {
   headerTitleStyle: {
     fontSize: widthPercentageToDP("5.5%"),
     color: "#242A22",
-    marginLeft: SPACE_FOR_DP,
-    fontFamily: FONT_BOLD,
+    marginLeft: SIZES.SPACE_FOR_DP,
+    fontFamily: FONTS.FONT_BOLD,
   },
   headerTintColor: "#fff",
 };
@@ -89,8 +91,8 @@ export const styleBarTopCart = (
     headerTitleStyle: {
       color: "#242A22",
       fontSize: widthPercentageToDP("5.5%"),
-      marginLeft: SPACE_FOR_DP,
-      fontFamily: FONT_BOLD,
+      marginLeft: SIZES.SPACE_FOR_DP,
+      fontFamily: FONTS.FONT_BOLD,
     },
     headerTintColor: "#fff",
     headerRight: () => <DeleteButton />,
@@ -103,7 +105,7 @@ export const styleBarTopBusca = {
   headerTitleContainerStyle: {
     right: 0,
     left: 0,
-    marginLeft: SPACE_FOR_DP,
+    marginLeft: SIZES.SPACE_FOR_DP,
   },
   headerTitle: () => <SearchBar />,
 
@@ -114,7 +116,7 @@ export const styleBarTopBusca = {
 export const styleBarAcc = (): StackNavigationOptions => {
   return {
     ...styleBarTop,
-    headerStyle: { backgroundColor: SECONDARY_COLOR, elevation: 0 },
+    headerStyle: { backgroundColor: COLORS.SECONDARY_COLOR, elevation: 0 },
     headerTitle: "Perfil",
     headerTitleContainerStyle: {
       right: 0,
@@ -123,8 +125,8 @@ export const styleBarAcc = (): StackNavigationOptions => {
     headerTitleStyle: {
       fontSize: widthPercentageToDP("5.5%"),
       color: "#fff",
-      marginLeft: SPACE_FOR_DP,
-      fontFamily: FONT_BOLD,
+      marginLeft: SIZES.SPACE_FOR_DP,
+      fontFamily: FONTS.FONT_BOLD,
     },
     headerRight: () => <EditButton />,
   };
@@ -147,7 +149,7 @@ export const styleBarTransparent = (
       <TouchableOpacity
         style={{
           backgroundColor: "rgba(0,0,0,.4)",
-          marginRight: SPACE_FOR_DP,
+          marginRight: SIZES.SPACE_FOR_DP,
           width: widthPercentageToDP("10%"),
           height: widthPercentageToDP("10%"),
           borderRadius: widthPercentageToDP("5%"),
@@ -156,14 +158,14 @@ export const styleBarTransparent = (
         }}
         onPress={() => ButtonRight()}
       >
-        <Icon name="share" size={SPACE_EIGHT_DP} color="#fff" />
+        <Icon name="share" size={SIZES.SPACE_EIGHT_DP} color="#fff" />
       </TouchableOpacity>
     ),
     headerLeft: () => (
       <TouchableOpacity
         style={{
           backgroundColor: "rgba(0,0,0,.4)",
-          marginLeft: SPACE_FOR_DP,
+          marginLeft: SIZES.SPACE_FOR_DP,
           width: widthPercentageToDP("10%"),
           height: widthPercentageToDP("10%"),
           borderRadius: widthPercentageToDP("5%"),
@@ -172,7 +174,7 @@ export const styleBarTransparent = (
         }}
         onPress={() => ButtonLeft()}
       >
-        <Icon name="arrow-left" size={SPACE_EIGHT_DP} color="#fff" />
+        <Icon name="arrow-left" size={SIZES.SPACE_EIGHT_DP} color="#fff" />
       </TouchableOpacity>
     ),
   };
@@ -184,13 +186,13 @@ export const styleBarAccSign = (
 ): StackNavigationOptions => {
   return {
     ...styleBarTop,
-    headerStyle: { backgroundColor: SECONDARY_COLOR, elevation: 0 },
+    headerStyle: { backgroundColor: COLORS.SECONDARY_COLOR, elevation: 0 },
     headerTitle: title,
     headerTitleStyle: {
       fontSize: widthPercentageToDP("5.5%"),
       color: "#fff",
-      marginLeft: SPACE_FOR_DP,
-      fontFamily: FONT_BOLD,
+      marginLeft: SIZES.SPACE_FOR_DP,
+      fontFamily: FONTS.FONT_BOLD,
     },
     headerTitleContainerStyle: {
       right: 0,
@@ -201,8 +203,8 @@ export const styleBarAccSign = (
       <TouchableOpacity onPress={() => ButtonLeft()}>
         <Icon
           name="arrow-left"
-          style={{ marginLeft: SPACE_FOR_DP }}
-          size={SPACE_EIGHT_DP}
+          style={{ marginLeft: SIZES.SPACE_FOR_DP }}
+          size={SIZES.SPACE_EIGHT_DP}
           color="#fff"
         />
       </TouchableOpacity>
@@ -224,8 +226,8 @@ export const styleBarOnlyBack = (
       <TouchableOpacity onPress={() => ButtonLeft()}>
         <Icon
           name="arrow-left"
-          style={{ marginLeft: SPACE_FOR_DP }}
-          size={SPACE_EIGHT_DP}
+          style={{ marginLeft: SIZES.SPACE_FOR_DP }}
+          size={SIZES.SPACE_EIGHT_DP}
           color="#555"
         />
       </TouchableOpacity>
@@ -249,8 +251,8 @@ export const styleBarCategory = (
       <TouchableOpacity onPress={() => ButtonLeft()}>
         <Icon
           name="arrow-left"
-          style={{ marginLeft: SPACE_FOR_DP }}
-          size={SPACE_EIGHT_DP}
+          style={{ marginLeft: SIZES.SPACE_FOR_DP }}
+          size={SIZES.SPACE_EIGHT_DP}
           color="#555"
         />
       </TouchableOpacity>
@@ -274,8 +276,8 @@ export const styleBarTopBuscaSecond = (
       <TouchableOpacity onPress={() => ButtonLeft()}>
         <Icon
           name="arrow-left"
-          style={{ marginLeft: SPACE_FOR_DP }}
-          size={SPACE_EIGHT_DP}
+          style={{ marginLeft: SIZES.SPACE_FOR_DP }}
+          size={SIZES.SPACE_EIGHT_DP}
           color="#555"
         />
       </TouchableOpacity>

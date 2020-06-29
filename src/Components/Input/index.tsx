@@ -5,19 +5,14 @@ import React, {
   useImperativeHandle,
   useEffect,
 } from "react";
-
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { TouchableWithoutFeedback, View, TextInputProps } from "react-native";
 import { TextInputMaskProps } from "react-native-masked-text";
 
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
-import {
-  PRIMARY_COLOR,
-  SECONDARY_COLOR,
-  TEXT_SECONDARY,
-} from "~/styles/colors";
-import { ICON_SIZE } from "~/styles/sizes";
+import COLORS from "~/styles/colors";
+import SIZES from "~/styles/sizes";
 
 import {
   Container,
@@ -98,14 +93,16 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
           <Icone
             name={icon}
             size={widthPercentageToDP("6%")}
-            color={focused || !!value ? SECONDARY_COLOR : "rgba(0,0,0,.45)"}
+            color={
+              focused || !!value ? COLORS.SECONDARY_COLOR : "rgba(0,0,0,.45)"
+            }
           />
         )}
 
         <TInput
           {...rest}
           value={value}
-          placeholderTextColor={TEXT_SECONDARY}
+          placeholderTextColor={COLORS.TEXT_SECONDARY}
           ref={inputRefElement}
           multiline={multiline}
           onFocus={() => {
@@ -123,7 +120,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
             <Icone
               name={securePass ? "eye-off" : "eye"}
               size={widthPercentageToDP("6%")}
-              color={focused ? SECONDARY_COLOR : "rgba(0,0,0,.45)"}
+              color={focused ? COLORS.SECONDARY_COLOR : "rgba(0,0,0,.45)"}
             />
           </TouchableWithoutFeedback>
         )}
@@ -133,7 +130,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
             <Icone
               name="check-circle"
               size={widthPercentageToDP("6%")}
-              color={PRIMARY_COLOR}
+              color={COLORS.PRIMARY_COLOR}
             />
           </View>
         )}
@@ -141,7 +138,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 
       {showError && !!error && (
         <ContainerCamp>
-          <AlertIcon name="alert-circle" size={ICON_SIZE} color="red" />
+          <AlertIcon name="alert-circle" size={SIZES.ICON_SIZE} color="red" />
           <CampInformationView>{error}</CampInformationView>
         </ContainerCamp>
       )}
@@ -189,7 +186,9 @@ const InputMaskForward: React.ForwardRefRenderFunction<
           <Icone
             name={icon}
             size={widthPercentageToDP("6%")}
-            color={focused || !!value ? SECONDARY_COLOR : "rgba(0,0,0,.45)"}
+            color={
+              focused || !!value ? COLORS.SECONDARY_COLOR : "rgba(0,0,0,.45)"
+            }
           />
         )}
 
@@ -197,7 +196,7 @@ const InputMaskForward: React.ForwardRefRenderFunction<
           {...rest}
           value={value}
           ref={inputRefElement}
-          placeholderTextColor={TEXT_SECONDARY}
+          placeholderTextColor={COLORS.TEXT_SECONDARY}
           onFocus={() => {
             setFocused(true);
             setTouched(true);
@@ -212,7 +211,7 @@ const InputMaskForward: React.ForwardRefRenderFunction<
             <Icone
               name={securePass ? "eye-off" : "eye"}
               size={widthPercentageToDP("6%")}
-              color={focused ? SECONDARY_COLOR : "rgba(0,0,0,.45)"}
+              color={focused ? COLORS.SECONDARY_COLOR : "rgba(0,0,0,.45)"}
             />
           </TouchableWithoutFeedback>
         )}
@@ -222,8 +221,8 @@ const InputMaskForward: React.ForwardRefRenderFunction<
             <Icone
               style={{ marginLeft: 5 }}
               name="check-circle"
-              size={ICON_SIZE}
-              color={PRIMARY_COLOR}
+              size={SIZES.ICON_SIZE}
+              color={COLORS.PRIMARY_COLOR}
             />
           </View>
         )}
@@ -231,7 +230,7 @@ const InputMaskForward: React.ForwardRefRenderFunction<
 
       {showError && !!error && (
         <ContainerCamp>
-          <AlertIcon name="alert-circle" size={ICON_SIZE} color="red" />
+          <AlertIcon name="alert-circle" size={SIZES.ICON_SIZE} color="red" />
           <CampInformationView>{error}</CampInformationView>
         </ContainerCamp>
       )}

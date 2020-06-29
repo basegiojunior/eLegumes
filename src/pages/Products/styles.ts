@@ -3,19 +3,10 @@ import { Animated } from "react-native";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
 import { RectButton } from "react-native-gesture-handler";
-import {
-  FONT_SIZE_SECONDARY,
-  SPACE_SIX,
-  SPACE_FIVE,
-  FONT_SIZE_QUATERNARY,
-  SPACE_EIGHT,
-  FONT_SIZE_TERTIARY,
-  SPACE_SEVEN,
-  SPACE_FOR,
-  SPACE_ONE,
-} from "~/styles/sizes";
-import { FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD } from "~/styles/fonts";
-import { TEXT_PRIMARY, TEXT_SECONDARY } from "~/styles/colors";
+
+import SIZES from "~/styles/sizes";
+import FONTS from "~/styles/fonts";
+import COLORS from "~/styles/colors";
 
 import { widthPercentageToPx } from "~/Components/PercentageConverter";
 
@@ -23,7 +14,7 @@ export const Container = styled.View`
   width: 100%;
   flex-direction: column;
   background-color: #fff;
-  padding: 0 ${SPACE_SIX};
+  padding: 0 ${SIZES.SPACE_SIX};
 `;
 
 export const ContainerRetrac = styled(Animated.View)`
@@ -38,18 +29,18 @@ export const ImageProduct = styled.Image`
 `;
 
 export const ProductName = styled.Text`
-  font-size: ${SPACE_SIX};
-  font-family: ${FONT_BOLD};
-  margin-top: ${SPACE_SIX};
-  color: ${TEXT_PRIMARY};
+  font-size: ${SIZES.SPACE_SIX};
+  font-family: ${FONTS.FONT_BOLD};
+  margin-top: ${SIZES.SPACE_SIX};
+  color: ${COLORS.TEXT_PRIMARY};
 `;
 
 export const ProductAmount = styled.Text`
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_REGULAR};
-  margin-top: ${SPACE_ONE};
-  margin-bottom: ${SPACE_FIVE};
-  color: ${TEXT_SECONDARY};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  margin-top: ${SIZES.SPACE_ONE};
+  margin-bottom: ${SIZES.SPACE_FIVE};
+  color: ${COLORS.TEXT_SECONDARY};
 `;
 
 export const AlertStore = styled.View`
@@ -59,27 +50,27 @@ export const AlertStore = styled.View`
   flex-grow: 1;
   flex-direction: row;
   border-radius: ${widthPercentageToPx("2.5%")};
-  padding: 0 ${SPACE_FOR};
+  padding: 0 ${SIZES.SPACE_FOR};
   justify-content: flex-start;
   align-items: center;
 `;
 
 export const AlertText = styled.Text`
   color: #736626;
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_REGULAR};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_REGULAR};
   flex-shrink: 1;
 `;
 
 export const Icone = styled(Icon)`
-  margin-right: ${SPACE_FOR};
+  margin-right: ${SIZES.SPACE_FOR};
 `;
 
 export const Store = styled.TouchableWithoutFeedback``;
 
 export const StoreView = styled.View`
   flex-direction: row;
-  padding: ${SPACE_SIX} ${SPACE_FOR} 0 ${SPACE_FOR};
+  padding: ${SIZES.SPACE_SIX} ${SIZES.SPACE_FOR} 0 ${SIZES.SPACE_FOR};
   flex-grow: 1;
   margin: 0;
   justify-content: space-between;
@@ -98,7 +89,7 @@ export const StoreCircle = styled.View<Circle>`
     !isPressed ? 0 : widthPercentageToPx("1.8%")};
   border-color: #aa3169;
   background-color: ${({ isPressed }) => (!isPressed ? "#f0f0f0" : "#ffffff")};
-  margin-right: ${SPACE_FIVE};
+  margin-right: ${SIZES.SPACE_FIVE};
 `;
 
 export const StoreViewLeft = styled.View`
@@ -116,16 +107,16 @@ export const StoreTextView = styled.View`
 `;
 
 export const StoreTextName = styled.Text`
-  color: ${TEXT_PRIMARY};
-  font-size: ${FONT_SIZE_TERTIARY};
-  font-family: ${FONT_REGULAR};
+  color: ${COLORS.TEXT_PRIMARY};
+  font-size: ${SIZES.FONT_SIZE_TERTIARY};
+  font-family: ${FONTS.FONT_REGULAR};
   flex-shrink: 1;
 `;
 
 export const StoreTextPrice = styled.Text`
-  color: ${TEXT_SECONDARY};
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_REGULAR};
+  color: ${COLORS.TEXT_SECONDARY};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_REGULAR};
   flex-shrink: 1;
 `;
 
@@ -144,18 +135,18 @@ export const AddProductLeft = styled.View`
 `;
 
 export const AddProductNumber = styled.Text`
-  color: ${TEXT_PRIMARY};
-  font-size: ${SPACE_FOR};
-  font-family: ${FONT_REGULAR};
-  margin: 0 ${SPACE_FOR};
-  width: ${SPACE_FOR};
+  color: ${COLORS.TEXT_PRIMARY};
+  font-size: ${SIZES.SPACE_FOR};
+  font-family: ${FONTS.FONT_REGULAR};
+  margin: 0 ${SIZES.SPACE_FOR};
+  width: ${SIZES.SPACE_FOR};
   text-align: center;
 `;
 
 export const AddProductPrice = styled.Text`
-  color: ${TEXT_PRIMARY};
-  font-size: ${SPACE_SIX};
-  font-family: ${FONT_BOLD};
+  color: ${COLORS.TEXT_PRIMARY};
+  font-size: ${SIZES.SPACE_SIX};
+  font-family: ${FONTS.FONT_BOLD};
 `;
 
 export const AddProductButton = styled(RectButton).attrs(() => ({
@@ -172,9 +163,9 @@ export const AddProductButton = styled(RectButton).attrs(() => ({
 `;
 
 export const AddProductButtonText = styled.Text`
-  color: ${TEXT_PRIMARY};
-  font-size: ${SPACE_SEVEN};
-  font-family: ${FONT_REGULAR};
+  color: ${COLORS.TEXT_PRIMARY};
+  font-size: ${SIZES.SPACE_SEVEN};
+  font-family: ${FONTS.FONT_REGULAR};
 `;
 
 export const AddToCart = styled(RectButton).attrs(() => ({
@@ -183,7 +174,7 @@ export const AddToCart = styled(RectButton).attrs(() => ({
   height: ${widthPercentageToPx("14%")};
   max-height: ${widthPercentageToPx("14%")};
   border-radius: ${widthPercentageToPx("2.5%")};
-  margin: ${SPACE_EIGHT} 0;
+  margin: ${SIZES.SPACE_EIGHT} 0;
   flex: 1;
   align-items: center;
   justify-content: center;
@@ -192,20 +183,20 @@ export const AddToCart = styled(RectButton).attrs(() => ({
 
 export const AddToCartText = styled.Text`
   color: #fff;
-  font-size: ${FONT_SIZE_TERTIARY};
-  font-family: ${FONT_BOLD};
+  font-size: ${SIZES.FONT_SIZE_TERTIARY};
+  font-family: ${FONTS.FONT_BOLD};
 `;
 
 export const TitleText = styled.Text`
-  font-size: ${FONT_SIZE_SECONDARY};
-  height: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_SECONDARY};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  height: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_SEMIBOLD};
+  color: ${COLORS.TEXT_SECONDARY};
 `;
 
 export const StoreViewSeledted = styled.View`
   flex-direction: row;
-  margin-top: ${SPACE_FOR};
+  margin-top: ${SIZES.SPACE_FOR};
   height: ${widthPercentageToPx("14%")};
   max-height: ${widthPercentageToPx("14%")};
   flex-grow: 1;
@@ -220,10 +211,10 @@ export const StoreSelectedImage = styled.Image`
 `;
 
 export const StoreSelectedName = styled.Text`
-  font-size: ${FONT_SIZE_TERTIARY};
-  font-family: ${FONT_BOLD};
-  color: ${TEXT_PRIMARY};
-  margin-left: ${SPACE_FOR};
+  font-size: ${SIZES.FONT_SIZE_TERTIARY};
+  font-family: ${FONTS.FONT_BOLD};
+  color: ${COLORS.TEXT_PRIMARY};
+  margin-left: ${SIZES.SPACE_FOR};
 `;
 
 // EXPANDED
@@ -233,7 +224,7 @@ export const InformationContainer = styled.View`
 `;
 
 export const InfomationSec = styled.Text`
-  font-size: ${FONT_SIZE_QUATERNARY};
-  font-family: ${FONT_REGULAR};
-  color: ${TEXT_PRIMARY};
+  font-size: ${SIZES.FONT_SIZE_QUATERNARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  color: ${COLORS.TEXT_PRIMARY};
 `;

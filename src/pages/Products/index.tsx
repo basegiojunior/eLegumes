@@ -44,7 +44,7 @@ import {
   InformationContainer,
 } from "./styles";
 
-import { TEXT_SECONDARY } from "../../styles/colors";
+import COLORS from "../../styles/colors";
 
 import { widthPercentageToDP } from "../../Components/PercentageConverter";
 
@@ -257,7 +257,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
 
                   <Icone
                     size={widthPercentageToDP("8%")}
-                    color={TEXT_SECONDARY}
+                    color={COLORS.TEXT_SECONDARY}
                     name="store"
                   />
                 </StoreViewSeledted>
@@ -294,7 +294,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
                       <StoreTextPrice>{item.rating}/5</StoreTextPrice>
                       <Icone
                         size={widthPercentageToDP("6%")}
-                        color={TEXT_SECONDARY}
+                        color={COLORS.TEXT_SECONDARY}
                         name="star"
                         style={{ marginLeft: 5 }}
                       />

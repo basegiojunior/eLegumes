@@ -38,8 +38,8 @@ import { deselectCompanie, selectCompanie } from "~/store/modules/cart/actions";
 
 import { orderRequest } from "~/store/modules/orders/actions";
 
-import { TEXT_SECONDARY } from "~/styles/colors";
-import { SPACE_FIVE_DP, SPACE_SEVEN_DP, SPACE_SIX_DP } from "~/styles/sizes";
+import COLORS from "~/styles/colors";
+import SIZES from "~/styles/sizes";
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
 type CartType = {
@@ -182,8 +182,8 @@ const Cart: React.FC = () => {
               <EndContainerPrice>R$ {actualPrice}</EndContainerPrice>
               <Icon
                 name="information-outline"
-                size={SPACE_SIX_DP}
-                color={TEXT_SECONDARY}
+                size={SIZES.SPACE_SIX_DP}
+                color={COLORS.TEXT_SECONDARY}
               />
             </EndContainerViewLeft>
           </EndContainerLeft>
@@ -216,15 +216,19 @@ const Cart: React.FC = () => {
                   <HeaderCompanieCheck
                     selected={item.companie.id === companieSelected.id}
                   >
-                    <Icon name="check" size={SPACE_FIVE_DP} color="#fff" />
+                    <Icon
+                      name="check"
+                      size={SIZES.SPACE_FIVE_DP}
+                      color="#fff"
+                    />
                   </HeaderCompanieCheck>
                   <HeaderCompanieTitle>
                     {item.companie.name.toUpperCase()}
                   </HeaderCompanieTitle>
                   <Icon
                     name="store"
-                    size={SPACE_SEVEN_DP}
-                    color={TEXT_SECONDARY}
+                    size={SIZES.SPACE_SEVEN_DP}
+                    color={COLORS.TEXT_SECONDARY}
                   />
                 </HeaderCompanie>
               </TouchableWithoutFeedback>

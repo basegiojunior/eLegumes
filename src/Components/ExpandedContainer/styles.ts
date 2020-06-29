@@ -5,16 +5,9 @@ import {
   widthPercentageToPx,
   heightPercentageToPx,
 } from "../PercentageConverter";
-import {
-  SPACE_THREE,
-  SPACE_FOR,
-  SPACE_FIVE,
-  SPACE_SIX,
-  SPACE_SEVEN,
-  FONT_SIZE_SECONDARY,
-} from "~/styles/sizes";
-import { FONT_SEMIBOLD } from "~/styles/fonts";
-import { TEXT_PRIMARY, TEXT_SECONDARY, TERT_COLOR } from "~/styles/colors";
+import SIZES from "~/styles/sizes";
+import FONTS from "~/styles/fonts";
+import COLORS from "~/styles/colors";
 
 // EXPANDED END
 
@@ -46,25 +39,25 @@ export const ExpandedLink = styled.TouchableWithoutFeedback`
 
 export const ExpandedEnd = styled(Animated.View)`
   height: ${heightPercentageToPx("65%")};
-  padding-top: ${SPACE_SEVEN};
-  padding-bottom: ${SPACE_SEVEN};
-  padding-left: ${SPACE_SIX};
-  padding-right: ${SPACE_SIX};
+  padding-top: ${SIZES.SPACE_SEVEN};
+  padding-bottom: ${SIZES.SPACE_SEVEN};
+  padding-left: ${SIZES.SPACE_SIX};
+  padding-right: ${SIZES.SPACE_SIX};
   width: 100%;
   background-color: #fff;
   position: absolute;
   left: 0;
   right: 0;
   z-index: 6;
-  border-top-left-radius: ${SPACE_SIX};
-  border-top-right-radius: ${SPACE_SIX};
+  border-top-left-radius: ${SIZES.SPACE_SIX};
+  border-top-right-radius: ${SIZES.SPACE_SIX};
   justify-content: space-between;
 `;
 
 export const InfoTopContainer = styled.View`
-  padding: ${heightPercentageToPx("3%")} ${SPACE_SIX};
-  border-radius: ${SPACE_THREE};
-  background-color: ${TERT_COLOR};
+  padding: ${heightPercentageToPx("3%")} ${SIZES.SPACE_SIX};
+  border-radius: ${SIZES.SPACE_THREE};
+  background-color: ${COLORS.TERT_COLOR};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -77,14 +70,14 @@ export const InfoTopLeft = styled.View`
 `;
 
 export const InfoTopTitle = styled.Text`
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_SEMIBOLD};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_SEMIBOLD};
   color: #fff;
 `;
 
 export const InfoTopPrice = styled.Text`
-  font-size: ${SPACE_SEVEN};
-  font-family: ${FONT_SEMIBOLD};
+  font-size: ${SIZES.SPACE_SEVEN};
+  font-family: ${FONTS.FONT_SEMIBOLD};
   color: #fff;
 `;
 
@@ -98,7 +91,7 @@ type LastType = {
 
 export const ButtonsIntern = styled.View<LastType>`
   flex-direction: row;
-  padding-left: ${({ last }) => (last ? SPACE_FOR : 0)};
+  padding-left: ${({ last }) => (last ? SIZES.SPACE_FOR : 0)};
   flex: 1;
 `;
 
@@ -115,13 +108,13 @@ export const InformationContainerIntern = styled.View`
 `;
 
 export const InfomationTitle = styled.Text`
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_SECONDARY};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_SEMIBOLD};
+  color: ${COLORS.TEXT_SECONDARY};
 `;
 
 export const InfomationSec = styled.Text`
-  font-size: ${SPACE_FIVE};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_PRIMARY};
+  font-size: ${SIZES.SPACE_FIVE};
+  font-family: ${FONTS.FONT_SEMIBOLD};
+  color: ${COLORS.TEXT_PRIMARY};
 `;

@@ -10,7 +10,7 @@ import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
 import { dashRequest, promoRequest } from "~/store/modules/dashboard/actions";
 import { store } from "~/store/index";
-import { SPACE_SIX_DP } from "~/styles/sizes";
+import SIZES from "~/styles/sizes";
 
 import { Container, LinkContainerLine, ViewLinkLine, Title } from "./styles";
 
@@ -161,7 +161,7 @@ const Dashboard: React.FC = () => {
         contentContainerStyle={{
           backgroundColor: "#fff",
           width: "100%",
-          paddingBottom: SPACE_SIX_DP,
+          paddingBottom: SIZES.SPACE_SIX_DP,
           flexDirection: "column",
         }}
         refreshControl={

@@ -6,14 +6,8 @@ import Title from "~/Components/Title";
 
 import { widthPercentageToPx } from "~/Components/PercentageConverter";
 
-import { COLOR_BACKGROUND_PRIMARY, SECONDARY_COLOR } from "~/styles/colors";
-import {
-  SPACE_ONE,
-  SPACE_THREE,
-  SPACE_FIVE,
-  SPACE_SIX,
-  SPACE_SEVEN,
-} from "~/styles/sizes";
+import COLORS from "~/styles/colors";
+import SIZES from "~/styles/sizes";
 
 type Button = {
   onPress: CallableFunction;
@@ -24,21 +18,21 @@ export const Container = styled.ScrollView.attrs(() => ({
 }))`
   flex: 1;
   height: 100%;
-  background-color: ${COLOR_BACKGROUND_PRIMARY};
+  background-color: ${COLORS.COLOR_BACKGROUND_PRIMARY};
 `;
 
 export const ContainerIntern = styled.View`
   justify-content: flex-start;
-  padding-left: ${SPACE_SIX};
-  padding-right: ${SPACE_SIX};
-  padding-top: ${SPACE_ONE};
-  padding-bottom: ${SPACE_SEVEN};
+  padding-left: ${SIZES.SPACE_SIX};
+  padding-right: ${SIZES.SPACE_SIX};
+  padding-top: ${SIZES.SPACE_ONE};
+  padding-bottom: ${SIZES.SPACE_SEVEN};
   align-items: flex-start;
 `;
 
 export const ContainerTop = styled.View`
   width: 100%;
-  background-color: ${SECONDARY_COLOR};
+  background-color: ${COLORS.SECONDARY_COLOR};
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -70,13 +64,13 @@ export const ButtonCheck = styled(CheckBox)<CheckBoxProps>`
 `;
 
 export const TitleText = styled(Title)`
-  margin-top: ${SPACE_FIVE};
-  margin-bottom: ${SPACE_THREE};
+  margin-top: ${SIZES.SPACE_FIVE};
+  margin-bottom: ${SIZES.SPACE_THREE};
 `;
 
 export const ToLoginContainer = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   width: 100%;
-  margin-top: ${SPACE_SIX};
+  margin-top: ${SIZES.SPACE_SIX};
 `;

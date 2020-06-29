@@ -2,18 +2,10 @@ import React, { useState, useRef } from "react";
 import { withFormik } from "formik";
 import { Alert, TextInput } from "react-native";
 import * as Yup from "yup";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
-import { CheckContainer, ButtonCheck, TitleText } from "./styles";
+import { TitleText } from "./styles";
 
-import { PRIMARY_COLOR } from "~/styles/colors";
-import {
-  ICON_CHECKBOX_SIZE,
-  SPACE_PRIMARY_DP,
-  FONT_SIZE_PRIMARY_DP,
-} from "~/styles/sizes";
-
-import { FONT_REGULAR } from "~/styles/fonts";
+import SIZES from "~/styles/sizes";
 
 import Input, { InputMask } from "~/Components/Input";
 import Button from "~/Components/Button";
@@ -218,7 +210,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
         onPress={() => {
           propsForm.handleSubmit();
         }}
-        style={{ marginTop: SPACE_PRIMARY_DP }}
+        style={{ marginTop: SIZES.SPACE_PRIMARY_DP }}
         text="Criar Conta"
       />
     </>

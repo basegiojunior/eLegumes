@@ -4,7 +4,7 @@ import { Modal, ActivityIndicator } from "react-native";
 import { ContainerOut, ContainerIn } from "./styles";
 import { widthPercentageToDP } from "../PercentageConverter";
 
-import { PRIMARY_COLOR } from "~/styles/colors";
+import COLORS from "~/styles/colors";
 
 type RequestProps = {
   visible: boolean;
@@ -17,7 +17,7 @@ const Loading: React.FC<RequestProps> = ({ visible }) => {
         <ContainerIn>
           <ActivityIndicator
             size={widthPercentageToDP("10%")}
-            color={PRIMARY_COLOR}
+            color={COLORS.PRIMARY_COLOR}
           />
         </ContainerIn>
       </ContainerOut>

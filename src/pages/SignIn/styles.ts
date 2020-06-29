@@ -1,21 +1,8 @@
 import styled from "styled-components/native";
 
-import {
-  SPACE_PRIMARY_DP,
-  FONT_SIZE_PRIMARY,
-  SPACE_EIGHT,
-  SPACE_TWO,
-  SPACE_FIVE,
-  SPACE_SEVEN,
-  SPACE_SIX_DP,
-  SPACE_SIX,
-} from "~/styles/sizes";
-import {
-  COLOR_BACKGROUND_PRIMARY,
-  TEXT_PRIMARY,
-  SECONDARY_COLOR,
-} from "~/styles/colors";
-import { FONT_REGULAR } from "~/styles/fonts";
+import SIZES from "~/styles/sizes";
+import COLORS from "~/styles/colors";
+import FONTS from "~/styles/fonts";
 
 import { widthPercentageToPx } from "~/Components/PercentageConverter";
 
@@ -24,21 +11,21 @@ export const Container = styled.ScrollView.attrs(() => ({
 }))`
   flex: 1;
   height: 100%;
-  background-color: ${COLOR_BACKGROUND_PRIMARY};
+  background-color: ${COLORS.COLOR_BACKGROUND_PRIMARY};
 `;
 
 export const ContainerIntern = styled.View`
   justify-content: center;
-  padding-left: ${SPACE_SIX};
-  padding-right: ${SPACE_SIX};
-  padding-top: ${SPACE_SEVEN};
-  padding-bottom: ${SPACE_SEVEN};
+  padding-left: ${SIZES.SPACE_SIX};
+  padding-right: ${SIZES.SPACE_SIX};
+  padding-top: ${SIZES.SPACE_SEVEN};
+  padding-bottom: ${SIZES.SPACE_SEVEN};
   align-items: center;
 `;
 
 export const ContainerTop = styled.View`
   width: 100%;
-  background-color: ${SECONDARY_COLOR};
+  background-color: ${COLORS.SECONDARY_COLOR};
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -67,7 +54,7 @@ export const LogoImage = styled.Image`
 export const LineDiv = styled.View`
   width: 100%;
   height: 0px;
-  margin: ${SPACE_SIX} 0;
+  margin: ${SIZES.SPACE_SIX} 0;
   border-top-width: 1px;
   border-bottom-width: 0;
   border-color: "rgba(0,0,0,.08)";
@@ -78,26 +65,26 @@ export const SignUpView = styled.View`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: ${SPACE_EIGHT};
+  margin-top: ${SIZES.SPACE_EIGHT};
 `;
 
 export const TextSignUp = styled.Text`
-  font-size: ${FONT_SIZE_PRIMARY};
-  color: ${TEXT_PRIMARY};
+  font-size: ${SIZES.FONT_SIZE_PRIMARY};
+  color: ${COLORS.TEXT_PRIMARY};
   padding: 0;
-  font-family: ${FONT_REGULAR};
+  font-family: ${FONTS.FONT_REGULAR};
 `;
 
 export const ModalContainerIn = styled.View`
   width: ${widthPercentageToPx("80%")};
   background-color: #fff;
-  padding: ${SPACE_SEVEN} ${SPACE_FIVE};
-  border-radius: ${SPACE_TWO};
+  padding: ${SIZES.SPACE_SEVEN} ${SIZES.SPACE_FIVE};
+  border-radius: ${SIZES.SPACE_TWO};
 `;
 
 export const FalseModal = styled.View`
 	/* width: ${widthPercentageToPx("90%")}; */
-	padding: ${SPACE_FIVE};
+	padding: ${SIZES.SPACE_FIVE};
 	align-items: center;
 	background-color: transparent;
 `;
@@ -118,7 +105,7 @@ export const Exit = styled.View`
   justify-content: center;
   width: ${widthPercentageToPx("10%")};
   height: ${widthPercentageToPx("10%")};
-  border-radius: ${SPACE_FIVE};
+  border-radius: ${SIZES.SPACE_FIVE};
 `;
 
 export const ExitButton = styled.TouchableOpacity`

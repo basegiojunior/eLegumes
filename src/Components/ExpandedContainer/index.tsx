@@ -6,7 +6,8 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 
 import Button, { ButtonGhost } from "../Button";
 
-import { PRIMARY_COLOR } from "~/styles/colors";
+import COLORS from "~/styles/colors";
+
 import {
   widthPercentageToDP,
   heightPercentageToDP,
@@ -87,7 +88,7 @@ const ExpandedContainer: React.FC<ExpandedType> = ({
             </InfoTopLeft>
             <Icon
               name="shopping"
-              color={PRIMARY_COLOR}
+              color={COLORS.PRIMARY_COLOR}
               size={widthPercentageToDP("17%")}
             />
           </InfoTopContainer>

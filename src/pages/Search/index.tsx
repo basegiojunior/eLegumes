@@ -13,8 +13,8 @@ import { Recent, RecentItem, RecentText } from "./styles";
 import { searchRequest } from "~/store/modules/search/actions";
 import { categoriesRequest } from "~/store/modules/categories/actions";
 
-import { ICON_CHECKBOX_SIZE, SPACE_TWO_DP } from "~/styles/sizes";
-import { TEXT_SECONDARY } from "~/styles/colors";
+import SIZES from "~/styles/sizes";
+import COLORS from "~/styles/colors";
 
 import { store } from "~/store/index";
 
@@ -72,7 +72,9 @@ const Search: React.FC = () => {
       <Loading visible={loading} />
       {recentSearchs.length > 0 && (
         <Recent>
-          <Title style={{ marginBottom: SPACE_TWO_DP }}>BUSCAS RECENTES</Title>
+          <Title style={{ marginBottom: SIZES.SPACE_TWO_DP }}>
+            BUSCAS RECENTES
+          </Title>
           {recentSearchs.map((item, index) => (
             <RecentItem
               onPress={() => handleSubmit(item)}
@@ -82,8 +84,8 @@ const Search: React.FC = () => {
               <Icon
                 style={{ marginRight: 5 }}
                 name="arrow-top-left"
-                size={ICON_CHECKBOX_SIZE}
-                color={TEXT_SECONDARY}
+                size={SIZES.ICON_CHECKBOX_SIZE}
+                color={COLORS.TEXT_SECONDARY}
               />
             </RecentItem>
           ))}

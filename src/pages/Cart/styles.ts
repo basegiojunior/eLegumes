@@ -3,25 +3,9 @@ import { RectButton } from "react-native-gesture-handler";
 import { Animated } from "react-native";
 
 import { widthPercentageToPx } from "~/Components/PercentageConverter";
-import {
-  SPACE_ONE,
-  SPACE_TWO,
-  SPACE_THREE,
-  SPACE_FOR,
-  SPACE_FIVE,
-  SPACE_SIX,
-  SPACE_SEVEN,
-  FONT_SIZE_SECONDARY,
-  FONT_SIZE_TERTIARY,
-  FONT_SIZE_QUATERNARY,
-} from "~/styles/sizes";
-import { FONT_REGULAR, FONT_SEMIBOLD, FONT_BOLD } from "~/styles/fonts";
-import {
-  TEXT_PRIMARY,
-  TEXT_SECONDARY,
-  PRIMARY_COLOR,
-  SECONDARY_COLOR,
-} from "~/styles/colors";
+import SIZES from "~/styles/sizes";
+import FONTS from "~/styles/fonts";
+import COLORS from "~/styles/colors";
 
 export const Container = styled.View`
   flex-direction: column;
@@ -33,8 +17,11 @@ export const HeaderCompanie = styled.View`
   align-items: center;
   justify-content: space-between;
   flex: 1;
-  margin: ${SPACE_SIX} ${SPACE_SIX} ${SPACE_TWO} ${SPACE_SIX};
-  padding: ${SPACE_THREE} 0;
+  margin-top: ${SIZES.SPACE_SIX};
+  margin-right: ${SIZES.SPACE_SIX};
+  margin-bottom: ${SIZES.SPACE_TWO};
+  margin-left: ${SIZES.SPACE_SIX};
+  padding: ${SIZES.SPACE_THREE} 0;
 `;
 
 type checkType = {
@@ -42,28 +29,32 @@ type checkType = {
 };
 
 export const HeaderCompanieCheck = styled.View<checkType>`
-  width: ${SPACE_SIX};
-  height: ${SPACE_SIX};
-  border-radius: ${SPACE_ONE};
-  background-color: ${({ selected }) => (selected ? PRIMARY_COLOR : "#F0F0F0")};
+  width: ${SIZES.SPACE_SIX};
+  height: ${SIZES.SPACE_SIX};
+  border-radius: ${SIZES.SPACE_ONE};
+  background-color: ${({ selected }) =>
+    selected ? COLORS.PRIMARY_COLOR : "#F0F0F0"};
   align-items: center;
   justify-content: center;
 `;
 
 export const HeaderCompanieTitle = styled.Text`
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_PRIMARY};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_SEMIBOLD};
+  color: ${COLORS.TEXT_PRIMARY};
   text-align: left;
   flex: 1;
-  margin-left: ${SPACE_FIVE};
+  margin-left: ${SIZES.SPACE_FIVE};
 `;
 
 // PRODUCT
 
 export const ProductContainer = styled.View`
   flex-direction: row;
-  padding: ${SPACE_FOR} ${SPACE_SIX} ${SPACE_FOR} ${SPACE_SIX};
+  padding-top: ${SIZES.SPACE_FOR};
+  padding-right: ${SIZES.SPACE_SIX};
+  padding-bottom: ${SIZES.SPACE_FOR};
+  padding-left: ${SIZES.SPACE_SIX};
   border-bottom-width: 1px;
   border-bottom-color: #f0f0f0;
 `;
@@ -71,12 +62,12 @@ export const ProductContainer = styled.View`
 export const ProductImage = styled.Image`
   width: ${widthPercentageToPx("19%")};
   height: ${widthPercentageToPx("19%")};
-  border-radius: ${SPACE_TWO};
+  border-radius: ${SIZES.SPACE_TWO};
 `;
 
 export const ProductAboutContainer = styled.View`
   flex-direction: column;
-  margin-left: ${SPACE_FOR};
+  margin-left: ${SIZES.SPACE_FOR};
   justify-content: space-between;
   flex: 1;
 `;
@@ -88,23 +79,23 @@ export const ProductAboutTop = styled.View`
 export const ProductTitle = styled.Text.attrs(() => ({
   numberOfLines: 1,
 }))`
-  font-size: ${FONT_SIZE_QUATERNARY};
-  font-family: ${FONT_BOLD};
-  color: ${TEXT_PRIMARY};
+  font-size: ${SIZES.FONT_SIZE_QUATERNARY};
+  font-family: ${FONTS.FONT_BOLD};
+  color: ${COLORS.TEXT_PRIMARY};
   overflow: hidden;
   flex-wrap: nowrap;
 `;
 
 export const ProductPrice = styled.Text`
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_REGULAR};
-  color: ${TEXT_SECONDARY};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  color: ${COLORS.TEXT_SECONDARY};
 `;
 
 export const ProductQuantity = styled.Text`
-  font-size: ${FONT_SIZE_TERTIARY};
-  font-family: ${FONT_REGULAR};
-  color: ${TEXT_SECONDARY};
+  font-size: ${SIZES.FONT_SIZE_TERTIARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  color: ${COLORS.TEXT_SECONDARY};
 `;
 
 export const ProductChangeQuantityContainer = styled.View`
@@ -129,29 +120,29 @@ export const ProductChangeQuantityButton = styled(RectButton).attrs(() => ({
 }))`
   width: ${widthPercentageToPx("10%")};
   height: ${widthPercentageToPx("10%")};
-  border-radius: ${SPACE_TWO};
+  border-radius: ${SIZES.SPACE_TWO};
   background-color: #f0f0f0;
   align-items: center;
   justify-content: center;
 `;
 
 export const ProductChangeQuantityButtonText = styled.Text`
-  font-family: ${FONT_REGULAR};
-  font-size: ${SPACE_SEVEN};
-  color: ${TEXT_PRIMARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  font-size: ${SIZES.SPACE_SEVEN};
+  color: ${COLORS.TEXT_PRIMARY};
 `;
 
 export const ProductChangeQuantityText = styled.Text`
-  font-family: ${FONT_REGULAR};
-  font-size: ${SPACE_FIVE};
-  color: ${TEXT_PRIMARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  font-size: ${SIZES.SPACE_FIVE};
+  color: ${COLORS.TEXT_PRIMARY};
 `;
 
 // TOTAL PRICE
 
 export const DeliveryContainer = styled.View`
   width: 100%;
-  padding: ${SPACE_FOR} ${SPACE_SIX};
+  padding: ${SIZES.SPACE_FOR} ${SIZES.SPACE_SIX};
   border-bottom-color: #f0f0f0;
   border-bottom-width: 1px;
   flex-direction: row;
@@ -160,15 +151,15 @@ export const DeliveryContainer = styled.View`
 `;
 
 export const DeliveryText = styled.Text`
-  font-family: ${FONT_REGULAR};
-  font-size: ${FONT_SIZE_TERTIARY};
-  color: ${TEXT_PRIMARY};
+  font-family: ${FONTS.FONT_REGULAR};
+  font-size: ${SIZES.FONT_SIZE_TERTIARY};
+  color: ${COLORS.TEXT_PRIMARY};
 `;
 
 export const DeliveryPrice = styled.Text`
-  font-family: ${FONT_REGULAR};
-  font-size: ${FONT_SIZE_TERTIARY};
-  color: ${PRIMARY_COLOR};
+  font-family: ${FONTS.FONT_REGULAR};
+  font-size: ${SIZES.FONT_SIZE_TERTIARY};
+  color: ${COLORS.PRIMARY_COLOR};
 `;
 
 // ABA DE FINALIZAR COMPRA
@@ -179,7 +170,7 @@ export const EndContainer = styled(Animated.View)`
   right: 0;
   bottom: 0;
   height: ${widthPercentageToPx("20%")};
-  padding: 0 ${SPACE_SIX};
+  padding: 0 ${SIZES.SPACE_SIX};
   width: 100%;
   position: absolute;
   background-color: #fff;
@@ -209,9 +200,9 @@ export const EndContainerRight = styled.View`
 `;
 
 export const EndContainerTitle = styled.Text`
-  font-size: ${SPACE_THREE};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_SECONDARY};
+  font-size: ${SIZES.SPACE_THREE};
+  font-family: ${FONTS.FONT_SEMIBOLD};
+  color: ${COLORS.TEXT_SECONDARY};
 `;
 
 export const EndContainerViewLeft = styled.View`
@@ -220,9 +211,9 @@ export const EndContainerViewLeft = styled.View`
 `;
 
 export const EndContainerPrice = styled.Text`
-  font-size: ${SPACE_SIX};
-  font-family: ${FONT_BOLD};
-  color: ${SECONDARY_COLOR};
+  font-size: ${SIZES.SPACE_SIX};
+  font-family: ${FONTS.FONT_BOLD};
+  color: ${COLORS.SECONDARY_COLOR};
   margin-right: 6px;
 `;
 
@@ -241,13 +232,13 @@ export const InformationContainerIntern = styled.View`
 `;
 
 export const InfomationTitle = styled.Text`
-  font-size: ${FONT_SIZE_SECONDARY};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_SECONDARY};
+  font-size: ${SIZES.FONT_SIZE_SECONDARY};
+  font-family: ${FONTS.FONT_SEMIBOLD};
+  color: ${COLORS.TEXT_SECONDARY};
 `;
 
 export const InfomationSec = styled.Text`
-  font-size: ${SPACE_FIVE};
-  font-family: ${FONT_SEMIBOLD};
-  color: ${TEXT_PRIMARY};
+  font-size: ${SIZES.SPACE_FIVE};
+  font-family: ${FONTS.FONT_SEMIBOLD};
+  color: ${COLORS.TEXT_PRIMARY};
 `;

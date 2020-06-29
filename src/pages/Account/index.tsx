@@ -23,7 +23,8 @@ import {
 
 import Button, { ButtonGhost } from "~/Components/Button";
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
-import { PRIMARY_COLOR } from "~/styles/colors";
+
+import COLORS from "~/styles/colors";
 
 import { signOut } from "~/store/modules/auth/actions";
 
@@ -117,7 +118,7 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
               <Icon
                 name="account"
                 size={widthPercentageToDP("28%")}
-                color={PRIMARY_COLOR}
+                color={COLORS.PRIMARY_COLOR}
               />
             </IconProfileContainer>
             <ProfileName>Visitante</ProfileName>
