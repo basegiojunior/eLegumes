@@ -6,7 +6,9 @@ import { Container, Item, Image, Name } from "./styles";
 
 import { categoriesRequest } from "~/store/modules/categories/actions";
 import { store } from "~/store/index";
-import { SPACE_SIX_DP } from "~/styles/sizes";
+import SIZES from "~/styles/sizes";
+
+import { Category } from "~/types";
 
 type Results = {
   categoryName: string;
@@ -19,28 +21,32 @@ type Results = {
   };
 };
 
+const emptyCategory = {
+  name: "",
+  id: "",
+  products: [
+    {
+      id: "",
+      name: "string",
+      image: {
+        url: "string",
+      },
+    },
+  ],
+};
+
 const Categories: React.FC<Results> = ({ route }) => {
   const { name, id } = route.params;
-  const [actualCat, setActualCat] = useState([]);
 
   const categories = useSelector((state) => state.categories.categories);
-  const [actualCategory, setActualCategory] = useState<
-    | {
-        id: string;
-        name: string;
-        image: {
-          url: string;
-        };
-      }[]
-    | []
-  >([]);
+  const [actualCategory, setActualCategory] = useState(emptyCategory);
 
   useEffect(() => {
-    const resp = categories.find((item) => item.name === name);
+    const resp = categories.find((item) => item.id === id);
     if (resp) {
-      setActualCategory(resp.products);
+      setActualCategory(resp);
     } else {
-      setActualCategory([]);
+      setActualCategory(emptyCategory);
     }
   }, [categories]);
 
@@ -65,10 +71,14 @@ const Categories: React.FC<Results> = ({ route }) => {
       <FlatList
         contentContainerStyle={{
           backgroundColor: "#fff",
-          paddingBottom: SPACE_SIX_DP,
+          paddingBottom: SIZES.SPACE_SIX_DP,
         }}
         renderItem={renderItem}
-        data={actualCategory}
+        data={
+          actualCategory.id === id
+            ? actualCategory.products
+            : emptyCategory.products
+        }
         keyExtractor={(item) => item.id}
         onEndReached={loadRepositories}
         onEndReachedThreshold={0.1}

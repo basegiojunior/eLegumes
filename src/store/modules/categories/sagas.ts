@@ -15,17 +15,17 @@ export function* categoriesRequestSaga({ payload }: any): any {
 
       const { categories } = response.data.data;
 
-      type categoryObjectType = {
-        [key: string]: object;
-      };
+      // type categoryObjectType = {
+      //   [key: string]: object;
+      // };
 
-      const categoryObject: categoryObjectType = {};
+      // const categoryObject: categoryObjectType = {};
 
-      for (let e = 0; e < categories.length; e += 1) {
-        categoryObject[categories[e].name] = categories[e];
-      }
+      // for (let e = 0; e < categories.length; e += 1) {
+      //   categoryObject[categories[e].name] = categories[e];
+      // }
 
-      yield put(categoriesSuccess(categoryObject));
+      yield put(categoriesSuccess(categories));
 
       return;
     } catch (error) {

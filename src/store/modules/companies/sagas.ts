@@ -29,12 +29,28 @@ export function* companieProductsRequestSaga({ payload }: any): any {
         }
       );
 
+      let processed: any = [];
       const products = response.data.data;
 
+      for (let e = 0; e < products.length; e += 1) {
+        processed = [
+          ...processed,
+          {
+            ...products[e],
+            name: products[e].name
+              ? products[e].name
+              : products[e].productDefault.name,
+            image: products[e].image
+              ? products[e].image
+              : products[e].productDefault.image,
+          },
+        ];
+      }
+
       if (page === 1) {
-        yield put(companieProductsSuccessReset(products, companieId));
+        yield put(companieProductsSuccessReset(processed, companieId));
       } else {
-        yield put(companieProductsSuccess(products, page));
+        yield put(companieProductsSuccess(processed, page));
       }
 
       return;

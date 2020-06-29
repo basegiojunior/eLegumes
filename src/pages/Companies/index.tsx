@@ -54,9 +54,10 @@ type CompaniesProps = {
       data: Companie;
     };
   };
+  navigation: any;
 };
 
-const Companies: React.FC<CompaniesProps> = ({ route }) => {
+const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
   const [stars, setStars] = useState([
     { id: 5, value: 1 },
     { id: 4, value: 1 },
@@ -64,6 +65,15 @@ const Companies: React.FC<CompaniesProps> = ({ route }) => {
     { id: 2, value: 1 },
     { id: 1, value: 1 },
   ]);
+  // const [actualProducts, setActualProducts] = useState<
+  //   | {
+  //       id: string;
+  //       image: string;
+  //       title: string;
+  //       subtitle: string;
+  //     }[]
+  //   | []
+  // >([]);
 
   const { data } = route.params;
 
@@ -94,6 +104,22 @@ const Companies: React.FC<CompaniesProps> = ({ route }) => {
     }
   }, [companie]);
 
+  // useEffect(() => {
+  //   const newProducts = companieProducts.products.map((item) => {
+  //     const subtitle = item.active_promotion
+  //       ? item.price_promotion
+  //       : item.price;
+  //     return {
+  //       id: item.id,
+  //       image: item.image?.url,
+  //       title: item.name,
+  //       subtitle,
+  //     };
+  //   });
+
+  //   setActualProducts(newProducts);
+  // }, [companieProducts]);
+
   useEffect(() => {
     store.dispatch(companieProductsRequest(data.id, 1));
     store.dispatch(companieCommentsRequest(data.id, 1));
@@ -117,6 +143,9 @@ const Companies: React.FC<CompaniesProps> = ({ route }) => {
         <Button text="entrar em contato" onPress={() => null} />
       </Container>
       <Slide
+        seeMoreData={() => {
+          navigation.navigate("CompanieProducts", { name: data.name });
+        }}
         listElements={companieProducts.products}
         color={color}
         show={

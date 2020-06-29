@@ -26,7 +26,7 @@ type ProductsArray = {
   title?: string;
   color: any;
   seeMore?: boolean;
-  seeMoreData?: { id: string; name: string };
+  seeMoreData?: CallableFunction;
   show?: boolean;
 };
 
@@ -46,12 +46,15 @@ const SlideImages: React.FC<ProductsArray> = ({
 
   const navigation = useNavigation();
 
-  const SlideCallback = useCallback(
-    (item) => (
-      <SlideItem item={item} key={item.id} nItemsInScreen={nItemsInScreen} />
-    ),
-    [nItemsInScreen]
-  );
+  // const SlideCallback = useCallback(
+  //   (item) => {
+  //     console.log(item);
+  //     return (
+  //       <SlideItem item={item} key={item.id} nItemsInScreen={nItemsInScreen} />
+  //     );
+  //   },
+  //   [nItemsInScreen]
+  // );
 
   const scrollCard: Function = (position: number) => {
     const perc = widthPercentageToDP(`${92 / nItemsInScreen}%`);
@@ -92,14 +95,7 @@ const SlideImages: React.FC<ProductsArray> = ({
             <Title style={{ marginLeft: SIZES.SPACE_SIX_DP }}>{title}</Title>
 
             {seeMoreData && (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("Categoria", {
-                    name: seeMoreData.name,
-                    id: seeMoreData.id,
-                  });
-                }}
-              >
+              <TouchableOpacity onPress={() => seeMoreData()}>
                 <VerMais>Ver Mais</VerMais>
               </TouchableOpacity>
             )}
@@ -111,7 +107,13 @@ const SlideImages: React.FC<ProductsArray> = ({
             ref={slideRef}
           >
             {listElements.length > 0 ? (
-              listElements.map(SlideCallback)
+              listElements.map((item) => (
+                <SlideItem
+                  item={item}
+                  key={item.id}
+                  nItemsInScreen={nItemsInScreen}
+                />
+              ))
             ) : (
               <LinkContainer>
                 <ViewLink>

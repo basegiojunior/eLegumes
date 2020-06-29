@@ -22,6 +22,7 @@ import SignIn from "~/pages/SignIn";
 import SignUp from "~/pages/SignUp";
 import Categories from "~/pages/Categories";
 import Companies from "~/pages/Companies";
+import CompanieProducts from "~/pages/CompanieProducts";
 import Products from "~/pages/Products";
 
 import {
@@ -211,6 +212,18 @@ const LoginStackScreen: React.FC = () => {
             );
           }}
         />
+
+        <LoginStack.Screen
+          name="CompanieProducts"
+          component={CompanieProducts}
+          options={({ route, navigation }) => {
+            return styleBarCategory(
+              () => navigation.goBack(),
+              route.params.name
+            );
+          }}
+        />
+
         <LoginStack.Screen
           name="Produto"
           component={Products}

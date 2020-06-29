@@ -18,7 +18,7 @@ import COLORS from "~/styles/colors";
 
 import { store } from "~/store/index";
 
-const Search: React.FC = () => {
+const Search: React.FC = ({ navigation }) => {
   // eslint-disable-next-line no-var
   var x = new Animated.Value(0);
 
@@ -92,15 +92,20 @@ const Search: React.FC = () => {
         </Recent>
       )}
 
-      {Object.entries(categories).length > 0 &&
-        Object.entries(categories).map((item) => (
+      {categories.length > 0 &&
+        categories.map((item) => (
           <SlideImages
             color={color}
-            seeMoreData={{ name: item[1].name, id: item[1].id }}
-            title={item[1].name.toUpperCase()}
-            listElements={item[1].products}
+            seeMoreData={() => {
+              navigation.navigate("Categoria", {
+                name: item.name,
+                id: item.id,
+              });
+            }}
+            title={item.name.toUpperCase()}
+            listElements={item.products}
             nItemsInScreen={2}
-            key={item[1].id}
+            key={item.id}
           />
         ))}
     </ContainerScroll>

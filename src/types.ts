@@ -1,6 +1,7 @@
 export type Product = {
   id: string;
   description?: string;
+  name?: string;
   technical_description?: string;
   price: string;
   active_promotion: boolean;
@@ -32,11 +33,11 @@ export type ResumeProductCompanie = {
 };
 
 export type TopProduct = {
-  image: {
+  image?: null | {
     url: string;
   };
   id: string;
-  name: string;
+  name?: string;
   weekly_sales?: number;
 };
 
