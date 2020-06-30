@@ -1,6 +1,6 @@
 import produce from "immer";
 import { Reducer } from "redux";
-import { Companie, TopProduct, Product } from "~/types";
+import { Companie, SlideType, GridType } from "~/types";
 
 const INITIAL_STATE = {
   noPageLoading: false,
@@ -16,8 +16,8 @@ type InitialProps = {
   pageLoading: boolean;
   pageFailure: boolean;
   newCompanies: Companie[];
-  topProducts: TopProduct[];
-  promotions: Product[];
+  topProducts: SlideType[];
+  promotions: GridType[];
 };
 
 const dash: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {

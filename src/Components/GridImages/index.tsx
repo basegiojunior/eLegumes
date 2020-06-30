@@ -11,10 +11,10 @@ import {
   ViewLinkLine,
 } from "./styles";
 
-import { Product } from "~/types";
+import { GridType } from "~/types";
 
 type GridTypes = {
-  item: Product;
+  item: GridType;
   index: number;
 };
 
@@ -24,25 +24,21 @@ const GridImages: React.FC<GridTypes> = ({ item, index }) => {
     <ProductsView>
       <LinkContainerLine
         onPress={() => {
-          NavigationService.navigate("Produto", { data: item });
+          NavigationService.navigate("Produto", { ...item });
         }}
         key={item.id}
       >
         <ViewLinkLine last={index % 2 !== 0}>
           <ImageProductLine
             source={{
-              uri: item.image ? item.image.url : item.productDefault?.image.url,
+              uri: item.image.url,
             }}
           />
-          <TitleProduct>{item.description}</TitleProduct>
+          <TitleProduct>{item.title}</TitleProduct>
           <PriceProduct style={{ textDecorationLine: "line-through" }}>
-            R$ {item.price.replace(".", ",")} /
-            {item.type === "weight" ? ` ${item.weight}g` : " 1 uni."}
+            {item.lineThrough}
           </PriceProduct>
-          <PriceProduct>
-            R$ {item.price_promotion.replace(".", ",")} /
-            {item.type === "weight" ? ` ${item.weight}g` : " 1 uni."}
-          </PriceProduct>
+          <PriceProduct>{item.subtitle}</PriceProduct>
         </ViewLinkLine>
       </LinkContainerLine>
     </ProductsView>

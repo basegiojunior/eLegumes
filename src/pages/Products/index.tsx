@@ -57,7 +57,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
   const dispatch = useDispatch();
 
   // dados do produto
-  const { data } = route.params;
+  const { params } = route;
 
   // dimensões do retrátil
   const maxHeight = widthPercentageToDP("63.4%");
@@ -91,8 +91,8 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
 
   // gera a string da unidade de venda do produto
   const getProductUnity = (): string => {
-    if (storeSelected === undefined) {
-      return "1 unidade";
+    if (!storeSelected) {
+      return "";
     }
     if (storeSelected.product?.type === "weight") {
       return `aproximadamente ${storeSelected.product.weight} g`;
@@ -120,18 +120,18 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
 
   // faz a requisição para exibir o produto selecionado
   useEffect(() => {
-    if (data.productDefault) {
-      dispatch(companiesFromProductsRequest(data.productDefault.id));
+    if (params.productDefault) {
+      dispatch(companiesFromProductsRequest(params.productDefault.id));
     } else {
-      dispatch(companiesFromProductsRequest(data.id));
+      dispatch(companiesFromProductsRequest(params.id));
     }
   }, []);
 
   // muda a loja selecionada
   useEffect(() => {
-    if (data.company) {
+    if (params.company) {
       const companie = companies.companies.find(
-        (item) => item.id === data.company.id
+        (item) => item.id === params.company.id
       );
 
       if (companie) {
@@ -143,7 +143,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
   return (
     <>
       <ExpandedContainer
-        infoTopText={data.name ? data.name : data.productDefault.name}
+        infoTopText={params.name ? params.name : params.productDefault.name}
         infoTopTitle="ADICIONADO À SACOLA"
         buttonLeftTitle="não, obrigado"
         buttonLeftCall={() => setExpanded(false)}
@@ -164,14 +164,14 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
       <ContainerScroll>
         <ImageProduct
           source={{
-            uri: data.productDefault
-              ? data.productDefault.image.url
-              : data.image.url,
+            uri: params.productDefault
+              ? params.productDefault.image.url
+              : params.image.url,
           }}
         />
         <Container>
           <ProductName>
-            {data.name ? data.name : data.productDefault.name}
+            {params.name ? params.name : params.productDefault.name}
           </ProductName>
           <ProductAmount>{getProductUnity()}</ProductAmount>
 
@@ -265,7 +265,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
             )}
           </ContainerRetrac>
 
-          {companies.id === data.id && companies.companies.length > 0 && (
+          {companies.id === params.id && companies.companies.length > 0 && (
             <>
               <Title
                 style={{

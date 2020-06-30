@@ -131,3 +131,18 @@ export type Category = {
     };
   }[];
 };
+
+export type SlideType = {
+  id: string;
+  image: { url: string };
+  title: string;
+  subtitle: string;
+};
+
+export type GridType = {
+  id: string;
+  image: { url: string };
+  title: string;
+  subtitle: string;
+  lineThrough: string;
+};

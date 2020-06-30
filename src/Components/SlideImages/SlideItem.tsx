@@ -9,10 +9,10 @@ import {
   PriceProduct,
 } from "./styles";
 
-import { TopProduct } from "~/types";
+import { SlideType } from "~/types";
 
 type ItemType = {
-  item: TopProduct;
+  item: SlideType;
   nItemsInScreen: number;
 };
 
@@ -22,20 +22,22 @@ const SlideItem: React.FC<ItemType> = ({ item, nItemsInScreen }) => {
   return (
     <LinkContainer
       onPress={() => {
-        navigation.navigate("Produto", { data: item });
+        navigation.navigate("Produto", {
+          id: item.id,
+          image: item.image,
+          name: item.title,
+        });
       }}
     >
       <ViewLink>
         <ImageProduct
           nItemsInScreen={nItemsInScreen || 2}
           source={{
-            uri: item.image?.url,
+            uri: item.image.url,
           }}
         />
-        <TitleProduct>{item.name}</TitleProduct>
-        {item.weekly_sales && (
-          <PriceProduct>{item.weekly_sales} vendidos</PriceProduct>
-        )}
+        <TitleProduct>{item.title}</TitleProduct>
+        {item.subtitle && <PriceProduct>{item.subtitle}</PriceProduct>}
       </ViewLink>
     </LinkContainer>
   );

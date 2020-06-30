@@ -18,10 +18,10 @@ import Title from "../Title";
 
 import SIZES from "~/styles/sizes";
 
-import { TopProduct } from "~/types";
+import { SlideType } from "~/types";
 
 type ProductsArray = {
-  listElements: TopProduct[];
+  listElements: SlideType[];
   nItemsInScreen?: number;
   title?: string;
   color: any;
