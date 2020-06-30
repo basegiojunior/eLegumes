@@ -120,18 +120,6 @@ export type CompanieFromProduct = {
   };
 };
 
-export type Category = {
-  name: string;
-  id: string;
-  products: {
-    id: string;
-    name: string;
-    image: {
-      url: string;
-    };
-  }[];
-};
-
 export type SlideType = {
   id: string;
   image: { url: string };
@@ -145,4 +133,10 @@ export type GridType = {
   title: string;
   subtitle: string;
   lineThrough: string;
+};
+
+export type Category = {
+  title: string;
+  id: string;
+  products: SlideType[];
 };

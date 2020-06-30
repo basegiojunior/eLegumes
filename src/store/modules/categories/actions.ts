@@ -13,18 +13,26 @@ export const categoriesSuccess: Function = (categories: object[]) => {
 
 export const categoriesEspecifyRequest: Function = (
   categoryId = "",
-  categoryName = ""
+  categoryName = "",
+  page = 0
 ) => {
   return {
     type: "@categories/CATEGORIES_ESPECIFY_REQUEST",
-    payload: { categoryId, categoryName },
+    payload: { categoryId, categoryName, page },
   };
 };
 
-export const categoriesEspecifySuccess: Function = (categories: object) => {
+export const categoriesEspecifySuccess: Function = (category: object) => {
   return {
     type: "@categories/CATEGORIES_ESPECIFY_SUCCESS",
-    payload: { categories },
+    payload: { category },
+  };
+};
+
+export const categoriesEspecifySuccessReset: Function = (category: object) => {
+  return {
+    type: "@categories/CATEGORIES_ESPECIFY_SUCCESS_RESET",
+    payload: { category },
   };
 };
 

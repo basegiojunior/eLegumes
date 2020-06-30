@@ -44,7 +44,6 @@ const Search: React.FC = ({ navigation }) => {
   const recentSearchs = useSelector((state) => state.search.recentSearchs);
   const categories = useSelector((state) => state.categories.categories);
   const loadingCategories = useSelector((state) => state.categories.loading);
-  const loading = useSelector((state) => state.search.searchLoading);
 
   const handleRequest: Function = () => {
     store.dispatch(categoriesRequest());
@@ -69,7 +68,6 @@ const Search: React.FC = ({ navigation }) => {
         />
       }
     >
-      <Loading visible={loading} />
       {recentSearchs.length > 0 && (
         <Recent>
           <Title style={{ marginBottom: SIZES.SPACE_TWO_DP }}>
@@ -98,11 +96,11 @@ const Search: React.FC = ({ navigation }) => {
             color={color}
             seeMoreData={() => {
               navigation.navigate("Categoria", {
-                name: item.name,
+                name: item.title,
                 id: item.id,
               });
             }}
-            title={item.name.toUpperCase()}
+            title={item.title.toUpperCase()}
             listElements={item.products}
             nItemsInScreen={2}
             key={item.id}

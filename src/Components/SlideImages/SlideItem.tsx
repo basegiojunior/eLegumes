@@ -37,7 +37,7 @@ const SlideItem: React.FC<ItemType> = ({ item, nItemsInScreen }) => {
           }}
         />
         <TitleProduct>{item.title}</TitleProduct>
-        {item.subtitle && <PriceProduct>{item.subtitle}</PriceProduct>}
+        {!!item.subtitle && <PriceProduct>{item.subtitle}</PriceProduct>}
       </ViewLink>
     </LinkContainer>
   );

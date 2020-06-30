@@ -2,7 +2,12 @@ import { takeLatest, call, put, all } from "redux-saga/effects";
 
 import api from "~/services/api";
 
-import { categoriesFailure, categoriesSuccess } from "./actions";
+import {
+  categoriesFailure,
+  categoriesSuccess,
+  categoriesEspecifySuccess,
+  categoriesEspecifySuccessReset,
+} from "./actions";
 
 export function* categoriesRequestSaga({ payload }: any): any {
   for (let i = 1; i <= 5; i += 1) {
@@ -15,17 +20,40 @@ export function* categoriesRequestSaga({ payload }: any): any {
 
       const { categories } = response.data.data;
 
-      // type categoryObjectType = {
-      //   [key: string]: object;
-      // };
+      let processCategories: any = [];
 
-      // const categoryObject: categoryObjectType = {};
+      for (let it = 0; it < categories.length; it += 1) {
+        let products: any = [];
 
-      // for (let e = 0; e < categories.length; e += 1) {
-      //   categoryObject[categories[e].name] = categories[e];
-      // }
+        for (let et = 0; et < categories[it].products.length; et += 1) {
+          products = [
+            ...products,
+            {
+              id: categories[it].products[et].id,
+              title: categories[it].products[et].name,
+              subtitle: "",
+              image: {
+                url:
+                  categories[it].products[et].image &&
+                  categories[it].products[et].image.url
+                    ? categories[it].products[et].image.url
+                    : "",
+              },
+            },
+          ];
+        }
 
-      yield put(categoriesSuccess(categories));
+        processCategories = [
+          ...processCategories,
+          {
+            id: categories[it].id,
+            title: categories[it].name,
+            products,
+          },
+        ];
+      }
+
+      yield put(categoriesSuccess(processCategories));
 
       return;
     } catch (error) {
@@ -38,42 +66,48 @@ export function* categoriesRequestSaga({ payload }: any): any {
 }
 
 export function* categoriesEspecifyRequestSaga({ payload }: any): any {
-  const { categoryId, page } = payload;
+  const { categoryId, categoryName, page } = payload;
   for (let i = 1; i <= 5; i += 1) {
-    let response;
-
     try {
-      if (categoryId === "") {
-        response = yield call(api.get, "/v1/client/categories", {
-          params: { perpage: 1 },
-        });
-
-        const { categories } = response.data.data;
-
-        type categoryObjectType = {
-          [key: string]: object;
-        };
-
-        const categoryObject: categoryObjectType = {};
-
-        for (let e = 0; e < categories.length; e += 1) {
-          categoryObject[categories[e].name] = categories[e];
+      const response = yield call(
+        api.get,
+        `/v1/client/categories/${categoryId}/produts`,
+        {
+          params: { perpage: 10, page },
         }
+      );
 
-        yield put(categoriesSuccess(categories));
-      } else {
-        response = yield call(
-          api.get,
-          `/v1/client/categories/${categoryId}/produts`,
+      const categories = response.data.data;
+
+      let processCategory: any = [];
+
+      for (let it = 0; it < categories.length; it += 1) {
+        processCategory = [
+          ...processCategory,
           {
-            params: { perpage: 10, id: categoryId, page },
-          }
-        );
+            id: categories[it].id,
+            title: categories[it].name,
+            image: {
+              url:
+                categories[it].image && categories[it].image.url
+                  ? categories[it].image.url
+                  : "",
+            },
+          },
+        ];
       }
 
-      const { categories } = response.data.data;
+      const finalResponse = {
+        id: categoryId,
+        title: categoryName,
+        products: processCategory,
+      };
 
-      yield put(categoriesSuccess(categories));
+      if (page !== 1) {
+        yield put(categoriesEspecifySuccess(finalResponse));
+      } else {
+        yield put(categoriesEspecifySuccessReset(finalResponse));
+      }
 
       return;
     } catch (error) {

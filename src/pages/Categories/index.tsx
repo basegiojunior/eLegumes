@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, ListRenderItem } from "react-native";
+import { FlatList, ListRenderItem, RefreshControl } from "react-native";
+import { useDispatch } from "react-redux";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import { Container, Item, Image, Name } from "./styles";
 
-import { categoriesRequest } from "~/store/modules/categories/actions";
-import { store } from "~/store/index";
+import { categoriesEspecifyRequest } from "~/store/modules/categories/actions";
 import SIZES from "~/styles/sizes";
-
-import { Category } from "~/types";
 
 type Results = {
   categoryName: string;
@@ -22,14 +20,14 @@ type Results = {
 };
 
 const emptyCategory = {
-  name: "",
+  title: "",
   id: "",
   products: [
     {
       id: "",
-      name: "string",
+      title: "",
       image: {
-        url: "string",
+        url: "",
       },
     },
   ],
@@ -37,21 +35,19 @@ const emptyCategory = {
 
 const Categories: React.FC<Results> = ({ route }) => {
   const { name, id } = route.params;
+  const dispatch = useDispatch();
 
-  const categories = useSelector((state) => state.categories.categories);
-  const [actualCategory, setActualCategory] = useState(emptyCategory);
-
-  useEffect(() => {
-    const resp = categories.find((item) => item.id === id);
-    if (resp) {
-      setActualCategory(resp);
-    } else {
-      setActualCategory(emptyCategory);
-    }
-  }, [categories]);
+  const category = useSelector((state) => state.categories.category);
+  const loadingCategory = useSelector(
+    (state) => state.categories.loadingCategory
+  );
 
   const loadRepositories: any = () => {
-    store.dispatch(categoriesRequest(id, name));
+    dispatch(categoriesEspecifyRequest(id, name));
+  };
+
+  const resetRepository: Function = () => {
+    dispatch(categoriesEspecifyRequest(id, name, 1));
   };
 
   const renderItem: ListRenderItem<any> = ({ item }) => (
@@ -61,7 +57,7 @@ const Categories: React.FC<Results> = ({ route }) => {
           uri: item.image.url,
         }}
       />
-      <Name>{item.name}</Name>
+      <Name>{item.title}</Name>
     </Item>
   );
 
@@ -74,12 +70,14 @@ const Categories: React.FC<Results> = ({ route }) => {
           paddingBottom: SIZES.SPACE_SIX_DP,
         }}
         renderItem={renderItem}
-        data={
-          actualCategory.id === id
-            ? actualCategory.products
-            : emptyCategory.products
-        }
+        data={category.id === id ? category.products : emptyCategory.products}
         keyExtractor={(item) => item.id}
+        refreshControl={
+          <RefreshControl
+            onRefresh={() => resetRepository()}
+            refreshing={loadingCategory}
+          />
+        }
         onEndReached={loadRepositories}
         onEndReachedThreshold={0.1}
       />
