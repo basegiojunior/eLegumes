@@ -167,8 +167,47 @@ export function* companiesFromProductsRequestSaga({ payload }: any): any {
       );
 
       const companies = response.data.data;
+      let processCompanies: any = [];
 
-      yield put(companiesFromProductsSuccess(companies, productId));
+      for (let it = 0; it < companies.length; it += 1) {
+        processCompanies = [
+          ...processCompanies,
+          {
+            id: companies[it].id,
+            title: companies[it].name,
+            image: {
+              url:
+                companies[it].image && companies[it].image.url
+                  ? companies[it].image.url
+                  : "",
+            },
+            rating: Math.round(companies[it].rating),
+            product: {
+              id: companies[it].product.productDefault.id,
+              title: companies[it].product.productDefault.name,
+              price: companies[it].product.active_promotion
+                ? parseFloat(companies[it].product.price_promotion)
+                : parseFloat(companies[it].product.price),
+              image: {
+                url:
+                  companies[it].product.image && companies[it].product.image.url
+                    ? companies[it].product.image.url
+                    : companies[it].product.productDefault.image.url,
+              },
+              typeString:
+                companies[it].product.type === "weight"
+                  ? `aproximadamente ${companies[it].product.weight} g`
+                  : "1 unidade",
+              weight:
+                companies[it].product.type === "weight"
+                  ? companies[it].product.weight
+                  : undefined,
+            },
+          },
+        ];
+      }
+
+      yield put(companiesFromProductsSuccess(processCompanies, productId));
 
       return;
     } catch (error) {

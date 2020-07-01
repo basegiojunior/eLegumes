@@ -48,6 +48,8 @@ import COLORS from "../../styles/colors";
 
 import { widthPercentageToDP } from "../../Components/PercentageConverter";
 
+import { CompanieFromProduct } from "~/types";
+
 type ProductsProps = {
   route: any;
   navigation: any;
@@ -71,7 +73,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
 
   // states
   const [storeSelected, setStoreSelected] = useState<
-    typeof companies.companies[0] | undefined
+    CompanieFromProduct | undefined
   >(undefined);
 
   const [nProductsInCart, setNProductsInCart] = useState(1);
@@ -88,17 +90,6 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
       setNProductsInCart(nProductsInCart - 1);
     }
   }
-
-  // gera a string da unidade de venda do produto
-  const getProductUnity = (): string => {
-    if (!storeSelected) {
-      return "";
-    }
-    if (storeSelected.product?.type === "weight") {
-      return `aproximadamente ${storeSelected.product.weight} g`;
-    }
-    return "1 unidade";
-  };
 
   // exibe ou oculta a aba de adicionar o produto ao carrinho
   function changeHeight(toValue: number): void {
@@ -143,7 +134,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
   return (
     <>
       <ExpandedContainer
-        infoTopText={params.name ? params.name : params.productDefault.name}
+        infoTopText={params.title ? params.title : params.productDefault.title}
         infoTopTitle="ADICIONADO À SACOLA"
         buttonLeftTitle="não, obrigado"
         buttonLeftCall={() => setExpanded(false)}
@@ -155,7 +146,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
       >
         <InformationContainer>
           <InfomationSec>
-            Você acabou de adicionar um produto de &ldquo;{storeSelected?.name}
+            Você acabou de adicionar um produto de &ldquo;{storeSelected?.title}
             &rdquo;. Gostaria de visitar este vendedor para ver mais produtos?
           </InfomationSec>
         </InformationContainer>
@@ -171,9 +162,11 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
         />
         <Container>
           <ProductName>
-            {params.name ? params.name : params.productDefault.name}
+            {params.title ? params.title : params.productDefault.title}
           </ProductName>
-          <ProductAmount>{getProductUnity()}</ProductAmount>
+          <ProductAmount>
+            {storeSelected ? storeSelected.product.typeString : ""}
+          </ProductAmount>
 
           <ContainerRetrac
             style={{
@@ -206,13 +199,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
                   </AddProductLeft>
                   <AddProductPrice>
                     R${" "}
-                    {(
-                      parseFloat(
-                        storeSelected?.product.active_promotion
-                          ? storeSelected.product.price_promotion
-                          : storeSelected.product.price
-                      ) * nProductsInCart
-                    )
+                    {(storeSelected.product.price * nProductsInCart)
                       .toFixed(2)
                       .toString()
                       .replace(".", ",")}
@@ -225,7 +212,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
                       addToCart(
                         {
                           id: storeSelected.id,
-                          name: storeSelected.name,
+                          title: storeSelected.title,
                         },
                         storeSelected.product,
                         nProductsInCart
@@ -252,7 +239,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
                         uri: storeSelected.image.url,
                       }}
                     />
-                    <StoreSelectedName>{storeSelected.name}</StoreSelectedName>
+                    <StoreSelectedName>{storeSelected.title}</StoreSelectedName>
                   </StoreViewLeft>
 
                   <Icone
@@ -281,12 +268,13 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
                     <StoreViewLeft>
                       <StoreCircle isPressed={storeSelected?.id === item.id} />
                       <StoreTextView>
-                        <StoreTextName>{item.name}</StoreTextName>
+                        <StoreTextName>{item.title}</StoreTextName>
                         <StoreTextPrice>
                           R${" "}
-                          {item?.product.active_promotion
-                            ? item?.product.price_promotion.replace(".", ",")
-                            : item?.product.price.replace(".", ",")}
+                          {item.product.price
+                            .toFixed(2)
+                            .toString()
+                            .replace(".", ",")}
                         </StoreTextPrice>
                       </StoreTextView>
                     </StoreViewLeft>

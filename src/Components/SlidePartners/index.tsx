@@ -62,7 +62,7 @@ const SlidePartners: React.FC<ProductsArray> = ({
           listElements.map(
             (item): JSX.Element => (
               <LinkContainer
-                onPress={() => navigation.navigate("Companie", { data: item })}
+                onPress={() => navigation.navigate("Companie", { ...item })}
                 key={item.id}
               >
                 <ViewLink>

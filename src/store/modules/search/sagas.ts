@@ -26,7 +26,42 @@ export function* searchRequestSaga({ payload }: any): any {
       const products = response.data.products.data;
       const companies = response.data.companies.data;
 
-      yield put(searchSuccess(products, companies));
+      let processProducts: any = [];
+      let processCompanies: any = [];
+
+      for (let it = 0; it < products.length; it += 1) {
+        processProducts = [
+          ...processProducts,
+          {
+            id: products[it].id,
+            title: products[it].name,
+            image: {
+              url:
+                products[it].image && products[it].image.url
+                  ? products[it].image.url
+                  : "",
+            },
+          },
+        ];
+      }
+
+      for (let it = 0; it < companies.length; it += 1) {
+        processCompanies = [
+          ...processCompanies,
+          {
+            id: companies[it].id,
+            title: companies[it].name,
+            image: {
+              url:
+                companies[it].image && companies[it].image.url
+                  ? companies[it].image.url
+                  : "",
+            },
+          },
+        ];
+      }
+
+      yield put(searchSuccess(processProducts, processCompanies));
       NavigationService.navigate("ResultadosBusca", { search: name });
 
       return;
@@ -48,11 +83,28 @@ export function* searchProductsRequestSaga({ payload }: any): any {
       });
 
       const products = response.data.data;
+      let processProducts: any = [];
+
+      for (let it = 0; it < products.length; it += 1) {
+        processProducts = [
+          ...processProducts,
+          {
+            id: products[it].id,
+            title: products[it].name,
+            image: {
+              url:
+                products[it].image && products[it].image.url
+                  ? products[it].image.url
+                  : "",
+            },
+          },
+        ];
+      }
 
       if (page === 1) {
-        yield put(searchProductsSuccessReset(products));
+        yield put(searchProductsSuccessReset(processProducts));
       } else {
-        yield put(searchProductsSuccess(products, page));
+        yield put(searchProductsSuccess(processProducts, page));
       }
 
       return;
@@ -76,11 +128,28 @@ export function* searchCompaniesRequestSaga({ payload }: any): any {
       // console.log(response.data.products.data);
 
       const companies = response.data.data;
+      let processCompanies: any = [];
+
+      for (let it = 0; it < companies.length; it += 1) {
+        processCompanies = [
+          ...processCompanies,
+          {
+            id: companies[it].id,
+            title: companies[it].name,
+            image: {
+              url:
+                companies[it].image && companies[it].image.url
+                  ? companies[it].image.url
+                  : "",
+            },
+          },
+        ];
+      }
 
       if (page === 1) {
-        yield put(searchCompaniesSuccessReset(companies));
+        yield put(searchCompaniesSuccessReset(processCompanies));
       } else {
-        yield put(searchCompaniesSuccess(companies, page));
+        yield put(searchCompaniesSuccess(processCompanies, page));
       }
 
       return;

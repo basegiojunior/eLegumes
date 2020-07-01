@@ -62,32 +62,38 @@ export interface Companie {
 
 export type CompanieFromProduct = {
   id: string;
-  name: string;
-  owner: string;
-  rating: number;
-  totalStars?: number;
-  primary_phone: string;
-  secundary_phone: string;
-  product: Product;
+  title: string;
   image: {
     url: string;
   };
-  adress: {
+  rating: number;
+  product: {
     id: string;
-    description: string;
-    street: string;
-    cep: number;
-    neighborhood: string;
-    city: string;
-    state: string;
+    title: string;
+    price: number;
+    image: {
+      url: string;
+    };
+    typeString: string;
+    weight?: number;
   };
-  stars?: {
-    one: number;
-    two: number;
-    three: number;
-    four: number;
-    five: number;
+};
+
+export type CartProduct = {
+  id: string;
+  title: string;
+  price: number;
+  image: {
+    url: string;
   };
+  typeString: string;
+  weight?: number;
+};
+
+export type ItemResultType = {
+  id: string;
+  image: { url: string };
+  title: string;
 };
 
 export type SlideType = {

@@ -53,7 +53,7 @@ const SearchEspecifyResults: React.FC<Results> = ({ route }) => {
   };
 
   const renderItem: ListRenderItem<any> = ({ item }) => (
-    <ItemResult item={item} />
+    <ItemResult item={item} pageTo={name === "Produtos" ? name : "Companie"} />
   );
 
   return (

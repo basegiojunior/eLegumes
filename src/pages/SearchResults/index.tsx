@@ -47,7 +47,7 @@ const SearchResults: React.FC = () => {
           <>
             <Title>VENDEDORES</Title>
             {companies.map((item) => (
-              <ItemResult item={item} />
+              <ItemResult key={item.id} item={item} pageTo="Companie" />
             ))}
             <Button
               onPress={() => {

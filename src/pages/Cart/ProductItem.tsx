@@ -18,8 +18,10 @@ import {
 
 import { decreaseProduct, increaseProduct } from "~/store/modules/cart/actions";
 
+import { CartProduct } from "~/types";
+
 type ItemType = {
-  productItem: object;
+  productItem: { quantity: number; data: CartProduct };
   companieId: string;
 };
 
@@ -28,29 +30,18 @@ const ProductItem: React.FC<ItemType> = ({ productItem, companieId }) => {
 
   return (
     <ProductContainer>
-      <ProductImage
-        source={{
-          uri: productItem.data.image
-            ? productItem.data.image.url
-            : productItem.data.productDefault.image.url,
-        }}
-      />
+      <ProductImage source={{ uri: productItem.data.image.url }} />
       <ProductAboutContainer>
         <ProductAboutTop>
-          <ProductTitle>
-            {productItem.data.name || productItem.data.productDefault.name}
-          </ProductTitle>
+          <ProductTitle>{productItem.data.title}</ProductTitle>
           <ProductPrice>
-            R${" "}
-            {productItem.data.active_promotion
-              ? productItem.data.price_promotion.replace(".", ",")
-              : productItem.data.price.replace(".", ",")}
+            R$ {productItem.data.price.toFixed(1).toString().replace(".", ",")}
           </ProductPrice>
         </ProductAboutTop>
         <ProductQuantity>
           {productItem.quantity} x{" "}
-          {productItem.data.type === "weight"
-            ? `${productItem.data.weight} g`
+          {productItem.data.weight
+            ? `${productItem.data.weight}g`
             : "1 unidade"}
         </ProductQuantity>
       </ProductAboutContainer>

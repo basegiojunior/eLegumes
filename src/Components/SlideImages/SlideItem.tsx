@@ -26,7 +26,7 @@ const SlideItem: React.FC<ItemType> = ({ item, nItemsInScreen, companyId }) => {
         navigation.navigate("Produto", {
           id: item.id,
           image: item.image,
-          name: item.title,
+          title: item.title,
           company: companyId
             ? {
                 id: companyId,

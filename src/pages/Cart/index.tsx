@@ -93,17 +93,22 @@ const Cart: React.FC = () => {
 
         for (let i = 0; i < company?.products.length; i += 1) {
           const dado = company.products[i].data;
-          if (
-            dado.type === "weight" &&
-            dado.weight !== undefined &&
-            dado.weight !== null
-          ) {
+          if (dado.weight) {
             request.items = [
               ...request.items,
               {
                 // eslint-disable-next-line @typescript-eslint/camelcase
                 product_id: dado.id,
                 weight: company.products[i].quantity * dado.weight,
+              },
+            ];
+          } else {
+            request.items = [
+              ...request.items,
+              {
+                // eslint-disable-next-line @typescript-eslint/camelcase
+                product_id: dado.id,
+                weight: company.products[i].quantity,
               },
             ];
           }
@@ -223,7 +228,7 @@ const Cart: React.FC = () => {
                     />
                   </HeaderCompanieCheck>
                   <HeaderCompanieTitle>
-                    {item.companie.name.toUpperCase()}
+                    {item.companie.title.toUpperCase()}
                   </HeaderCompanieTitle>
                   <Icon
                     name="store"

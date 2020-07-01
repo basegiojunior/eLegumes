@@ -59,7 +59,7 @@ type CompaniesProps = {
 };
 
 const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
-  const { data } = route.params;
+  const { params } = route;
 
   const [actualCompanie, setActualCompanie] = useState({
     id: "",
@@ -92,7 +92,7 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
   const color = "rgba(0,0,0,.1)";
 
   useEffect(() => {
-    if (companie.id === data.id) {
+    if (companie.id === params.id) {
       const { five, four, three, two, one } = companie.stars;
       // const { one } = companie.stars;
 
@@ -109,7 +109,7 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
         ],
       });
     }
-  }, [companie, data]);
+  }, [companie, params]);
 
   // useEffect(() => {
   //   const newProducts = companieProducts.products.map((item) => {
@@ -128,9 +128,9 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
   // }, [companieProducts]);
 
   useEffect(() => {
-    store.dispatch(companieProductsRequest(data.id, 1));
-    store.dispatch(companieCommentsRequest(data.id, 1));
-    store.dispatch(companieRequest(data.id));
+    store.dispatch(companieProductsRequest(params.id, 1));
+    store.dispatch(companieCommentsRequest(params.id, 1));
+    store.dispatch(companieRequest(params.id));
   }, []);
 
   return (
@@ -161,7 +161,7 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
         color={color}
         show={
           companieProducts.products.length > 0 &&
-          companieProducts.id === data.id
+          companieProducts.id === params.id
         }
         nItemsInScreen={2}
         title="PRODUTOS"
@@ -183,7 +183,7 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
                 includeFontPadding: false,
               }}
             >
-              {actualCompanie.id === data.id ? actualCompanie.rating : "?"}
+              {actualCompanie.id === params.id ? actualCompanie.rating : "?"}
             </RatingNumbersActual>
             <RatingNumbersTotal
               style={{
@@ -249,7 +249,7 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
         </RatingRight>
       </RatingView>
 
-      {companieComments.id === data.id &&
+      {companieComments.id === params.id &&
         companieComments.comments.map((item) => (
           <CommentView key={item.id}>
             <CommentTopView>

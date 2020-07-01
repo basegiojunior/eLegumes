@@ -1,7 +1,7 @@
 import produce from "immer";
 import { Reducer } from "redux";
 
-import { Companie, Product } from "~/types";
+import { Companie, CartProduct } from "~/types";
 
 const INITIAL_STATE = {
   loading: false,
@@ -15,7 +15,7 @@ type InitialProps = {
   cart: {
     companie: Companie;
     totalPrice: number;
-    products: { quantity: number; data: Product }[];
+    products: { quantity: number; data: CartProduct }[];
   }[];
 };
 
@@ -24,9 +24,7 @@ const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
     switch (action.type) {
       case "@cart/ADD_TO_CART": {
         const { product, companie, quantity } = action.payload;
-        const price = product.active_promotion
-          ? parseFloat(product.price_promotion) * quantity
-          : parseFloat(product.price) * quantity;
+        const price = product.price * quantity;
 
         // verifica se já existe essa empresa
         const companieIndex = draft.cart.findIndex(
@@ -57,11 +55,8 @@ const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
               draft.cart[companieIndex].products[productIndex].data;
 
             const lastPrice =
-              parseFloat(
-                lastProduct.active_promotion
-                  ? lastProduct.price_promotion
-                  : lastProduct.price
-              ) * draft.cart[companieIndex].products[productIndex].quantity;
+              lastProduct.price *
+              draft.cart[companieIndex].products[productIndex].quantity;
 
             draft.cart[companieIndex].totalPrice =
               draft.cart[companieIndex].totalPrice - lastPrice + price;
@@ -102,9 +97,7 @@ const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
         );
 
         const product = draft.cart[companieIndex].products[productIndex].data;
-        const price = parseFloat(
-          product.active_promotion ? product.price_promotion : product.price
-        );
+        const { price } = product;
 
         draft.cart[companieIndex].products[productIndex].quantity += 1;
         draft.cart[companieIndex].totalPrice += price;
@@ -123,9 +116,7 @@ const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
         );
 
         const product = draft.cart[companieIndex].products[productIndex].data;
-        const price = parseFloat(
-          product.active_promotion ? product.price_promotion : product.price
-        );
+        const { price } = product;
 
         // se tiver mais que um produto no carrinho, pode iminuir uma unidade
         if (draft.cart[companieIndex].products[productIndex].quantity > 1) {
@@ -136,11 +127,16 @@ const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
       }
 
       case "@cart/SELECT_COMPANIE": {
-        const { companie } = draft.cart.find(
+        const finded = draft.cart.find(
           (item) => item.companie.id === action.payload.id
         );
 
-        draft.companieSelected = { id: companie.id, name: companie.name };
+        if (finded) {
+          draft.companieSelected = {
+            id: finded.companie.id,
+            name: finded.companie.title,
+          };
+        }
         break;
       }
 

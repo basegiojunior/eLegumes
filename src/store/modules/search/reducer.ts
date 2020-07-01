@@ -1,6 +1,6 @@
 import produce from "immer";
 import { Reducer } from "redux";
-import { ResumeProductCompanie } from "~/types";
+import { ItemResultType } from "~/types";
 
 const INITIAL_STATE = {
   searchLoading: false,
@@ -13,8 +13,8 @@ const INITIAL_STATE = {
 type InitialProps = {
   searchLoading: boolean;
   searchLoadingEspecify: boolean;
-  searchProductsResults: ResumeProductCompanie[];
-  searchCompaniesResults: ResumeProductCompanie[];
+  searchProductsResults: ItemResultType[];
+  searchCompaniesResults: ItemResultType[];
   recentSearchs: string[];
 };
 

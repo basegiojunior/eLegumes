@@ -2,23 +2,24 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Item, Image, Name } from "./styles";
 
-import { TopProduct } from "~/types";
+import { ItemResultType } from "~/types";
 
 type Lista = {
-  item: TopProduct;
+  item: ItemResultType;
+  pageTo?: string;
 };
 
-const ItemResult: React.FC<Lista> = ({ item }) => {
+const ItemResult: React.FC<Lista> = ({ item, pageTo = "Produto" }) => {
   const navigation = useNavigation();
 
   return (
-    <Item onPress={() => navigation.navigate("Produto", { data: item })}>
+    <Item onPress={() => navigation.navigate(pageTo, { ...item })}>
       <Image
         source={{
           uri: item.image.url,
         }}
       />
-      <Name>{item.name}</Name>
+      <Name>{item.title}</Name>
     </Item>
   );
 };
