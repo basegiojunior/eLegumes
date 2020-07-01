@@ -22,6 +22,7 @@ import { SlideType } from "~/types";
 
 type ProductsArray = {
   listElements: SlideType[];
+  isFromCompany?: string;
   nItemsInScreen?: number;
   title?: string;
   color: any;
@@ -32,6 +33,7 @@ type ProductsArray = {
 
 const SlideImages: React.FC<ProductsArray> = ({
   listElements,
+  isFromCompany,
   nItemsInScreen = 1,
   title,
   color,
@@ -110,6 +112,7 @@ const SlideImages: React.FC<ProductsArray> = ({
               listElements.map((item) => (
                 <SlideItem
                   item={item}
+                  companyId={isFromCompany || undefined}
                   key={item.id}
                   nItemsInScreen={nItemsInScreen}
                 />

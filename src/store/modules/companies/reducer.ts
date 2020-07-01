@@ -1,33 +1,25 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import produce from "immer";
 import { Reducer } from "redux";
-import { CompanieFromProduct, CompaniePage, Product } from "~/types";
+import { CompanieFromProduct, Companie, SlideType } from "~/types";
 
 const INITIAL_STATE = {
   loading: false,
   loadingProduct: false,
+  loadingComments: false,
+  loadingCompanieFromProduct: false,
   companieProducts: { id: "", products: [] },
   companieComments: { id: "", comments: [] },
   companie: {
     id: "",
-    name: "",
-    owner: "",
+    title: "",
     rating: 0,
     totalStars: 0,
-    primary_phone: "",
-    secundary_phone: "",
+    phone: "",
     image: {
       url: "",
     },
-    address: {
-      id: "",
-      description: "",
-      street: "",
-      cep: 0,
-      neighborhood: "",
-      city: "",
-      state: "",
-    },
+    address: "",
     stars: {
       one: 0,
       two: 0,
@@ -42,7 +34,9 @@ const INITIAL_STATE = {
 type InitialProps = {
   loading: boolean;
   loadingProduct: boolean;
-  companieProducts: { id: string; products: Product[] };
+  loadingComments: boolean;
+  loadingCompanieFromProduct: boolean;
+  companieProducts: { id: string; products: SlideType[] };
   companieComments: {
     id: string;
     comments: {
@@ -53,14 +47,14 @@ type InitialProps = {
     }[];
   };
   companiesFromProduct: { id: string; companies: CompanieFromProduct[] };
-  companie: CompaniePage;
+  companie: Companie;
 };
 
 const companie: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
   return produce(state, (draft: InitialProps) => {
     switch (action.type) {
       case "@companies/COMPANIES_PRODUCTS_REQUEST": {
-        draft.loading = true;
+        draft.loadingProduct = true;
         if (action.payload.page !== 1) {
           if (action.payload.id === draft.companieProducts.id) {
             action.payload.page =
@@ -72,7 +66,7 @@ const companie: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
         break;
       }
       case "@companies/COMPANIES_PRODUCTS_SUCCESS": {
-        draft.loading = false;
+        draft.loadingProduct = false;
         draft.companieProducts.products = [
           ...draft.companieProducts.products.slice(0, 10 * action.payload.page),
           ...action.payload.companieProducts,
@@ -80,13 +74,13 @@ const companie: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
         break;
       }
       case "@companies/COMPANIES_PRODUCTS_SUCCESS_RESET": {
-        draft.loading = false;
+        draft.loadingProduct = false;
         draft.companieProducts.products = action.payload.companieProducts;
         draft.companieProducts.id = action.payload.id;
         break;
       }
       case "@companies/COMPANIES_PRODUCTS_FAILURE": {
-        draft.loading = false;
+        draft.loadingProduct = false;
         break;
       }
 
@@ -108,7 +102,7 @@ const companie: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
 
       // COMMENTS
       case "@companies/COMPANIES_COMMENTS_REQUEST": {
-        draft.loading = true;
+        draft.loadingComments = true;
         if (action.payload.page !== 1) {
           if (action.payload.id === draft.companieComments.id) {
             action.payload.page =
@@ -120,7 +114,7 @@ const companie: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
         break;
       }
       case "@companies/COMPANIES_COMMENTS_SUCCESS": {
-        draft.loading = false;
+        draft.loadingComments = false;
         draft.companieComments.comments = [
           ...draft.companieComments.comments.slice(0, 10 * action.payload.page),
           ...action.payload.companieComments,
@@ -128,29 +122,29 @@ const companie: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
         break;
       }
       case "@companies/COMPANIES_COMMENTS_SUCCESS_RESET": {
-        draft.loading = false;
+        draft.loadingComments = false;
         draft.companieComments.comments = action.payload.companieComments;
         draft.companieComments.id = action.payload.id;
         break;
       }
       case "@companies/COMPANIES_COMMENTS_FAILURE": {
-        draft.loading = false;
+        draft.loadingComments = false;
         break;
       }
 
       // COMPANIES FROM PRODUCT
       case "@companies/COMPANIES_FROM_PRODUCTS_REQUEST": {
-        draft.loadingProduct = true;
+        draft.loadingCompanieFromProduct = true;
         break;
       }
       case "@companies/COMPANIES_FROM_PRODUCTS_SUCCESS": {
-        draft.loadingProduct = false;
+        draft.loadingCompanieFromProduct = false;
         draft.companiesFromProduct.companies = action.payload.companies;
         draft.companiesFromProduct.id = action.payload.id;
         break;
       }
       case "@companies/COMPANIES_FROM_PRODUCTS_FAILURE": {
-        draft.loadingProduct = false;
+        draft.loadingCompanieFromProduct = false;
         break;
       }
       default:

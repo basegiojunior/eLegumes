@@ -15,7 +15,7 @@ type InitialProps = {
   noPageLoading: boolean;
   pageLoading: boolean;
   pageFailure: boolean;
-  newCompanies: Companie[];
+  newCompanies: SlideType[];
   topProducts: SlideType[];
   promotions: GridType[];
 };

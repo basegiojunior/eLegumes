@@ -33,16 +33,41 @@ export function* companieProductsRequestSaga({ payload }: any): any {
       const products = response.data.data;
 
       for (let e = 0; e < products.length; e += 1) {
+        let image;
+        let price;
+
+        if (products[e].active_promotion) {
+          price = `R$ ${products[e].price_promotion.replace(".", ",")} / ${
+            products[e].type === "weight" ? `${products[e].weight}g` : "1 uni."
+          }`;
+        } else {
+          price = `R$ ${products[e].price.replace(".", ",")} / ${
+            products[e].type === "weight" ? `${products[e].weight}g` : "1 uni."
+          }`;
+        }
+
+        if (products[e].image && products[e].image.url) {
+          image = products[e].image;
+        } else if (
+          products[e].productDefault.image &&
+          products[e].productDefault.image.url
+        ) {
+          image = products[e].productDefault.image;
+        } else {
+          image = {
+            url: "",
+          };
+        }
+
         processed = [
           ...processed,
           {
-            ...products[e],
-            name: products[e].name
+            id: products[e].productDefault.id,
+            title: products[e].name
               ? products[e].name
               : products[e].productDefault.name,
-            image: products[e].image
-              ? products[e].image
-              : products[e].productDefault.image,
+            subtitle: price,
+            image,
           },
         ];
       }
@@ -71,9 +96,22 @@ export function* companieRequestSaga({ payload }: any): any {
     try {
       response = yield call(api.get, `/v1/client/company/${companieId}`);
 
-      const products = response.data.data.company;
+      const companie = response.data.data.company;
 
-      yield put(companieSuccess(products));
+      const processCompanie = {
+        id: companie.id,
+        image: {
+          url: companie.image && companie.image.url ? companie.image.url : "",
+        },
+        address: `${companie.address.street}, ${companie.address.neighborhood}`,
+        title: companie.name,
+        phone: companie.primary_phone,
+        rating: Math.round(parseFloat(companie.rating)),
+        totalStars: companie.totalStars,
+        stars: companie.stars,
+      };
+
+      yield put(companieSuccess(processCompanie));
 
       return;
     } catch (error) {

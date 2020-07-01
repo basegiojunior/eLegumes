@@ -26,7 +26,9 @@ export function* dashRequestSaga(): any {
         processNewCompanies = [
           ...processNewCompanies,
           {
-            ...newCompanies[it],
+            id: newCompanies[it].id,
+            title: newCompanies[it].name,
+            subtitle: `${newCompanies[it].address.street}, ${newCompanies[it].address.neighborhood}`,
             image: {
               url:
                 newCompanies[it].image && newCompanies[it].image.url

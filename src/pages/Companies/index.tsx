@@ -5,6 +5,7 @@ import { ContainerScroll } from "~/styles/scrollView";
 import Button from "~/Components/Button";
 import Slide from "~/Components/SlideImages";
 import Title from "~/Components/Title";
+import Loading from "~/Components/Loading";
 
 import {
   companieProductsRequest,
@@ -46,36 +47,38 @@ import {
 
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
-import { Companie } from "~/types";
+import { SlideType } from "~/types";
 
 type CompaniesProps = {
   route: {
     params: {
-      data: Companie;
+      data: SlideType;
     };
   };
   navigation: any;
 };
 
 const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
-  const [stars, setStars] = useState([
-    { id: 5, value: 1 },
-    { id: 4, value: 1 },
-    { id: 3, value: 1 },
-    { id: 2, value: 1 },
-    { id: 1, value: 1 },
-  ]);
-  // const [actualProducts, setActualProducts] = useState<
-  //   | {
-  //       id: string;
-  //       image: string;
-  //       title: string;
-  //       subtitle: string;
-  //     }[]
-  //   | []
-  // >([]);
-
   const { data } = route.params;
+
+  const [actualCompanie, setActualCompanie] = useState({
+    id: "",
+    title: "",
+    image: {
+      url: "",
+    },
+    address: "",
+    rating: 0,
+    totalStars: 0,
+    phone: "",
+    stars: [
+      { id: 5, value: 1 },
+      { id: 4, value: 1 },
+      { id: 3, value: 1 },
+      { id: 2, value: 1 },
+      { id: 1, value: 1 },
+    ],
+  });
 
   const companieProducts = useSelector(
     (state) => state.companies.companieProducts
@@ -84,6 +87,7 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
     (state) => state.companies.companieComments
   );
   const companie = useSelector((state) => state.companies.companie);
+  const loading = useSelector((state) => state.companies.loading);
 
   const color = "rgba(0,0,0,.1)";
 
@@ -94,15 +98,18 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
 
       const total = five + four + three + two + one;
 
-      setStars([
-        { id: 5, value: (five * 100) / total },
-        { id: 4, value: (four * 100) / total },
-        { id: 3, value: (three * 100) / total },
-        { id: 2, value: (two * 100) / total },
-        { id: 1, value: (one * 100) / total },
-      ]);
+      setActualCompanie({
+        ...companie,
+        stars: [
+          { id: 5, value: (five * 100) / total },
+          { id: 4, value: (four * 100) / total },
+          { id: 3, value: (three * 100) / total },
+          { id: 2, value: (two * 100) / total },
+          { id: 1, value: (one * 100) / total },
+        ],
+      });
     }
-  }, [companie]);
+  }, [companie, data]);
 
   // useEffect(() => {
   //   const newProducts = companieProducts.products.map((item) => {
@@ -128,24 +135,28 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
 
   return (
     <ContainerScroll>
-      <ImageCompanie source={{ uri: data.image.url }} />
+      <Loading visible={loading} />
+      <ImageCompanie source={{ uri: actualCompanie.image.url }} />
       <Container>
-        <CompanieName>{data.name}</CompanieName>
+        <CompanieName>{actualCompanie.title}</CompanieName>
         <Address>
           <Icone
             color="#11bb11"
             size={widthPercentageToDP("7%")}
             name="map-marker"
           />
-          <CompanieAddress>{data.address.description}</CompanieAddress>
+          <CompanieAddress>{actualCompanie.address}</CompanieAddress>
         </Address>
 
         <Button text="entrar em contato" onPress={() => null} />
       </Container>
       <Slide
         seeMoreData={() => {
-          navigation.navigate("CompanieProducts", { name: data.name });
+          navigation.navigate("CompanieProducts", {
+            title: actualCompanie.title,
+          });
         }}
+        isFromCompany={actualCompanie.id}
         listElements={companieProducts.products}
         color={color}
         show={
@@ -172,7 +183,7 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
                 includeFontPadding: false,
               }}
             >
-              {companie.id === data.id ? companie.rating : "?"}
+              {actualCompanie.id === data.id ? actualCompanie.rating : "?"}
             </RatingNumbersActual>
             <RatingNumbersTotal
               style={{
@@ -186,52 +197,32 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
             <Icone
               name="star"
               size={widthPercentageToDP("6%")}
-              color={
-                companie.rating > 0 && companie.id === data.id
-                  ? "#6bc76b"
-                  : "#bec1bd"
-              }
+              color={actualCompanie.rating > 0 ? "#6bc76b" : "#bec1bd"}
             />
             <Icone
               name="star"
               size={widthPercentageToDP("6%")}
-              color={
-                companie.rating > 1 && companie.id === data.id
-                  ? "#6bc76b"
-                  : "#bec1bd"
-              }
+              color={actualCompanie.rating > 1 ? "#6bc76b" : "#bec1bd"}
             />
             <Icone
               name="star"
               size={widthPercentageToDP("6%")}
-              color={
-                companie.rating > 2 && companie.id === data.id
-                  ? "#6bc76b"
-                  : "#bec1bd"
-              }
+              color={actualCompanie.rating > 2 ? "#6bc76b" : "#bec1bd"}
             />
             <Icone
               name="star"
               size={widthPercentageToDP("6%")}
-              color={
-                companie.rating > 3 && companie.id === data.id
-                  ? "#6bc76b"
-                  : "#bec1bd"
-              }
+              color={actualCompanie.rating > 3 ? "#6bc76b" : "#bec1bd"}
             />
             <Icone
               name="star"
               size={widthPercentageToDP("6%")}
-              color={
-                companie.rating > 4 && companie.id === data.id
-                  ? "#6bc76b"
-                  : "#bec1bd"
-              }
+              color={actualCompanie.rating > 4 ? "#6bc76b" : "#bec1bd"}
             />
           </Stars>
         </RatingLeft>
         <RatingRight>
-          {stars.map((item, index) => {
+          {actualCompanie.stars.map((item, index) => {
             return (
               <StarLine key={item.id}>
                 <StarLineViewLeft>

@@ -18,10 +18,10 @@ import { widthPercentageToDP } from "../PercentageConverter";
 import Title from "../Title";
 
 import SIZES from "~/styles/sizes";
-import { Companie } from "~/types";
+import { SlideType } from "~/types";
 
 type ProductsArray = {
-  listElements: Companie[];
+  listElements: SlideType[];
   nItemsInScreen?: number;
   title?: string;
   color: any;
@@ -71,8 +71,8 @@ const SlidePartners: React.FC<ProductsArray> = ({
                     source={{ uri: item.image.url }}
                   />
                   <ViewAbout>
-                    <TitlePartner>{item.name}</TitlePartner>
-                    <TextPartner>{item.address.description}</TextPartner>
+                    <TitlePartner>{item.title}</TitlePartner>
+                    <TextPartner>{item.subtitle}</TextPartner>
                   </ViewAbout>
                 </ViewLink>
               </LinkContainer>

@@ -14,9 +14,10 @@ import { SlideType } from "~/types";
 type ItemType = {
   item: SlideType;
   nItemsInScreen: number;
+  companyId?: string;
 };
 
-const SlideItem: React.FC<ItemType> = ({ item, nItemsInScreen }) => {
+const SlideItem: React.FC<ItemType> = ({ item, nItemsInScreen, companyId }) => {
   const navigation = useNavigation();
 
   return (
@@ -26,6 +27,11 @@ const SlideItem: React.FC<ItemType> = ({ item, nItemsInScreen }) => {
           id: item.id,
           image: item.image,
           name: item.title,
+          company: companyId
+            ? {
+                id: companyId,
+              }
+            : null,
         });
       }}
     >

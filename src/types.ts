@@ -43,44 +43,14 @@ export type TopProduct = {
 
 export interface Companie {
   id: string;
-  name: string;
-  owner: string;
-  primary_phone?: string;
-  secundary_phone?: string;
+  title: string;
+  phone: string;
   image: {
     url: string;
   };
-  address: {
-    id: string;
-    description: string;
-    street: string;
-    cep: number;
-    neighborhood: string;
-    city: string;
-    state: string;
-  };
-}
-
-export interface CompaniePage extends Companie {
-  id: string;
-  name: string;
-  owner: string;
+  address: string;
   rating: number;
   totalStars: number;
-  primary_phone: string;
-  secundary_phone: string;
-  image: {
-    url: string;
-  };
-  address: {
-    id: string;
-    description: string;
-    street: string;
-    cep: number;
-    neighborhood: string;
-    city: string;
-    state: string;
-  };
   stars: {
     one: number;
     two: number;
