@@ -108,7 +108,7 @@ export type GridType = {
   image: { url: string };
   title: string;
   subtitle: string;
-  lineThrough: string;
+  lineThrough?: string;
 };
 
 export type Category = {

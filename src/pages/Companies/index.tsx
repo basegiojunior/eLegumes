@@ -52,6 +52,7 @@ import { SlideType } from "~/types";
 type CompaniesProps = {
   route: {
     params: {
+      id: string;
       data: SlideType;
     };
   };
@@ -154,6 +155,7 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
         seeMoreData={() => {
           navigation.navigate("CompanieProducts", {
             title: actualCompanie.title,
+            id: actualCompanie.id,
           });
         }}
         isFromCompany={actualCompanie.id}

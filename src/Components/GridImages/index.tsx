@@ -35,9 +35,11 @@ const GridImages: React.FC<GridTypes> = ({ item, index }) => {
             }}
           />
           <TitleProduct>{item.title}</TitleProduct>
-          <PriceProduct style={{ textDecorationLine: "line-through" }}>
-            {item.lineThrough}
-          </PriceProduct>
+          {!!item.lineThrough && (
+            <PriceProduct style={{ textDecorationLine: "line-through" }}>
+              {item.lineThrough}
+            </PriceProduct>
+          )}
           <PriceProduct>{item.subtitle}</PriceProduct>
         </ViewLinkLine>
       </LinkContainerLine>

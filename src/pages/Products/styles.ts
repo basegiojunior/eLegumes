@@ -196,12 +196,16 @@ export const TitleText = styled.Text`
 
 export const StoreViewSeledted = styled.View`
   flex-direction: row;
-  margin-top: ${SIZES.SPACE_FOR};
   height: ${widthPercentageToPx("14%")};
   max-height: ${widthPercentageToPx("14%")};
+  margin-top: ${SIZES.SPACE_FOR};
   flex-grow: 1;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const StoreLinkSelected = styled.TouchableOpacity`
+  margin-top: ${SIZES.SPACE_TWO};
 `;
 
 export const StoreSelectedImage = styled.Image`

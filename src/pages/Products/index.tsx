@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { Animated } from "react-native";
+import { Animated, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import { ContainerScroll } from "~/styles/scrollView";
@@ -40,6 +40,7 @@ import {
   StoreSelectedImage,
   StoreSelectedName,
   StoreViewSeledted,
+  StoreLinkSelected,
   InfomationSec,
   InformationContainer,
 } from "./styles";
@@ -232,22 +233,31 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
                   VENDEDOR SELECIONADO
                 </TitleText>
 
-                <StoreViewSeledted>
-                  <StoreViewLeft>
-                    <StoreSelectedImage
-                      source={{
-                        uri: storeSelected.image.url,
-                      }}
-                    />
-                    <StoreSelectedName>{storeSelected.title}</StoreSelectedName>
-                  </StoreViewLeft>
+                <StoreLinkSelected
+                  onPress={() => {
+                    navigation.navigate("Companie", { ...storeSelected });
+                    // console.log("na");
+                  }}
+                >
+                  <StoreViewSeledted>
+                    <StoreViewLeft>
+                      <StoreSelectedImage
+                        source={{
+                          uri: storeSelected.image.url,
+                        }}
+                      />
+                      <StoreSelectedName>
+                        {storeSelected.title}
+                      </StoreSelectedName>
+                    </StoreViewLeft>
 
-                  <Icone
-                    size={widthPercentageToDP("8%")}
-                    color={COLORS.TEXT_SECONDARY}
-                    name="store"
-                  />
-                </StoreViewSeledted>
+                    <Icone
+                      size={widthPercentageToDP("8%")}
+                      color={COLORS.TEXT_SECONDARY}
+                      name="store"
+                    />
+                  </StoreViewSeledted>
+                </StoreLinkSelected>
               </>
             )}
           </ContainerRetrac>

@@ -55,7 +55,7 @@ const companie: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
     switch (action.type) {
       case "@companies/COMPANIES_PRODUCTS_REQUEST": {
         draft.loadingProduct = true;
-        if (action.payload.page !== 1) {
+        if (action.payload.page === 0) {
           if (action.payload.id === draft.companieProducts.id) {
             action.payload.page =
               Math.floor(draft.companieProducts.products.length / 10) + 1;

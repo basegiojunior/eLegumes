@@ -10,7 +10,7 @@ export const companieProductsRequest: Function = (
 
 export const companieProductsSuccess: Function = (
   companieProducts: object[],
-  page: number
+  page = 0
 ) => {
   return {
     type: "@companies/COMPANIES_PRODUCTS_SUCCESS",

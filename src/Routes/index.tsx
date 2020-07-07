@@ -219,7 +219,7 @@ const LoginStackScreen: React.FC = () => {
           options={({ route, navigation }) => {
             return styleBarCategory(
               () => navigation.goBack(),
-              route.params.name
+              route.params.title
             );
           }}
         />
