@@ -1,14 +1,17 @@
 import produce from "immer";
 import { Reducer } from "redux";
-import { Companie, SlideType, GridType } from "~/types";
+import { SlideType, GridType } from "~/types";
 
 const INITIAL_STATE = {
   noPageLoading: false,
   pageLoading: false,
   pageFailure: false,
   newCompanies: [],
+  emptyNewCompanies: false,
   topProducts: [],
+  emptyTopProducts: [],
   promotions: [],
+  emptyPromotions: [],
 };
 
 type InitialProps = {
@@ -16,8 +19,11 @@ type InitialProps = {
   pageLoading: boolean;
   pageFailure: boolean;
   newCompanies: SlideType[];
+  emptyNewCompanies: boolean;
   topProducts: SlideType[];
+  emptyTopProducts: boolean;
   promotions: GridType[];
+  emptyPromotions: boolean;
 };
 
 const dash: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
@@ -30,7 +36,18 @@ const dash: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
       case "@dash/DASHBOARD_SUCCESS": {
         draft.noPageLoading = false;
         draft.newCompanies = action.payload.newCompanies;
+        if (action.payload.newCompanies.length === 0) {
+          draft.emptyNewCompanies = true;
+        } else {
+          draft.emptyNewCompanies = false;
+        }
+
         draft.topProducts = action.payload.topProducts;
+        if (action.payload.topProducts.length === 0) {
+          draft.emptyTopProducts = true;
+        } else {
+          draft.emptyTopProducts = false;
+        }
         break;
       }
       case "@dash/DASHBOARD_FAILURE": {
@@ -48,6 +65,11 @@ const dash: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
         draft.pageLoading = false;
         draft.pageFailure = false;
         draft.promotions = action.payload.promotions;
+        if (action.payload.promotions.length === 0) {
+          draft.emptyPromotions = true;
+        } else {
+          draft.emptyPromotions = false;
+        }
         break;
       }
       case "@promo/PROMO_SUCCESS": {

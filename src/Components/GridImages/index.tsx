@@ -8,6 +8,7 @@ import {
   LinkContainerLine,
   ProductsView,
   ImageProductLine,
+  ImageProductLineEmpty,
   ViewLinkLine,
 } from "./styles";
 
@@ -29,11 +30,16 @@ const GridImages: React.FC<GridTypes> = ({ item, index }) => {
         key={item.id}
       >
         <ViewLinkLine last={index % 2 !== 0}>
-          <ImageProductLine
-            source={{
-              uri: item.image.url,
-            }}
-          />
+          {item.image.url ? (
+            <ImageProductLine
+              source={{
+                uri: item.image.url,
+              }}
+            />
+          ) : (
+            <ImageProductLineEmpty />
+          )}
+
           <TitleProduct>{item.title}</TitleProduct>
           {!!item.lineThrough && (
             <PriceProduct style={{ textDecorationLine: "line-through" }}>

@@ -49,6 +49,14 @@ export const ImagePartner = styled.Image<ImageProp>`
   border-radius: ${SIZES.SPACE_TWO};
 `;
 
+export const ImagePartnerEmpry = styled.View<ImageProp>`
+  width: ${widthPercentageToPx("21%")};
+  height: ${widthPercentageToPx("21%")};
+  margin-right: ${SIZES.SPACE_FOR};
+  border-radius: ${SIZES.SPACE_TWO};
+  background-color: ${COLORS.BACKGROUND_IMAGES};
+`;
+
 export const ViewAbout = styled.View`
   flex-direction: column;
   justify-content: center;

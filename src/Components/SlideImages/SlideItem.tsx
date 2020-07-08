@@ -5,6 +5,7 @@ import {
   LinkContainer,
   ViewLink,
   ImageProduct,
+  ImageProductEmpty,
   TitleProduct,
   PriceProduct,
 } from "./styles";
@@ -36,12 +37,16 @@ const SlideItem: React.FC<ItemType> = ({ item, nItemsInScreen, companyId }) => {
       }}
     >
       <ViewLink>
-        <ImageProduct
-          nItemsInScreen={nItemsInScreen || 2}
-          source={{
-            uri: item.image.url,
-          }}
-        />
+        {item.image.url ? (
+          <ImageProduct
+            nItemsInScreen={nItemsInScreen || 2}
+            source={{
+              uri: item.image.url,
+            }}
+          />
+        ) : (
+          <ImageProductEmpty />
+        )}
         <TitleProduct>{item.title}</TitleProduct>
         {!!item.subtitle && <PriceProduct>{item.subtitle}</PriceProduct>}
       </ViewLink>

@@ -65,6 +65,13 @@ export const ProductImage = styled.Image`
   border-radius: ${SIZES.SPACE_TWO};
 `;
 
+export const ProductImageEmpty = styled.View`
+  width: ${widthPercentageToPx("19%")};
+  height: ${widthPercentageToPx("19%")};
+  border-radius: ${SIZES.SPACE_TWO};
+  background-color: ${COLORS.BACKGROUND_IMAGES};
+`;
+
 export const ProductAboutContainer = styled.View`
   flex-direction: column;
   margin-left: ${SIZES.SPACE_FOR};

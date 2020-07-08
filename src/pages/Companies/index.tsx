@@ -19,6 +19,7 @@ import profile from "~/assets/product.jpg";
 import {
   Container,
   ImageCompanie,
+  ImageCompanieEmpty,
   CompanieName,
   CompanieAddress,
   Address,
@@ -137,7 +138,11 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
   return (
     <ContainerScroll>
       <Loading visible={loading} />
-      <ImageCompanie source={{ uri: actualCompanie.image.url }} />
+      {actualCompanie.image.url ? (
+        <ImageCompanie source={{ uri: actualCompanie.image.url }} />
+      ) : (
+        <ImageCompanieEmpty />
+      )}
       <Container>
         <CompanieName>{actualCompanie.title}</CompanieName>
         <Address>

@@ -3,7 +3,7 @@ import { FlatList, ListRenderItem, RefreshControl } from "react-native";
 import { useDispatch } from "react-redux";
 import { useSelector } from "~/store/modules/rootReducer";
 
-import { Container, Item, Image, Name } from "./styles";
+import { Container, Item, Image, ImageEmpty, Name } from "./styles";
 
 import { categoriesEspecifyRequest } from "~/store/modules/categories/actions";
 import SIZES from "~/styles/sizes";
@@ -52,11 +52,15 @@ const Categories: React.FC<Results> = ({ route }) => {
 
   const renderItem: ListRenderItem<any> = ({ item }) => (
     <Item>
-      <Image
-        source={{
-          uri: item.image.url,
-        }}
-      />
+      {item.image.url ? (
+        <Image
+          source={{
+            uri: item.image.url,
+          }}
+        />
+      ) : (
+        <ImageEmpty />
+      )}
       <Name>{item.title}</Name>
     </Item>
   );

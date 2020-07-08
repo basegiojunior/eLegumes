@@ -19,6 +19,12 @@ export const ImageCompanie = styled.Image`
   height: ${widthPercentageToPx("100%")};
 `;
 
+export const ImageCompanieEmpty = styled.View`
+  width: ${widthPercentageToPx("100%")};
+  height: ${widthPercentageToPx("100%")};
+  background-color: ${COLORS.BACKGROUND_IMAGES};
+`;
+
 export const CompanieName = styled.Text`
   font-size: ${SIZES.SPACE_SIX};
   font-family: ${FONTS.FONT_BOLD};

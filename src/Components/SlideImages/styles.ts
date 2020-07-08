@@ -53,6 +53,19 @@ export const ImageProduct = styled.Image<ImageProp>`
       : widthPercentageToPx("40%")};
 `;
 
+export const ImageProductEmpty = styled.View<ImageProp>`
+  border-radius: ${SIZES.SPACE_TWO};
+  width: ${(props) =>
+    props.nItemsInScreen
+      ? widthPercentageToPx(`${92 / props.nItemsInScreen - 4}%`)
+      : widthPercentageToPx("40%")};
+  height: ${(props) =>
+    props.nItemsInScreen
+      ? widthPercentageToPx(`${55 / props.nItemsInScreen - 4}%`)
+      : widthPercentageToPx("40%")};
+  background-color: ${COLORS.BACKGROUND_IMAGES};
+`;
+
 export const TitleProduct = styled.Text`
   font-size: ${SIZES.FONT_SIZE_QUATERNARY};
   margin-top: ${SIZES.SPACE_TWO};

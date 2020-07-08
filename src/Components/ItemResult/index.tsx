@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Item, Image, Name } from "./styles";
+import { Item, Image, ImageEmpty, Name } from "./styles";
 
 import { ItemResultType } from "~/types";
 
@@ -14,11 +14,15 @@ const ItemResult: React.FC<Lista> = ({ item, pageTo = "Produto" }) => {
 
   return (
     <Item onPress={() => navigation.navigate(pageTo, { ...item })}>
-      <Image
-        source={{
-          uri: item.image.url,
-        }}
-      />
+      {item.image.url ? (
+        <Image
+          source={{
+            uri: item.image.url,
+          }}
+        />
+      ) : (
+        <ImageEmpty />
+      )}
       <Name>{item.title}</Name>
     </Item>
   );

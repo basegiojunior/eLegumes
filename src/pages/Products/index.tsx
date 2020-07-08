@@ -15,6 +15,7 @@ import {
   Container,
   ContainerRetrac,
   ImageProduct,
+  ImageProductEmpty,
   ProductName,
   ProductAmount,
   AlertStore,
@@ -38,6 +39,7 @@ import {
   AddToCartText,
   TitleText,
   StoreSelectedImage,
+  StoreSelectedImageEmpty,
   StoreSelectedName,
   StoreViewSeledted,
   StoreLinkSelected,
@@ -154,13 +156,15 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
       </ExpandedContainer>
 
       <ContainerScroll>
-        <ImageProduct
-          source={{
-            uri: params.productDefault
-              ? params.productDefault.image.url
-              : params.image.url,
-          }}
-        />
+        {params.image.url ? (
+          <ImageProduct
+            source={{
+              uri: params.image.url,
+            }}
+          />
+        ) : (
+          <ImageProductEmpty />
+        )}
         <Container>
           <ProductName>
             {params.title ? params.title : params.productDefault.title}
@@ -241,11 +245,15 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
                 >
                   <StoreViewSeledted>
                     <StoreViewLeft>
-                      <StoreSelectedImage
-                        source={{
-                          uri: storeSelected.image.url,
-                        }}
-                      />
+                      {storeSelected.image.url ? (
+                        <StoreSelectedImage
+                          source={{
+                            uri: storeSelected.image.url,
+                          }}
+                        />
+                      ) : (
+                        <StoreSelectedImageEmpty />
+                      )}
                       <StoreSelectedName>
                         {storeSelected.title}
                       </StoreSelectedName>

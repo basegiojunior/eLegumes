@@ -28,6 +28,12 @@ export const ImageProduct = styled.Image`
   height: ${widthPercentageToPx("100%")};
 `;
 
+export const ImageProductEmpty = styled.View`
+  width: ${widthPercentageToPx("100%")};
+  height: ${widthPercentageToPx("100%")};
+  background-color: ${COLORS.BACKGROUND_IMAGES};
+`;
+
 export const ProductName = styled.Text`
   font-size: ${SIZES.SPACE_SIX};
   font-family: ${FONTS.FONT_BOLD};
@@ -212,6 +218,12 @@ export const StoreSelectedImage = styled.Image`
   height: ${widthPercentageToPx("14%")};
   width: ${widthPercentageToPx("14%")};
   border-radius: ${widthPercentageToPx("7%")};
+`;
+export const StoreSelectedImageEmpty = styled.View`
+  height: ${widthPercentageToPx("14%")};
+  width: ${widthPercentageToPx("14%")};
+  border-radius: ${widthPercentageToPx("7%")};
+  background-color: ${COLORS.BACKGROUND_IMAGES};
 `;
 
 export const StoreSelectedName = styled.Text`

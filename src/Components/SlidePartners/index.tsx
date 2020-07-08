@@ -6,6 +6,7 @@ import {
   LinkContainer,
   LateralSlide,
   ImagePartner,
+  ImagePartnerEmpry,
   ViewLink,
   TitlePartner,
   TextPartner,
@@ -66,10 +67,14 @@ const SlidePartners: React.FC<ProductsArray> = ({
                 key={item.id}
               >
                 <ViewLink>
-                  <ImagePartner
-                    nItemsInScreen={nItemsInScreen || 2}
-                    source={{ uri: item.image.url }}
-                  />
+                  {item.image.url ? (
+                    <ImagePartner
+                      nItemsInScreen={nItemsInScreen || 2}
+                      source={{ uri: item.image.url }}
+                    />
+                  ) : (
+                    <ImagePartnerEmpry />
+                  )}
                   <ViewAbout>
                     <TitlePartner>{item.title}</TitlePartner>
                     <TextPartner>{item.subtitle}</TextPartner>

@@ -12,8 +12,8 @@ interface Margin extends ViewProps {
 }
 
 export const Container = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
+  background-color: #fff;
+  height: 100%;
 `;
 
 export const Title = styled.Text`

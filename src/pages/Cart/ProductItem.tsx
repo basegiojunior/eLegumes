@@ -11,6 +11,7 @@ import {
   ProductChangeQuantityText,
   ProductContainer,
   ProductImage,
+  ProductImageEmpty,
   ProductPrice,
   ProductQuantity,
   ProductTitle,
@@ -30,7 +31,11 @@ const ProductItem: React.FC<ItemType> = ({ productItem, companieId }) => {
 
   return (
     <ProductContainer>
-      <ProductImage source={{ uri: productItem.data.image.url }} />
+      {productItem.data.image.url ? (
+        <ProductImage source={{ uri: productItem.data.image.url }} />
+      ) : (
+        <ProductImageEmpty />
+      )}
       <ProductAboutContainer>
         <ProductAboutTop>
           <ProductTitle>{productItem.data.title}</ProductTitle>

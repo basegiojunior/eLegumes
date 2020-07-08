@@ -17,6 +17,13 @@ export const Image = styled.Image`
   height: ${widthPercentageToPx("14%")};
 `;
 
+export const ImageEmpty = styled.View`
+  border-radius: ${SIZES.SPACE_TWO};
+  width: ${widthPercentageToPx("14%")};
+  height: ${widthPercentageToPx("14%")};
+  background-color: ${COLORS.BACKGROUND_IMAGES};
+`;
+
 export const Name = styled.Text`
   font-family: ${FONTS.FONT_REGULAR};
   color: ${COLORS.TEXT_PRIMARY};

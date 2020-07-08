@@ -54,3 +54,10 @@ export const ImageProductLine = styled.Image`
   width: ${widthPercentageToPx("42%")};
   height: ${widthPercentageToPx("25%")};
 `;
+
+export const ImageProductLineEmpty = styled.View`
+  border-radius: ${SIZES.SPACE_TWO};
+  width: ${widthPercentageToPx("42%")};
+  height: ${widthPercentageToPx("25%")};
+  background-color: ${COLORS.BACKGROUND_IMAGES};
+`;
