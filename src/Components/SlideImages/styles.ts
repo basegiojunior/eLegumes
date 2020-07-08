@@ -56,13 +56,11 @@ export const ImageProduct = styled.Image<ImageProp>`
 export const TitleProduct = styled.Text`
   font-size: ${SIZES.FONT_SIZE_QUATERNARY};
   margin-top: ${SIZES.SPACE_TWO};
-  margin-left: ${SIZES.SPACE_TWO};
   font-family: ${FONTS.FONT_BOLD};
   color: ${COLORS.TEXT_PRIMARY};
 `;
 
 export const PriceProduct = styled.Text`
-  margin-left: ${SIZES.SPACE_TWO};
   font-size: ${SIZES.FONT_SIZE_SECONDARY};
   font-family: ${FONTS.FONT_REGULAR};
   color: ${COLORS.TEXT_SECONDARY};
