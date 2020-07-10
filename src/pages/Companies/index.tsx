@@ -6,6 +6,7 @@ import Button from "~/Components/Button";
 import Slide from "~/Components/SlideImages";
 import Title from "~/Components/Title";
 import Loading from "~/Components/Loading";
+import Icon from "~/Components/Icon";
 
 import {
   companieProductsRequest,
@@ -30,6 +31,7 @@ import {
   RatingNumbersTotal,
   RatingNumbersView,
   Icone,
+  IconeSecond,
   Stars,
   StarLine,
   StarLineBarLeft,
@@ -41,7 +43,7 @@ import {
   CommentTopView,
   CommentTopLeft,
   CommentTopStars,
-  Profile,
+  ProfileView,
   Name,
   CommentText,
 } from "./styles";
@@ -49,6 +51,8 @@ import {
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
 
 import { SlideType } from "~/types";
+
+import COLORS from "~/styles/colors";
 
 type CompaniesProps = {
   route: {
@@ -149,7 +153,7 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
           <Icone
             color="#11bb11"
             size={widthPercentageToDP("7%")}
-            name="map-marker"
+            name="local24x24"
           />
           <CompanieAddress>{actualCompanie.address}</CompanieAddress>
         </Address>
@@ -201,27 +205,27 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
             </RatingNumbersTotal>
           </RatingNumbersView>
           <Stars>
-            <Icone
+            <IconeSecond
               name="star"
               size={widthPercentageToDP("6%")}
               color={actualCompanie.rating > 0 ? "#6bc76b" : "#bec1bd"}
             />
-            <Icone
+            <IconeSecond
               name="star"
               size={widthPercentageToDP("6%")}
               color={actualCompanie.rating > 1 ? "#6bc76b" : "#bec1bd"}
             />
-            <Icone
+            <IconeSecond
               name="star"
               size={widthPercentageToDP("6%")}
               color={actualCompanie.rating > 2 ? "#6bc76b" : "#bec1bd"}
             />
-            <Icone
+            <IconeSecond
               name="star"
               size={widthPercentageToDP("6%")}
               color={actualCompanie.rating > 3 ? "#6bc76b" : "#bec1bd"}
             />
-            <Icone
+            <IconeSecond
               name="star"
               size={widthPercentageToDP("6%")}
               color={actualCompanie.rating > 4 ? "#6bc76b" : "#bec1bd"}
@@ -240,7 +244,7 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
                   >
                     {5 - index}
                   </StarLineNumber>
-                  <Icone
+                  <IconeSecond
                     name="star"
                     size={widthPercentageToDP("4.5%")}
                     color="#bec1bd"
@@ -261,31 +265,37 @@ const Companies: React.FC<CompaniesProps> = ({ route, navigation }) => {
           <CommentView key={item.id}>
             <CommentTopView>
               <CommentTopLeft>
-                <Profile source={profile} />
+                <ProfileView>
+                  <Icon
+                    name="person"
+                    color={COLORS.PRIMARY_COLOR}
+                    size={widthPercentageToDP("10%")}
+                  />
+                </ProfileView>
                 <Name>{item.user.username}</Name>
               </CommentTopLeft>
               <CommentTopStars>
-                <Icone
+                <IconeSecond
                   name="star"
                   size={widthPercentageToDP("4.5%")}
                   color={Math.round(item.rate) > 0 ? "#6bc76b" : "#bec1bd"}
                 />
-                <Icone
+                <IconeSecond
                   name="star"
                   size={widthPercentageToDP("4.5%")}
                   color={Math.round(item.rate) > 1 ? "#6bc76b" : "#bec1bd"}
                 />
-                <Icone
+                <IconeSecond
                   name="star"
                   size={widthPercentageToDP("4.5%")}
                   color={Math.round(item.rate) > 2 ? "#6bc76b" : "#bec1bd"}
                 />
-                <Icone
+                <IconeSecond
                   name="star"
                   size={widthPercentageToDP("4.5%")}
                   color={Math.round(item.rate) > 3 ? "#6bc76b" : "#bec1bd"}
                 />
-                <Icone
+                <IconeSecond
                   name="star"
                   size={widthPercentageToDP("4.5%")}
                   color={Math.round(item.rate) > 4 ? "#6bc76b" : "#bec1bd"}

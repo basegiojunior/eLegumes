@@ -33,7 +33,6 @@ const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
 
         // Se já ouver um produto dessa empresa
         if (companieIndex !== -1) {
-          console.log("companieIndexIf");
           // verifica se o produto já existe
           const productIndex = draft.cart[companieIndex].products.findIndex(
             (item) => item.data.id === product.id
@@ -41,7 +40,6 @@ const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
 
           // se não existir, adiciona ele na lista
           if (productIndex === -1) {
-            console.log("aqui");
             draft.cart[companieIndex].products = [
               ...draft.cart[companieIndex].products,
               {
@@ -52,7 +50,6 @@ const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
 
             draft.cart[companieIndex].totalPrice += price;
           } else {
-            console.log("aqui não");
             // se já existir, sobrescreve ele com os novos dados
             const lastProduct =
               draft.cart[companieIndex].products[productIndex].data;
@@ -70,7 +67,6 @@ const cart: Reducer<InitialProps> = (state = INITIAL_STATE, action) => {
             };
           }
         } else {
-          console.log("companieIndexElse");
           // se a empresa não existir, adiciona ela com o produto do parâmetro
           draft.cart = [
             ...draft.cart,

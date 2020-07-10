@@ -5,7 +5,6 @@ import React, {
   useImperativeHandle,
   useEffect,
 } from "react";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { TouchableWithoutFeedback, View, TextInputProps } from "react-native";
 import { TextInputMaskProps } from "react-native-masked-text";
 
@@ -22,6 +21,7 @@ import {
   ContainerCamp,
   AlertIcon,
   Icone,
+  IconeSecond,
   CampInformationView,
   TInputMask,
 } from "./styles";
@@ -117,7 +117,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 
         {secureTextEntry && (
           <TouchableWithoutFeedback onPress={() => setSecurePass(!securePass)}>
-            <Icone
+            <IconeSecond
               name={securePass ? "eye-off" : "eye"}
               size={widthPercentageToDP("6%")}
               color={focused ? COLORS.SECONDARY_COLOR : "rgba(0,0,0,.45)"}
@@ -127,7 +127,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 
         {!error && value !== "" && (
           <View>
-            <Icone
+            <IconeSecond
               name="check-circle"
               size={widthPercentageToDP("6%")}
               color={COLORS.PRIMARY_COLOR}
@@ -138,7 +138,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 
       {showError && !!error && (
         <ContainerCamp>
-          <AlertIcon name="alert-circle" size={SIZES.ICON_SIZE} color="red" />
+          <AlertIcon name="alert" size={SIZES.ICON_SIZE} color="red" />
           <CampInformationView>{error}</CampInformationView>
         </ContainerCamp>
       )}
@@ -208,7 +208,7 @@ const InputMaskForward: React.ForwardRefRenderFunction<
 
         {secureTextEntry && (
           <TouchableWithoutFeedback onPress={() => setSecurePass(!securePass)}>
-            <Icone
+            <IconeSecond
               name={securePass ? "eye-off" : "eye"}
               size={widthPercentageToDP("6%")}
               color={focused ? COLORS.SECONDARY_COLOR : "rgba(0,0,0,.45)"}
@@ -218,7 +218,7 @@ const InputMaskForward: React.ForwardRefRenderFunction<
 
         {!error && value !== "" && (
           <View>
-            <Icone
+            <IconeSecond
               style={{ marginLeft: 5 }}
               name="check-circle"
               size={SIZES.ICON_SIZE}
@@ -230,7 +230,7 @@ const InputMaskForward: React.ForwardRefRenderFunction<
 
       {showError && !!error && (
         <ContainerCamp>
-          <AlertIcon name="alert-circle" size={SIZES.ICON_SIZE} color="red" />
+          <AlertIcon name="alert" size={SIZES.ICON_SIZE} color="red" />
           <CampInformationView>{error}</CampInformationView>
         </ContainerCamp>
       )}

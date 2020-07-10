@@ -55,7 +55,7 @@ export const ExpandedEnd = styled(Animated.View)`
 `;
 
 export const InfoTopContainer = styled.View`
-  padding: ${heightPercentageToPx("3%")} ${SIZES.SPACE_SIX};
+  padding: ${heightPercentageToPx("5%")} ${SIZES.SPACE_SIX};
   border-radius: ${SIZES.SPACE_THREE};
   background-color: ${COLORS.TERT_COLOR};
   flex-direction: row;

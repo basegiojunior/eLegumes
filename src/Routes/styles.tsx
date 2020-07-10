@@ -1,9 +1,9 @@
 import React from "react";
 import { StackNavigationOptions } from "@react-navigation/stack";
 import { TouchableOpacity, RectButton } from "react-native-gesture-handler";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { View } from "react-native";
+import Icon from "~/Components/Icon";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import SearchBar from "~/Components/SearchBar";
@@ -62,7 +62,7 @@ export const EditButton: React.FC = () => {
         }}
         onPress={() => null}
       >
-        <Icon name="pen" size={SIZES.SPACE_EIGHT_DP} color="#fff" />
+        <Icon name="edit" size={SIZES.SPACE_EIGHT_DP} color="#fff" />
       </TouchableOpacity>
     );
   }
@@ -70,11 +70,23 @@ export const EditButton: React.FC = () => {
 };
 
 export const styleBarTop = {
-  headerTitle: "eLegumes",
+  headerTitle: "",
   headerTitleContainerStyle: { left: 0 },
   headerTitleStyle: {
     fontSize: widthPercentageToDP("5.5%"),
-    color: "#242A22",
+    color: COLORS.TEXT_PRIMARY,
+    marginLeft: SIZES.SPACE_FOR_DP,
+    fontFamily: FONTS.FONT_BOLD,
+  },
+  headerTintColor: "#fff",
+};
+
+export const styleBarTopElegumes = {
+  headerTitle: "eLegumes",
+  headerTitleContainerStyle: { left: 0 },
+  headerTitleStyle: {
+    fontSize: widthPercentageToDP("7%"),
+    color: COLORS.PRIMARY_COLOR,
     marginLeft: SIZES.SPACE_FOR_DP,
     fontFamily: FONTS.FONT_BOLD,
   },
@@ -174,7 +186,7 @@ export const styleBarTransparent = (
         }}
         onPress={() => ButtonLeft()}
       >
-        <Icon name="arrow-left" size={SIZES.SPACE_EIGHT_DP} color="#fff" />
+        <Icon name="arrow_left" size={SIZES.SPACE_EIGHT_DP} color="#fff" />
       </TouchableOpacity>
     ),
   };
@@ -202,7 +214,7 @@ export const styleBarAccSign = (
     headerLeft: () => (
       <TouchableOpacity onPress={() => ButtonLeft()}>
         <Icon
-          name="arrow-left"
+          name="arrow_left"
           style={{ marginLeft: SIZES.SPACE_FOR_DP }}
           size={SIZES.SPACE_EIGHT_DP}
           color="#fff"
@@ -225,7 +237,7 @@ export const styleBarOnlyBack = (
     headerLeft: () => (
       <TouchableOpacity onPress={() => ButtonLeft()}>
         <Icon
-          name="arrow-left"
+          name="arrow_left"
           style={{ marginLeft: SIZES.SPACE_FOR_DP }}
           size={SIZES.SPACE_EIGHT_DP}
           color="#555"
@@ -250,7 +262,7 @@ export const styleBarCategory = (
     headerLeft: () => (
       <TouchableOpacity onPress={() => ButtonLeft()}>
         <Icon
-          name="arrow-left"
+          name="arrow_left"
           style={{ marginLeft: SIZES.SPACE_FOR_DP }}
           size={SIZES.SPACE_EIGHT_DP}
           color="#555"
@@ -275,7 +287,7 @@ export const styleBarTopBuscaSecond = (
     headerLeft: () => (
       <TouchableOpacity onPress={() => ButtonLeft()}>
         <Icon
-          name="arrow-left"
+          name="arrow_left"
           style={{ marginLeft: SIZES.SPACE_FOR_DP }}
           size={SIZES.SPACE_EIGHT_DP}
           color="#555"

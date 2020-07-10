@@ -40,7 +40,9 @@ const GridImages: React.FC<GridTypes> = ({ item, index }) => {
             <ImageProductLineEmpty />
           )}
 
-          <TitleProduct>{item.title}</TitleProduct>
+          <TitleProduct>
+            {item.title[0].toUpperCase() + item.title.slice(1)}
+          </TitleProduct>
           {!!item.lineThrough && (
             <PriceProduct style={{ textDecorationLine: "line-through" }}>
               {item.lineThrough}

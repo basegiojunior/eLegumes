@@ -2,8 +2,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { TouchableWithoutFeedback, Animated } from "react-native";
 import { useDispatch } from "react-redux";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import Icon from "~/Components/Icon";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import Button from "~/Components/Button";
@@ -186,7 +186,7 @@ const Cart: React.FC = () => {
             <EndContainerViewLeft>
               <EndContainerPrice>R$ {actualPrice}</EndContainerPrice>
               <Icon
-                name="information-outline"
+                name="info"
                 size={SIZES.SPACE_SIX_DP}
                 color={COLORS.TEXT_SECONDARY}
               />
@@ -231,7 +231,7 @@ const Cart: React.FC = () => {
                     {item.companie.title.toUpperCase()}
                   </HeaderCompanieTitle>
                   <Icon
-                    name="store"
+                    name="shop"
                     size={SIZES.SPACE_SEVEN_DP}
                     color={COLORS.TEXT_SECONDARY}
                   />

@@ -34,7 +34,10 @@ export function* signIn({ payload }: any): any {
 
       return;
     } catch (error) {
-      if (i === 5) {
+      if (
+        i === 5 ||
+        (error && error.response && error.response.status !== 500)
+      ) {
         // console.log(error.response.status);
         if (error.response.status === 400) {
           Alert.alert(
@@ -85,13 +88,13 @@ export function* signUp({ payload }: any): any {
 
       return;
     } catch (error) {
-      if (i === 5) {
+      if (
+        i === 5 ||
+        (error && error.response && error.response.status !== 500)
+      ) {
         // console.log(error.response.status);
         if (error.response.status === 400) {
-          Alert.alert(
-            "Ops..",
-            "Parece que algum campo não está preenchido corretamente."
-          );
+          Alert.alert("Ops..", "Parece que esse email já está cadastrado.");
         } else if (error.response.status === 500) {
           Alert.alert(
             "Ops..",
@@ -100,6 +103,7 @@ export function* signUp({ payload }: any): any {
         }
 
         yield put(signFailure());
+        return;
       }
     }
   }

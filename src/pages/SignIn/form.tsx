@@ -23,7 +23,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
   return (
     <>
       <Input
-        icon="email"
+        icon="mail"
         autoCapitalize="none"
         autoCorrect={false}
         title="E-mail"

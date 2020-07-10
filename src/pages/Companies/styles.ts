@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import { MaterialCommunityIcons as IconSecond } from "@expo/vector-icons";
+import Icon from "~/Components/Icon";
 
 import SIZES from "~/styles/sizes";
 import FONTS from "~/styles/fonts";
@@ -89,6 +90,10 @@ export const Icone = styled(Icon)`
   margin-right: ${SIZES.SPACE_ONE};
 `;
 
+export const IconeSecond = styled(IconSecond)`
+  margin-right: ${SIZES.SPACE_ONE};
+`;
+
 export const Stars = styled.View`
   flex-direction: row;
   padding-top: ${SIZES.SPACE_FOR};
@@ -163,10 +168,13 @@ export const CommentTopStars = styled.View`
   align-items: center;
 `;
 
-export const Profile = styled.Image`
+export const ProfileView = styled.View`
   width: ${widthPercentageToPx("12%")};
   height: ${widthPercentageToPx("12%")};
   border-radius: ${widthPercentageToPx("6%")};
+  background-color: #f0f0f0;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Name = styled.Text`

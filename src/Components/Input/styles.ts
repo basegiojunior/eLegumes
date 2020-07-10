@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import { TextInputMask, TextInputMaskProps } from "react-native-masked-text";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import { MaterialCommunityIcons as IconSecond } from "@expo/vector-icons";
+import Icon from "~/Components/Icon";
 
 import SIZES from "~/styles/sizes";
 import COLORS from "~/styles/colors";
@@ -79,6 +80,11 @@ export const AlertIcon = styled(Icon)`
 `;
 
 export const Icone = styled(Icon)`
+  margin-left: ${SIZES.SPACE_TWO};
+  margin-right: ${SIZES.SPACE_TWO};
+`;
+
+export const IconeSecond = styled(IconSecond)`
   margin-left: ${SIZES.SPACE_TWO};
   margin-right: ${SIZES.SPACE_TWO};
 `;

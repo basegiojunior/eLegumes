@@ -47,7 +47,9 @@ const SlideItem: React.FC<ItemType> = ({ item, nItemsInScreen, companyId }) => {
         ) : (
           <ImageProductEmpty />
         )}
-        <TitleProduct>{item.title}</TitleProduct>
+        <TitleProduct>
+          {item.title[0].toUpperCase() + item.title.slice(1)}
+        </TitleProduct>
         {!!item.subtitle && <PriceProduct>{item.subtitle}</PriceProduct>}
       </ViewLink>
     </LinkContainer>

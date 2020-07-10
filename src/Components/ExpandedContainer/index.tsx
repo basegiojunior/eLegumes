@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Animated } from "react-native";
 /* eslint-disable no-underscore-dangle */
 
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import Icon from "~/Components/Icon";
 
 import Button, { ButtonGhost } from "../Button";
 
@@ -59,7 +59,7 @@ const ExpandedContainer: React.FC<ExpandedType> = ({
   function animatedExpandEnd(to: number): void {
     Animated.timing(expandedEnd, {
       toValue: to,
-      duration: 500,
+      duration: 300,
       useNativeDriver: false,
     }).start(() => {
       if (to !== 0) {
@@ -87,9 +87,9 @@ const ExpandedContainer: React.FC<ExpandedType> = ({
               <InfoTopPrice>{infoTopText}</InfoTopPrice>
             </InfoTopLeft>
             <Icon
-              name="shopping"
+              name="elegumes"
               color={COLORS.PRIMARY_COLOR}
-              size={widthPercentageToDP("17%")}
+              size={widthPercentageToDP("20%")}
             />
           </InfoTopContainer>
 

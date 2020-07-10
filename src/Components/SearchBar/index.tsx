@@ -7,6 +7,8 @@ import { widthPercentageToDP } from "../PercentageConverter";
 import { searchRequest } from "~/store/modules/search/actions";
 import { store } from "~/store/index";
 
+import COLORS from "~/styles/colors";
+
 type SearchType = {
   showRecent?: string;
 };
@@ -39,7 +41,9 @@ const SearchBar: React.FC<SearchType> = ({ showRecent }) => {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         placeholder={placeholder}
-        placeholderTextColor={isFocused ? "#969D95" : "#242A22"}
+        placeholderTextColor={
+          isFocused ? COLORS.TEXT_SECONDARY : COLORS.TEXT_PRIMARY
+        }
         onChangeText={(text: string) => setSearchValue(text)}
         returnKeyType="send"
         onSubmitEditing={() => {
@@ -57,7 +61,7 @@ const SearchBar: React.FC<SearchType> = ({ showRecent }) => {
           }
         }}
       >
-        <Icone name="magnify" size={widthPercentageToDP("8%")} color="#555" />
+        <Icone name="search" size={widthPercentageToDP("8%")} color="#555" />
       </ButtonSearch>
     </Container>
   );

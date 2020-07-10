@@ -1,12 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+// import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import React from "react";
-
 import { navigationRef } from "./navigationService";
 
 import { widthPercentageToDP } from "~/Components/PercentageConverter";
+import Icon from "~/Components/Icon";
 
 import FONTS from "~/styles/fonts";
 import COLORS from "~/styles/colors";
@@ -27,6 +27,7 @@ import Products from "~/pages/Products";
 
 import {
   styleBarTop,
+  styleBarTopElegumes,
   styleBarTopBusca,
   styleBarTopBuscaSecond,
   styleBarCategory,
@@ -44,7 +45,7 @@ const DashboardStackScreen: React.FC = () => {
       <DashboardStack.Screen
         name="Produtos"
         component={Dashboard}
-        options={styleBarTop}
+        options={styleBarTopElegumes}
       />
     </DashboardStack.Navigator>
   );
@@ -150,11 +151,11 @@ const Routes: React.FC = () => {
           if (route.name === "Produtos") {
             iconName = "home";
           } else if (route.name === "Sacola") {
-            iconName = "shopping";
+            iconName = "elegumes";
           } else if (route.name === "Minha Conta") {
-            iconName = "account";
+            iconName = "person";
           } else if (route.name === "Busca") {
-            iconName = "format-list-bulleted-type";
+            iconName = "search";
           }
 
           // You can return any component that you like here!

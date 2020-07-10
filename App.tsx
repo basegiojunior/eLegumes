@@ -11,10 +11,7 @@ const App: React.FC = () => {
     "Inter-Bold": require("./src/assets/fonts/Inter/Inter-Bold.ttf"),
     "Inter-Regular": require("./src/assets/fonts/Inter/Inter-Regular.ttf"),
     "Inter-SemiBold": require("./src/assets/fonts/Inter/Inter-SemiBold.ttf"),
-    // "RobotoCondensed-Regular": require("./src/assets/fonts/Roboto-Condensed/RobotoCondensed-Regular.ttf"),
-    // "RobotoCondensed-Bold": require("./src/assets/fonts/Roboto-Condensed/RobotoCondensed-Bold.ttf"),
-    // "RobotoCondensed-BoldItalic": require("./src/assets/fonts/Roboto-Condensed/RobotoCondensed-BoldItalic.ttf"),
-    // "RobotoCondensed-Italic": require("./src/assets/fonts/Roboto-Condensed/RobotoCondensed-Italic.ttf"),
+    Icomoon: require("./src/assets/fonts/icons/fonts/icomoon.ttf"),
   });
 
   // const [fontsLoaded, setFontsLoaded] = useState(true);
@@ -35,7 +32,7 @@ const App: React.FC = () => {
   //     });
   // }, [customFonts]);
 
-  return fontsLoaded ? <Index /> : <Loading />;
+  return fontsLoaded ? <Index /> : <Loading visible />;
 };
 
 export default App;

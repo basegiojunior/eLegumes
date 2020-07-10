@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { Animated, TouchableWithoutFeedback } from "react-native";
+import { Animated } from "react-native";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import { ContainerScroll } from "~/styles/scrollView";
@@ -21,6 +21,7 @@ import {
   AlertStore,
   AlertText,
   Icone,
+  IconeSecond,
   Store,
   StoreCircle,
   StoreTextName,
@@ -143,7 +144,8 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
         buttonLeftCall={() => setExpanded(false)}
         buttonRightTitle="ir para a loja"
         buttonRightCall={() => {
-          navigation.navigate("Sacola");
+          navigation.navigate("Companie", { ...storeSelected });
+          setExpanded(false);
         }}
         expanded={expanded}
       >
@@ -183,7 +185,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
                 <Icone
                   color="#736626"
                   size={widthPercentageToDP("8%")}
-                  name="alert-outline"
+                  name="alert"
                 />
                 <AlertText>
                   Atenção! Selecione um vendedor para então adicionar este
@@ -262,7 +264,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
                     <Icone
                       size={widthPercentageToDP("8%")}
                       color={COLORS.TEXT_SECONDARY}
-                      name="store"
+                      name="shop"
                     />
                   </StoreViewSeledted>
                 </StoreLinkSelected>
@@ -298,7 +300,7 @@ const Products: React.FC<ProductsProps> = ({ route, navigation }) => {
                     </StoreViewLeft>
                     <StoreViewRight>
                       <StoreTextPrice>{item.rating}/5</StoreTextPrice>
-                      <Icone
+                      <IconeSecond
                         size={widthPercentageToDP("6%")}
                         color={COLORS.TEXT_SECONDARY}
                         name="star"

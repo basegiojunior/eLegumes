@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FontAwesome as Icon } from "@expo/vector-icons";
+import Icon from "~/Components/Icon";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import { signInRequest } from "~/store/modules/auth/actions";

@@ -49,7 +49,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
     <>
       <TitleText>SEUS DADOS</TitleText>
       <Input
-        icon="account"
+        icon="person"
         autoCorrect={false}
         placeholder="Nome"
         autoCompleteType="name"
@@ -66,7 +66,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
       />
 
       <Input
-        icon="email"
+        icon="mail"
         autoCorrect={false}
         placeholder="E-mail"
         autoCompleteType="email"
@@ -84,7 +84,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
       />
 
       <InputMask
-        icon="calendar"
+        icon="date"
         type="datetime"
         autoCorrect={false}
         placeholder="Data de Nascimento"
@@ -101,7 +101,7 @@ const Form: React.FC<FormProps> = (propsForm) => {
       />
 
       <InputMask
-        icon="cellphone-android"
+        icon="phone"
         type="cel-phone"
         options={{
           maskType: "BRL",

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { RefreshControl, Animated } from "react-native";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import Icon from "~/Components/Icon";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import { ContainerScroll } from "~/styles/scrollView";
@@ -18,7 +18,11 @@ import COLORS from "~/styles/colors";
 
 import { store } from "~/store/index";
 
-const Search: React.FC = ({ navigation }) => {
+type SearchType = {
+  navigation: any;
+};
+
+const Search: React.FC<SearchType> = ({ navigation }) => {
   // eslint-disable-next-line no-var
   var x = new Animated.Value(0);
 
@@ -81,7 +85,7 @@ const Search: React.FC = ({ navigation }) => {
               <RecentText>&ldquo;{item}&rdquo;</RecentText>
               <Icon
                 style={{ marginRight: 5 }}
-                name="arrow-top-left"
+                name="shortcut"
                 size={SIZES.ICON_CHECKBOX_SIZE}
                 color={COLORS.TEXT_SECONDARY}
               />

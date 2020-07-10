@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RefreshControl, FlatList } from "react-native";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import Icon from "~/Components/Icon";
 import { useSelector } from "~/store/modules/rootReducer";
 
 import GridImages from "~/Components/GridImages";
@@ -113,7 +113,7 @@ const CompanieProducts: React.FC<CompType> = ({ navigation, route }) => {
       return (
         <Container>
           <AlertStore>
-            <Icon name="shopping" size={SIZES.SPACE_EIGHT_DP} color="#1f6761" />
+            <Icon name="shop" size={SIZES.SPACE_EIGHT_DP} color="#1f6761" />
             <AlertText>
               Ocultamos produtos desta loja que já estão na sua sacola.
             </AlertText>

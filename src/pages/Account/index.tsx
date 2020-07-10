@@ -1,7 +1,8 @@
 import React from "react";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
-
+// import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
+import Icon from "~/Components/Icon";
+
 import { useSelector } from "~/store/modules/rootReducer";
 
 import profile from "~/assets/product.jpg";
@@ -50,7 +51,7 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="clock-outline"
+                  name="history"
                   color="#30a8c0"
                   size={widthPercentageToDP("7%")}
                 />
@@ -70,7 +71,7 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="credit-card"
+                  name="card"
                   color="#7c6"
                   size={widthPercentageToDP("7%")}
                 />
@@ -82,7 +83,7 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="message-outline"
+                  name="contact"
                   color="#f0c74c"
                   size={widthPercentageToDP("7%")}
                 />
@@ -92,7 +93,7 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="help-circle-outline"
+                  name="faq"
                   color="#f3a372"
                   size={widthPercentageToDP("7%")}
                 />
@@ -102,7 +103,7 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink onPress={() => dispatch(signOut())}>
               <Item>
                 <Icon
-                  name="exit-run"
+                  name="exit"
                   color="#ed5e5e"
                   size={widthPercentageToDP("7%")}
                 />
@@ -116,7 +117,7 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
           <ContainerProfile>
             <IconProfileContainer>
               <Icon
-                name="account"
+                name="person"
                 size={widthPercentageToDP("28%")}
                 color={COLORS.PRIMARY_COLOR}
               />
@@ -143,7 +144,7 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="message-outline"
+                  name="contact"
                   color="#f0c74c"
                   size={widthPercentageToDP("7%")}
                 />
@@ -153,7 +154,7 @@ const Account: React.FC<AccProps> = ({ navigation }) => {
             <ItemLink>
               <Item>
                 <Icon
-                  name="help-circle-outline"
+                  name="faq"
                   color="#f3a372"
                   size={widthPercentageToDP("7%")}
                 />

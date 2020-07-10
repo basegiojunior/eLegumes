@@ -1,8 +1,8 @@
 import styled from "styled-components/native";
 import { Animated } from "react-native";
-import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
-
+import { MaterialCommunityIcons as IconSecond } from "@expo/vector-icons";
 import { RectButton } from "react-native-gesture-handler";
+import Icon from "~/Components/Icon";
 
 import SIZES from "~/styles/sizes";
 import FONTS from "~/styles/fonts";
@@ -72,6 +72,10 @@ export const Icone = styled(Icon)`
   margin-right: ${SIZES.SPACE_FOR};
 `;
 
+export const IconeSecond = styled(IconSecond)`
+  margin-right: ${SIZES.SPACE_FOR};
+`;
+
 export const Store = styled.TouchableWithoutFeedback``;
 
 export const StoreView = styled.View`
@@ -93,7 +97,7 @@ export const StoreCircle = styled.View<Circle>`
   border-radius: ${widthPercentageToPx("3%")};
   border-width: ${({ isPressed }) =>
     !isPressed ? 0 : widthPercentageToPx("1.8%")};
-  border-color: #aa3169;
+  border-color: ${COLORS.PRIMARY_COLOR};
   background-color: ${({ isPressed }) => (!isPressed ? "#f0f0f0" : "#ffffff")};
   margin-right: ${SIZES.SPACE_FIVE};
 `;
@@ -184,7 +188,7 @@ export const AddToCart = styled(RectButton).attrs(() => ({
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: #aa3169;
+  background-color: ${COLORS.PRIMARY_COLOR};
 `;
 
 export const AddToCartText = styled.Text`
