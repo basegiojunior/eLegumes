@@ -50,7 +50,7 @@ const App: React.FC = () => {
       });
   }, [customFonts]);
 
-  return fontsLoaded ? <Index /> : <Loading visible />;
+  return fontsLoaded ? <Index /> : null;
 };
 
 export default App;

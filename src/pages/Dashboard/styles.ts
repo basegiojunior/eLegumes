@@ -48,6 +48,11 @@ export const ProductsView = styled.View`
 
 export const LinkContainerLine = styled.TouchableWithoutFeedback``;
 
+export const Grid = styled.View`
+  width: 100%;
+  flex-direction: row;
+`;
+
 export const ViewLinkLine = styled.View<Margin>`
   width: 50%;
   flex-direction: column;

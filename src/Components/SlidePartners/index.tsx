@@ -25,12 +25,14 @@ type ProductsArray = {
   listElements: SlideType[];
   nItemsInScreen?: number;
   title?: string;
+  isLoading?: boolean;
   color: any;
 };
 
 const SlidePartners: React.FC<ProductsArray> = ({
   listElements,
   nItemsInScreen = 1,
+  isLoading = false,
   title,
   color,
 }) => {
@@ -59,7 +61,7 @@ const SlidePartners: React.FC<ProductsArray> = ({
         }}
         ref={slideRef}
       >
-        {listElements.length > 0 ? (
+        {listElements.length > 0 &&
           listElements.map(
             (item): JSX.Element => (
               <LinkContainer
@@ -82,8 +84,9 @@ const SlidePartners: React.FC<ProductsArray> = ({
                 </ViewLink>
               </LinkContainer>
             )
-          )
-        ) : (
+          )}
+
+        {listElements.length === 0 && isLoading && (
           <>
             <LinkContainer>
               <ViewLink>

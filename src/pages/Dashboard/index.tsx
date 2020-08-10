@@ -12,7 +12,13 @@ import { dashRequest, promoRequest } from "~/store/modules/dashboard/actions";
 import { store } from "~/store/index";
 import SIZES from "~/styles/sizes";
 
-import { Container, LinkContainerLine, ViewLinkLine, Title } from "./styles";
+import {
+  Container,
+  LinkContainerLine,
+  ViewLinkLine,
+  Title,
+  Grid,
+} from "./styles";
 
 const Dashboard: React.FC = () => {
   // eslint-disable-next-line no-var
@@ -31,14 +37,15 @@ const Dashboard: React.FC = () => {
   const newCompanies = useSelector((state) => state.dash.newCompanies);
   const topProducts = useSelector((state) => state.dash.topProducts);
   const promotions = useSelector((state) => state.dash.promotions);
+
   const pageLoading = useSelector((state) => state.dash.pageLoading);
   const noPageLoading = useSelector((state) => state.dash.noPageLoading);
 
-  const emptyNewCompanies = useSelector(
-    (state) => state.dash.emptyNewCompanies
-  );
-  const emptyPromotions = useSelector((state) => state.dash.emptyPromotions);
-  const emptyTopProducts = useSelector((state) => state.dash.emptyTopProducts);
+  // const emptyNewCompanies = useSelector(
+  //   (state) => state.dash.emptyNewCompanies
+  // );
+  // const emptyPromotions = useSelector((state) => state.dash.emptyPromotions);
+  // const emptyTopProducts = useSelector((state) => state.dash.emptyTopProducts);
 
   useEffect(() => {
     if (newCompanies === [] || topProducts === []) {
@@ -47,7 +54,7 @@ const Dashboard: React.FC = () => {
     if (promotions === []) {
       store.dispatch(promoRequest());
     }
-  }, []);
+  }, [newCompanies, topProducts, promotions]);
 
   // useEffect(() => {
   //   Animated.loop(
@@ -72,96 +79,90 @@ const Dashboard: React.FC = () => {
 
   const headerComponent: any = () => (
     <>
-      {!emptyNewCompanies && (
-        <SlidePartners
-          color={color}
-          title="NOVOS PARCEIROS"
-          listElements={newCompanies}
-        />
+      <SlidePartners
+        color={color}
+        title="NOVOS PARCEIROS"
+        listElements={newCompanies}
+        isLoading={noPageLoading}
+      />
+
+      <SlideImages
+        color={color}
+        title="MAIS COMPRADOS"
+        listElements={topProducts}
+        nItemsInScreen={1}
+        isLoading={noPageLoading}
+      />
+
+      {(promotions.length > 0 || (promotions.length === 0 && pageLoading)) && (
+        <Title>OFERTAS</Title>
       )}
 
-      {!emptyTopProducts && (
-        <SlideImages
-          color={color}
-          title="MAIS COMPRADOS"
-          listElements={topProducts}
-          nItemsInScreen={1}
-        />
-      )}
-
-      {!emptyPromotions && <Title>OFERTAS</Title>}
-
-      {promotions.length === 0 && !emptyPromotions && (
-        <>
-          <Container>
-            <LinkContainerLine>
-              <ViewLinkLine last={false}>
-                <Animated.View
-                  style={{
-                    width: widthPercentageToDP("42%"),
-                    height: widthPercentageToDP("25%"),
-                    marginBottom: widthPercentageToDP("2%"),
-                    borderRadius: widthPercentageToDP("2%"),
-                    backgroundColor: color,
-                  }}
-                />
-                <Animated.View
-                  style={{
-                    width: widthPercentageToDP("25%"),
-                    height: widthPercentageToDP("4.5%"),
-                    marginTop: widthPercentageToDP("2%"),
-                    marginLeft: widthPercentageToDP("2%"),
-                    borderRadius: widthPercentageToDP("2%"),
-                    backgroundColor: color,
-                  }}
-                />
-                <Animated.View
-                  style={{
-                    width: widthPercentageToDP("20%"),
-                    height: widthPercentageToDP("3.4%"),
-                    marginTop: widthPercentageToDP("2%"),
-                    marginLeft: widthPercentageToDP("2%"),
-                    borderRadius: widthPercentageToDP("2%"),
-                    backgroundColor: color,
-                  }}
-                />
-              </ViewLinkLine>
-            </LinkContainerLine>
-            <LinkContainerLine>
-              <ViewLinkLine last>
-                <Animated.View
-                  style={{
-                    width: widthPercentageToDP("42%"),
-                    height: widthPercentageToDP("25%"),
-                    marginBottom: widthPercentageToDP("2%"),
-                    borderRadius: widthPercentageToDP("2%"),
-                    backgroundColor: color,
-                  }}
-                />
-                <Animated.View
-                  style={{
-                    width: widthPercentageToDP("25%"),
-                    height: widthPercentageToDP("4.5%"),
-                    marginTop: widthPercentageToDP("2%"),
-                    marginLeft: widthPercentageToDP("2%"),
-                    borderRadius: widthPercentageToDP("2%"),
-                    backgroundColor: color,
-                  }}
-                />
-                <Animated.View
-                  style={{
-                    width: widthPercentageToDP("20%"),
-                    height: widthPercentageToDP("3.4%"),
-                    marginTop: widthPercentageToDP("2%"),
-                    marginLeft: widthPercentageToDP("2%"),
-                    borderRadius: widthPercentageToDP("2%"),
-                    backgroundColor: color,
-                  }}
-                />
-              </ViewLinkLine>
-            </LinkContainerLine>
-          </Container>
-        </>
+      {promotions.length === 0 && pageLoading && (
+        <Grid>
+          <ViewLinkLine last={false}>
+            <Animated.View
+              style={{
+                width: widthPercentageToDP("42%"),
+                height: widthPercentageToDP("25%"),
+                marginBottom: widthPercentageToDP("2%"),
+                borderRadius: widthPercentageToDP("2%"),
+                backgroundColor: color,
+              }}
+            />
+            <Animated.View
+              style={{
+                width: widthPercentageToDP("25%"),
+                height: widthPercentageToDP("4.5%"),
+                marginTop: widthPercentageToDP("2%"),
+                marginLeft: widthPercentageToDP("2%"),
+                borderRadius: widthPercentageToDP("2%"),
+                backgroundColor: color,
+              }}
+            />
+            <Animated.View
+              style={{
+                width: widthPercentageToDP("20%"),
+                height: widthPercentageToDP("3.4%"),
+                marginTop: widthPercentageToDP("2%"),
+                marginLeft: widthPercentageToDP("2%"),
+                borderRadius: widthPercentageToDP("2%"),
+                backgroundColor: color,
+              }}
+            />
+          </ViewLinkLine>
+          <ViewLinkLine last>
+            <Animated.View
+              style={{
+                width: widthPercentageToDP("42%"),
+                height: widthPercentageToDP("25%"),
+                marginBottom: widthPercentageToDP("2%"),
+                borderRadius: widthPercentageToDP("2%"),
+                backgroundColor: color,
+              }}
+            />
+            <Animated.View
+              style={{
+                width: widthPercentageToDP("25%"),
+                height: widthPercentageToDP("4.5%"),
+                marginTop: widthPercentageToDP("2%"),
+                marginLeft: widthPercentageToDP("2%"),
+                borderRadius: widthPercentageToDP("2%"),
+                backgroundColor: color,
+              }}
+            />
+            <Animated.View
+              style={{
+                width: widthPercentageToDP("20%"),
+                height: widthPercentageToDP("3.4%"),
+                marginTop: widthPercentageToDP("2%"),
+                marginLeft: widthPercentageToDP("2%"),
+                borderRadius: widthPercentageToDP("2%"),
+                backgroundColor: color,
+              }}
+            />
+          </ViewLinkLine>
+        </Grid>
       )}
     </>
   );
@@ -184,7 +185,7 @@ const Dashboard: React.FC = () => {
         numColumns={2}
         renderItem={GridImages}
         data={promotions}
-        keyExtractor={(item: any) => item.id}
+        keyExtractor={(item) => item.id}
         onEndReached={() => handleRequestPromotions()}
         onEndReachedThreshold={0.1}
         ListHeaderComponent={headerComponent}

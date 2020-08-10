@@ -24,7 +24,7 @@ const appReducer = combineReducers({
 
 const Reducer: ReducerProps = (state, action) => {
   if (action.type === "@auth/SIGN_OUT") {
-    state = undefined;
+    state.auth = undefined;
   }
 
   return appReducer(state, action);

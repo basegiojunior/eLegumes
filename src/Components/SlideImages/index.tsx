@@ -29,6 +29,7 @@ type ProductsArray = {
   seeMore?: boolean;
   seeMoreData?: CallableFunction;
   show?: boolean;
+  isLoading?: boolean;
 };
 
 const SlideImages: React.FC<ProductsArray> = ({
@@ -39,6 +40,7 @@ const SlideImages: React.FC<ProductsArray> = ({
   color,
   seeMoreData,
   show = true,
+  isLoading = false,
 }) => {
   const slideRef = useRef<ScrollView>(null);
   const lastCard = {
@@ -108,7 +110,7 @@ const SlideImages: React.FC<ProductsArray> = ({
             }}
             ref={slideRef}
           >
-            {listElements.length > 0 ? (
+            {listElements.length > 0 &&
               listElements.map((item) => (
                 <SlideItem
                   item={item}
@@ -116,8 +118,9 @@ const SlideImages: React.FC<ProductsArray> = ({
                   key={item.id}
                   nItemsInScreen={nItemsInScreen}
                 />
-              ))
-            ) : (
+              ))}
+
+            {listElements && isLoading && (
               <LinkContainer>
                 <ViewLink>
                   <Animated.View
